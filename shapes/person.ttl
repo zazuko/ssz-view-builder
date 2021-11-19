@@ -1,0 +1,12 @@
+prefix schema: <http://schema.org/>
+prefix sh: <http://www.w3.org/ns/shacl#>
+
+<>
+  a sh:NodeShape ;
+  sh:property
+    [
+      sh:path schema:name ;
+      sh:minCount 1 ;
+      sh:defaultValue "John Doe" ;
+    ] ;
+.
