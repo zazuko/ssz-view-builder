@@ -10,8 +10,5 @@
   },
   "dependencies": {
     "@hydrofoil/shaperone-wc": "0.6.5"
-  },
-  "devDependencies": {
-
   }
 }
