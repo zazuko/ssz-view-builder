@@ -1,24 +1,22 @@
 import str2stream from 'string-to-stream'
-import formats from '@rdfjs/formats-common'
+import { parsers } from '@rdf-esm/formats-common'
 import * as RDF from '@rdf-esm/dataset'
 import clownface from 'clownface'
-import type {DatasetCore} from '@rdfjs/types'
 
-export async function loadShape({ shape, id = '' }) {
+export async function loadShape({
+  shape,
+  id = ''
+}) {
   const res = await fetch(`./dist/shapes/${shape}.ttl`)
   const stream = str2stream(await res.text())
 
-  const parsed = formats.parsers.import('text/turtle', stream)
+  const parsed = parsers.import('text/turtle', stream)
 
-  const dataset = await new Promise<DatasetCore>(res => {
-    const dataset = RDF.dataset()
-    parsed.on('data', quad => {
-      dataset.add(quad)
-    })
-    parsed.on('end', () => {
-      res(dataset);
-    })
-  })
+  const dataset = RDF.dataset()
+  // @ts-ignore https://unpkg.com/browse/@rdfjs/types@1.0.1/stream.d.ts
+  for await (const quad of parsed) {
+    dataset.add(quad)
+  }
 
   return clownface({ dataset }).namedNode(id)
 }
