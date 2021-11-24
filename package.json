@@ -6,9 +6,13 @@
   "type": "module",
   "homepage": "{{ homepage }}",
   "scripts": {
-    "serve": "npx wcd-cli@latest serve O8SwE2klRV1wMB87Rkh2 --open"
+    "serve": "npx wcd-cli@latest serve O8SwE2klRV1wMB87Rkh2 --open",
+    "lint": "standard --fix"
   },
   "dependencies": {
     "@hydrofoil/shaperone-wc": "0.6.5"
+  },
+  "devDependencies": {
+    "standard": "^16.0.4"
   }
 }
