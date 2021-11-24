@@ -1,7 +1,6 @@
 import str2stream from 'string-to-stream'
 import { parsers } from '@rdf-esm/formats-common'
 import * as RDF from '@rdf-esm/dataset'
-import { rdf, sh } from '@tpluscode/rdf-ns-builders'
 import clownface from 'clownface'
 import isAbsoluteUrl from 'is-absolute-url'
 
@@ -22,5 +21,6 @@ export default async function fetchShapes (id) {
     dataset.add(quad)
   }
 
-  return clownface({ dataset }).has(rdf.type, sh.NodeShape)
+  const graph = clownface({ dataset })
+  return isAbsoluteUrl(id) ? graph.namedNode(id) : graph
 }

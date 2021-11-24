@@ -7,5 +7,5 @@ const form = document.querySelector('shaperone-form')
 ;(async function () {
   const shapes = await fetchShapes('person')
 
-  form.shapes = shapes
+  form.shapes = shapes.namedNode('')
 })()
