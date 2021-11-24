@@ -1,13 +1,17 @@
 import str2stream from 'string-to-stream'
 import { parsers } from '@rdf-esm/formats-common'
 import * as RDF from '@rdf-esm/dataset'
+import { rdf, sh } from '@tpluscode/rdf-ns-builders'
 import clownface from 'clownface'
+import isAbsoluteUrl from 'is-absolute-url'
 
-export async function loadShape({
-  shape,
-  id = ''
-}) {
-  const res = await fetch(`./dist/shapes/${shape}.ttl`)
+/**
+ * @param id resource URI or path to local shape
+ */
+export default async function fetchShapes (id) {
+  const uri = isAbsoluteUrl(id) ? id : `./dist/shapes/${id}.ttl`
+
+  const res = await window.fetch(uri)
   const stream = str2stream(await res.text())
 
   const parsed = parsers.import('text/turtle', stream)
@@ -18,5 +22,5 @@ export async function loadShape({
     dataset.add(quad)
   }
 
-  return clownface({ dataset }).namedNode(id)
+  return clownface({ dataset }).has(rdf.type, sh.NodeShape)
 }
