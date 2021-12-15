@@ -4,11 +4,8 @@ import * as RDF from '@rdf-esm/dataset'
 import clownface from 'clownface'
 import isAbsoluteUrl from 'is-absolute-url'
 
-/**
- * @param id resource URI or path to local shape
- */
-export default async function fetchShapes (id) {
-  const uri = isAbsoluteUrl(id) ? id : `./dist/shapes/${id}.turtle`
+async function fetch(id, what) {
+  const uri = isAbsoluteUrl(id) ? id : `./dist/${what}/${id}.turtle`
 
   const res = await window.fetch(uri)
   const stream = str2stream(await res.text())
@@ -23,4 +20,18 @@ export default async function fetchShapes (id) {
 
   const graph = clownface({ dataset })
   return isAbsoluteUrl(id) ? graph.namedNode(id) : graph
+}
+
+/**
+ * @param id resource URI or path to local shape
+ */
+export function fetchShapes (id) {
+  return fetch(id, 'shapes')
+}
+
+/**
+ * @param id resource URI or path to local shape
+ */
+export function fetchResource (id) {
+  return fetch(id, 'resource')
 }
