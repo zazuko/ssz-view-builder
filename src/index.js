@@ -1,5 +1,5 @@
 import '@hydrofoil/shaperone-wc/shaperone-form.js'
-import fetchShapes from './fetchShapes'
+import { fetchShapes } from './fetch'
 import './config'
 
 const form = document.querySelector('shaperone-form')
