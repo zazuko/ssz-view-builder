@@ -2,7 +2,7 @@ name: Sync
 on:
   push:
     branches:
-      - master
+      - baseline
 
 jobs:
   sync-branches:
@@ -10,7 +10,7 @@ jobs:
     name: Syncing branches
     strategy:
       matrix:
-        from: ["master"]
+        from: ["baseline"]
         to: ["material"]
 
     steps:
