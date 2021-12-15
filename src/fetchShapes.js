@@ -8,7 +8,7 @@ import isAbsoluteUrl from 'is-absolute-url'
  * @param id resource URI or path to local shape
  */
 export default async function fetchShapes (id) {
-  const uri = isAbsoluteUrl(id) ? id : `./dist/shapes/${id}.ttl`
+  const uri = isAbsoluteUrl(id) ? id : `./dist/shapes/${id}.turtle`
 
   const res = await window.fetch(uri)
   const stream = str2stream(await res.text())
