@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         from: ["baseline"]
-        to: ["material"]
+        to: ["material", "star-rating"]
 
     steps:
       - name: Checkout
