@@ -1,0 +1,26 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix view: <http://ns.bergnet.org/cube-view/> .
+
+<> a view:View ; 
+	view:dimension [
+		a view:Dimension ;
+		rdfs:label "ZEIT" ;
+		view:from [
+			view:source _:source ;
+		  view:path <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> ;
+		] ;
+	] ;
+	<urn:ssz:source> _:source, _:source2 .
+
+_:source
+	a view:CubeSource ;
+	view:cube <https://ld.stadt-zuerich.ch/statistics/BEW-HEL-SEX> ;
+	rdfs:label "BEW-HEL-SEX" ;
+	<urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BEW> 
+.
+_:source2
+	a view:CubeSource ;
+	view:cube <https://ld.stadt-zuerich.ch/statistics/BES-BTA> ;
+	rdfs:label "BES-BTA" ;
+	<urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BES> 
+.

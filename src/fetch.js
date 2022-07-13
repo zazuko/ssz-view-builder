@@ -35,3 +35,9 @@ export function fetchShapes (id) {
 export function fetchResource (id) {
   return fetch(id, 'resource')
 }
+
+export async function fetchQuery(id) {
+  const uri = `./dist/query/${id}.sparql`
+  const res = await window.fetch(uri)
+  return res.text()
+}

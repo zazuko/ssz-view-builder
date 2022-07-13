@@ -1,0 +1,25 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX cube: <https://cube.link/>
+
+CONSTRUCT {
+  <urn:ssz:measures> a hydra:Collection ; hydra:member ?sub .
+  ?sub rdfs:label ?kennzahlLabel .
+}
+FROM <https://lindas.admin.ch/stadtzuerich/stat>
+WHERE {
+  ?sub a rdf:Property ;
+       schema:identifier ?kennzahl ;
+       schema:name ?kennzahlLabel .
+
+  # Limit only those whaich are used in cubes
+  ?shape a cube:Constraint;
+        sh:property/sh:path ?sub .
+  
+  # FILTER( CONTAINS(LCASE(?kennzahlLabel), LCASE("{Q}")))
+  FILTER( CONTAINS(STR(?sub), "measure"))
+} 
+#LIMIT 10

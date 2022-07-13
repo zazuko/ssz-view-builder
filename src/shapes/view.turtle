@@ -1,0 +1,155 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix view: <http://ns.bergnet.org/cube-view/> .
+@prefix code: <https://code.described.at/> .
+@prefix : <urn:ssz:> .
+
+<>
+    a sh:NodeShape ;
+    sh:targetClass view:View ;
+    rdfs:label "View" ;
+    sh:property 
+      :CubeSourceProperty, 
+      :DimensionProperty,
+      [
+        sh:path rdf:type ;
+        sh:defaultValue view:View ;
+        dash:hidden true ;
+        sh:group :Group_Sources;
+      ] ;
+.
+
+:Group_Sources
+  sh:order 1 ;
+  rdfs:label "Sources" ;
+.
+
+:Group_Dimensions
+  sh:order 2 ;
+  rdfs:label "Dimensions" ;
+.
+
+:CubeSourceProperty
+    sh:path :source ;
+    sh:minCount 1 ;
+    sh:class view:CubeSource ;
+    sh:node :CubeSourceShape ;
+    sh:order 10 ;
+    sh:group :Group_Sources;
+.
+
+:LabelProperty
+  sh:path rdfs:label ;
+  sh:name "Name" ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:order 0 ;
+.
+
+:CubeSourceShape
+    rdfs:label "Cube source" ;
+    sh:property
+        :KeyFigureProperty,
+        :CubeProperty,
+        :LabelProperty,
+        [
+            sh:path rdf:type ;
+            sh:defaultValue view:CubeSource ;
+            dash:hidden true ;
+        ] ;
+.
+
+:DimensionProperty
+    sh:path view:dimension ;
+    sh:class view:Dimension ;
+    sh:nodeKind sh:BlankNode ;
+    sh:node :DimensionShape ;
+    sh:minCount 1 ;
+    sh:order 20 ;
+    sh:group :Group_Dimensions ;
+.
+
+:DimensionShape
+    rdfs:label "Dimension" ;
+    sh:property
+      :LabelProperty,
+        [
+            sh:order 10 ;
+            sh:path view:from ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:node
+                [
+                   rdfs:label "sources" ;
+                    sh:property
+                        [
+                            sh:path view:source ;
+                            sh:minCount 1 ;
+                            dash:editor dash:InstancesSelectEditor ;
+                            sh:class view:CubeSource ;
+                        ],
+                        [
+                            sh:name "path" ;
+                            sh:path view:path ;
+                            sh:nodeKind sh:IRI ;
+                            sh:minCount 1 ;
+                            sh:maxCount 1 ;
+                            dash:editor dash:InstancesSelectEditor ;
+                            hydra:search
+                                [
+                                    hydra:template [ code:name "dimensions" ] ;
+                                    sh:path view:source ;
+                                    hydra:mapping
+                                        [
+                                            hydra:property view:cube ;
+                                            hydra:variable "CUBE" ;
+                                            hydra:required true ;
+                                        ] ;
+                                ] ;
+                        ] ;
+                ] ;
+        ] ;
+.
+
+
+:KeyFigureProperty
+    sh:name "Key figure", "Kennzahl"@de ;
+    dash:editor dash:InstancesSelectEditor ;
+    sh:path :keyFigure ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    hydra:search
+        [
+            hydra:template [ code:name "key-figures" ] ;
+            hydra:mapping
+                [
+                    hydra:property hydra:freetextQuery ;
+                    hydra:variable "Q" ;
+                    sh:minLength 0 ;
+                ] ;
+        ] ;
+    sh:order 10 ;
+.
+
+:CubeProperty
+    sh:name "Cube" ;
+    sh:path view:cube ;
+    dash:editor dash:InstancesSelectEditor ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    hydra:search
+        [
+            hydra:template [ code:name "cubes" ] ;
+            hydra:mapping
+                [
+                    hydra:property :keyFigure ;
+                    hydra:variable "KENNZAHL" ;
+                    hydra:required true ;
+                ] ;
+        ] ;
+    sh:order 20 ;
+.
