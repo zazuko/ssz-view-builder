@@ -3,8 +3,9 @@
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix hydra: <http://www.w3.org/ns/hydra/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix view: <http://ns.bergnet.org/cube-view/> .
+@prefix view: <https://cube.link/view/> .
 @prefix code: <https://code.described.at/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix : <urn:ssz:> .
 
 <>
@@ -14,13 +15,23 @@
     sh:property 
       :CubeSourceProperty, 
       :DimensionProperty,
+      :FiltersProperty,
+      :ProjectionProperty ,
       [
         sh:path rdf:type ;
         sh:defaultValue view:View ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
         dash:hidden true ;
         sh:group :Group_Sources;
       ] ;
 .
+
+view:Gte rdfs:label ">=" .
+view:Gt rdfs:label ">" .
+view:Lte rdfs:label "<=" .
+view:Lt rdfs:label "<" .
+view:Eq rdfs:label "=" .
 
 :Group_Sources
   sh:order 1 ;
@@ -32,6 +43,16 @@
   rdfs:label "Dimensions" ;
 .
 
+:Group_Filters
+  sh:order 3 ;
+  rdfs:label "Filters" ;
+.
+
+:Group_Projection
+  sh:order 4 ;
+  rdfs:label "Projection" ;
+.
+
 :CubeSourceProperty
     sh:path :source ;
     sh:minCount 1 ;
@@ -39,6 +60,67 @@
     sh:node :CubeSourceShape ;
     sh:order 10 ;
     sh:group :Group_Sources;
+.
+
+:ProjectionProperty
+    sh:path view:projection ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:BlankNode ;
+    sh:group :Group_Projection ;
+    sh:node [
+        sh:property [
+            sh:name "Limit" ;
+            sh:path view:limit ;
+            sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minValue 1 ;
+            sh:order 20 ;
+        ] , [
+            sh:name "Offset" ;
+            sh:path view:offset ;
+            sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:order 30 ;
+        ] ;
+    ]
+.
+
+:FiltersProperty
+  sh:path view:filter ;
+  sh:class view:Filter ;
+  sh:group :Group_Filters ;
+  sh:node [
+      rdfs:label "Filter" ;
+        sh:property :LabelProperty, [
+        sh:name "dimension" ;
+        sh:path view:dimension ;
+        dash:editor dash:InstancesSelectEditor ;
+        sh:class view:Dimension ;
+        sh:order 1 ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ], [
+        sh:name "operator" ;
+        sh:path view:operation ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:order 2 ;
+        sh:in (
+            view:Gte
+            view:Lte
+            view:Lt
+            view:Gt
+            view:Eq
+        ) ;
+    ], [
+        sh:name "argument" ;
+        sh:path view:argument ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:order 2 ;
+    ] ;
+  ] ;
 .
 
 :LabelProperty

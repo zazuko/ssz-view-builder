@@ -1,16 +1,28 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix view: <http://ns.bergnet.org/cube-view/> .
+@prefix view: <https://cube.link/view/> .
 
 <> a view:View ; 
-	view:dimension [
-		a view:Dimension ;
-		rdfs:label "ZEIT" ;
-		view:from [
-			view:source _:source ;
-		  view:path <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> ;
-		] ;
+	view:dimension _:dim_ZEIT ;
+	view:filter [
+    rdfs:label "After the important date!" ;
+		view:dimension _:dim_ZEIT ;
+		view:argument "1953-12-31" ;
+		view:operation view:Gte ;
+	] ;
+	view:projection [
+		view:limit 10 ;
+		view:offset 10 ;
 	] ;
 	<urn:ssz:source> _:source, _:source2 .
+
+_:dim_ZEIT
+	a view:Dimension ;
+	rdfs:label "ZEIT" ;
+	view:from [
+	view:source _:source ;
+	view:path ( <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> <https://ld.stadt-zuerich.ch/schema/hasEnd>) ;
+	] ;
+.
 
 _:source
 	a view:CubeSource ;
