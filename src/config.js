@@ -17,4 +17,4 @@ configure.components.pushComponents(shoelace)
 Object.values(decorators)
   .forEach(configure.components.decorate)
 
-// configure.components.pushComponents(local)
+configure.components.pushComponents(local)

@@ -1,20 +1,21 @@
-import { html } from 'lit'
+
+import '@shoelace-style/shoelace/dist/components/select/select.js'
+import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js'
+import { html } from '@hydrofoil/shaperone-wc'
 import { repeat } from 'lit/directives/repeat.js'
 
-export default function ({ property, value }, { update, clear }) {
-  const choices = value.componentState.instances || []
+export default function ({ value }) {
+  const pointers = value.componentState.instances
+  const choices = pointers?.map(([c, label]) => ({
+    term: c.term,
+    label,
+  })) || []
 
-  function onInput(e) {
-    const { selectedIndex } = e.target
-    return selectedIndex === 0
-      ? clear()
-      : update(choices[(e.target).selectedIndex - 1]?.[0].term)
-  }
+  return html`<sl-select .value=${value.object?.value}>
+    ${repeat(choices, renderItem)}
+  </sl-select>`
+}
 
-  return html`<select @input="${onInput}">
-        <option value=""></option>
-        ${repeat(choices, ([choice, label]) => html`<option ?selected="${choice.term.equals(value.object?.term)}" value="${choice.value}">
-            ${label}
-        </option>`)}
-    </select>`
+function renderItem({term, label}) {
+  return html`<sl-menu-item .value=${term.value}>${label}</sl-select-item>`
 }
