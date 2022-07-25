@@ -199,7 +199,7 @@ view:Eq rdfs:label "=" .
 
 
 :KeyFigureProperty
-    sh:name "Key figure", "Kennzahl"@de ;
+    sh:name "Kennzahl" ;
     dash:editor dash:InstancesSelectEditor ;
     sh:path :keyFigure ;
     sh:minCount 1 ;

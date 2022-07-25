@@ -1,6 +1,6 @@
 import str2stream from 'string-to-stream'
 import { parsers } from '@rdf-esm/formats-common'
-import * as RDF from '@rdf-esm/dataset'
+import RDF from '@rdfjs/dataset'
 import clownface from 'clownface'
 import isAbsoluteUrl from 'is-absolute-url'
 

@@ -4,40 +4,56 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX schema: <http://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-# TODO
-# Presently, the query below will return all dimension from all provided cubes.
-# It should actually reutrn only those which apprear in each cube simultaneously.
+PREFIX prop: <https://ld.stadt-zuerich.ch/statistics/property/>
 
 CONSTRUCT {
-  <urn:ssz:dimensions> a hydra:Collection ; hydra:member ?dimensions .
-  ?dimensions rdfs:label ?dimensionsLabel
+  <urn:ssz:dimensions> a hydra:Collection ; hydra:member ?dimension .
+  ?dimension rdfs:label ?dimensionLabel
 }
 WHERE {
   {
-    # had to be a little creative here since we only have a URL template with encoded query
-    # this gist provided a solution to split a string
-    # https://gist.github.com/jindrichmynarz/630226f2f53af92332843f0747a3ab85
-    #
-    # thus, coma-separated URLs in query string can be split again and
-    # bound to the ?cube variable
-    SELECT distinct ?cube WHERE {
-      BIND ("{CUBE}" as ?cubes)
-      VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
-      
-      BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
-      BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
-    } 
+    SELECT (count(distinct ?cube) as ?cube_count) {
+      # had to be a little creative here since we only have a URL template with encoded query
+      # this gist provided a solution to split a string
+      # https://gist.github.com/jindrichmynarz/630226f2f53af92332843f0747a3ab85
+      #
+      # thus, coma-separated URLs in query string can be split again and
+      # bound to the ?cube variable
+      SELECT ?cube WHERE {
+        BIND ("{CUBE}" as ?cubes)
+        VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
+        
+        BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
+        BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
+      } 
+    }
   }
 
-  ?shape a cube:Constraint;
-         ^cube:observationConstraint ?cube ;
-         sh:property/sh:path ?dimensions .
+  {
+    SELECT ?dimension (count(distinct ?cube) as ?usages) {
+      {
+        SELECT ?cube WHERE {
+          BIND ("{CUBE}" as ?cubes)
+          VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
+          
+          BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
+          BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
+        }
+      }
+
+      ?shape a cube:Constraint;
+             ^cube:observationConstraint ?cube ;
+             sh:property/sh:path ?dimension .
    
-  ?dimensions a rdf:Property ;
-              schema:name ?dimensionsLabel .
+      ?dimension a rdf:Property ; .
   
-  FILTER( ?dimensions NOT IN ( <https://ld.stadt-zuerich.ch/statistics/property/TIME>, <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>))
-   
+      FILTER( ?dimension NOT IN ( prop:TIME, rdf:type ))
+    }
+    group by ?dimension
+  }
+
+  ?dimension schema:name ?dimensionLabel .
+  
+  FILTER (?usages = ?cube_count)
 } 
 #LIMIT 10

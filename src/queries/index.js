@@ -11,6 +11,6 @@ export function getSparqlUrl(query, template) {
     .out(hydra.variable)
     .toArray()
     .reduce((encoded, { value }) => {
-      return encoded.replace(`%7B${value}%7D`, `{${value}}`)
+      return encoded.replace(new RegExp(`%7B${value}%7D`, 'g'), `{${value}}`)
     }, url.toString())
 }

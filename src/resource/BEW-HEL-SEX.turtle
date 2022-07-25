@@ -19,8 +19,8 @@ _:dim_ZEIT
 	a view:Dimension ;
 	rdfs:label "ZEIT" ;
 	view:from [
-	view:source _:source ;
-	view:path ( <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> <https://ld.stadt-zuerich.ch/schema/hasEnd>) ;
+		view:source _:source ;
+		view:path ( <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> <https://ld.stadt-zuerich.ch/schema/hasEnd>) ;
 	] ;
 .
 
