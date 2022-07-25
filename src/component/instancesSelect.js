@@ -21,7 +21,7 @@ function select(value, pointers, update) {
     const selected = pointers.find(({ value }) => value === e.target.value)
 
   if (selected)
-    update(selected)
+    update(selected.term)
   }
 
   return html`<sl-select hoist .value=${value.object?.value} @sl-change=${onChange} @sl-hide=${stop}>
@@ -30,7 +30,7 @@ function select(value, pointers, update) {
 }
 
 function renderItem(item) {
-  return html`<sl-menu-item .value=${item.value}>${localizedLabel(item)}</sl-select-item>`
+  return html`<sl-menu-item .value=${item.value}>${localizedLabel(item, { fallback: item.value })}</sl-select-item>`
 }
 
 function stop(e) {
