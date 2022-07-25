@@ -17,6 +17,7 @@ export const dataGraphInstanceSource = {
         return focusNode
           .any()
           .has(rdf.type, clas.id)
+          .toArray()
       }
     }
   }

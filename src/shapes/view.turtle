@@ -183,6 +183,7 @@ view:Eq rdfs:label "=" .
                             dash:editor dash:InstancesSelectEditor ;
                             hydra:search
                                 [
+                                    a hydra:IriTemplate ;
                                     hydra:template [ code:name "dimensions" ] ;
                                     sh:path view:source ;
                                     hydra:mapping
@@ -206,6 +207,7 @@ view:Eq rdfs:label "=" .
     sh:maxCount 1 ;
     hydra:search
         [
+            a hydra:IriTemplate ;
             hydra:template [ code:name "key-figures" ] ;
             hydra:mapping
                 [
@@ -225,6 +227,7 @@ view:Eq rdfs:label "=" .
     sh:maxCount 1 ;
     hydra:search
         [
+            a hydra:IriTemplate ;
             hydra:template [ code:name "cubes" ] ;
             hydra:mapping
                 [
