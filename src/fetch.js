@@ -4,7 +4,7 @@ import RDF from '@rdfjs/dataset'
 import clownface from 'clownface'
 import isAbsoluteUrl from 'is-absolute-url'
 
-async function fetch(id, what) {
+export async function fetch(id, what) {
   const uri = isAbsoluteUrl(id) ? id : `./dist/${what}/${id}.turtle`
 
   const res = await window.fetch(uri)

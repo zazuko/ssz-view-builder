@@ -7,6 +7,8 @@
 @prefix code: <https://code.described.at/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix : <urn:ssz:> .
+@prefix sh1: <https://hypermedia.app/shaperone#> .
+@prefix schema: <http://schema.org/> .
 
 <>
     a sh:NodeShape ;
@@ -128,7 +130,6 @@ view:Eq rdfs:label "=" .
   sh:name "Name" ;
   sh:minCount 1 ;
   sh:maxCount 1 ;
-  sh:order 0 ;
 .
 
 :CubeSourceShape
@@ -136,7 +137,15 @@ view:Eq rdfs:label "=" .
     sh:property
         :KeyFigureProperty,
         :CubeProperty,
-        :LabelProperty,
+        [
+            sh:path rdfs:label ;
+            sh:name "Name" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:order 100 ;
+            sh1:valueFrom view:cube ;
+            sh1:labelPath schema:name ;
+        ],
         [
             sh:path rdf:type ;
             sh:defaultValue view:CubeSource ;
@@ -157,7 +166,15 @@ view:Eq rdfs:label "=" .
 :DimensionShape
     rdfs:label "Dimension" ;
     sh:property
-      :LabelProperty,
+        [
+            sh:path rdfs:label ;
+            sh:name "Name" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:order 100 ;
+            sh1:valueFrom ( view:from view:path ) ;
+            sh1:labelPath schema:name ;
+        ],
         [
             sh:order 10 ;
             sh:path view:from ;
