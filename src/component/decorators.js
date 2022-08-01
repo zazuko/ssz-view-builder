@@ -7,11 +7,12 @@ export const dataGraphInstanceSource = {
   decorate(component) {
     return {
       ...component,
-      loadChoices(args, freetextQuery) {
+      async loadChoices(args, freetextQuery) {
         const { focusNode, property } = args
         const { class: clas } = property.shape
         if (!clas) {
-          return component.loadChoices(args, freetextQuery)
+          const choices = await component.loadChoices(args, freetextQuery)
+          return choices
         }
 
         return focusNode

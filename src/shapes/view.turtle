@@ -201,7 +201,7 @@ view:Eq rdfs:label "=" .
 
 :KeyFigureProperty
     sh:name "Kennzahl" ;
-    dash:editor dash:InstancesSelectEditor ;
+    dash:editor dash:AutoCompleteEditor ;
     sh:path :keyFigure ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -213,7 +213,7 @@ view:Eq rdfs:label "=" .
                 [
                     hydra:property hydra:freetextQuery ;
                     hydra:variable "Q" ;
-                    sh:minLength 0 ;
+                    sh:minLength 2 ;
                 ] ;
         ] ;
     sh:order 10 ;

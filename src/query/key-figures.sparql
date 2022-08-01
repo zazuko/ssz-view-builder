@@ -19,7 +19,7 @@ WHERE {
   ?shape a cube:Constraint;
         sh:property/sh:path ?sub .
   
-  # FILTER( CONTAINS(LCASE(?kennzahlLabel), LCASE("{Q}")))
+  FILTER( CONTAINS(LCASE(?kennzahlLabel), LCASE("{Q}")))
   FILTER( CONTAINS(STR(?sub), "measure"))
 } 
-#LIMIT 10
+LIMIT 10
