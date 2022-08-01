@@ -94,7 +94,13 @@ view:Eq rdfs:label "=" .
   sh:group :Group_Filters ;
   sh:node [
       rdfs:label "Filter" ;
-        sh:property :LabelProperty, [
+        sh:property 
+        [
+            sh:path rdfs:label ;
+            sh:name "Name" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] , [
         sh:name "dimension" ;
         sh:path view:dimension ;
         dash:editor dash:InstancesSelectEditor ;
@@ -123,13 +129,6 @@ view:Eq rdfs:label "=" .
         sh:order 2 ;
     ] ;
   ] ;
-.
-
-:LabelProperty
-  sh:path rdfs:label ;
-  sh:name "Name" ;
-  sh:minCount 1 ;
-  sh:maxCount 1 ;
 .
 
 :CubeSourceShape
