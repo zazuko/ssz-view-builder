@@ -14,19 +14,19 @@
     a sh:NodeShape ;
     sh:targetClass view:View ;
     rdfs:label "View" ;
-    sh:property 
-      :CubeSourceProperty, 
-      :DimensionProperty,
-      :FiltersProperty,
-      :ProjectionProperty ,
-      [
-        sh:path rdf:type ;
-        sh:defaultValue view:View ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        dash:hidden true ;
-        sh:group :Group_Sources;
-      ] ;
+    sh:property
+        :CubeSourceProperty,
+        :DimensionProperty,
+        :FiltersProperty,
+        :ProjectionProperty,
+        [
+            sh:path rdf:type ;
+            sh:defaultValue view:View ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            dash:hidden true ;
+            sh:group :Group_Sources ;
+        ] ;
 .
 
 view:Gte rdfs:label ">=" .
@@ -36,23 +36,23 @@ view:Lt rdfs:label "<" .
 view:Eq rdfs:label "=" .
 
 :Group_Sources
-  sh:order 1 ;
-  rdfs:label "Sources" ;
+    sh:order 1 ;
+    rdfs:label "Sources" ;
 .
 
 :Group_Dimensions
-  sh:order 2 ;
-  rdfs:label "Dimensions" ;
+    sh:order 2 ;
+    rdfs:label "Dimensions" ;
 .
 
 :Group_Filters
-  sh:order 3 ;
-  rdfs:label "Filters" ;
+    sh:order 3 ;
+    rdfs:label "Filters" ;
 .
 
 :Group_Projection
-  sh:order 4 ;
-  rdfs:label "Projection" ;
+    sh:order 4 ;
+    rdfs:label "Projection" ;
 .
 
 :CubeSourceProperty
@@ -61,7 +61,7 @@ view:Eq rdfs:label "=" .
     sh:class view:CubeSource ;
     sh:node :CubeSourceShape ;
     sh:order 10 ;
-    sh:group :Group_Sources;
+    sh:group :Group_Sources ;
 .
 
 :ProjectionProperty
@@ -70,65 +70,73 @@ view:Eq rdfs:label "=" .
     sh:maxCount 1 ;
     sh:nodeKind sh:BlankNode ;
     sh:group :Group_Projection ;
-    sh:node [
-        sh:property [
-            sh:name "Limit" ;
-            sh:path view:limit ;
-            sh:datatype xsd:integer ;
-            sh:maxCount 1 ;
-            sh:minValue 1 ;
-            sh:order 20 ;
-        ] , [
-            sh:name "Offset" ;
-            sh:path view:offset ;
-            sh:datatype xsd:integer ;
-            sh:maxCount 1 ;
-            sh:order 30 ;
-        ] ;
-    ]
+    sh:node
+        [
+            sh:property
+                [
+                    sh:name "Limit" ;
+                    sh:path view:limit ;
+                    sh:datatype xsd:integer ;
+                    sh:maxCount 1 ;
+                    sh:minValue 1 ;
+                    sh:order 20 ;
+                ],
+                [
+                    sh:name "Offset" ;
+                    sh:path view:offset ;
+                    sh:datatype xsd:integer ;
+                    sh:maxCount 1 ;
+                    sh:order 30 ;
+                ] ;
+        ]
 .
 
 :FiltersProperty
-  sh:path view:filter ;
-  sh:class view:Filter ;
-  sh:group :Group_Filters ;
-  sh:node [
-      rdfs:label "Filter" ;
-        sh:property 
+    sh:path view:filter ;
+    sh:class view:Filter ;
+    sh:group :Group_Filters ;
+    sh:node
         [
-            sh:path rdfs:label ;
-            sh:name "Name" ;
-            sh:minCount 1 ;
-            sh:maxCount 1 ;
-        ] , [
-        sh:name "dimension" ;
-        sh:path view:dimension ;
-        dash:editor dash:InstancesSelectEditor ;
-        sh:class view:Dimension ;
-        sh:order 1 ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ], [
-        sh:name "operator" ;
-        sh:path view:operation ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:order 2 ;
-        sh:in (
-            view:Gte
-            view:Lte
-            view:Lt
-            view:Gt
-            view:Eq
-        ) ;
-    ], [
-        sh:name "argument" ;
-        sh:path view:argument ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:order 2 ;
-    ] ;
-  ] ;
+            rdfs:label "Filter" ;
+            sh:property
+                [
+                    sh:path rdfs:label ;
+                    sh:name "Name" ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                ],
+                [
+                    sh:name "dimension" ;
+                    sh:path view:dimension ;
+                    dash:editor dash:InstancesSelectEditor ;
+                    sh:class view:Dimension ;
+                    sh:order 1 ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                ],
+                [
+                    sh:name "operator" ;
+                    sh:path view:operation ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:order 2 ;
+                    sh:in
+                        (
+                            view:Gte
+                            view:Lte
+                            view:Lt
+                            view:Gt
+                            view:Eq
+                        ) ;
+                ],
+                [
+                    sh:name "argument" ;
+                    sh:path view:argument ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:order 2 ;
+                ] ;
+        ] ;
 .
 
 :CubeSourceShape
@@ -182,7 +190,7 @@ view:Eq rdfs:label "=" .
             sh:nodeKind sh:BlankNode ;
             sh:node
                 [
-                   rdfs:label "sources" ;
+                    rdfs:label "sources" ;
                     sh:property
                         [
                             sh:path view:source ;
