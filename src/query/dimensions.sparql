@@ -1,0 +1,60 @@
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX cube: <https://cube.link/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop: <https://ld.stadt-zuerich.ch/statistics/property/>
+
+CONSTRUCT {
+  <urn:ssz:dimensions> a hydra:Collection ; hydra:member ?dimension .
+  ?dimension rdfs:label ?dimensionLabel
+}
+WHERE {
+  {
+    SELECT (count(distinct ?cube) as ?cube_count) {
+      # had to be a little creative here since we only have a URL template with encoded query
+      # this gist provided a solution to split a string
+      # https://gist.github.com/jindrichmynarz/630226f2f53af92332843f0747a3ab85
+      #
+      # thus, coma-separated URLs in query string can be split again and
+      # bound to the ?cube variable
+      SELECT ?cube WHERE {
+        BIND ("{CUBE}" as ?cubes)
+        VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
+        
+        BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
+        BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
+      } 
+    }
+  }
+
+  {
+    SELECT ?dimension (count(distinct ?cube) as ?usages) {
+      {
+        SELECT ?cube WHERE {
+          BIND ("{CUBE}" as ?cubes)
+          VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
+          
+          BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
+          BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
+        }
+      }
+
+      ?shape a cube:Constraint;
+             ^cube:observationConstraint ?cube ;
+             sh:property/sh:path ?dimension .
+   
+      ?dimension a rdf:Property ; .
+  
+      FILTER( ?dimension NOT IN ( prop:TIME, rdf:type ))
+      FILTER( !CONTAINS(STR(?dimension), "measure"))
+    }
+    group by ?dimension
+  }
+
+  ?dimension schema:name ?dimensionLabel .
+  
+  FILTER (?usages = ?cube_count)
+} 
+#LIMIT 10

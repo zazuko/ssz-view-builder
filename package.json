@@ -1,5 +1,5 @@
 {
-  "name": "@wcd/tpluscode.shaperone-form-fork-l6bz7t92",
+  "name": "@zazuko/ssz-view-builder",
   "version": "0.0.0",
   "description": "",
   "license": "ISC",
@@ -10,7 +10,10 @@
     "lint": "standard --fix"
   },
   "dependencies": {
-    "@hydrofoil/shaperone-wc": "0.6.5"
+    "@hydrofoil/shaperone-core": "0.9.1",
+    "@hydrofoil/shaperone-hydra": "0.3.8",
+    "@hydrofoil/shaperone-wc": "0.7.0",
+    "@hydrofoil/shaperone-wc-shoelace": "0.1.4"
   },
   "devDependencies": {
     "standard": "^16.0.4"
