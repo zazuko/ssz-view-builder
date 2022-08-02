@@ -1,0 +1,18 @@
+{
+  "name": "@wcd/tpluscode.shaperone-form-fork-l6bz7t92",
+  "version": "0.0.0",
+  "description": "",
+  "license": "ISC",
+  "type": "module",
+  "homepage": "{{ homepage }}",
+  "scripts": {
+    "serve": "npx wcd-cli@latest serve AdsvMVHg26rf0rys4whF --open",
+    "lint": "standard --fix"
+  },
+  "dependencies": {
+    "@hydrofoil/shaperone-wc": "0.6.5"
+  },
+  "devDependencies": {
+    "standard": "^16.0.4"
+  }
+}
