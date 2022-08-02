@@ -21,7 +21,7 @@ export function autocomplete(params, { update }) {
   })) || []
 
   const search = (e) => {
-    const [input] = e.path
+    const [input] = e.composedPath()
     params.updateComponentState({
       freetextQuery: input.value,
     })
