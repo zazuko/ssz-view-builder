@@ -7,7 +7,6 @@ import "@shoelace-style/shoelace/dist/components/menu/menu.js"
 import "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js"
 import "@shoelace-style/shoelace/dist/components/tag/tag.js"
 import { getLocalizedLabel } from '@rdfjs-elements/lit-helpers'
-import { localizedLabel } from '@rdfjs-elements/lit-helpers/localizedLabel.js'
 import { renderItem } from './instancesSelect.js'
 import { rdfs } from '@tpluscode/rdf-ns-builders'
 
