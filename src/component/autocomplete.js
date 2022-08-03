@@ -34,7 +34,7 @@ export function autocomplete(params, { update }) {
       update(selected.term)
     }
   }
-debugger
+
   return html`
     <sl-dropdown @sl-hide=${stop} hoist>
       <sl-input slot="trigger" 
