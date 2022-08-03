@@ -20,7 +20,7 @@ export const autocompleteEditor = {
       const selectionLoading = this.loadInstance({ value: object })
         .then(resource => {
             updateComponentState({
-              selected: resource
+              selected: resource,
             })
         })
 
