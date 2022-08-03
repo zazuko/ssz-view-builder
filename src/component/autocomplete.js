@@ -15,11 +15,6 @@ export function autocomplete(params, { update }) {
   const pointers = value.componentState.instances || []
   const freetextQuery = value.componentState.freetextQuery || ''
 
-  const values = value.object?.map((ptr) => ({
-    value: ptr.value,
-    label: getLocalizedLabel(ptr.out(rdfs.label)),
-  })) || []
-
   const search = (e) => {
     const [input] = e.composedPath()
     params.updateComponentState({
@@ -30,8 +25,12 @@ export function autocomplete(params, { update }) {
   const itemSelected = (e) => {
     const selected = pointers.find(({ value }) => value === e.detail.item.value)
 
-    if (selected)
+    params.updateComponentState({
+      freetextQuery: getLocalizedLabel(selected.out(rdfs.label)),
+    })
+    if (selected) {
       update(selected.term)
+    }
   }
 
   return html`
@@ -44,7 +43,9 @@ export function autocomplete(params, { update }) {
       <sl-menu hoist .value=${value.object?.value} placeholder="Missing data!" @sl-select=${itemSelected}>
         ${repeat(pointers, renderItem)}
       </sl-menu>
-    </sl-dropdown>`
+    </sl-dropdown>
+    
+    <div>Selected: ${value.object?.value || 'none'}</div>`
 }
 
 function stop(e) {
