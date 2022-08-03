@@ -2,8 +2,7 @@ import {
   instancesSelect,
   enumSelect,
 } from '@hydrofoil/shaperone-core/components'
-import { dash, schema } from '@tpluscode/rdf-ns-builders'
-import { getLocalizedLabel } from '@rdfjs-elements/lit-helpers'
+import { dash } from '@tpluscode/rdf-ns-builders'
 
 export const autocompleteEditor = {
   ...instancesSelect,
@@ -21,7 +20,7 @@ export const autocompleteEditor = {
       const selectionLoading = this.loadInstance({ value: object })
         .then(resource => {
             updateComponentState({
-              freetextQuery: getLocalizedLabel(resource.out(schema.name))
+              selected: resource
             })
         })
 
