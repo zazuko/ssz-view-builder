@@ -38,6 +38,7 @@ export function autocomplete(params, { update }) {
       <sl-input slot="trigger" 
                 .value=${freetextQuery}
                 @sl-input="${search}">
+        <sl-icon name="search" slot="suffix"></sl-icon>
       </sl-input>
 
       <sl-menu hoist .value=${value.object?.value} placeholder="Missing data!" @sl-select=${itemSelected}>
