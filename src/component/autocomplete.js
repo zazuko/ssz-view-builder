@@ -44,9 +44,7 @@ export function autocomplete(params, { update }) {
       <sl-menu hoist .value=${value.object?.value} placeholder="Missing data!" @sl-select=${itemSelected}>
         ${repeat(pointers, renderItem)}
       </sl-menu>
-    </sl-dropdown>
-    
-    <div>Selected: ${value.object?.value || 'none'}</div>`
+    </sl-dropdown>`
 }
 
 function stop(e) {
