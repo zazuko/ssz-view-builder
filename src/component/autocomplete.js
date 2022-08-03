@@ -8,7 +8,7 @@ import "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js"
 import "@shoelace-style/shoelace/dist/components/tag/tag.js"
 import { localizedLabel } from '@rdfjs-elements/lit-helpers/localizedLabel.js'
 import { renderItem } from './instancesSelect.js'
-import { schema } from '@tpluscode/rdf-ns-builders'
+import { rdfs, schema } from '@tpluscode/rdf-ns-builders'
 
 export function autocomplete(params, { update }) {
   const { value } = params
@@ -28,7 +28,7 @@ export function autocomplete(params, { update }) {
 
     params.updateComponentState({
       freetextQuery: '',
-      selected,
+      selected
     })
     if (selected) {
       update(selected.term)
@@ -38,7 +38,7 @@ export function autocomplete(params, { update }) {
   return html`
     <sl-dropdown @sl-hide=${stop} hoist>
       <sl-input slot="trigger" 
-                .value=${localizedLabel(selected, { property: schema.name, fallback: freetextQuery })}
+                .value=${localizedLabel(selected, { property: [schema.name, rdfs.label], fallback: freetextQuery })}
                 @sl-input="${search}">
         <sl-icon name="search" slot="suffix"></sl-icon>
       </sl-input>
