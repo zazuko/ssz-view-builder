@@ -48,7 +48,6 @@ WHERE {
       ?dimension a rdf:Property ; .
   
       FILTER( ?dimension NOT IN ( prop:TIME, rdf:type ))
-      FILTER( !CONTAINS(STR(?dimension), "measure"))
     }
     group by ?dimension
   }
