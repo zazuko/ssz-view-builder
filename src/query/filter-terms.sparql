@@ -1,0 +1,21 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX schema: <http://schema.org/>
+PREFIX cube: <https://cube.link/>
+PREFIX ssz: <https://ld.stadt-zuerich.ch/schema/>
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+CONSTRUCT {
+  <urn:ssz:terms> a hydra:Collection ; hydra:member ?term .
+  ?term rdfs:label ?label
+}
+WHERE {
+  VALUES ?arg { <{FILTER}> }
+
+  # TODO: fix the URI rewrites
+  BIND ( IRI(replace(str(?arg), "ld.integ.stadt-zuerich", "ld.stadt-zuerich")) as ?filter )
+
+  ?filter schema:hasDefinedTerm ?term .
+  ?term schema:name ?label ;
+        schema:position ?position .
+} 

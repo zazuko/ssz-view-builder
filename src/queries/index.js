@@ -1,6 +1,6 @@
 import { hydra } from '@tpluscode/rdf-ns-builders'
 
-const endpoint = 'https://ld.stadt-zuerich.ch/query'
+const endpoint = 'https://ld.integ.stadt-zuerich.ch/query'
 
 export function getSparqlUrl(query, template) {
   const url = new URL(endpoint)

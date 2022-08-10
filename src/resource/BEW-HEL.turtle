@@ -1,0 +1,30 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix view: <https://cube.link/view/> .
+
+<> a view:View ; 
+	view:dimension _:dim_RAUM ;
+	view:filter [
+		view:dimension _:dim_RAUM ;
+		view:operation view:In ;
+    <urn:ssz:filterTermSet> <https://ld.integ.stadt-zuerich.ch/statistics/termset/QuartiereZH> ;
+    view:argument
+      <https://ld.integ.stadt-zuerich.ch/statistics/code/R00024>,
+      <https://ld.integ.stadt-zuerich.ch/statistics/code/R00014> ;
+	] ;
+	<urn:ssz:source> _:source .
+
+_:dim_RAUM
+	a view:Dimension ;
+	rdfs:label "RAUM" ;
+	view:from [
+		view:source _:source ;
+		view:path <https://ld.stadt-zuerich.ch/statistics/property/RAUM> ;
+	] ;
+.
+
+_:source
+	a view:CubeSource ;
+	view:cube <https://ld.stadt-zuerich.ch/statistics/BEW-HEL> ;
+	rdfs:label "BEW-HEL" ;
+	<urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BEW> 
+.

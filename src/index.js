@@ -36,6 +36,7 @@ const form = document.querySelector('shaperone-form')
 
 document.getElementById('load-example')
   .addEventListener('click', async () => {
-    const example = await fetchResource('BEW-HEL-SEX')
-    form.resource = example.namedNode('')
+    const example = document.querySelector('#example').value
+    const graph = await fetchResource(example)
+    form.resource = graph.namedNode('')
   })

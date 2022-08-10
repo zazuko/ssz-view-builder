@@ -34,6 +34,7 @@ view:Gt rdfs:label ">" .
 view:Lte rdfs:label "<=" .
 view:Lt rdfs:label "<" .
 view:Eq rdfs:label "=" .
+view:In rdfs:label "one of" .
 
 :Group_Sources
     sh:order 1 ;
@@ -120,6 +121,7 @@ view:Eq rdfs:label "=" .
                     sh:minCount 1 ;
                     sh:maxCount 1 ;
                     sh:order 2 ;
+                    sh:defaultValue view:In ;
                     sh:in
                         (
                             view:Gte
@@ -127,14 +129,50 @@ view:Eq rdfs:label "=" .
                             view:Lt
                             view:Gt
                             view:Eq
+                            view:In
                         ) ;
                 ],
                 [
-                    sh:name "argument" ;
-                    sh:path view:argument ;
+                    sh:name "filter" ;
+                    sh:path :filterTermSet ;
                     sh:minCount 1 ;
                     sh:maxCount 1 ;
                     sh:order 2 ;
+                    dash:editor dash:AutoCompleteEditor ;
+                    hydra:search
+                        [
+                            a hydra:IriTemplate ;
+                            hydra:template [ code:name "filters" ] ;
+                            sh:path ( view:dimension view:from ) ;
+                            hydra:mapping
+                                [
+                                    hydra:property view:path ;
+                                    hydra:variable "DIMENSION" ;
+                                    hydra:required true ;
+                                ],
+                                [
+                                    hydra:property hydra:freetextQuery ;
+                                    hydra:variable "Q" ;
+                                    sh:minLength 0 ;
+                                ] ;
+                        ] ;
+                ],
+                [
+                    sh:name "values" ;
+                    sh:path view:argument ;
+                    sh:order 3 ;
+                    dash:editor dash:InstancesSelectEditor ;
+                    hydra:search
+                        [
+                            a hydra:IriTemplate ;
+                            hydra:template [ code:name "filter-terms" ] ;
+                            hydra:mapping
+                                [
+                                    hydra:property :filterTermSet ;
+                                    hydra:variable "FILTER" ;
+                                    hydra:required true ;
+                                ] ;
+                        ] ;
                 ] ;
         ] ;
 .

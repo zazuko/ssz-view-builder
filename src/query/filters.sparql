@@ -1,0 +1,28 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX schema: <http://schema.org/>
+PREFIX cube: <https://cube.link/>
+PREFIX ssz: <https://ld.stadt-zuerich.ch/schema/>
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+CONSTRUCT {
+  <urn:ssz:sets> a hydra:Collection ; hydra:member ?termSet .
+  ?termSet rdfs:label ?label
+}
+WHERE {
+  {
+    SELECT ?termSet ?label {
+      VALUES ?dimArg { <{DIMENSION}> }
+
+      # TODO: fix the URI rewrites
+      BIND ( IRI(replace(str(?dimArg), "ld.stadt-zuerich", "ld.integ.stadt-zuerich")) as ?dimension )
+    
+      ?termSet ssz:filterOf ?dimension ;
+              schema:name ?label .
+      
+      FILTER( CONTAINS(LCASE(?label), LCASE("{Q}")))
+    }
+    ORDER BY ?label
+  }
+} 
+LIMIT 10
