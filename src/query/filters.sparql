@@ -12,11 +12,8 @@ CONSTRUCT {
 WHERE {
   {
     SELECT ?termSet ?label {
-      VALUES ?dimArg { <{DIMENSION}> }
+      VALUES ?dimension { <{DIMENSION}> }
 
-      # TODO: fix the URI rewrites
-      BIND ( IRI(replace(str(?dimArg), "ld.stadt-zuerich", "ld.integ.stadt-zuerich")) as ?dimension )
-    
       ?termSet ssz:filterOf ?dimension ;
               schema:name ?label .
       

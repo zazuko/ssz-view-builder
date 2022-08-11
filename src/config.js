@@ -1,6 +1,6 @@
 // configuration goes here
 
-import $rdf from 'rdf-ext'
+import $rdf from '@rdf-esm/data-model'
 import { dash, rdf } from '@tpluscode/rdf-ns-builders'
 import * as configure from '@hydrofoil/shaperone-wc/configure'
 import * as templates from '@hydrofoil/shaperone-wc-shoelace/templates.js'

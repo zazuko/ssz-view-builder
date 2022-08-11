@@ -10,10 +10,7 @@ CONSTRUCT {
   ?term rdfs:label ?label
 }
 WHERE {
-  VALUES ?arg { <{FILTER}> }
-
-  # TODO: fix the URI rewrites
-  BIND ( IRI(replace(str(?arg), "ld.integ.stadt-zuerich", "ld.stadt-zuerich")) as ?filter )
+  VALUES ?filter { <{FILTER}> }
 
   ?filter schema:hasDefinedTerm ?term .
   ?term schema:name ?label ;
