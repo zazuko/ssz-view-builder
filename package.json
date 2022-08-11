@@ -10,10 +10,10 @@
     "lint": "standard --fix"
   },
   "dependencies": {
-    "@hydrofoil/shaperone-core": "0.9.1",
-    "@hydrofoil/shaperone-hydra": "0.3.8",
-    "@hydrofoil/shaperone-wc": "0.7.0",
-    "@hydrofoil/shaperone-wc-shoelace": "0.1.4"
+    "@hydrofoil/shaperone-core": "0.9.3",
+    "@hydrofoil/shaperone-hydra": "0.3.9",
+    "@hydrofoil/shaperone-wc": "0.7.2",
+    "@hydrofoil/shaperone-wc-shoelace": "0.1.7"
   },
   "devDependencies": {
     "standard": "^16.0.4"

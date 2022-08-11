@@ -161,7 +161,7 @@ view:In rdfs:label "one of" .
                     sh:name "values" ;
                     sh:path view:argument ;
                     sh:order 3 ;
-                    dash:editor dash:InstancesSelectEditor ;
+                    dash:editor dash:InstancesMultiSelectEditor ;
                     hydra:search
                         [
                             a hydra:IriTemplate ;

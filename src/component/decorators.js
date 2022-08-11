@@ -1,6 +1,7 @@
 import { dash, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { isGraphPointer, isNamedNode } from 'is-graph-pointer'
 import { findNodes } from 'clownface-shacl-path'
+import * as hydraSearch from '@hydrofoil/shaperone-hydra/lib/components/searchDecorator.js'
 import { sh1 } from '../ns.js'
 import { fetch } from '../fetch.js'
 
@@ -103,4 +104,11 @@ export const autoName = {
 
 function isEmpty(arg) {
   return arg === '' || !arg || arg.value === ''
+}
+
+export const hydraMultiSelectDecorator = {
+  ...hydraSearch.decorator(),
+  applicableTo(component) {
+    return component.editor.equals(dash.InstancesMultiSelectEditor)
+  },
 }
