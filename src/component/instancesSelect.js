@@ -3,7 +3,7 @@ import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js'
 import { localizedLabel } from '@rdfjs-elements/lit-helpers/localizedLabel.js'
 import { html } from '@hydrofoil/shaperone-wc'
 import { repeat } from 'lit/directives/repeat.js'
-import { difference } from '@ngard/tiny-difference';
+import { stop } from './eventHelpers.js'
 
 export function instancesSelect({ value, componentState }, { update }) {
   const pointers = componentState.instances
@@ -29,29 +29,6 @@ function select(value, pointers, update) {
   </sl-select>`
 }
 
-export function multiSelect({ property, componentState }, { update }) {
-  const values = property.objects.map(o => o.object?.value).filter(Boolean)
-  const pointers = componentState.instances || []
-
-  function onChange(e) {
-    if (difference(e.target.value, values).length != 0) {
-      const selected = pointers
-        .filter(({ value }) => e.target.value.includes(value))
-        .map(({ term }) => term)
-
-      update(selected)
-    }
-  }
-
-  return html`<sl-select hoist multiple clearable .value=${values} @sl-hide=${stop} @sl-change=${onChange}>
-      ${repeat(pointers || [], renderItem)}
-  </sl-select>`
-}
-
 export function renderItem(item) {
   return html`<sl-menu-item .value=${item.value}>${localizedLabel(item, { fallback: item.value })}</sl-select-item>`
-}
-
-function stop(e) {
-  e.stopPropagation()
 }

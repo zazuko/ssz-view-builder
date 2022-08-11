@@ -47,7 +47,7 @@ export const instancesMultiSelectEditor = {
   ...instancesSelect,
   editor: dash.InstancesMultiSelectEditor,
   async lazyRender() {
-    return (await import('./instancesSelect.js')).multiSelect
+    return (await import('./multiSelect.js')).multiSelect
   },
 }
 
