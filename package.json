@@ -13,7 +13,8 @@
     "@hydrofoil/shaperone-core": "0.9.3",
     "@hydrofoil/shaperone-hydra": "0.3.9",
     "@hydrofoil/shaperone-wc": "0.7.2",
-    "@hydrofoil/shaperone-wc-shoelace": "0.1.7"
+    "@hydrofoil/shaperone-wc-shoelace": "0.1.7",
+    "@rdfjs-elements/lit-helpers": "0.3.4"
   },
   "devDependencies": {
     "standard": "^16.0.4"

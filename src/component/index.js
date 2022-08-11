@@ -10,8 +10,27 @@ export const autocompleteEditor = {
   async lazyRender() {
     return (await import('./autocomplete.js')).autocomplete
   },
+  initLabel({ value, updateComponentState }) {
+    const {
+      object,
+      componentState: { freetextQuery, selectionLoading },
+    } = value
+
+    if(object && !freetextQuery && !selectionLoading) {
+      const selectionLoading = this.loadInstance({ value: object })
+        .then(resource => {
+            updateComponentState({
+              selected: resource,
+            })
+        })
+
+        updateComponentState({ selectionLoading })
+    }
+  },
   init(...args) {
     instancesSelect.init.call(this, ...args)
+
+    this.initLabel(args[0])
 
     return true
   },
