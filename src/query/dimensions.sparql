@@ -22,10 +22,10 @@ WHERE {
       SELECT ?cube WHERE {
         BIND ("{CUBE}" as ?cubes)
         VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
-        
+
         BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
         BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
-      } 
+      }
     }
   }
 
@@ -35,7 +35,7 @@ WHERE {
         SELECT ?cube WHERE {
           BIND ("{CUBE}" as ?cubes)
           VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
-          
+
           BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
           BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
         }
@@ -44,17 +44,15 @@ WHERE {
       ?shape a cube:Constraint;
              ^cube:observationConstraint ?cube ;
              sh:property/sh:path ?dimension .
-   
-      ?dimension a rdf:Property ; .
-  
-      FILTER( ?dimension NOT IN ( prop:TIME, rdf:type ))
-      #FILTER( !CONTAINS(STR(?dimension), "measure"))
+
+      VALUES ?dimensionTypes { cube:KeyDimension cube:MeasureDimension }
+      ?dimension a ?dimensionTypes .
     }
     group by ?dimension
   }
 
   ?dimension schema:name ?dimensionLabel .
-  
+
   FILTER (?usages = ?cube_count)
-} 
+}
 #LIMIT 10
