@@ -24,7 +24,7 @@ _:dim_RAUM
 
 _:source
 	a view:CubeSource ;
-	view:cube <https://ld.stadt-zuerich.ch/statistics/000026> ;
+	view:cube <https://ld.stadt-zuerich.ch/statistics/000003> ;
 	rdfs:label "BEW-HEL" ;
 	<urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BEW> 
 .

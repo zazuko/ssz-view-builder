@@ -12,9 +12,7 @@ CONSTRUCT {
 WHERE {
   {
     SELECT ?termSet ?label {
-      VALUES ?arg { <{DIMENSION}> }
-
-      BIND(IRI(REPLACE(STR(?arg), "ld.stadt-zuerich.ch", "ld.integ.stadt-zuerich.ch")) as ?dimension)
+      VALUES ?dimension { <{DIMENSION}> }
 
       ?termSet ssz:filterOf ?dimension ;
               schema:name ?label .
