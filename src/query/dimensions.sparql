@@ -45,10 +45,8 @@ WHERE {
              ^cube:observationConstraint ?cube ;
              sh:property/sh:path ?dimension .
    
-      ?dimension a rdf:Property ; .
-  
-      FILTER( ?dimension NOT IN ( prop:TIME, rdf:type ))
-      FILTER( !CONTAINS(STR(?dimension), "measure"))
+      VALUES ?dimensionTypes { cube:KeyDimension cube:MeasureDimension }
+      ?dimension a ?dimensionTypes .
     }
     group by ?dimension
   }
