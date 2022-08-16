@@ -18,6 +18,9 @@ WHERE {
   ?shape a cube:Constraint;
         sh:property/sh:path ?sub .
   
-  FILTER( CONTAINS(LCASE(?kennzahlLabel), LCASE("{Q}")))
+  FILTER( 
+    CONTAINS(LCASE(?kennzahlLabel), LCASE("{Q}")) ||
+    LCASE(?kennzahl) = LCASE("{Q}")
+  )
 } 
 LIMIT 10
