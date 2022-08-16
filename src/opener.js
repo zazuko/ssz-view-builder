@@ -1,8 +1,9 @@
 import { turtle } from '@tpluscode/rdf-string'
-import { prepareViewPointer, createViewQuery } from './view.js'
 import { endpoint } from './queries/index.js'
 
-document.getElementById('converter-opener').addEventListener('click', () => {
+document.getElementById('converter-opener').addEventListener('click', async () => {
+  const { prepareViewPointer } = await import( './view.js')
+
   const form = document.querySelector('shaperone-form')
   const view = prepareViewPointer(form.resource.dataset)
 
@@ -11,7 +12,9 @@ document.getElementById('converter-opener').addEventListener('click', () => {
   window.open(converterUrl, 'converter')
 })
 
-document.getElementById('yasgui-opener').addEventListener('click', () => {
+document.getElementById('yasgui-opener').addEventListener('click', async () => {
+  const { prepareViewPointer, createViewQuery } = await import( './view.js')
+
   const form = document.querySelector('shaperone-form')
   const view = prepareViewPointer(form.resource.dataset)
   const query = createViewQuery(view)
