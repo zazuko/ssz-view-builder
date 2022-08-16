@@ -8,6 +8,7 @@ import "@shoelace-style/shoelace/dist/components/tag/tag.js"
 import { localizedLabel } from '@rdfjs-elements/lit-helpers/localizedLabel.js'
 import { renderItem } from './instancesSelect.js'
 import { rdfs, schema } from '@tpluscode/rdf-ns-builders'
+import { isNamedNode } from 'is-graph-pointer'
 
 export function autocomplete(params, { update }) {
   const { value } = params
@@ -34,10 +35,17 @@ export function autocomplete(params, { update }) {
     }
   }
 
+  let nodeValue = value.object?.value
+  if (isNamedNode(value.object)) {
+    const nodeUrl = new URL(value.object.value)
+    nodeValue = nodeUrl.hash || nodeUrl.pathname
+  }
+  const fallback = nodeValue || freetextQuery
+
   return html`
     <sl-dropdown @sl-hide=${stop} hoist>
       <sl-input slot="trigger" 
-                .value=${localizedLabel(selected, { property: [schema.name, rdfs.label], fallback: freetextQuery })}
+                .value=${localizedLabel(selected, { property: [schema.name, rdfs.label], fallback })}
                 @sl-input="${search}">
         <sl-icon name="search" slot="suffix"></sl-icon>
       </sl-input>

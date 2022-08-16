@@ -1,8 +1,10 @@
-import { dash, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
+import { dash, rdf, rdfs } from '@tpluscode/rdf-ns-builders'
+import { SELECT } from '@tpluscode/sparql-builder'
 import { isGraphPointer, isNamedNode } from 'is-graph-pointer'
-import { findNodes } from 'clownface-shacl-path'
+import { findNodes, toSparql } from 'clownface-shacl-path'
+import * as hydraSearch from '@hydrofoil/shaperone-hydra/lib/components/searchDecorator.js'
 import { sh1 } from '../ns.js'
-import { fetch } from '../fetch.js'
+import { client } from '../queries/index.js'
 
 export const dataGraphInstanceSource = {
   applicableTo(component) {
@@ -37,6 +39,23 @@ export const autoName = {
   decorate(component) {
     return {
       ...component,
+      async getLabel(id, labelPath) {
+        const propertyPath = isGraphPointer(labelPath)
+          ? toSparql(labelPath)
+          : rdfs.label
+
+        try {
+          const [result] = await SELECT`?label`
+            .WHERE`${id.term} ${propertyPath} ?label`
+            .execute(client.query)
+
+          return result?.label.value || id.value
+        }
+        catch(e) {
+          console.warn(e)
+          return id.value
+        }
+      }, 
       async init(params, actions) {
         const { value, focusNode, updateComponentState, property } = params
 
@@ -58,16 +77,12 @@ export const autoName = {
             let label = current.value
 
             if (isNamedNode(current)) {
-              const resource = await fetch(current.value)
               let labelPath = property.shape.pointer.out(sh1.labelPath)
-              if (!isGraphPointer(labelPath)) {
-                labelPath = rdfs.label
-              }
 
-              label = findNodes(resource, labelPath).value
+              label = await this.getLabel(current, labelPath)
             }
 
-            actions.update(label || current.value)
+            actions.update(label)
           }
 
           updateComponentState({
@@ -103,4 +118,11 @@ export const autoName = {
 
 function isEmpty(arg) {
   return arg === '' || !arg || arg.value === ''
+}
+
+export const hydraMultiSelectDecorator = {
+  ...hydraSearch.decorator(),
+  applicableTo(component) {
+    return component.editor.equals(dash.InstancesMultiSelectEditor)
+  },
 }
