@@ -1,6 +1,5 @@
 import { html } from '@hydrofoil/shaperone-wc'
 import { repeat } from 'lit/directives/repeat.js'
-import 'sl-tags-input'
 import "@shoelace-style/shoelace/dist/components/dropdown/dropdown.js"
 import "@shoelace-style/shoelace/dist/components/input/input.js"
 import "@shoelace-style/shoelace/dist/components/menu/menu.js"
