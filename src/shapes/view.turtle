@@ -263,6 +263,7 @@ view:In rdfs:label "one of" .
 
 :KeyFigureProperty
     sh:name "Kennzahl" ;
+    sh:description "Enter at least 2 characters to search" ;
     dash:editor dash:AutoCompleteEditor ;
     sh:path :keyFigure ;
     sh:minCount 1 ;
