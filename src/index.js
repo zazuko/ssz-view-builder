@@ -4,6 +4,7 @@ import { code } from '@zazuko/vocabulary-extras/builders'
 import { isBlankNode } from 'is-graph-pointer'
 import { fetchShapes, fetchQuery, fetchResource } from './fetch'
 import { getSparqlUrl } from './queries/index.js'
+import { generateDimensions } from './automation.js'
 import './config'
 
 const form = document.querySelector('shaperone-form')
@@ -39,4 +40,12 @@ document.getElementById('load-example')
     const example = document.querySelector('#example').value
     const graph = await fetchResource(example)
     form.resource = graph.namedNode('')
+  })
+
+document.getElementById('generate-dimensions')
+  .addEventListener('click', async (e) => {
+    const form = e.target.parentElement
+    const view = form.resource    
+
+    form.resource = await generateDimensions(view)
   })

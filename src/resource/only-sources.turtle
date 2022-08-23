@@ -1,0 +1,19 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix view: <https://cube.link/view/> .
+
+<> a view:View ; 
+	<urn:ssz:source> _:bew, _:stf .
+
+_:bew
+	a view:CubeSource ;
+	view:cube <https://ld.stadt-zuerich.ch/statistics/000003> ;
+	rdfs:label "Wirtschaftliche Bevölkerung" ;
+	<urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BEW> 
+.
+
+_:stf
+	a view:CubeSource ;
+	view:cube <https://ld.stadt-zuerich.ch/statistics/000004> ;
+	rdfs:label "Grundstückflächen in Ha. nach Bebauungsart (Level 2)" ;
+	<urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/STF> 
+.
