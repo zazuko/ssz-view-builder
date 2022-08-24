@@ -2,7 +2,7 @@ import { turtle } from '@tpluscode/rdf-string'
 import { endpoint } from './queries/index.js'
 
 document.getElementById('converter-opener').addEventListener('click', async () => {
-  const { prepareViewPointer } = await import( './view.js')
+  const { prepareViewPointer } = await import('./view.js')
 
   const form = document.querySelector('shaperone-form')
   const view = prepareViewPointer(form.resource.dataset)
@@ -13,7 +13,7 @@ document.getElementById('converter-opener').addEventListener('click', async () =
 })
 
 document.getElementById('yasgui-opener').addEventListener('click', async () => {
-  const { prepareViewPointer, createViewQuery } = await import( './view.js')
+  const { prepareViewPointer, createViewQuery } = await import('./view.js')
 
   const form = document.querySelector('shaperone-form')
   const view = prepareViewPointer(form.resource.dataset)
@@ -31,14 +31,14 @@ document.getElementById('yasgui-opener').addEventListener('click', async () => {
 })
 
 document.getElementById('cube-viewer-opener').addEventListener('click', async () => {
-  const { prepareViewPointer } = await import( './view.js')
+  const { prepareViewPointer } = await import('./view.js')
 
   const form = document.querySelector('shaperone-form')
   const view = prepareViewPointer(form.resource.dataset)
   const resourceTurtle = turtle`${view.dataset}`.toString()
 
-  const endpointUrl = encodeURIComponent('https://ld.stadt-zuerich.ch/query')
-  const cubeViewerUrl = `https://cubeviewerdemo.netlify.app/?endpointUrl=${endpointUrl}&view=${resourceTurtle}`
+  const endpointUrl = 'https://ld.stadt-zuerich.ch/query'
+  const cubeViewerUrl = `https://cubeviewerdemo.netlify.app/?endpointUrl=${encodeURIComponent(endpointUrl)}&view=${encodeURIComponent(resourceTurtle)}`
 
   window.open(cubeViewerUrl, 'cubeViewer')
 })
