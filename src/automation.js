@@ -99,7 +99,7 @@ function deleteCbd(ptr) {
 }
 
 async function findMeasureDimensions(cube) {
-  return await SELECT`?dimension ?label`
+  return await SELECT.DISTINCT`?dimension ?label`
     .WHERE`
       ${cube} ${ns.cube.observationConstraint}/${sh.property}/${sh.path} ?dimension .
 

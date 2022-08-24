@@ -58,7 +58,6 @@ view:In rdfs:label "one of" .
 
 :CubeSourceProperty
     sh:path :source ;
-    sh:minCount 1 ;
     sh:class view:CubeSource ;
     sh:node :CubeSourceShape ;
     sh:order 10 ;
@@ -73,6 +72,7 @@ view:In rdfs:label "one of" .
     sh:group :Group_Projection ;
     sh:node
         [
+            rdfs:label "Projection" ;
             sh:property
                 [
                     sh:name "Limit" ;
@@ -203,7 +203,6 @@ view:In rdfs:label "one of" .
     sh:class view:Dimension ;
     sh:nodeKind sh:BlankNode ;
     sh:node :DimensionShape ;
-    sh:minCount 1 ;
     sh:order 20 ;
     sh:group :Group_Dimensions ;
 .
