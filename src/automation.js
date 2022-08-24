@@ -1,19 +1,17 @@
-import { rdfs, rdf, sh, schema } from '@tpluscode/rdf-ns-builders'
+import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
 import $rdf from '@rdfjs/dataset'
 import clownface from 'clownface'
-import { SELECT } from '@tpluscode/sparql-builder'
-import { VALUES } from '@tpluscode/sparql-builder/expressions'
 import TermMap from '@rdfjs/term-map'
-import { client } from './queries/index.js'
+import * as dimensionQueries from './queries/dimensions.js'
 import * as ns from './ns.js'
 
-export async function generateDimensions(view) {
+export async function generateDimensions(view, queries = dimensionQueries) {
   const sources = view.out(ns.ssz.source)
 
   clearGeneratedDimensions(view)
 
-  await createMeasureDimensions(view, sources)
-  await createKeyDimensions(view, sources, ns.cube.KeyDimension)
+  await createMeasureDimensions(view, sources, queries)
+  await createKeyDimensions(view, sources, queries)
 
   return clownface({
     dataset: $rdf.dataset([...view.dataset]),
@@ -21,7 +19,7 @@ export async function generateDimensions(view) {
   })
 }
 
-async function createKeyDimensions(view, sources) {
+async function createKeyDimensions(view, sources, { findKeyDimensions }) {
   const results = await findKeyDimensions(sources.out(ns.view.cube).terms)
 
   const dimensions = results.reduce((map, { cube, dimension, label }) => {
@@ -49,7 +47,7 @@ async function createKeyDimensions(view, sources) {
   }
 }
 
-async function createMeasureDimensions(view, sources) {
+async function createMeasureDimensions(view, sources, { findMeasureDimensions }) {
   const dimensions = await Promise.all(
     sources.map(async source => {
       const cube = source.out(ns.view.cube).term
@@ -95,31 +93,5 @@ function deleteCbd(ptr) {
       deleteCbd(child)
     }
     child.deleteIn(ptr)
-  })  
-}
-
-async function findMeasureDimensions(cube) {
-  return await SELECT.DISTINCT`?dimension ?label`
-    .WHERE`
-      ${cube} ${ns.cube.observationConstraint}/${sh.property}/${sh.path} ?dimension .
-
-      optional { ?dimension ${schema.name} ?label . }
-
-      ?dimension a ${ns.cube.MeasureDimension}
-    `.execute(client.query)
-}
-
-async function findKeyDimensions(cubes) {
-  const cubeValues = cubes.map(cube => ({ cube }))
-
-  return await SELECT`?cube ?dimension ?label`
-    .WHERE`
-      ${VALUES(...cubeValues)}
-
-      ?cube ${ns.cube.observationConstraint}/${sh.property}/${sh.path} ?dimension .
-
-      optional { ?dimension ${schema.name} ?label . }
-
-      ?dimension a ${ns.cube.KeyDimension}
-    `.execute(client.query)
+  })
 }
