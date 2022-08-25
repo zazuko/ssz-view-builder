@@ -1,3 +1,4 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
@@ -99,81 +100,112 @@ view:In rdfs:label "one of" .
     sh:node
         [
             rdfs:label "Filter" ;
+            sh1:xoneDiscriminator ( view:dimension view:from view:path ) ;
+            sh:xone ( :DefinedTermFilter :DateFilter ) ;
             sh:property
                 [
                     sh:path rdfs:label ;
                     sh:name "Name" ;
                     sh:minCount 1 ;
                     sh:maxCount 1 ;
+                    sh:order 1 ;
                 ],
                 [
                     sh:name "dimension" ;
                     sh:path view:dimension ;
                     dash:editor dash:InstancesSelectEditor ;
                     sh:class view:Dimension ;
-                    sh:order 1 ;
-                    sh:minCount 1 ;
-                    sh:maxCount 1 ;
-                ],
-                [
-                    sh:name "operator" ;
-                    sh:path view:operation ;
-                    sh:minCount 1 ;
-                    sh:maxCount 1 ;
                     sh:order 2 ;
-                    sh:defaultValue view:In ;
-                    sh:in
-                        (
-                            view:Gte
-                            view:Lte
-                            view:Lt
-                            view:Gt
-                            view:Eq
-                            view:In
-                        ) ;
-                ],
-                [
-                    sh:name "filter" ;
-                    sh:path :filterTermSet ;
                     sh:minCount 1 ;
                     sh:maxCount 1 ;
-                    sh:order 2 ;
-                    dash:editor dash:AutoCompleteEditor ;
-                    hydra:search
-                        [
-                            a hydra:IriTemplate ;
-                            hydra:template [ code:name "filters" ] ;
-                            sh:path ( view:dimension view:from ) ;
-                            hydra:mapping
-                                [
-                                    hydra:property view:path ;
-                                    hydra:variable "DIMENSION" ;
-                                    hydra:required true ;
-                                ],
-                                [
-                                    hydra:property hydra:freetextQuery ;
-                                    hydra:variable "Q" ;
-                                    sh:minLength 0 ;
-                                ] ;
-                        ] ;
-                ],
+                ] ;
+        ] ;
+.
+
+:DefinedTermFilter
+    sh1:discriminatorValue
+    [
+        owl:differentFrom <https://ld.stadt-zuerich.ch/statistics/property/ZEIT>
+    ] ;
+    sh:property
+        [
+            sh:path view:operation ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            dash:hidden true ;
+            sh:defaultValue view:In ;
+        ],
+        [
+            sh:name "filter" ;
+            sh:path :filterTermSet ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            dash:editor dash:AutoCompleteEditor ;
+            hydra:search
                 [
-                    sh:name "values" ;
-                    sh:path view:argument ;
-                    sh:order 3 ;
-                    dash:editor dash:InstancesMultiSelectEditor ;
-                    hydra:search
+                    a hydra:IriTemplate ;
+                    hydra:template [ code:name "filters" ] ;
+                    sh:path ( view:dimension view:from ) ;
+                    hydra:mapping
                         [
-                            a hydra:IriTemplate ;
-                            hydra:template [ code:name "filter-terms" ] ;
-                            hydra:mapping
-                                [
-                                    hydra:property :filterTermSet ;
-                                    hydra:variable "FILTER" ;
-                                    hydra:required true ;
-                                ] ;
+                            hydra:property view:path ;
+                            hydra:variable "DIMENSION" ;
+                            hydra:required true ;
+                        ],
+                        [
+                            hydra:property hydra:freetextQuery ;
+                            hydra:variable "Q" ;
+                            sh:minLength 0 ;
                         ] ;
                 ] ;
+        ],
+        [
+            sh:name "values" ;
+            sh:path view:argument ;
+            sh:order 5 ;
+            dash:editor dash:InstancesMultiSelectEditor ;
+            hydra:search
+                [
+                    a hydra:IriTemplate ;
+                    hydra:template [ code:name "filter-terms" ] ;
+                    hydra:mapping
+                        [
+                            hydra:property :filterTermSet ;
+                            hydra:variable "FILTER" ;
+                            hydra:required true ;
+                        ] ;
+                ] ;
+        ] ;
+.
+
+:DateFilter
+    sh1:discriminatorValue <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> ;
+    sh:property
+        [
+            sh:name "operator" ;
+            sh:path view:operation ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:in
+                (
+                    view:Gte
+                    view:Lte
+                    view:Lt
+                    view:Gt
+                    view:Eq
+                ) ;
+        ],
+        [
+            sh:name "value" ;
+            sh:path view:argument ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:datatype xsd:date ;
+            dash:editor dash:DatePickerEditor ;
         ] ;
 .
 

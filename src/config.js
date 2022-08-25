@@ -10,6 +10,7 @@ import shaperoneHydra from '@hydrofoil/shaperone-hydra'
 import * as local from './component/index.js'
 import * as decorators from './component/decorators.js'
 import * as editors from './editor/index.js'
+import dynamicXone from './forms/dynamicXone.js'
 
 shaperoneHydra(configure)
 
@@ -21,6 +22,9 @@ configure.editors.addMetadata([
 configure.editors.addMatchers(editors)
 
 configure.renderer.setTemplates(templates)
+configure.renderer.setTemplates({
+  focusNode: dynamicXone(templates.focusNode),
+})
 configure.components.pushComponents(shoelace)
 
 Object.values(decorators)
