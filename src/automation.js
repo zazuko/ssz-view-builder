@@ -1,9 +1,8 @@
 import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
-import $rdf from '@rdfjs/dataset'
-import clownface from 'clownface'
 import TermMap from '@rdfjs/term-map'
 import * as dimensionQueries from './queries/dimensions.js'
 import * as ns from './ns.js'
+import { deleteCbd, newReference } from './clownface.js'
 
 export async function generateDimensions(view, queries = dimensionQueries) {
   const sources = view.out(ns.ssz.source)
@@ -13,10 +12,9 @@ export async function generateDimensions(view, queries = dimensionQueries) {
   await createMeasureDimensions(view, sources, queries)
   await createKeyDimensions(view, sources, queries)
 
-  return clownface({
-    dataset: $rdf.dataset([...view.dataset]),
-    term: view.term,
-  })
+  // create a new pointer reference
+  // to force form re-render
+  return newReference(view)
 }
 
 async function createKeyDimensions(view, sources, { findKeyDimensions }) {
@@ -84,14 +82,5 @@ function clearGeneratedDimensions(view) {
   generatedDimensions.forEach(dim => {
     dim.deleteIn(ns.view.dimension)
     deleteCbd(dim)
-  })
-}
-
-function deleteCbd(ptr) {
-  ptr.out().forEach(child => {
-    if (child.term.termType === 'BlankNode') {
-      deleteCbd(child)
-    }
-    child.deleteIn(ptr)
   })
 }
