@@ -1,5 +1,5 @@
 import str2stream from 'string-to-stream'
-import { parsers } from '@rdf-esm/formats-common'
+import readTtl from '@graphy/content.ttl.read'
 import RDF from '@rdfjs/dataset'
 import clownface from 'clownface'
 import isAbsoluteUrl from 'is-absolute-url'
@@ -8,9 +8,7 @@ export async function fetch(id, what) {
   const uri = isAbsoluteUrl(id) ? id : `./dist/${what}/${id}.turtle`
 
   const res = await window.fetch(uri)
-  const stream = str2stream(await res.text())
-
-  const parsed = parsers.import('text/turtle', stream)
+  const parsed = str2stream(await res.text()).pipe(readTtl())
 
   const dataset = RDF.dataset()
   for await (const quad of parsed) {

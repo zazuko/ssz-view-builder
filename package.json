@@ -14,12 +14,12 @@
     "start": "webpack-dev-server --mode development --config webpack.config.cjs"
   },
   "dependencies": {
+    "@graphy/content.ttl.read": "^4.3.4",
     "@hydrofoil/shaperone-core": "0.9.3",
     "@hydrofoil/shaperone-hydra": "0.3.9",
     "@hydrofoil/shaperone-wc": "0.7.2",
     "@hydrofoil/shaperone-wc-shoelace": "0.1.7",
     "@ngard/tiny-difference": "^1.0.0",
-    "@rdf-esm/formats-common": "^0.5.6",
     "@rdfjs-elements/lit-helpers": "^0.3.4",
     "@rdfjs/data-model": "^2.0.1",
     "@rdfjs/dataset": "^2.0.1",
