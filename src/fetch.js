@@ -13,7 +13,6 @@ export async function fetch(id, what) {
   const parsed = parsers.import('text/turtle', stream)
 
   const dataset = RDF.dataset()
-  // @ts-ignore https://unpkg.com/browse/@rdfjs/types@1.0.1/stream.d.ts
   for await (const quad of parsed) {
     dataset.add(quad)
   }
@@ -25,14 +24,14 @@ export async function fetch(id, what) {
 /**
  * @param id resource URI or path to local shape
  */
-export function fetchShapes (id) {
+export function fetchShapes(id) {
   return fetch(id, 'shapes')
 }
 
 /**
  * @param id resource URI or path to local shape
  */
-export function fetchResource (id) {
+export function fetchResource(id) {
   return fetch(id, 'resource')
 }
 

@@ -16,15 +16,15 @@ export const autocompleteEditor = {
       componentState: { freetextQuery, selectionLoading },
     } = value
 
-    if(object && !freetextQuery && !selectionLoading) {
+    if (object && !freetextQuery && !selectionLoading) {
       const selectionLoading = this.loadInstance({ value: object })
         .then(resource => {
-            updateComponentState({
-              selected: resource,
-            })
+          updateComponentState({
+            selected: resource,
+          })
         })
 
-        updateComponentState({ selectionLoading })
+      updateComponentState({ selectionLoading })
     }
   },
   init(...args) {

@@ -1,15 +1,15 @@
 import { html } from '@hydrofoil/shaperone-wc'
 import { LitElement, css } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
-import "@shoelace-style/shoelace/dist/components/dropdown/dropdown.js"
-import "@shoelace-style/shoelace/dist/components/input/input.js"
-import "@shoelace-style/shoelace/dist/components/menu/menu.js"
-import "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js"
-import "@shoelace-style/shoelace/dist/components/tag/tag.js"
+import '@shoelace-style/shoelace/dist/components/dropdown/dropdown.js'
+import '@shoelace-style/shoelace/dist/components/input/input.js'
+import '@shoelace-style/shoelace/dist/components/menu/menu.js'
+import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js'
+import '@shoelace-style/shoelace/dist/components/tag/tag.js'
 import { localizedLabel } from '@rdfjs-elements/lit-helpers/localizedLabel.js'
-import { renderItem } from './instancesSelect.js'
 import { rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { isNamedNode } from 'is-graph-pointer'
+import { renderItem } from './instancesSelect.js'
 
 customElements.define('sh-sl-autocomplete', class extends LitElement {
   static get styles() {
@@ -24,7 +24,7 @@ customElements.define('sh-sl-autocomplete', class extends LitElement {
     return {
       selected: { type: Object },
       inputValue: { type: String },
-      empty: { type: Boolean, reflect: true }
+      empty: { type: Boolean, reflect: true },
     }
   }
 
@@ -49,7 +49,7 @@ customElements.define('sh-sl-autocomplete', class extends LitElement {
     </sl-dropdown>
     `
   }
-  
+
   updateEmpty(e) {
     this.empty = e.target.assignedElements().length === 0
   }
@@ -59,15 +59,15 @@ customElements.define('sh-sl-autocomplete', class extends LitElement {
     this.dispatchEvent(new CustomEvent('search', {
       detail: {
         value: input.value,
-      }
+      },
     }))
   }
 
   dispatchItemSelected(e) {
     this.dispatchEvent(new CustomEvent('itemSelected', {
       detail: {
-        value: e.detail.item.value
-      }
+        value: e.detail.item.value,
+      },
     }))
   }
 })
@@ -89,7 +89,7 @@ export function autocomplete(params, { update }) {
 
     params.updateComponentState({
       freetextQuery: '',
-      selected
+      selected,
     })
     if (selected) {
       update(selected.term)

@@ -25,9 +25,9 @@ export const dataGraphInstanceSource = {
           .any()
           .has(rdf.type, clas.id)
           .toArray()
-      }
+      },
     }
-  }
+  },
 }
 
 const autoNameDecorated = 'autoNameDecorated'
@@ -50,12 +50,12 @@ export const autoName = {
             .execute(client.query)
 
           return result?.label.value || id.value
-        }
-        catch(e) {
+        } catch (e) {
+          // eslint-disable-next-line no-console
           console.warn(e)
           return id.value
         }
-      }, 
+      },
       async init(params, actions) {
         const { value, focusNode, updateComponentState, property } = params
 
@@ -71,13 +71,13 @@ export const autoName = {
 
           if (!edited && isGraphPointer(current) && !current.term.equals(previous)) {
             updateComponentState({
-              valueFrom: current.term
+              valueFrom: current.term,
             })
 
             let label = current.value
 
             if (isNamedNode(current)) {
-              let labelPath = property.shape.pointer.out(sh1.labelPath)
+              const labelPath = property.shape.pointer.out(sh1.labelPath)
 
               label = await this.getLabel(current, labelPath)
             }
@@ -87,13 +87,13 @@ export const autoName = {
 
           updateComponentState({
             edited,
-            [autoNameDecorated]: true
+            [autoNameDecorated]: true,
           })
-        } 
-        
+        }
+
         return component.init?.(params, actions) || true
       },
-      _decorateRender (render) {
+      _decorateRender(render) {
         return (params, actions) => {
           const { value, updateComponentState } = params
 
@@ -102,18 +102,18 @@ export const autoName = {
               ...actions,
               update(value) {
                 updateComponentState({
-                  edited: !isEmpty(value)
+                  edited: !isEmpty(value),
                 })
                 actions.update(value)
-              }
+              },
             })
           }
 
           return render(params, actions)
         }
-      }
+      },
     }
-  }
+  },
 }
 
 function isEmpty(arg) {

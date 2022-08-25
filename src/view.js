@@ -11,7 +11,7 @@ export function prepareViewPointer(raw) {
     .has(rdf.type, ns.view.View)
 
   view.out(ns.view.projection)
-      .addList(ns.view.columns, view.out(ns.view.dimension))
+    .addList(ns.view.columns, view.out(ns.view.dimension))
 
   return view
 }

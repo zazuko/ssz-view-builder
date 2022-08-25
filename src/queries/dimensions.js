@@ -1,8 +1,8 @@
-import {SELECT} from '@tpluscode/sparql-builder';
-import * as ns from '../ns.js';
-import {schema, sh} from '@tpluscode/rdf-ns-builders';
-import {client} from './index.js';
-import {VALUES} from '@tpluscode/sparql-builder/expressions';
+import { SELECT } from '@tpluscode/sparql-builder'
+import { schema, sh } from '@tpluscode/rdf-ns-builders'
+import { VALUES } from '@tpluscode/sparql-builder/expressions'
+import * as ns from '../ns.js'
+import { client } from './index.js'
 
 /**
  *

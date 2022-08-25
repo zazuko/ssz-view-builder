@@ -5,5 +5,5 @@ export const instancesMultiSelectEditor = {
   term: dash.InstancesMultiSelectEditor,
   match(shape) {
     return shape.editor?.equals(dash.InstancesMultiSelectEditor)
-  }
+  },
 }

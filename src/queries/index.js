@@ -4,7 +4,7 @@ import ParsingClient from 'sparql-http-client/ParsingClient.js'
 export const endpoint = 'https://ld.integ.stadt-zuerich.ch/query'
 
 export const client = new ParsingClient({
-  endpointUrl: endpoint
+  endpointUrl: endpoint,
 })
 
 export function getSparqlUrl(query, template) {
