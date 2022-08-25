@@ -12,7 +12,7 @@ export function multiSelect({ property, componentState }, { update }) {
   const pointers = componentState.instances || []
 
   function onChange(e) {
-    if (difference(e.target.value, values).length != 0) {
+    if (difference(e.target.value, values).length !== 0) {
       const selected = pointers
         .filter(({ value }) => e.target.value.includes(value))
         .map(({ term }) => term)

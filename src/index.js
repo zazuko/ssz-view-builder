@@ -45,7 +45,7 @@ document.getElementById('load-example')
 document.getElementById('generate-dimensions')
   .addEventListener('click', async (e) => {
     const form = e.target.parentElement
-    const view = form.resource    
+    const view = form.resource
 
     form.resource = await generateDimensions(view)
   })

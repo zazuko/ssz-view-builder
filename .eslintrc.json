@@ -1,0 +1,7 @@
+{
+  "extends": [ "@tpluscode" ],
+  "env": {
+    "browser": true,
+    "mocha": true
+  }
+}

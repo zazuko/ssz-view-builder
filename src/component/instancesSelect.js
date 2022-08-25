@@ -20,8 +20,7 @@ function select(value, pointers, update) {
   function onChange(e) {
     const selected = pointers.find(({ value }) => value === e.target.value)
 
-    if (selected)
-      update(selected.term)
+    if (selected) { update(selected.term) }
   }
 
   return html`<sl-select hoist .value=${value.object?.value} @sl-change=${onChange} @sl-hide=${stop}>

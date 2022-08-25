@@ -30,18 +30,18 @@ async function createKeyDimensions(view, sources, { findKeyDimensions }) {
 
   for (const [dimension, { label, sources }] of dimensions) {
     view.addOut(ns.view.dimension, viewDim => {
-        viewDim
-          .addOut(rdf.type, ns.view.Dimension)
-          .addOut(ns.ssz.generated, true)
-          .addOut(ns.view.from, from => {
-            from.addOut(ns.view.source, sources)
-                .addOut(ns.view.path, dimension)
-          })
+      viewDim
+        .addOut(rdf.type, ns.view.Dimension)
+        .addOut(ns.ssz.generated, true)
+        .addOut(ns.view.from, from => {
+          from.addOut(ns.view.source, sources)
+            .addOut(ns.view.path, dimension)
+        })
 
-          if (label) {
-            viewDim.addOut(rdfs.label, `Key ${label.value}`)
-          }
-      })
+      if (label) {
+        viewDim.addOut(rdfs.label, `Key ${label.value}`)
+      }
+    })
   }
 }
 
@@ -51,9 +51,9 @@ async function createMeasureDimensions(view, sources, { findMeasureDimensions })
       const cube = source.out(ns.view.cube).term
       return {
         source,
-        measures: await findMeasureDimensions(cube)
+        measures: await findMeasureDimensions(cube),
       }
-    })
+    }),
   )
 
   for (const { source, measures } of dimensions) {
@@ -64,12 +64,12 @@ async function createMeasureDimensions(view, sources, { findMeasureDimensions })
           .addOut(ns.ssz.generated, true)
           .addOut(ns.view.from, from => {
             from.addOut(ns.view.source, source)
-                .addOut(ns.view.path, dimension)
+              .addOut(ns.view.path, dimension)
           })
 
-          if (label) {
-            viewDim.addOut(rdfs.label, `Measure ${label.value} (${source.out(rdfs.label).value})`)
-          }
+        if (label) {
+          viewDim.addOut(rdfs.label, `Measure ${label.value} (${source.out(rdfs.label).value})`)
+        }
       })
     }
   }

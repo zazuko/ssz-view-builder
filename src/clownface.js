@@ -1,12 +1,11 @@
-import $rdf from 'rdf-ext';
-import clownface from 'clownface';
+import $rdf from '@rdfjs/dataset'
+import clownface from 'clownface'
 
 export function newReference(ptr) {
   return clownface({
     dataset: $rdf.dataset([...ptr.dataset]),
     term: ptr.term,
   })
-
 }
 
 export function deleteCbd(ptr) {

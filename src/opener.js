@@ -22,7 +22,7 @@ document.getElementById('yasgui-opener').addEventListener('click', async () => {
   const params = new URLSearchParams({
     endpoint,
     query,
-    format: 'text/turtle'
+    format: 'text/turtle',
   })
 
   const converterUrl = new URL('https://ld.stadt-zuerich.ch/sparql/')

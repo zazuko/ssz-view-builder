@@ -1,5 +1,5 @@
 import str2stream from 'string-to-stream'
-import { parsers } from '@rdf-esm/formats-common'
+import readTtl from '@graphy/content.ttl.read'
 import RDF from '@rdfjs/dataset'
 import clownface from 'clownface'
 import isAbsoluteUrl from 'is-absolute-url'
@@ -8,12 +8,9 @@ export async function fetch(id, what) {
   const uri = isAbsoluteUrl(id) ? id : `./dist/${what}/${id}.turtle`
 
   const res = await window.fetch(uri)
-  const stream = str2stream(await res.text())
-
-  const parsed = parsers.import('text/turtle', stream)
+  const parsed = str2stream(await res.text()).pipe(readTtl())
 
   const dataset = RDF.dataset()
-  // @ts-ignore https://unpkg.com/browse/@rdfjs/types@1.0.1/stream.d.ts
   for await (const quad of parsed) {
     dataset.add(quad)
   }
@@ -25,14 +22,14 @@ export async function fetch(id, what) {
 /**
  * @param id resource URI or path to local shape
  */
-export function fetchShapes (id) {
+export function fetchShapes(id) {
   return fetch(id, 'shapes')
 }
 
 /**
  * @param id resource URI or path to local shape
  */
-export function fetchResource (id) {
+export function fetchResource(id) {
   return fetch(id, 'resource')
 }
 

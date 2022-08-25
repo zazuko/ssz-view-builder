@@ -1,10 +1,10 @@
-import {expect} from 'chai';
-import sinon from 'sinon';
-import $rdf from 'rdf-ext';
-import {rdfs} from '@tpluscode/rdf-ns-builders';
+import { expect } from 'chai'
+import sinon from 'sinon'
+import $rdf from 'rdf-ext'
+import { rdfs } from '@tpluscode/rdf-ns-builders'
 import { generateDimensions } from '../src/automation.js'
-import {ssz, view} from '../src/ns.js';
-import {ex, testData} from './_helpers.js';
+import { ssz, view } from '../src/ns.js'
+import { ex, testData } from './_helpers.js'
 
 describe('automation.js', () => {
   let queries
@@ -12,7 +12,7 @@ describe('automation.js', () => {
   beforeEach(() => {
     queries = {
       findKeyDimensions: sinon.stub().resolves([]),
-      findMeasureDimensions: sinon.stub().resolves([])
+      findMeasureDimensions: sinon.stub().resolves([]),
     }
   })
 
@@ -20,7 +20,7 @@ describe('automation.js', () => {
     it('generates a view dimension for cube measure', async () => {
       // given
       queries.findMeasureDimensions.resolves([
-        { dimension: ex.Kennzahl, label: $rdf.literal('KENNZAHL') }
+        { dimension: ex.Kennzahl, label: $rdf.literal('KENNZAHL') },
       ])
 
       const before = await testData`
@@ -46,7 +46,7 @@ describe('automation.js', () => {
       // given
       queries.findKeyDimensions.resolves([
         { cube: ex.Cube, dimension: ex.Width, label: $rdf.literal('Width') },
-        { cube: ex.Cube, dimension: ex.Height, label: $rdf.literal('Height') }
+        { cube: ex.Cube, dimension: ex.Height, label: $rdf.literal('Height') },
       ])
 
       const before = await testData`
@@ -74,7 +74,7 @@ describe('automation.js', () => {
       // given
       queries.findKeyDimensions.resolves([
         { cube: ex.Cube1, dimension: ex.Width, label: $rdf.literal('Width') },
-        { cube: ex.Cube2, dimension: ex.Width, label: $rdf.literal('Width') }
+        { cube: ex.Cube2, dimension: ex.Width, label: $rdf.literal('Width') },
       ])
 
       const before = await testData`
@@ -96,5 +96,5 @@ describe('automation.js', () => {
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Width)
       expect(dimensions.out(view.from).out(view.source).terms).to.have.all.members(before.out(ssz.source).terms)
     })
-  });
-});
+  })
+})
