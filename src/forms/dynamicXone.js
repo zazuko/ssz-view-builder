@@ -2,7 +2,7 @@ import { decorate } from '@hydrofoil/shaperone-wc/templates.js'
 import { findNodes } from 'clownface-shacl-path'
 import { isGraphPointer } from 'is-graph-pointer'
 import { owl } from '@tpluscode/rdf-ns-builders'
-import { sh1 } from '../ns.js'
+import sh1 from '@hydrofoil/shaperone-core/ns.js'
 
 /**
  * Focus node rendering decorator, which will choose properties to render by only showing those
