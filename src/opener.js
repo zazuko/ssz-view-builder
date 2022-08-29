@@ -37,8 +37,7 @@ document.getElementById('cube-viewer-opener').addEventListener('click', async ()
   const view = prepareViewPointer(form.resource.dataset)
   const resourceTurtle = turtle`${view.dataset}`.toString()
 
-  const endpointUrl = 'https://ld.stadt-zuerich.ch/query'
-  const cubeViewerUrl = `https://cubeviewerdemo.netlify.app/?endpointUrl=${encodeURIComponent(endpointUrl)}&view=${encodeURIComponent(resourceTurtle)}`
+  const cubeViewerUrl = `https://cubeviewerdemo.netlify.app/?endpointUrl=${encodeURIComponent(endpoint)}&view=${encodeURIComponent(resourceTurtle)}`
 
   window.open(cubeViewerUrl, 'cubeViewer')
 })
