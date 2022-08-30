@@ -6,6 +6,7 @@ import * as shoelace from '@hydrofoil/shaperone-wc-shoelace/components.js'
 import { instancesMultiSelectEditor } from '@hydrofoil/shaperone-wc-shoelace/component-extras.js'
 import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js'
 import shaperoneHydra from '@hydrofoil/shaperone-hydra'
+import { rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import * as decorators from './component/decorators.js'
 import * as editors from './editor/index.js'
 import dynamicXone from './forms/dynamicXone.js'
@@ -14,6 +15,7 @@ import filterDimensionViewer from './component/filterDimensionViewer.js'
 shaperoneHydra(configure)
 
 setBasePath('https://unpkg.com/@shoelace-style/shoelace/dist')
+shoelace.autocomplete.labelProperties = [schema.name, rdfs.label]
 
 configure.editors.addMatchers(editors)
 
