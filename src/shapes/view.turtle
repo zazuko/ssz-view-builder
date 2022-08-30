@@ -119,7 +119,7 @@ view:In rdfs:label "one of" .
                     sh:order 1 ;
                 ],
                 [
-                    sh:name "base dimension" ;
+                    sh:name "dimension" ;
                     sh:path :baseDimension ;
                     dash:editor dash:InstancesSelectEditor ;
                     sh:class view:Dimension ;
@@ -128,7 +128,7 @@ view:In rdfs:label "one of" .
                     sh:maxCount 1 ;
                 ],
                 [
-                    sh:name "drill-down property" ;
+                    sh:name "dimension term property" ;
                     sh:path :drillDownProperty ;
                     sh:maxCount 1 ;
                     sh:order 3 ;
