@@ -100,7 +100,15 @@ view:In rdfs:label "one of" .
     sh:node
         [
             rdfs:label "Filter" ;
-            sh1:xoneDiscriminator ( view:dimension view:from view:path ) ;
+            sh1:xoneDiscriminator
+                [
+                # :drillDownProperty|(view:dimension/view:from/view:path)
+                    sh:alternativePath
+                        (
+                            :drillDownProperty
+                            ( :baseDimension view:from view:path )
+                        )
+                ] ;
             sh:xone ( :DefinedTermFilter :DateFilter ) ;
             sh:property
                 [
@@ -111,13 +119,40 @@ view:In rdfs:label "one of" .
                     sh:order 1 ;
                 ],
                 [
-                    sh:name "dimension" ;
-                    sh:path view:dimension ;
+                    sh:name "base dimension" ;
+                    sh:path :baseDimension ;
                     dash:editor dash:InstancesSelectEditor ;
                     sh:class view:Dimension ;
                     sh:order 2 ;
                     sh:minCount 1 ;
                     sh:maxCount 1 ;
+                ],
+                [
+                    sh:name "drill-down property" ;
+                    sh:path :drillDownProperty ;
+                    sh:maxCount 1 ;
+                    sh:order 3 ;
+                    dash:editor dash:InstancesSelectEditor ;
+                    hydra:search
+                        [
+                            a hydra:IriTemplate ;
+                            hydra:template [ code:name "deepDimensionProperty" ] ;
+                            sh:path ( :baseDimension view:from ) ;
+                            hydra:mapping
+                                [
+                                    hydra:property view:path ;
+                                    hydra:variable "DIMENSION" ;
+                                    hydra:required true ;
+                                ] ;
+                        ] ;
+                ],
+                [
+                    sh:name "effective path" ;
+                    sh:path view:dimension ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:order 100 ;
+                    dash:editor :FilterDimensionViewer ;
                 ] ;
         ] ;
 .
@@ -125,7 +160,7 @@ view:In rdfs:label "one of" .
 :DefinedTermFilter
     sh1:discriminatorValue
     [
-        owl:differentFrom <https://ld.stadt-zuerich.ch/statistics/property/ZEIT>
+        owl:differentFrom <https://ld.stadt-zuerich.ch/schema/hasEnd>
     ] ;
     sh:property
         [
@@ -181,7 +216,7 @@ view:In rdfs:label "one of" .
 .
 
 :DateFilter
-    sh1:discriminatorValue <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> ;
+    sh1:discriminatorValue <https://ld.stadt-zuerich.ch/schema/hasEnd> ;
     sh:property
         [
             sh:name "operator" ;

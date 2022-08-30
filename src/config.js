@@ -9,6 +9,7 @@ import shaperoneHydra from '@hydrofoil/shaperone-hydra'
 import * as decorators from './component/decorators.js'
 import * as editors from './editor/index.js'
 import dynamicXone from './forms/dynamicXone.js'
+import filterDimensionViewer from './component/filterDimensionViewer.js'
 
 shaperoneHydra(configure)
 
@@ -20,7 +21,11 @@ configure.renderer.setTemplates(templates)
 configure.renderer.setTemplates({
   focusNode: dynamicXone(templates.focusNode),
 })
-configure.components.pushComponents({ ...shoelace, instancesMultiSelectEditor })
+configure.components.pushComponents({
+  ...shoelace,
+  instancesMultiSelectEditor,
+  filterDimensionViewer,
+})
 
 Object.values(decorators)
   .forEach(configure.components.decorate)
