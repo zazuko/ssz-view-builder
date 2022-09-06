@@ -36,9 +36,7 @@ function createFilterDimension(baseDimension, focusNode) {
   dimension
     .addOut(rdf.type, [view.Dimension, ssz.FilterDimension])
     .addOut(view.from, from => {
-      from.addOut(view.source, source => {
-        source.addOut(view.cube, baseDimension.out(view.from).out(view.source).out(view.cube))
-      })
+      from.addOut(view.source, baseDimension.out(view.from).out(view.source))
 
       if (deepPath) {
         from.addList(view.path, [basePath, deepPath])

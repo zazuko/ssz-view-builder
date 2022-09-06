@@ -63,6 +63,8 @@ view:In rdfs:label "one of" .
     sh:node :CubeSourceShape ;
     sh:order 10 ;
     sh:group :Group_Sources ;
+    sh:nodeKind sh:IRI ;
+    sh1:iriPrefix <source/> ;
 .
 
 :ProjectionProperty
@@ -97,6 +99,7 @@ view:In rdfs:label "one of" .
     sh:path view:filter ;
     sh:class view:Filter ;
     sh:group :Group_Filters ;
+    sh:nodeKind sh:BlankNode ;
     sh:node
         [
             rdfs:label "Filter" ;
