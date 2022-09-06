@@ -12,22 +12,14 @@ import sh1 from '@hydrofoil/shaperone-core/ns.js'
  * the focus node value of the discriminator matches the `sh:hasValue` of that hidden property
  *
  * <shape>
- *    sh1:discriminator <property> ;
+ *    sh1:xoneDiscriminator <property> ;
  *    sh:xone (
  *      [
- *        sh:property [
- *          sh:path <property> ;
- *          sh:hasValue "foo" ;
- *          dash:hidden true ;
- *        ] ;
+ *        sh1:discriminatorValue "foo" ;
  *        sh:property <foo1> , <foo2> , <foo3>;
  *      ]
  *      [
- *        sh:property [
- *          sh:path <property> ;
- *          sh:hasValue "bar" ;
- *          dash:hidden true ;
- *        ] ;
+ *        sh1:discriminatorValue "bar" ;
  *        sh:property <bar1> , <bar2> , <bar3>;
  *      ]
  *    )
