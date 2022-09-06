@@ -156,7 +156,7 @@ view:In rdfs:label "one of" .
                     sh:maxCount 1 ;
                     sh:order 100 ;
                     dash:editor :FilterDimensionViewer ;
-                    dash:hidden true ;
+                    sh1:showInDebugOnly true ;
                 ] ;
         ] ;
 .
