@@ -65,11 +65,13 @@ describe('component/filterDimensionViewer.js', () => {
         <>
           ${ssz.baseDimension} [
             ${view.from} [
-              ${view.source} [ ${view.cube} <cube> ] ;
+              ${view.source} <source> ;
               ${view.path} <ZEIT> ;
             ] ;
           ] ;
         .
+        
+        <source> ${view.cube} <cube> .
       `
       const value = {
       }
@@ -79,7 +81,7 @@ describe('component/filterDimensionViewer.js', () => {
 
       // then
       expect(update).to.have.been.calledWith(
-        sinon.match(dimensionWith({ cube: $rdf.namedNode('cube'), path: '<ZEIT>' })),
+        sinon.match(dimensionWith({ source: $rdf.namedNode('source'), path: '<ZEIT>' })),
       )
     })
 
@@ -89,18 +91,20 @@ describe('component/filterDimensionViewer.js', () => {
         <>
           ${view.dimension} [
             ${view.from} [
-              ${view.source} [ ${view.cube} <cube> ] ;
+              ${view.source} <source> ;
               ${view.path} <ZEIT> ;
             ] ;
           ] ;
           ${ssz.baseDimension} [
             ${view.from} [
-              ${view.source} [ ${view.cube} <cube> ] ;
+              ${view.source} <source> ;
               ${view.path} <ZEIT> ;
             ] ;
           ] ;
           ${ssz.drillDownProperty} <hasEnd> ;
         .
+        
+        <source> ${view.cube} <cube> .
       `
       const value = {
         object: focusNode.out(view.dimension),
@@ -111,19 +115,19 @@ describe('component/filterDimensionViewer.js', () => {
 
       // then
       expect(update).to.have.been.calledWith(
-        sinon.match(dimensionWith({ cube: $rdf.namedNode('cube'), path: '<ZEIT>/<hasEnd>' })),
+        sinon.match(dimensionWith({ source: $rdf.namedNode('source'), path: '<ZEIT>/<hasEnd>' })),
       )
     })
   })
 })
 
-function dimensionWith({ cube, path }) {
+function dimensionWith({ source, path }) {
   return actual => {
     try {
-      const actualCube = actual.out(view.from).out(view.source).out(view.cube).term
+      const actualSource = actual.out(view.from).out(view.source).term
       const actualPath = toSparql(actual.out(view.from).out(view.path)).toString({ prologue: false })
 
-      return cube.equals(actualCube) && path === actualPath
+      return source.equals(actualSource) && path === actualPath
     } catch {
       return false
     }
