@@ -8,7 +8,7 @@ import sh1 from '@hydrofoil/shaperone-core/ns.js'
  * Focus node rendering decorator, which will choose properties to render by only showing those
  * matching a `sh1:xoneDiscriminator`.
  *
- * Add a hidden property to the items of `sh:xone`. Properties within its group will be shown onyl when
+ * Add a hidden property to the items of `sh:xone`. Properties within its group will be shown only when
  * the focus node value of the discriminator matches the `sh:hasValue` of that hidden property
  *
  * <shape>
