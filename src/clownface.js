@@ -9,10 +9,14 @@ export function newReference(ptr) {
 }
 
 export function deleteCbd(ptr) {
-  ptr.out().forEach(child => {
-    if (child.term.termType === 'BlankNode') {
-      deleteCbd(child)
+  function deleteQuads(dataset, term) {
+    for (const quad of dataset.match(term)) {
+      ptr.dataset.delete(quad)
+      if (quad.object.termType === 'BlankNode') {
+        deleteQuads(dataset, quad.object)
+      }
     }
-    child.deleteIn(ptr)
-  })
+  }
+
+  deleteQuads(ptr.dataset, ptr.term)
 }

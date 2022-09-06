@@ -76,7 +76,8 @@ async function createMeasureDimensions(view, sources, { findMeasureDimensions })
 }
 
 function clearGeneratedDimensions(view) {
-  const generatedDimensions = view.out(ns.view.dimension)
+  const generatedDimensions = view.any()
+    .has(rdf.type, ns.view.Dimension)
     .has(ns.ssz.generated, true)
 
   generatedDimensions.forEach(dim => {
