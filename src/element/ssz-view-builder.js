@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit'
+import { css, html, LitElement } from 'lit'
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js'
 import '@shoelace-style/shoelace/dist/components/menu/menu.js'
 import '@shoelace-style/shoelace/dist/components/menu-label/menu-label.js'
@@ -12,6 +12,14 @@ import { fetchShapes, fetchQuery } from '../fetch'
 import { getSparqlUrl, endpoint } from '../queries/index.js'
 
 customElements.define('ssz-view-builder', class extends LitElement {
+  static get styles() {
+    return css`
+      :host {
+        display: block
+      }
+    `
+  }
+
   static get properties() {
     return {
       ready: { type: Boolean, reflect: true },
