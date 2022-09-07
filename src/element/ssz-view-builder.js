@@ -37,7 +37,7 @@ customElements.define('ssz-view-builder', class extends LitElement {
 
     Promise.all([
       import('./ssz-view-builder.deps.js'),
-      this.loadShapes()
+      this.loadShapes(),
     ]).then(() => {
       this.ready = true
     })

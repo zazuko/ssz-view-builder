@@ -11,4 +11,3 @@ document.querySelectorAll('sl-menu-item.example').forEach(menuItem => {
     form.resource = graph.namedNode('')
   })
 })
- 
