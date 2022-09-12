@@ -9,11 +9,11 @@ export default {
   init({ focusNode, value }, { update }) {
     const baseDimension = focusNode.out(ssz.baseDimension)
     const expectedDimension = createFilterDimension(baseDimension, focusNode)
-    const expectedPath = expectedDimension.out(view.from).out(view.path)
+    const expectedPath = pathSparql(expectedDimension.out(view.from).out(view.path))
 
-    const currentPath = value.object?.out(view.from).out(view.path)
+    const currentPath = pathSparql(value.object?.out(view.from).out(view.path))
 
-    if (baseDimension.term && (!value.object || !pathsEqual(expectedPath, currentPath))) {
+    if (expectedPath && expectedPath !== currentPath) {
       update(expectedDimension)
     }
 
@@ -22,11 +22,7 @@ export default {
   render({ value }) {
     const path = value.object?.out(view.from).out(view.path)
 
-    try {
-      return toSparql(path).toString({ prologue: false })
-    } catch {
-      return ''
-    }
+    return pathSparql(path)
   },
 }
 
@@ -50,13 +46,10 @@ function createFilterDimension(baseDimension, focusNode) {
   return dimension
 }
 
-function pathsEqual(left, right) {
+function pathSparql(pointer) {
   try {
-    const leftSparql = toSparql(left).toString({ prologue: true })
-    const rightSparql = toSparql(right).toString({ prologue: true })
-
-    return leftSparql === rightSparql
+    return toSparql(pointer).toString({ prologue: true })
   } catch {
-    return true
+    return ''
   }
 }
