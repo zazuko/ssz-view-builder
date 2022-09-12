@@ -186,7 +186,7 @@ view:In rdfs:label "one of" .
                 [
                     a hydra:IriTemplate ;
                     hydra:template [ code:name "filters" ] ;
-                    sh:path ( view:dimension view:from ) ;
+                    sh:path ( :baseDimension view:from ) ;
                     hydra:mapping
                         [
                             hydra:property view:path ;
