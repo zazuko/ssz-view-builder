@@ -150,6 +150,23 @@ view:In rdfs:label "one of" .
                         ] ;
                 ],
                 [
+                    sh:name "operator" ;
+                    sh:path view:operation ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:order 4 ;
+                    sh:defaultValue view:In ;
+                    sh:in
+                        (
+                            view:In
+                            view:Gte
+                            view:Lte
+                            view:Lt
+                            view:Gt
+                            view:Eq
+                        ) ;
+                ],
+                [
                     sh:name "effective path" ;
                     sh:path view:dimension ;
                     sh:minCount 1 ;
@@ -167,14 +184,6 @@ view:In rdfs:label "one of" .
         owl:differentFrom <https://ld.stadt-zuerich.ch/schema/hasEnd>
     ] ;
     sh:property
-        [
-            sh:path view:operation ;
-            sh:minCount 1 ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            dash:hidden true ;
-            sh:defaultValue view:In ;
-        ],
         [
             sh:name "filter" ;
             sh:path :filterTermSet ;
@@ -222,21 +231,6 @@ view:In rdfs:label "one of" .
 :DateFilter
     sh1:discriminatorValue <https://ld.stadt-zuerich.ch/schema/hasEnd> ;
     sh:property
-        [
-            sh:name "operator" ;
-            sh:path view:operation ;
-            sh:minCount 1 ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:in
-                (
-                    view:Gte
-                    view:Lte
-                    view:Lt
-                    view:Gt
-                    view:Eq
-                ) ;
-        ],
         [
             sh:name "value" ;
             sh:path view:argument ;
