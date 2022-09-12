@@ -20,11 +20,13 @@ export default {
     return true
   },
   render({ value }) {
-    if (!value.object) {
+    const path = value.object?.out(view.from).out(view.path)
+
+    try {
+      return toSparql(path).toString({ prologue: false })
+    } catch {
       return ''
     }
-
-    return toSparql(value.object.out(view.from).out(view.path)).toString({ prologue: false })
   },
 }
 
