@@ -9,9 +9,9 @@ export default {
   init({ focusNode, value }, { update }) {
     const baseDimension = focusNode.out(ssz.baseDimension)
     const expectedDimension = createFilterDimension(baseDimension, focusNode)
-    const expectedPath = pathSparql(expectedDimension.out(view.from).out(view.path))
+    const expectedPath = getSparqlStringForPath(expectedDimension.out(view.from).out(view.path))
 
-    const currentPath = pathSparql(value.object?.out(view.from).out(view.path))
+    const currentPath = getSparqlStringForPath(value.object?.out(view.from).out(view.path))
 
     if (expectedPath && expectedPath !== currentPath) {
       update(expectedDimension)
@@ -22,7 +22,7 @@ export default {
   render({ value }) {
     const path = value.object?.out(view.from).out(view.path)
 
-    return pathSparql(path)
+    return getSparqlStringForPath(path)
   },
 }
 
@@ -46,7 +46,7 @@ function createFilterDimension(baseDimension, focusNode) {
   return dimension
 }
 
-function pathSparql(pointer) {
+function getSparqlStringForPath(pointer) {
   try {
     return toSparql(pointer).toString({ prologue: true })
   } catch {
