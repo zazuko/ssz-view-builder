@@ -16,6 +16,7 @@
     sh:targetClass view:View ;
     rdfs:label "View" ;
     sh:property
+        :IdentifierProperty,
         :CubeSourceProperty,
         :DimensionProperty,
         :FiltersProperty,
@@ -55,6 +56,20 @@ view:In rdfs:label "one of" .
 :Group_Projection
     sh:order 4 ;
     rdfs:label "Projection" ;
+.
+
+:Group_Main
+  sh:order 5 ;
+  rdfs:label "Metadata" ;
+.
+
+:IdentifierProperty
+  sh:group :Group_Main ;
+  sh:name "Identifier" ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:minLength 1 ;
+  sh:path schema:identifier ;
 .
 
 :CubeSourceProperty

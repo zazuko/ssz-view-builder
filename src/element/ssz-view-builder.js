@@ -5,7 +5,7 @@ import '@shoelace-style/shoelace/dist/components/menu-label/menu-label.js'
 import '@shoelace-style/shoelace/dist/components/divider/divider.js'
 import '@material/mwc-drawer/mwc-drawer.js'
 import { turtle } from '@tpluscode/rdf-string'
-import { hydra } from '@tpluscode/rdf-ns-builders'
+import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import { code } from '@zazuko/vocabulary-extras/builders'
 import { isBlankNode } from 'is-graph-pointer'
 import { fetchShapes, fetchQuery } from '../fetch'
@@ -25,6 +25,7 @@ customElements.define('ssz-view-builder', class extends LitElement {
       ready: { type: Boolean, reflect: true },
       shapes: { type: Object },
       resource: { type: Object },
+      viewsUrl: { type: String, attribute: 'views-url' },
     }
   }
 
@@ -38,7 +39,15 @@ customElements.define('ssz-view-builder', class extends LitElement {
     Promise.all([
       import('./ssz-view-builder.deps.js'),
       this.loadShapes(),
-    ]).then(() => {
+    ]).then(async ([{ Hydra }]) => {
+      Hydra.defaultRequestInit = {
+        credentials: 'include',
+      }
+      this.api = Hydra
+
+      const { representation } = await Hydra.loadResource(this.viewsUrl)
+      this.viewsCollection = representation?.root
+
       this.ready = true
     })
   }
@@ -50,7 +59,11 @@ customElements.define('ssz-view-builder', class extends LitElement {
           <sl-menu>
             <sl-menu-label>View Builder</sl-menu-label>
             <sl-divider></sl-divider>
+            <sl-menu-label>Current view</sl-menu-label>
+            <sl-menu-item @click=${this.saveView}>Save</sl-menu-item>
             <sl-menu-item @click=${this.generateDimensions}>Generate dimensions</sl-menu-item>
+            <sl-divider></sl-divider>
+            <sl-menu-label>Actions</sl-menu-label>
             <sl-menu-item @click=${this.showView}>Show view</sl-menu-item>
             <sl-menu-item @click=${this.showQuery}>Show query</sl-menu-item>
             <sl-menu-item @click=${this.showInCubeViewer}>Show in cube viewer</sl-menu-item>
@@ -66,6 +79,37 @@ customElements.define('ssz-view-builder', class extends LitElement {
 
   renderForm() {
     return html`<shaperone-form .shapes=${this.shapes} .resource=${this.resource}></shaperone-form>`
+  }
+
+  async saveView() {
+    let saveOperation
+
+    if (!this.view) {
+      saveOperation = this.viewsCollection.findOperations({
+        bySupportedOperation: schema.CreateAction,
+      }).shift()
+    } else {
+      saveOperation = this.view.findOperations({
+        byMethod: 'PUT',
+      }).shift()
+    }
+
+    const body = this.form.value.toJSON()
+    const { response, representation } = await saveOperation.invoke(JSON.stringify(body), {
+      'content-type': 'application/ld+json',
+    })
+
+    if (!this.view) {
+      if (response.xhr.ok && response.xhr.headers.has('location')) {
+        const id = response.xhr.headers.get('location')
+        const created = await this.api.loadResource(id)
+        this.view = created.representation.root
+        this.resource = created.representation.root.pointer
+      }
+    } else {
+      this.view = representation.root
+      this.resource = representation.root.pointer
+    }
   }
 
   async loadShapes() {
