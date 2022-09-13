@@ -18,7 +18,7 @@
     "@hydrofoil/shaperone-core": "0.9.9",
     "@hydrofoil/shaperone-hydra": "0.3.13",
     "@hydrofoil/shaperone-wc": "0.7.6",
-    "@hydrofoil/shaperone-wc-shoelace": "0.1.16",
+    "@hydrofoil/shaperone-wc-shoelace": "0.1.18",
     "@ngard/tiny-difference": "^1.0.0",
     "@rdfjs-elements/lit-helpers": "^0.3.4",
     "@rdfjs/data-model": "^2.0.1",
