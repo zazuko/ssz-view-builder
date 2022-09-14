@@ -13,6 +13,8 @@ export function prepareViewPointer(raw) {
   view.out(ns.view.projection)
     .addList(ns.view.columns, view.out(ns.view.dimension))
 
+  view.addOut(ns.view.dimension, view.out(ns.view.filter).out(ns.view.dimension))
+
   return view
 }
 

@@ -2,8 +2,7 @@ import { dash, rdf, rdfs } from '@tpluscode/rdf-ns-builders'
 import { SELECT } from '@tpluscode/sparql-builder'
 import { isGraphPointer, isNamedNode } from 'is-graph-pointer'
 import { findNodes, toSparql } from 'clownface-shacl-path'
-import * as hydraSearch from '@hydrofoil/shaperone-hydra/lib/components/searchDecorator.js'
-import { sh1 } from '../ns.js'
+import sh1 from '@hydrofoil/shaperone-core/ns.js'
 import { client } from '../queries/index.js'
 
 export const dataGraphInstanceSource = {
@@ -13,12 +12,11 @@ export const dataGraphInstanceSource = {
   decorate(component) {
     return {
       ...component,
-      async loadChoices(args, freetextQuery) {
+      loadChoices(args, freetextQuery) {
         const { focusNode, property } = args
         const { class: clas } = property.shape
         if (!clas) {
-          const choices = await component.loadChoices(args, freetextQuery)
-          return choices
+          return component.loadChoices(args, freetextQuery)
         }
 
         return focusNode
@@ -118,11 +116,4 @@ export const autoName = {
 
 function isEmpty(arg) {
   return arg === '' || !arg || arg.value === ''
-}
-
-export const hydraMultiSelectDecorator = {
-  ...hydraSearch.decorator(),
-  applicableTo(component) {
-    return component.editor.equals(dash.InstancesMultiSelectEditor)
-  },
 }

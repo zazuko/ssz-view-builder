@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import sinon from 'sinon'
 import $rdf from 'rdf-ext'
-import { rdfs } from '@tpluscode/rdf-ns-builders'
+import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
 import { generateDimensions } from '../src/automation.js'
 import { ssz, view } from '../src/ns.js'
 import { ex, testData } from './_helpers.js'
@@ -95,6 +95,39 @@ describe('automation.js', () => {
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Width)
       expect(dimensions.out(view.from).out(view.source).terms).to.have.all.members(before.out(ssz.source).terms)
+    })
+
+    it('removes all existing generated dimensions', async () => {
+      // given
+      queries.findMeasureDimensions.resolves([
+        { dimension: ex.Kennzahl, label: $rdf.literal('KENNZAHL') },
+      ])
+
+      const before = await testData`
+        <> a ${view.View} ;
+           ${ssz.source} <source> ;
+           ${view.dimension} [
+             a ${view.Dimension} ;
+             ${ssz.generated} true ;
+             ${view.source} <source> ;
+           ] ;
+        .
+        
+        <dangling1> a ${view.Dimension} ; ${ssz.generated} true ; ${view.source} <source> .
+        <dangling2> a ${view.Dimension} ; ${ssz.generated} true ; ${view.source} <source> .
+        
+        <source> ${view.cube} ${ex.cube} .
+      `
+
+      // when
+      const after = await generateDimensions(before, queries)
+
+      // then
+      const dimensions = after.any().has(rdf.type, view.Dimension)
+      expect(dimensions.terms).to.have.length(1)
+      expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Kennzahl)
+      expect(dimensions.out(view.from).out(view.source).term).to.deep.eq(before.out(ssz.source).term)
+      expect(dimensions.out(rdfs.label).value).to.contain('KENNZAHL')
     })
   })
 })
