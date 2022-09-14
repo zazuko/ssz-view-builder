@@ -1,4 +1,5 @@
 import $rdf from '@rdfjs/dataset'
+import Traverser from '@rdfjs/traverser'
 import clownface from 'clownface'
 
 export function newReference(ptr) {
@@ -8,11 +9,12 @@ export function newReference(ptr) {
   })
 }
 
+const subgraph = new Traverser(({ level, quad }) => {
+  return level === 0 || quad.subject.termType === 'BlankNode'
+}, { factory: $rdf })
+
 export function deleteCbd(ptr) {
-  ptr.out().forEach(child => {
-    if (child.term.termType === 'BlankNode') {
-      deleteCbd(child)
-    }
-    child.deleteIn(ptr)
-  })
+  for (const quad of subgraph.match(ptr)) {
+    ptr.dataset.delete(quad)
+  }
 }

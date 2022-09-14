@@ -1,0 +1,36 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX cube: <https://cube.link/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+
+CONSTRUCT {
+  <urn:ssz:deep-props> a hydra:Collection ;
+    hydra:member ?prop .
+  ?prop rdfs:label ?prop
+}
+where {
+  {
+    SELECT DISTINCT ?prop
+    {
+      {
+        SELECT ?observation
+        {
+          # BIND(iri("{CUBE}") as ?cube)
+
+          # TODO currently there is no way to bind the cube to a template
+          # because it's nested under view:source
+          # For that reason, a sample of observation is selected instead in a subquery
+
+          ?cube cube:observationSet/cube:observation ?observation .
+        }
+        limit 10000
+      }
+
+      BIND(iri("{DIMENSION}") as ?dimension)
+      ?observation ?dimension ?observationValue .
+      ?observationValue ?prop ?any .
+    }
+  }
+  FILTER (?prop NOT IN (schema:inDefinedTermSet, rdf:type ))
+}
