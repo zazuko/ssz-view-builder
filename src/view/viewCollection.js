@@ -15,7 +15,10 @@ export function content({ state, dispatch }) {
     <sl-button @click="${() => dispatch.app.viewParam('#create')}">Create new View</sl-button>
     <ssz-view-table .views="${views}"
                     @view-select="${e => dispatch.routing.goTo(e.detail.view.value)}"
-                    @view-delete="${e => alert(`delete ${e.detail.view.value}`)}">
+                    @view-delete="${e => dispatch.viewCollection.deleteView(e.detail.view)}">
+      <span slot="empty">
+        No views found
+      </span>
     </ssz-view-table>
   `
 }

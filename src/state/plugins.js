@@ -4,6 +4,7 @@ import { hydra } from '@tpluscode/rdf-ns-builders'
 import { apiBase } from './env.js'
 
 export { viewForm } from './plugin/view.js'
+export { viewCollection } from './plugin/viewCollection.js'
 
 export const routing = shell.routing({
   apiBase,

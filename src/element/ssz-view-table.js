@@ -1,9 +1,17 @@
-import { html, LitElement } from 'lit'
+import { css, html, LitElement } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
 import { rdfs, skos } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js'
 
 customElements.define('ssz-view-table', class extends LitElement {
+  static get styles() {
+    return css`
+      [hidden] {
+        display: none;
+      }
+    `
+  }
+
   static get properties() {
     return {
       views: { type: Array },
@@ -24,6 +32,11 @@ customElements.define('ssz-view-table', class extends LitElement {
         </thead>
         <tbody>
           ${repeat(this.views, view => view.value, this.renderRow.bind(this))}
+          <tr ?hidden="${this.views.length > 0}">
+            <td colspan="5">
+              <slot name="empty"></slot>
+            </td>
+          </tr>
         </tbody>
       </table>
     `
