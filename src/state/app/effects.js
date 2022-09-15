@@ -62,7 +62,9 @@ export default function effects(store) {
       if (!url.hash && !hash) return
       if (url.hash === hash) return
 
-      url.push(hash || '#')
+      url.push({
+        hash,
+      })
     },
   }
 }

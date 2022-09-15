@@ -47,7 +47,10 @@
     "rdf-ext": "^2.0.1",
     "sparql-http-client": "^2.4.1",
     "string-to-stream": "^3.0.1",
-    "url-state": "^2"
+    "url-state": "^3"
+  },
+  "resolutions": {
+    "url-state": "3.0.2"
   },
   "devDependencies": {
     "@open-wc/building-webpack": "^2.13.46",

@@ -9547,10 +9547,10 @@ url-parse@^1.5.10:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
 
-url-state@^2, url-state@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/url-state/-/url-state-2.0.3.tgz#505c0ee2aed3d34712bf3863743e73d2ca3d0669"
-  integrity sha512-LwswQMf+xIwqdEXMA1LKLve7Sh4PriQanA6xG1f6trgX54B2F2jxIyta1ThSeXJ8Hg+2KSOK8Lja0tH+Pb4Qgw==
+url-state@3.0.2, url-state@^2.0.3, url-state@^3:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/url-state/-/url-state-3.0.2.tgz#c6c7f1349d9dd3d162e333e760add69bed7fc273"
+  integrity sha512-L/jM8Rw9F2+8j8fbHqWkBdAC6aW+uLF7413D0lqc2EUQeT3luOWPO7S25dhUAopPMh5xHcE82wZWV9s+Q+AMmg==
 
 url@^0.11.0:
   version "0.11.0"
