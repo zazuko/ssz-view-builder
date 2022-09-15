@@ -1,3 +1,4 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -58,18 +59,30 @@ view:In rdfs:label "one of" .
     rdfs:label "Projection" ;
 .
 
-:Group_Main
-  sh:order 5 ;
-  rdfs:label "Metadata" ;
+:Group_Meta
+    sh:order 5 ;
+    rdfs:label "Metadata" ;
 .
 
 :IdentifierProperty
-  sh:group :Group_Main ;
-  sh:name "Identifier" ;
-  sh:minCount 1 ;
-  sh:maxCount 1 ;
-  sh:minLength 1 ;
-  sh:path schema:identifier ;
+    sh:group :Group_Meta ;
+    sh:name "ID" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:minLength 1 ;
+    dash:readOnly true ;
+    sh:path skos:notation ;
+.
+
+:PrimaryProperty
+    sh:group :Group_Meta ;
+    sh:name "Internal ID" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:minLength 1 ;
+    dash:readOnly true ;
+    dash:hidden true ;
+    sh:path schema:identifier ;
 .
 
 :CubeSourceProperty
@@ -79,7 +92,7 @@ view:In rdfs:label "one of" .
     sh:order 10 ;
     sh:group :Group_Sources ;
     sh:nodeKind sh:IRI ;
-    sh1:iriPrefix <source/> ;
+    sh1:iriPrefix <#source-> ;
 .
 
 :ProjectionProperty
@@ -195,9 +208,9 @@ view:In rdfs:label "one of" .
 
 :DefinedTermFilter
     sh1:discriminatorValue
-    [
-        owl:differentFrom <https://ld.stadt-zuerich.ch/schema/hasEnd>
-    ] ;
+        [
+            owl:differentFrom <https://ld.stadt-zuerich.ch/schema/hasEnd>
+        ] ;
     sh:property
         [
             sh:name "filter" ;

@@ -1,6 +1,8 @@
+import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js'
 import { fetchResource } from './fetch'
-import './config'
 import './element/ssz-view-builder.js'
+
+setBasePath('https://unpkg.com/@shoelace-style/shoelace/dist')
 
 const form = document.querySelector('ssz-view-builder')
 

@@ -10,20 +10,6 @@ module.exports =
       input: path.resolve(__dirname, "./build/index.html")
     }),
     {
-      devServer: {
-        setup(app) {
-          app.all('*', (req, res, next) => {
-            if (!req.headers.authorization) {
-              res.status(401)
-              res.setHeader('WWW-Authenticate', 'Basic')
-              res.end('Access denied')
-              return
-            }
-
-            next()
-          })
-        }
-      },
       resolve: {
         extensions: ['.ts', '.mjs', '.js', '.json'],
         alias: {

@@ -1,0 +1,42 @@
+diff --git a/node_modules/@hydrofoil/shell-routing/index.js b/node_modules/@hydrofoil/shell-routing/index.js
+index bcfc566..7368c49 100644
+--- a/node_modules/@hydrofoil/shell-routing/index.js
++++ b/node_modules/@hydrofoil/shell-routing/index.js
+@@ -5,11 +5,14 @@ const reducers = {
+         return { ...state, resource };
+     },
+ };
+-export const routing = ({ appPath = '/', pathPrefix = '' } = {}) => {
++export const routing = ({ appPath = '/', pathPrefix = '', apiBase, hijackOptions } = {}) => {
+     const appPathPattern = new RegExp(`^${appPath}`);
+     const prefixPattern = new RegExp(`^${pathPrefix}`);
+     const getResourcePath = (href) => {
+         const resourceUrl = new URL(href);
++        if(href.startsWith(apiBase)) {
++          return resourceUrl.pathname;
++        }
+         const path = resourceUrl.pathname.replace(prefixPattern, '');
+         if (url.hostname === resourceUrl.hostname) {
+             return `${appPath}${path}${resourceUrl.search}${resourceUrl.hash}`;
+@@ -35,14 +38,19 @@ export const routing = ({ appPath = '/', pathPrefix = '' } = {}) => {
+         onStore(store) {
+             const dispatch = store.dispatch.routing;
+             function urlChanged() {
+-                const resource = new URL(url.href);
++                let resource = new URL(url.href);
++                if (apiBase) {
++                  const apiUrl = new URL(apiBase)
++                  apiUrl.pathname = resource.pathname
++                  resource = apiUrl
++                }
+                 resource.pathname = resource.pathname
+                     .replace(appPathPattern, pathPrefix)
+                     .replace(/\/$/, '');
+                 dispatch.resource(resource.href);
+             }
+             url.addEventListener('change', urlChanged);
+-            linkHijacker.hijack(({ href }) => goTo(href));
++            linkHijacker.hijack(hijackOptions, ({ href }) => goTo(href));
+             queueMicrotask(urlChanged);
+         },
+     };

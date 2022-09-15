@@ -3,4 +3,5 @@ import namespace from '@rdfjs/namespace'
 export { cube } from '@zazuko/vocabulary-extras/builders'
 
 export const ssz = namespace('urn:ssz:')
+export const viewBuilder = namespace('https://view-builder.described.at/')
 export const view = namespace('https://cube.link/view/')

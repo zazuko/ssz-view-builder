@@ -1,14 +1,12 @@
 import clownface from 'clownface'
-import { rdf } from '@tpluscode/rdf-ns-builders'
 import $rdf from '@rdfjs/dataset'
 import View from 'rdf-cube-view-query/lib/View.js'
 import * as ns from './ns.js'
 
-export function prepareViewPointer(raw) {
-  const dataset = $rdf.dataset([...raw])
+export function prepareViewPointer(pointer) {
+  const dataset = $rdf.dataset([...pointer.dataset])
 
-  const view = clownface({ dataset })
-    .has(rdf.type, ns.view.View)
+  const view = clownface({ dataset }).node(pointer)
 
   view.out(ns.view.projection)
     .addList(ns.view.columns, view.out(ns.view.dimension))
