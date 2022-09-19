@@ -6,20 +6,58 @@ PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 CONSTRUCT {
-  <urn:ssz:sets> a hydra:Collection ; hydra:member ?termSet .
+  <urn:ssz:sets> a hydra:Collection ;
+    hydra:member ?termSet .
   ?termSet rdfs:label ?label
 }
 WHERE {
   {
-    SELECT ?termSet ?label {
+    SELECT (count(distinct ?cube) as ?cube_count) {
+      # had to be a little creative here since we only have a URL template with encoded query
+      # this gist provided a solution to split a string
+      # https://gist.github.com/jindrichmynarz/630226f2f53af92332843f0747a3ab85
+      #
+      # thus, coma-separated URLs in query string can be split again and
+      # bound to the ?cube variable
+      SELECT ?cube WHERE {
+        BIND ("{CUBE}" as ?cubes)
+        VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
+
+        BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
+        BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
+      }
+    }
+  }
+
+  {
+    SELECT ?termSet (count(distinct ?cube) as ?usages) {
+      {
+        SELECT ?cube WHERE {
+          BIND ("{CUBE}" as ?cubes)
+          VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
+
+          BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
+          BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
+        }
+      }
+
       VALUES ?dimension { <{DIMENSION}> }
 
-      ?termSet ssz:filterOf ?dimension ;
-              schema:name ?label .
-      
-      FILTER( CONTAINS(LCASE(?label), LCASE("{Q}")))
+      ?cube a cube:Cube ;
+        cube:observationConstraint/sh:property
+          [
+            sh:path ?dimension ;
+            <https://ld.stadt-zuerich.ch/schema/hasFilter> ?termSet
+          ] .
+
+      ?termSet ssz:filterOf ?dimension .
     }
-    ORDER BY ?label
+    group by ?termSet
   }
-} 
+
+  ?termSet schema:name ?label .
+
+  FILTER (?usages = ?cube_count)
+  FILTER (CONTAINS(LCASE(?label), LCASE("{Q}")))
+}
 LIMIT 10

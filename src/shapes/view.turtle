@@ -180,9 +180,9 @@ view:In rdfs:label "one of" .
 
 :DefinedTermFilter
     sh1:discriminatorValue
-    [
-        owl:differentFrom <https://ld.stadt-zuerich.ch/schema/hasEnd>
-    ] ;
+        [
+            owl:differentFrom <https://ld.stadt-zuerich.ch/schema/hasEnd>
+        ] ;
     sh:property
         [
             sh:name "filter" ;
@@ -200,6 +200,12 @@ view:In rdfs:label "one of" .
                         [
                             hydra:property view:path ;
                             hydra:variable "DIMENSION" ;
+                            hydra:required true ;
+                        ],
+                        [
+                            hydra:property view:cube ;
+                            sh:path ( view:source view:cube ) ;
+                            hydra:variable "CUBE" ;
                             hydra:required true ;
                         ],
                         [
