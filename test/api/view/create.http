@@ -1,0 +1,40 @@
+### Anonymous
+POST {{base}}/views
+Content-Type: text/turtle
+
+< ./good/empty.ttl
+> ./bad/unauthorized.js
+
+### Empty View
+POST {{base}}/views
+Content-Type: text/turtle
+Authorization: Basic YWRtaW46YWRtaW4=
+
+< ./good/empty.ttl
+> ./good/created.js
+
+### Repeat returns conflict
+POST {{base}}/views
+Content-Type: text/turtle
+Authorization: Basic YWRtaW46YWRtaW4=
+
+< ./good/empty.ttl
+> ./bad/conflict.js
+
+### View with a dimension
+POST {{base}}/views
+Content-Type: text/turtle
+Authorization: Basic YWRtaW46YWRtaW4=
+
+< ./good/single-dimension.ttl
+> ./good/created.js
+
+###
+
+DELETE {{base}}/view/empty%20view
+Authorization: Basic YWRtaW46YWRtaW4=
+
+###
+
+DELETE {{base}}/view/single%20dimension
+Authorization: Basic YWRtaW46YWRtaW4=

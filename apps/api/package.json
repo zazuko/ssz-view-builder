@@ -1,0 +1,21 @@
+{
+  "name": "@view-builder/api",
+  "version": "0.0.0",
+  "private": "true",
+  "type": "module",
+  "scripts": {
+    "bootstrap": "talos put --api $API_BASE --endpoint $SPARQL_ENDPOINT --updateEndpoint $SPARQL_UPDATE_ENDPOINT --user $SPARQL_USER --password $SPARQL_PASSWORD",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@hydrofoil/knossos": "^0.9.5",
+    "@tpluscode/sparql-builder": "^0.3.23",
+    "basic-auth": "^2.0.1",
+    "clownface": "^1.5.1",
+    "cors": "^2.8.5",
+    "rdf-ext": "^2.0.1"
+  },
+  "devDependencies": {
+    "@hydrofoil/talos": "^0.4.4"
+  }
+}

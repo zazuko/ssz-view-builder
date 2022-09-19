@@ -1,0 +1,5 @@
+PREFIX view-builder: <https://view-builder.described.at/>
+
+<>
+  a </api/ViewCollection>, view-builder:ViewCollection ;
+.

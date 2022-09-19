@@ -1,5 +1,5 @@
 {
-  "extends": [ "@tpluscode" ],
+  "extends": [ "@open-wc", "@tpluscode" ],
   "env": {
     "browser": true,
     "mocha": true

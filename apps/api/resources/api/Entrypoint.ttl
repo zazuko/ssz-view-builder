@@ -1,0 +1,15 @@
+PREFIX code: <https://code.described.at/>
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+<>
+  a hydra:Class ;
+  hydra:supportedOperation
+    [
+      hydra:method "GET" ;
+      code:implementedBy
+      [
+      a code:EcmaScriptModule ;
+        code:link <file:apps/api/lib/entrypoint.js#redirect>
+      ] ;
+    ] ;
+.

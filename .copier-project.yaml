@@ -1,0 +1,15 @@
+_commit: 2.0.1-14-g00d6b20
+_src_path: /Users/tplus/projects/github/hydrofoil/creta-template-app
+apis:
+- api
+app_name: view-builder
+author: Zazuko GmbH
+debugger_port: '32272'
+email: no-reply@zazuko.com
+generate_ui: true
+node_version: '16'
+project_name: View Builder API
+repository: https://github.com/zazuko/ssz-view-builder-api
+ui_path: app
+vocabs: []
+

@@ -1,0 +1,22 @@
+### Anonymous
+PUT {{base}}/view/example
+Content-Type: text/turtle
+
+< ./good/single-dimension.ttl
+> ./bad/unauthorized.js
+
+### View with a dimension
+PUT {{base}}/view/example
+Content-Type: text/turtle
+Authorization: Basic YWRtaW46YWRtaW4=
+
+< ./good/single-dimension.ttl
+> ./good/updated.js
+
+###
+PUT {{base}}/view/example
+Content-Type: text/turtle
+Authorization: Basic YWRtaW46YWRtaW4=
+
+< ./bad/dimension-without-path.ttl
+> ./bad/bad-request.js

@@ -1,0 +1,33 @@
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX code: <https://code.described.at/>
+PREFIX schema: <http://schema.org/>
+PREFIX knossos: <https://hypermedia.app/knossos#>
+
+<>
+  a knossos:Configuration ;
+  knossos:middleware
+    [
+      schema:name "before" ;
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/cors.js#default> ;
+        ] ;
+    ],
+    [
+      schema:name "before" ;
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/auth.js#basic> ;
+        ] ;
+    ] ;
+  knossos:minimalRepresentationLoader
+    [
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/minimalRepresentationLoader.js#default> ;
+        ] ;
+    ] ;
+.

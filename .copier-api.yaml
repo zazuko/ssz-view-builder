@@ -1,0 +1,10 @@
+_commit: 2.0.0
+_src_path: https://github.com/hypermedia-app/creta-template-api.git
+api_delete_handler: false
+collection_get_handler: false
+event_handlers: false
+resource_get_handler: false
+writable_acl: false
+writable_event_handlers: false
+writable_hydra_class: false
+

@@ -1,0 +1,12 @@
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix acl: <http://www.w3.org/ns/auth/acl#>
+prefix view: <https://cube.link/view/>
+prefix view-builder: <https://view-builder.described.at/>
+
+<>
+  a acl:Authorization ;
+  acl:accessToClass view:View, </api/Entrypoint> ;
+  acl:accessTo </views> ;
+  acl:agentClass acl:AuthenticatedAgent ;
+  acl:mode acl:Read ;
+.

@@ -3,6 +3,7 @@ root = true
 [*]
 indent_size = 2
 indent_style = space
+insert_final_newline = true
 
-[*.turtle]
+[*.hydra]
 indent_size = 4
