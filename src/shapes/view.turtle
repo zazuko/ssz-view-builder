@@ -226,6 +226,21 @@ view:In rdfs:label "one of" .
                     hydra:template [ code:name "filter-terms" ] ;
                     hydra:mapping
                         [
+                            hydra:property view:path ;
+                            sh:path ( view:dimension view:from view:path ) ;
+                            hydra:variable "DIMENSION" ;
+                            hydra:required true ;
+                        ],
+                        [
+                            hydra:property view:cube ;
+                            sh:path
+                            (
+                                view:dimension view:from view:source view:cube
+                            ) ;
+                            hydra:variable "CUBE" ;
+                            hydra:required true ;
+                        ],
+                        [
                             hydra:property :filterTermSet ;
                             hydra:variable "FILTER" ;
                             hydra:required true ;
