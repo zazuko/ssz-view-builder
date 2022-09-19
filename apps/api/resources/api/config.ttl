@@ -30,4 +30,13 @@ PREFIX knossos: <https://hypermedia.app/knossos#>
           code:link <file:apps/api/lib/minimalRepresentationLoader.js#default> ;
         ] ;
     ] ;
+  knossos:override
+    [
+      schema:identifier <node:@hydrofoil/knossos/shacl.js#shapesQuery> ;
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/shacl.js#shapesQuery> ;
+        ] ;
+    ] ;
 .

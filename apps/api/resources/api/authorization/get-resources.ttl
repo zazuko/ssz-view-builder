@@ -5,7 +5,7 @@ prefix view-builder: <https://view-builder.described.at/>
 
 <>
   a acl:Authorization ;
-  acl:accessToClass view:View, </api/Entrypoint> ;
+  acl:accessToClass </api/View>, </api/Entrypoint> ;
   acl:accessTo </views> ;
   acl:agentClass acl:AuthenticatedAgent ;
   acl:mode acl:Read ;

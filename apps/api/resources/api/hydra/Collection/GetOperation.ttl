@@ -7,7 +7,8 @@ prefix knossos: <https://hypermedia.app/knossos#>
 prefix view: <https://cube.link/view/>
 
 <>
-  knossos:supportedBy hydra:Collection ;
+  # TODO: this causes an "Ambiguous operation" problem on Stardog because hydra:Collection effectively has 2 GET operations  hydra:method "GET" ;
+  # knossos:supportedBy hydra:Collection ;
   hydra:method "GET" ;
   auth:access acl:Read ;
   code:implementedBy
@@ -16,3 +17,5 @@ prefix view: <https://cube.link/view/>
       code:link <node:@hydrofoil/labyrinth/collection#get> ;
     ]
 .
+
+</api/ViewCollection> hydra:supportedOperation <> .

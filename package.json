@@ -10,7 +10,7 @@
     "bootstrap": "dotenv -c local -- run-s bootstrap:*",
     "bootstrap:dev": "wsrun -msc bootstrap resources resources.dev",
     "bootstrap:vocabs": "talos put-vocabs --endpoint $SPARQL_UPDATE_ENDPOINT --user $SPARQL_USER --password $SPARQL_PASSWORD",
-    "start": "knossos serve $SPARQL_ENDPOINT --name view-builder --user $SPARQL_USER --password $SPARQL_PASSWORD",
+    "start": "knossos serve $SPARQL_ENDPOINT --updateUrl $SPARQL_UPDATE_ENDPOINT --name view-builder --user $SPARQL_USER --password $SPARQL_PASSWORD",
     "precommit": "yarn lint && wsrun -m -c precommit",
     "build": "yarn wsrun -m -c build",
     "serve": "dotenv -e .env.lando -- node server.js",
@@ -19,7 +19,7 @@
   "author": "Zazuko GmbH <no-reply@zazuko.com>",
   "repository": "https://github.com/zazuko/ssz-view-builder-api",
   "dependencies": {
-    "@hydrofoil/knossos": "^0.9.5",
+    "@hydrofoil/knossos": "^0.9.6",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-conditional-middleware": "^2.1.1",

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@hydrofoil/knossos": "^0.9.5",
+    "@tpluscode/rdf-ns-builders": "^2.0.1",
     "@tpluscode/sparql-builder": "^0.3.23",
     "basic-auth": "^2.0.1",
     "clownface": "^1.5.1",

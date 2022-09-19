@@ -7,7 +7,7 @@ prefix knossos: <https://hypermedia.app/knossos#>
 prefix view: <https://cube.link/view/>
 
 <>
-  knossos:supportedBy hydra:Resource ;
+  knossos:supportedBy </api/View> ;
   hydra:method "GET" ;
   auth:access acl:Read ;
   code:implementedBy
@@ -16,3 +16,5 @@ prefix view: <https://cube.link/view/>
       code:link <node:@hydrofoil/labyrinth/resource#get> ;
     ]
 .
+
+</api/View> hydra:supportedOperation <> .
