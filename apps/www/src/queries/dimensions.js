@@ -6,7 +6,10 @@ import { client } from './index.js'
 
 /**
  *
- * @returns {Array<{ dimension: import('@rdfjs/types').Term; label: import('@rdfjs/types').Literal }>}
+ * @returns {Array<{
+ *   dimension: import('@rdfjs/types').Term;
+ *   label: import('@rdfjs/types').Literal
+ * }>}
  */
 export function findMeasureDimensions(cube) {
   return SELECT.DISTINCT`?dimension ?label`
@@ -21,7 +24,11 @@ export function findMeasureDimensions(cube) {
 
 /**
  *
- * @returns {Array<{ cube: import('@rdfjs/types').Term; dimension: import('@rdfjs/types').Term; label: import('@rdfjs/types').Literal }>}
+ * @returns {Array<{
+ *   cube: import('@rdfjs/types').Term;
+ *   dimension: import('@rdfjs/types').Term;
+ *   label: import('@rdfjs/types').Literal
+ * }>}
  */
 export function findKeyDimensions(cubes) {
   const cubeValues = cubes.map(cube => ({ cube }))

@@ -3,7 +3,7 @@ import { turtle } from '@tpluscode/rdf-string'
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import { getAllTriplesFromRoot } from '../../clownface.js'
-import { view } from '../../ns.js'
+import * as ns from '../../ns.js'
 import { endpoint } from '../../queries/index.js'
 
 export const viewForm = {
@@ -82,7 +82,7 @@ export const viewForm = {
           window.open(cubeViewerUrl, 'cubeViewer')
         },
         'core/setContentResource': ({ pointer }) => {
-          if (pointer.has(rdf.type, view.View).term) {
+          if (pointer.has(rdf.type, ns.view.View).term) {
             dispatch.populateForm(pointer.term)
           }
         },

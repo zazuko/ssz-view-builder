@@ -17,12 +17,12 @@ export async function generateDimensions(view, queries = dimensionQueries) {
   return newReference(view)
 }
 
-async function createKeyDimensions(view, sources, { findKeyDimensions }) {
-  const results = await findKeyDimensions(sources.out(ns.view.cube).terms)
+async function createKeyDimensions(view, pointer, { findKeyDimensions }) {
+  const results = await findKeyDimensions(pointer.out(ns.view.cube).terms)
 
   const dimensions = results.reduce((map, { cube, dimension, label }) => {
     const value = map.get(dimension) || { label, sources: [] }
-    value.sources.push(sources.has(ns.view.cube, cube).term)
+    value.sources.push(pointer.has(ns.view.cube, cube).term)
 
     map.set(dimension, value)
     return map

@@ -3,7 +3,8 @@ import sh1 from '@hydrofoil/shaperone-core/ns.js'
 import { html } from 'lit'
 
 export default decorate(wrapped => (context, args) => {
-  if (!window.Shaperone.DEBUG && context.property.shape.pointer.has(sh1.showInDebugOnly, true).term) {
+  const showInDebugMode = () => context.property.shape.pointer.has(sh1.showInDebugOnly, true).term
+  if (!window.Shaperone.DEBUG && showInDebugMode()) {
     return html`<div style="display: none">${wrapped(context, args)}</div>`
   }
 

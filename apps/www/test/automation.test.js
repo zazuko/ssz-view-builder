@@ -38,7 +38,8 @@ describe('automation.js', () => {
       const dimensions = after.out(view.dimension)
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Kennzahl)
-      expect(dimensions.out(view.from).out(view.source).term).to.deep.eq(before.out(ssz.source).term)
+      expect(dimensions.out(view.from).out(view.source).term)
+        .to.deep.eq(before.out(ssz.source).term)
       expect(dimensions.out(rdfs.label).value).to.contain('KENNZAHL')
     })
 
@@ -94,7 +95,8 @@ describe('automation.js', () => {
       const dimensions = after.out(view.dimension)
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Width)
-      expect(dimensions.out(view.from).out(view.source).terms).to.have.all.members(before.out(ssz.source).terms)
+      expect(dimensions.out(view.from).out(view.source).terms)
+        .to.have.all.members(before.out(ssz.source).terms)
     })
 
     it('removes all existing generated dimensions', async () => {
@@ -126,7 +128,8 @@ describe('automation.js', () => {
       const dimensions = after.any().has(rdf.type, view.Dimension)
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Kennzahl)
-      expect(dimensions.out(view.from).out(view.source).term).to.deep.eq(before.out(ssz.source).term)
+      expect(dimensions.out(view.from).out(view.source).term)
+        .to.deep.eq(before.out(ssz.source).term)
       expect(dimensions.out(rdfs.label).value).to.contain('KENNZAHL')
     })
   })

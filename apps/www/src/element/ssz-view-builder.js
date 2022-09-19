@@ -66,6 +66,7 @@ customElements.define('ssz-view-builder', class extends connect(store, LitElemen
     `
   }
 
+  // eslint-disable-next-line class-methods-use-this
   mapState(state) {
     return {
       state,

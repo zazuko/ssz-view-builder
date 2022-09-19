@@ -8,8 +8,8 @@ import sh1 from '@hydrofoil/shaperone-core/ns.js'
  * Focus node rendering decorator, which will choose properties to render by only showing those
  * matching a `sh1:xoneDiscriminator`.
  *
- * Add a hidden property to the items of `sh:xone`. Properties within its group will be shown only when
- * the focus node value of the discriminator matches the `sh:hasValue` of that hidden property
+ * Add a hidden property to the items of `sh:xone`. Properties within its group will be shown only,
+ * when the focus node value of the discriminator matches the `sh:hasValue` of that hidden property
  *
  * <shape>
  *    sh1:xoneDiscriminator <property> ;
@@ -26,9 +26,9 @@ import sh1 from '@hydrofoil/shaperone-core/ns.js'
  * .
  */
 export default decorate(wrapped => function dynamicXone(context, args) {
-  const { focusNode: { focusNode, logicalConstraints: { xone }, shape }, actions } = context
+  const { focusNode: { focusNode, logicalConstraints: { xone } }, actions } = context
 
-  const discriminator = shape?.pointer.out(sh1.xoneDiscriminator)
+  const discriminator = context.shape?.pointer.out(sh1.xoneDiscriminator)
   if (isGraphPointer(discriminator)) {
     const [actualValue] = findNodes(focusNode, discriminator).terms
 
@@ -37,9 +37,9 @@ export default decorate(wrapped => function dynamicXone(context, args) {
         const properties = shape.property.filter(({ hidden }) => !hidden)
         requestAnimationFrame(() => {
           if (shouldDisplay(shape, actualValue)) {
-            properties.forEach(shape => actions.showProperty(shape))
+            properties.forEach(propShape => actions.showProperty(propShape))
           } else {
-            properties.forEach(shape => actions.hideProperty(shape))
+            properties.forEach(propShape => actions.hideProperty(propShape))
           }
         })
       }

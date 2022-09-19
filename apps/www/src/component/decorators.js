@@ -98,11 +98,11 @@ export const autoName = {
           if (value.componentState[autoNameDecorated]) {
             return render(params, {
               ...actions,
-              update(value) {
+              update(newValue) {
                 updateComponentState({
-                  edited: !isEmpty(value),
+                  edited: !isEmpty(newValue),
                 })
-                actions.update(value)
+                actions.update(newValue)
               },
             })
           }

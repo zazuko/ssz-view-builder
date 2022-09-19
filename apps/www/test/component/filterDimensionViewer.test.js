@@ -125,7 +125,8 @@ function dimensionWith({ source, path }) {
   return (actual) => {
     try {
       const actualSource = actual.out(view.from).out(view.source).term
-      const actualPath = toSparql(actual.out(view.from).out(view.path)).toString({ prologue: false })
+      const actualPath = toSparql(actual.out(view.from).out(view.path))
+        .toString({ prologue: false })
 
       return source.equals(actualSource) && path === actualPath
     } catch {
