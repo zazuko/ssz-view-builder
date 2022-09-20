@@ -4,8 +4,7 @@
   "private": "true",
   "type": "module",
   "scripts": {
-    "bootstrap": "talos put --api $API_BASE --endpoint $SPARQL_ENDPOINT --updateEndpoint $SPARQL_UPDATE_ENDPOINT --user $SPARQL_USER --password $SPARQL_PASSWORD",
-    "build": "tsc"
+    "bootstrap": "talos put --api $API_BASE --endpoint $SPARQL_ENDPOINT --updateEndpoint $SPARQL_UPDATE_ENDPOINT --user $SPARQL_USER --password $SPARQL_PASSWORD"
   },
   "dependencies": {
     "@hydrofoil/knossos": "^0.9.5",
