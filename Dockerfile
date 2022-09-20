@@ -1,4 +1,4 @@
-FROM docker.io/library/node:18-alpine AS builder
+FROM docker.io/library/node:18-alpine
 
 # fix "error:0308010C:digital envelope routines::unsupported" error during build
 ENV NODE_OPTIONS="--openssl-legacy-provider"
@@ -13,7 +13,9 @@ RUN yarn
 COPY . ./
 RUN yarn build
 
-# serve the static build using nginx
-FROM docker.io/library/nginx:1.23-alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
+# some default environment variables
+ENV APP_NAME="view-builder"
+ENV PORT="8080"
+
+EXPOSE 8080
+CMD [ "/app/entrypoint.sh" ]
