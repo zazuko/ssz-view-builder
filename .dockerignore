@@ -4,3 +4,5 @@ package-lock.json
 Dockerfile
 .gitignore
 .editorconfig
+.git/
+.github/
