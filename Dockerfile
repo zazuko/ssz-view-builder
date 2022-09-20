@@ -8,12 +8,14 @@ COPY . ./
 # first do the build
 RUN yarn --frozen-lockfile \
   && yarn build \
-  && rm -rf ./node_modules/ ./apps/**/node_modules/
+  && rm -rf ./node_modules/ ./apps/**/node_modules/ \
+  && yarn cache clean
 
 # then, install required modules for the runtime
 RUN yarn global add yarn-deduplicate \
   && yarn --production --frozen-lockfile \
-  && yarn global remove yarn-deduplicate
+  && yarn global remove yarn-deduplicate \
+  && yarn cache clean
 
 # some default environment variables
 ENV APP_NAME="view-builder"
