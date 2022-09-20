@@ -27,6 +27,7 @@ jobs:
       - run: yarn test
 
   Test-API:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
