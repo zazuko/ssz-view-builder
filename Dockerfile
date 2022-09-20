@@ -1,7 +1,4 @@
-FROM docker.io/library/node:18-alpine
-
-# fix "error:0308010C:digital envelope routines::unsupported" error during build
-ENV NODE_OPTIONS="--openssl-legacy-provider"
+FROM docker.io/library/node:16-alpine
 
 WORKDIR /app
 
