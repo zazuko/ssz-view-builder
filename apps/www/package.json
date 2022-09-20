@@ -2,6 +2,7 @@
   "name": "@view-builder/app",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "precommit": "lit-analyzer --strict --quiet",
     "build": "webpack --mode production",
