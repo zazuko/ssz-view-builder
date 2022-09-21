@@ -6,9 +6,10 @@ Prototype for UI to build views following the [RDF Data Cube specification][cube
 
 1. Install [lando](https://github.com/lando/lando/releases/latest)
 2. `yarn`
-3. `lando start`
-4. `yarn bootstrap` - initialize the required database resources
-5. Open [https://view-builder.lndo.site/app/](https://view-builder.lndo.site/app/)
+3. [Request Stardog license](https://www.stardog.com/download-free/) and save to `~/stardog-home/stardog-license-key`
+4. `lando start`
+5. `yarn bootstrap` - initialize the required database resources
+6. Open [https://view-builder.lndo.site/app/](https://view-builder.lndo.site/app/)
 
 Authentication is just a mockup. Type anything in the browser user/password dialog.
 
