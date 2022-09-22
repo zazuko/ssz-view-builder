@@ -3,10 +3,14 @@ import { Router } from 'express'
 import auth from 'express-basic-auth'
 import clownface from 'clownface'
 import $rdf from 'rdf-ext'
+import asyncMiddleware from 'middleware-async'
+import { DESCRIBE } from '@tpluscode/sparql-builder'
+import { acl, rdf, vcard } from '@tpluscode/rdf-ns-builders'
+import { isNamedNode } from 'is-graph-pointer'
 
 const require = createRequire(import.meta.url)
 
-export function basic() {
+export function basic({ client }) {
   const authMiddleware = auth({
     users: loadUsers(),
     challenge: true,
@@ -22,16 +26,44 @@ export function basic() {
 
       return authMiddleware(req, res, next)
     })
-    .use(setAgent)
+    .use(setAgent(client))
 }
 
-function setAgent(req, res, next) {
-  if (req.auth?.user) {
-    req.agent = clownface({ dataset: $rdf.dataset() })
-      .namedNode(req.rdf.namedNode(`/user/${req.auth.user}`))
-  }
+function setAgent(client) {
+  return asyncMiddleware(async (req, res, next) => {
+    const userName = req.auth?.user
 
-  next()
+    if (!userName) {
+      return next()
+    }
+    const userQuery = await DESCRIBE`?user`
+      .WHERE`?user ${vcard.hasUID} "${userName}"`
+      .execute(client.query)
+    const dataset = await $rdf.dataset().import(userQuery)
+
+    let [foundUser] = clownface({ dataset })
+      .has(vcard.hasUID, userName)
+      .toArray()
+      .filter(isNamedNode)
+
+    if (foundUser) {
+      req.knossos.log(`Current user ${foundUser.value}`)
+    } else {
+      const id = req.rdf.namedNode(`/user/${encodeURIComponent(userName)}`)
+      foundUser = clownface({ dataset: $rdf.dataset() })
+        .namedNode(id)
+        .addOut(rdf.type, vcard.Individual)
+        .addOut(vcard.hasUID, userName)
+        .addOut(acl.owner, id)
+      await req.knossos.store.save(foundUser)
+        .then(() => req.knossos.log(`Created user resource ${foundUser.value}`))
+        .catch(req.knossos.log)
+    }
+
+    req.agent = foundUser
+
+    return next()
+  })
 }
 
 function loadUsers() {

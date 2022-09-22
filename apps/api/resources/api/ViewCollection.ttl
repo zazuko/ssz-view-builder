@@ -1,3 +1,4 @@
+PREFIX acl: <http://www.w3.org/ns/auth/acl#>
 PREFIX view: <https://cube.link/view/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX knossos: <https://hypermedia.app/knossos#>
@@ -5,6 +6,7 @@ PREFIX code: <https://code.described.at/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX query: <https://hypermedia.app/query#>
 
 <>
   a hydra:Class ;
@@ -17,6 +19,10 @@ PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
     [
       hydra:property rdf:type ;
       hydra:object view:View ;
+    ] ;
+  query:memberInclude
+    [
+      query:path acl:owner ;
     ] ;
   hydra:supportedOperation
     [
@@ -46,6 +52,13 @@ PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
         [
           a code:EcmaScriptModule ;
           code:link <file:apps/api/lib/view/create.js#importMetadata>
+        ] ;
+    ],
+    [
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/view/create.js#setOwner> ;
         ] ;
     ] ;
 .
