@@ -1051,17 +1051,17 @@
     immer "^9.0.15"
     nanoid "^4"
 
-"@hydrofoil/shaperone-hydra@0.3.13":
-  version "0.3.13"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-hydra/-/shaperone-hydra-0.3.13.tgz#cff397bebf02577f00eec7b3099573fa417c94fb"
-  integrity sha512-mUaOgZI/jwUbXs7rHWnxMv8DX6y5YCauXoTtwHjfNiqbik04xXSr8lXS21YOtDieLj2+0HpoH6iv4SZAsdwL7w==
+"@hydrofoil/shaperone-hydra@0.3.14":
+  version "0.3.14"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-hydra/-/shaperone-hydra-0.3.14.tgz#7ce402959a59be967f1235291e02a754b5008e18"
+  integrity sha512-jDz8e1eOwh2/Ugw93Bu8x32gAgZe6UcN1/K59CcfPOUVmhOR4VRNxcTTBM0m0b+fEvvGuLkUn281vjqQFfb92w==
   dependencies:
     "@hydrofoil/shaperone-core" "^0.9.9"
     "@rdf-esm/dataset" "^0.5.0"
     "@rdf-esm/term-map" "^0.5.0"
     "@rdfine/hydra" "^0.8.5"
     "@tpluscode/rdf-ns-builders" "^2.0.0"
-    "@tpluscode/rdfine" "^0.5.39"
+    "@tpluscode/rdfine" "^0.5.41"
     alcaeus "^2.2.3"
     clownface "^1.2.0"
     clownface-shacl-path "^1.3.2"
@@ -1864,7 +1864,7 @@
     "@tpluscode/rdf-ns-builders" "^2"
     "@zazuko/rdf-vocabularies" "*"
 
-"@tpluscode/rdfine@^0.5.27", "@tpluscode/rdfine@^0.5.39":
+"@tpluscode/rdfine@^0.5.27", "@tpluscode/rdfine@^0.5.39", "@tpluscode/rdfine@^0.5.41":
   version "0.5.41"
   resolved "https://registry.yarnpkg.com/@tpluscode/rdfine/-/rdfine-0.5.41.tgz#3100cc1feb065174fe243222e6e5223bd02b2b7e"
   integrity sha512-C6f+zE7KCDO0BbpM15p889umolQgmHPyOOuVBjYtMxpJ/w8dwUHAmvNG01RArDUVEnS71TabIEaduCYWlS/zNg==

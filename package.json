@@ -16,7 +16,7 @@
   "dependencies": {
     "@graphy/content.ttl.read": "^4.3.4",
     "@hydrofoil/shaperone-core": "0.9.9",
-    "@hydrofoil/shaperone-hydra": "0.3.13",
+    "@hydrofoil/shaperone-hydra": "0.3.14",
     "@hydrofoil/shaperone-wc": "0.7.6",
     "@hydrofoil/shaperone-wc-shoelace": "0.1.18",
     "@material/mwc-drawer": "^0.27",
