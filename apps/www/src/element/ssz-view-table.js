@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
-import { schema } from '@tpluscode/rdf-ns-builders'
+import { acl, schema, vcard } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js'
 
 customElements.define('ssz-view-table', class extends LitElement {
@@ -52,7 +52,7 @@ customElements.define('ssz-view-table', class extends LitElement {
         <td>${view.out(schema.alternateName).value}</td>
         <td>${view.out(schema.name).value}</td>
         <td></td>
-        <td></td>
+        <td>${view.out(acl.owner).out(vcard.hasUID).value}</td>
         <td>
           <sl-icon-button name="trash"
                           label="Delete"

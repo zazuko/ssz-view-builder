@@ -1,3 +1,4 @@
+PREFIX acl: <http://www.w3.org/ns/auth/acl#>
 PREFIX schema: <http://schema.org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
@@ -5,8 +6,10 @@ prefix view: <https://cube.link/view/>
 <> a </api/View>, view:View ;
   schema:identifier "example" ;
   schema:alternateName "TEST" ;
-  rdfs:label "Dev testing view" ;
-  <urn:ssz:source> <#source-bew>, <#source-stf> .
+  schema:name "Dev testing view" ;
+  <urn:ssz:source> <#source-bew>, <#source-stf> ;
+  acl:owner </user/tpluscode> ;
+.
 
 <#source-bew>
   a view:CubeSource ;

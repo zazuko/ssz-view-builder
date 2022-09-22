@@ -1,4 +1,4 @@
-import { schema } from '@tpluscode/rdf-ns-builders'
+import { acl, schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import fromStream from 'rdf-dataset-ext/fromStream.js'
 
@@ -28,4 +28,8 @@ export async function importMetadata({ req, pointer }) {
 
     await fromStream(pointer.dataset, metadata)
   }
+}
+
+export function setOwner({ req, pointer }) {
+  pointer.addOut(acl.owner, req.agent.term)
 }
