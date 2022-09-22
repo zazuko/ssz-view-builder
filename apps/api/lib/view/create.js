@@ -1,23 +1,25 @@
 import { schema } from '@tpluscode/rdf-ns-builders'
-import { SELECT } from '@tpluscode/sparql-builder'
-import getStream from 'get-stream'
+import { CONSTRUCT } from '@tpluscode/sparql-builder'
+import fromStream from 'rdf-dataset-ext/fromStream.js'
 
 export async function importMetadata({ req, pointer }) {
   const sourceDataset = pointer.out(schema.isBasedOn).term
+  const view = pointer.term
+
   if (sourceDataset) {
-    const [result] = await getStream.array(await SELECT`?identifier ?alternateName ?name`
+    const metadata = await CONSTRUCT`
+      ${view} ${schema.identifier} ?identifier ;
+              ${schema.alternateName} ?alternateName ;
+              ${schema.name} ?name .
+    `
       .WHERE`
         SERVICE <${process.env.METADATA_ENDPOINT}> {
-          ${sourceDataset} ${schema.identifier} ?identifier .
-          ${sourceDataset} ${schema.alternateName} ?alternateName .
-          ${sourceDataset} ${schema.name} ?name .
+          ${sourceDataset} ${schema.identifier} ?identifier ;
+                           ${schema.alternateName} ?alternateName ;
+                           ${schema.name} ?name .
         }
-      `.execute(req.labyrinth.sparql.query))
+      `.execute(req.labyrinth.sparql.query)
 
-    if (result) {
-      pointer.addOut(schema.identifier, result.identifier)
-      pointer.addOut(schema.alternateName, result.alternateName)
-      pointer.addOut(schema.name, result.name)
-    }
+    await fromStream(pointer.dataset, metadata)
   }
 }
