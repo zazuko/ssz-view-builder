@@ -6,23 +6,25 @@
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.74/dist/themes/light.css" />
   <script src="./dist/index.js" type="module"></script>
-  <script src="./dist/opener.js" type="module"></script>
+  <style>
+    ssz-view-builder {
+      height: 100vh;
+    }
+
+    ssz-view-builder:not([ready]) * {
+      display: none
+    }
+  </style>
 </head>
 
 <body>
-  <select id="example">
-    <option value="BEW-HEL">BEW-HEL (filter usage)</option>
-    <option value="BEW-HEL-SEX">BEW-HEL-SEX (imperfect example)</option>
-    <option value="only-sources">Sources only</option>
-  </select>
-  <button id="load-example">Load example</button>
-
-  <shaperone-form>
-    <button id="generate-dimensions" slot="buttons">Generate dimensions</button>
-    <button id="converter-opener" slot="buttons">Show view</button>
-    <button id="yasgui-opener" slot="buttons">Show query</button>
-    <button id="cube-viewer-opener" slot="buttons">Show in cube viewer</button>
-  </shaperone-form>
+  <ssz-view-builder>
+    <sl-divider slot="menu"></sl-divider>
+    <sl-menu-label slot="menu">Load example</sl-menu-label>
+    <sl-menu-item class="example" slot="menu" value="BEW-HEL">BEW-HEL (filter usage)</sl-menu-item>
+    <sl-menu-item class="example" slot="menu" value="BEW-HEL-SEX">BEW-HEL-SEX (imperfect example)</sl-menu-item>
+    <sl-menu-item class="example" slot="menu" value="only-sources">Sources only</sl-menu-item>
+  </ssz-view-builder>
 </body>
 
 </html>
