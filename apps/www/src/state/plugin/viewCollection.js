@@ -1,11 +1,13 @@
 import { hydra, rdf, schema } from '@tpluscode/rdf-ns-builders'
-import { newReference } from '../../clownface.js'
 import * as ns from '../../ns.js'
 
 export const viewCollection = {
   model: {
     state: {},
     reducers: {
+      setPointer(state, pointer) {
+        return { ...state, pointer }
+      },
       setNewViewOperation(state, newViewOperation) {
         return { ...state, newViewOperation }
       },
@@ -19,6 +21,7 @@ export const viewCollection = {
       return {
         'core/setContentResource': ({ pointer }) => {
           if (pointer.has(rdf.type, ns.viewBuilder.ViewCollection).term) {
+            dispatch.viewCollection.setPointer(pointer)
             dispatch.viewCollection.loadNewViewShape()
           }
         },
@@ -55,11 +58,11 @@ export const viewCollection = {
             dispatch.routing.goTo(created)
           }
         },
-        async deleteView(pointer) {
-          const { resource, core } = store.getState()
+        async deleteView({ term: deleted }) {
+          const { resource, viewCollection: { pointer } } = store.getState()
 
-          const collection = resource.representations.get(core.contentResource.id).root
-          const viewResource = collection.member.find(member => member.id.equals(pointer.term))
+          const collection = resource.representations.get(pointer.term).root
+          const viewResource = collection.member.find(member => member.id.equals(deleted))
 
           const operation = viewResource.findOperations({
             bySupportedOperation: schema.DeleteAction,
@@ -67,10 +70,8 @@ export const viewCollection = {
 
           await operation.invoke()
 
-          core.contentResource.pointer.deleteOut(hydra.member, pointer)
-          dispatch.core.setContentResource({
-            pointer: newReference(core.contentResource.pointer),
-          })
+          pointer.deleteOut(hydra.member, deleted)
+          dispatch.viewCollection.setPointer(pointer)
         },
       }
     },

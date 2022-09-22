@@ -12,9 +12,9 @@ export function content(arg) {
 }
 
 function table({ state, dispatch }) {
-  const views = state.core.contentResource.pointer
-    .out(hydra.member)
-    .toArray()
+  const views = state.viewCollection.pointer
+    ?.out(hydra.member)
+    .toArray() || []
   return html`
     <sl-button @click="${() => dispatch.app.viewParam('#create')}">Create new View</sl-button>
     <ssz-view-table .views="${views}"
