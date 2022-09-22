@@ -1,5 +1,5 @@
 import { html } from 'lit'
-import { hydra } from '@tpluscode/rdf-ns-builders'
+import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import { isBlankNode } from 'is-graph-pointer'
 import { code } from '@zazuko/vocabulary-extras/builders'
 import '../forms/index.js'
@@ -18,8 +18,11 @@ export async function init() {
 }
 
 function content({ state }) {
-  return html`<shaperone-form .shapes=${shapes} 
-                              .resource=${state.viewForm.pointer}></shaperone-form>`
+  return html`
+    <h2>${state.viewForm.pointer.out(schema.name).value || 'Unnamed view'}</h2>
+    
+    <shaperone-form .shapes=${shapes} 
+                    .resource=${state.viewForm.pointer}></shaperone-form>`
 }
 
 function menu({ dispatch }) {
