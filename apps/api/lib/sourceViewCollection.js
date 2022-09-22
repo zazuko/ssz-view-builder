@@ -5,6 +5,11 @@ import { hydra, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import { cube } from '@zazuko/vocabulary-extras/builders'
 
+/**
+ * GET handler for loading view metadata from the metadata endpoint
+ *
+ * The response is a hydra collection
+ */
 export const get = asyncMiddleware(async (req, res) => {
   const collection = clownface({
     dataset: $rdf.dataset(),
