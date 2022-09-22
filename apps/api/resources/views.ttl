@@ -1,5 +1,6 @@
+prefix hydra: <http://www.w3.org/ns/hydra/core#>
 PREFIX view-builder: <https://view-builder.described.at/>
 
 <>
-  a </api/ViewCollection>, view-builder:ViewCollection ;
+  a </api/ViewCollection>, view-builder:ViewCollection, hydra:Collection ;
 .
