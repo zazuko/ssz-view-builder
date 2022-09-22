@@ -6,7 +6,6 @@
   "type": "module",
   "homepage": "{{ homepage }}",
   "scripts": {
-    "postinstall": "patch-package",
     "prepare": "husky install",
     "serve": "npx wcd-cli@latest serve AdsvMVHg26rf0rys4whF --open",
     "lint": "eslint . --quiet --ignore-path .gitignore",
@@ -59,8 +58,6 @@
     "lint-staged": "^13.0.3",
     "mocha": "^10.0.0",
     "n3": "^1.16.2",
-    "patch-package": "^6.4.7",
-    "postinstall-postinstall": "^2.1.0",
     "rdf-ext": "^2.0.1",
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
