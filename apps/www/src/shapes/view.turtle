@@ -1,4 +1,3 @@
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -71,7 +70,7 @@ view:In rdfs:label "one of" .
     sh:maxCount 1 ;
     sh:minLength 1 ;
     dash:readOnly true ;
-    sh:path skos:notation ;
+    sh:path schema:alternateName ;
 .
 
 :PrimaryProperty

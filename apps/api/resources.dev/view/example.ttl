@@ -1,11 +1,10 @@
 PREFIX schema: <http://schema.org/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
 
 <> a </api/View>, view:View ;
   schema:identifier "example" ;
-  skos:notation "TEST" ;
+  schema:alternateName "TEST" ;
   rdfs:label "Dev testing view" ;
   <urn:ssz:source> <#source-bew>, <#source-stf> .
 

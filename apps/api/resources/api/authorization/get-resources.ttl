@@ -1,3 +1,4 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix acl: <http://www.w3.org/ns/auth/acl#>
 prefix view: <https://cube.link/view/>
@@ -5,8 +6,8 @@ prefix view-builder: <https://view-builder.described.at/>
 
 <>
   a acl:Authorization ;
-  acl:accessToClass </api/View>, </api/Entrypoint> ;
-  acl:accessTo </views> ;
+  acl:accessToClass </api/View>, </api/Entrypoint>, sh:NodeShape ;
+  acl:accessTo </views>, </source-views> ;
   acl:agentClass acl:AuthenticatedAgent ;
   acl:mode acl:Read ;
 .

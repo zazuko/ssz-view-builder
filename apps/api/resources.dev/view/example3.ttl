@@ -5,7 +5,7 @@ prefix view: <https://cube.link/view/>
 
 <> a </api/View>, view:View ;
   schema:identifier "example3" ;
-  skos:notation "TEST3" ;
+  schema:alternateName "TEST3" ;
   rdfs:label "Test filtering" ;
   <urn:ssz:source> <#source-bew>, <#source-stf> .
 

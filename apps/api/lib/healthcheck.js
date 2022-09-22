@@ -17,6 +17,10 @@ const publishingStoreClient = new StreamClient({
   password: process.env.PUBLIC_ENDPOINT_PASSWORD,
 })
 
+const metadataEndpoint = new StreamClient({
+  endpointUrl: process.env.METADATA_ENDPOINT,
+})
+
 export default asyncMiddleware(async (req, res, next) => {
   try {
     const result = await ASK`
@@ -49,6 +53,13 @@ export default asyncMiddleware(async (req, res, next) => {
   } catch (e) {
     req.knossos.log(e)
     return next('Failed to connect to publishing database')
+  }
+
+  try {
+    await ASK`?s ?p ?o`.execute(metadataEndpoint.query)
+  } catch (e) {
+    req.knossos.log(e)
+    return next('Failed to connect to metadata database')
   }
 
   return res.end()

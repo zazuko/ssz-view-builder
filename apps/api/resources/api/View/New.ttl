@@ -1,0 +1,19 @@
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX dash: <http://datashapes.org/dash#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+<>
+  a sh:NodeShape ;
+  sh:property
+    [
+      sh:name "Base View" ;
+      sh:path schema:isBasedOn ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      dash:editor dash:InstancesSelectEditor ;
+      hydra:collection </source-views> ;
+    ]
+.
