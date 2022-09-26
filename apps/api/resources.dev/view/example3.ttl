@@ -1,4 +1,3 @@
-PREFIX acl: <http://www.w3.org/ns/auth/acl#>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -9,7 +8,7 @@ prefix view: <https://cube.link/view/>
   schema:alternateName "TEST3" ;
   schema:name "Test filtering" ;
   <urn:ssz:source> <#source-bew>, <#source-stf> ;
-  acl:owner </user/cvasquez> ;
+  schema:author </user/cvasquez> ;
 .
 
 <#source-bew>
