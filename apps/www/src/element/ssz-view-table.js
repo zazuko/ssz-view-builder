@@ -9,6 +9,10 @@ customElements.define('ssz-view-table', class extends LitElement {
       [hidden] {
         display: none;
       }
+      
+      .view-row {
+        cursor: pointer;
+      }
     `
   }
 
@@ -44,7 +48,7 @@ customElements.define('ssz-view-table', class extends LitElement {
 
   renderRow(view) {
     return html`
-      <tr @click="${() => this.dispatchEvent(new CustomEvent('view-select', { detail: { view } }))}">
+      <tr class="view-row" @click="${() => this.dispatchEvent(new CustomEvent('view-select', { detail: { view } }))}">
         <td>${view.out(schema.alternateName).value}</td>
         <td>${view.out(schema.name).value}</td>
         <td></td>

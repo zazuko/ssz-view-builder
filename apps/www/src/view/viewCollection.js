@@ -1,5 +1,5 @@
 import { html } from 'lit'
-import { hydra } from '@tpluscode/rdf-ns-builders'
+import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '../element/ssz-view-table.js'
 
@@ -22,7 +22,13 @@ export function content(arg) {
 function table({ state, dispatch }) {
   const views = state.viewCollection.pointer
     ?.out(hydra.member)
-    .toArray() || []
+    .toArray()
+    .sort((l, r) => {
+      const leftId = l.out(schema.identifier).value || ''
+      const rightId = r.out(schema.identifier).value || ''
+
+      return leftId.localeCompare(rightId)
+    }) || []
   return html`
     <sl-button @click="${() => dispatch.app.viewParam('#create')}">Create new View</sl-button>
     <ssz-view-table .views="${views}"
