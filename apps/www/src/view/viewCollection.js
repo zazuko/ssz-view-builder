@@ -3,6 +3,14 @@ import { hydra } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '../element/ssz-view-table.js'
 
+export async function init() {
+  await import('../forms/index.js')
+
+  return {
+    content,
+  }
+}
+
 export function content(arg) {
   if (arg.state.app.view.param === '#create') {
     return newViewForm(arg)
