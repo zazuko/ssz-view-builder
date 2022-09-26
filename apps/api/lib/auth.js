@@ -1,17 +1,47 @@
-import auth from 'basic-auth'
+import { createRequire } from 'module'
+import { Router } from 'express'
+import auth from 'express-basic-auth'
 import clownface from 'clownface'
 import $rdf from 'rdf-ext'
 
-export function basic() {
-  return (req, res, next) => {
-    const credentials = auth(req)
-    if (!credentials) {
-      res.setHeader('WWW-Authenticate', 'Basic Realm="view builder"')
-    } else {
-      req.agent = clownface({ dataset: $rdf.dataset() })
-        .namedNode(req.rdf.namedNode(`/user/${credentials.name}`))
-    }
+const require = createRequire(import.meta.url)
 
-    next()
+export function basic() {
+  const authMiddleware = auth({
+    users: loadUsers(),
+    challenge: true,
+    realm: 'view builder',
+  })
+
+  return Router()
+    .use((req, res, next) => {
+      if (req.path === '/api/health') {
+        // Skip authentication for ping endpoint
+        return next()
+      }
+
+      return authMiddleware(req, res, next)
+    })
+    .use(setAgent)
+}
+
+function setAgent(req, res, next) {
+  if (req.auth?.user) {
+    req.agent = clownface({ dataset: $rdf.dataset() })
+      .namedNode(req.rdf.namedNode(`/user/${req.auth.user}`))
+  }
+
+  next()
+}
+
+function loadUsers() {
+  try {
+    // eslint-disable-next-line import/no-unresolved
+    return require('../../../creds.json')
+  } catch (e) {
+    /* eslint-disable no-console */
+    console.warn('Failed to load credentials')
+    console.warn(e)
+    return []
   }
 }

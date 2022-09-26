@@ -11,7 +11,7 @@ Prototype for UI to build views following the [RDF Data Cube specification][cube
 5. `yarn bootstrap` - initialize the required database resources
 6. Open [https://view-builder.lndo.site/app/](https://view-builder.lndo.site/app/)
 
-Authentication is just a mockup. Type anything in the browser user/password dialog.
+For testing, credentials are stored in the file [creds.json](creds.json)
 
 Any changes to the RDF sources in `apps/api/lib/resource(.dev)` will restart the app container, but it will
 also be necessary to run `yarn bootstrap` to update the store.
@@ -37,3 +37,6 @@ _API tests are now disabled on CI because the containers refuse to start for som
 The Stardog database should have:
 - the "Query All Graphs" (`query.all.graphs`) option set to `true`,
 - the "Describe Strategy" (`query.describe.strategy`) option set to `cbd`.
+
+The [creds.json](creds.json) file is excluded from docker image. When running a container,
+make sure to mount a similar file as `/creds.json`.

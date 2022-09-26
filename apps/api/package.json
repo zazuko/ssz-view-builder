@@ -10,9 +10,10 @@
     "@hydrofoil/knossos": "^0.9.5",
     "@tpluscode/rdf-ns-builders": "^2.0.1",
     "@tpluscode/sparql-builder": "^0.3.23",
-    "basic-auth": "^2.0.1",
     "clownface": "^1.5.1",
     "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-basic-auth": "^1.2.1",
     "middleware-async": "^1.3.5",
     "rdf-ext": "^2.0.1",
     "sparql-http-client": "^2.4.1"
