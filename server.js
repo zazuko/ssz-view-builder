@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires,no-console */
-const express = require('express')
-const fallback = require('express-history-api-fallback')
-const conditional = require('express-conditional-middleware')
-const knossos = require('@hydrofoil/knossos')
-const compression = require('compression')
+import express from 'express'
+import fallback from 'express-history-api-fallback'
+import conditional from 'express-conditional-middleware'
+import knossos from '@hydrofoil/knossos'
+import compression from 'compression'
 
 const app = express()
 
