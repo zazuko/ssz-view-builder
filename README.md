@@ -31,3 +31,9 @@ Tests are executed using [restcli](https://github.com/restcli/restcli).
 _API tests are now disabled on CI because the containers refuse to start for some reason_
 
 [cube]: https://github.com/zazuko/cube-link
+
+## Deployment notes
+
+The Stardog database should have:
+- the "Query All Graphs" (`query.all.graphs`) option set to `true`,
+- the "Describe Strategy" (`query.describe.strategy`) option set to `cbd`.
