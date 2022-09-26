@@ -21,6 +21,11 @@ const apis = knossos.default({
   user: process.env.SPARQL_USER,
   password: process.env.SPARQL_PASSWORD,
 })
+
+app.get('/', conditional(
+  req => req.accepts('html'),
+  (req, res) => res.redirect('/app'),
+))
 app.use('/', apis)
 
 app.listen(parseInt(process.env.PORT, 10) || 8080)
