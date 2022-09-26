@@ -1,6 +1,5 @@
 PREFIX dash: <http://datashapes.org/dash#>
 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
-PREFIX acl: <http://www.w3.org/ns/auth/acl#>
 PREFIX schema: <http://schema.org/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX view: <https://cube.link/view/>
@@ -16,7 +15,7 @@ PREFIX view: <https://cube.link/view/>
       sh:nodeKind sh:IRI ;
     ],
     [
-      sh:path acl:owner ;
+      sh:path schema:author ;
       sh:minCount 1 ;
       sh:maxCount 1 ;
       sh:nodeKind sh:IRI ;
