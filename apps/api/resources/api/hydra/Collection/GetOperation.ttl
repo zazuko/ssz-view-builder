@@ -1,0 +1,21 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix code: <https://code.described.at/>
+prefix acl: <http://www.w3.org/ns/auth/acl#>
+prefix hydra: <http://www.w3.org/ns/hydra/core#>
+prefix auth: <https://hypermedia.app/auth#>
+prefix knossos: <https://hypermedia.app/knossos#>
+prefix view: <https://cube.link/view/>
+
+<>
+  # TODO: this causes an "Ambiguous operation" problem on Stardog because hydra:Collection effectively has 2 GET operations  hydra:method "GET" ;
+  # knossos:supportedBy hydra:Collection ;
+  hydra:method "GET" ;
+  auth:access acl:Read ;
+  code:implementedBy
+    [
+      a code:EcmaScript ;
+      code:link <node:@hydrofoil/labyrinth/collection#get> ;
+    ]
+.
+
+</api/ViewCollection> hydra:supportedOperation <> .

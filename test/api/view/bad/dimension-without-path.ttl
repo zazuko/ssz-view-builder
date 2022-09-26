@@ -1,0 +1,19 @@
+PREFIX schema: <http://schema.org/>
+PREFIX view: <https://cube.link/view/>
+
+<>
+  a </api/View> ;
+  view:dimension
+    [
+      a view:Dimension ;
+      view:from
+        [
+          view:source _:source ;
+        ] ;
+    ] ;
+.
+
+_:source
+  a view:CubeSource ;
+  view:cube <https://example.com/cube/foo> ;
+.

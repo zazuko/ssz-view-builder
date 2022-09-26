@@ -1,0 +1,24 @@
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix view: <https://cube.link/view/>
+
+<> a </api/View>, view:View ;
+  schema:identifier "example3" ;
+  skos:notation "TEST3" ;
+  rdfs:label "Test filtering" ;
+  <urn:ssz:source> <#source-bew>, <#source-stf> .
+
+<#source-bew>
+  a view:CubeSource ;
+  view:cube <https://ld.stadt-zuerich.ch/statistics/000003> ;
+  rdfs:label "Wirtschaftliche Bevölkerung" ;
+  <urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BEW>
+.
+
+<#source-stf>
+  a view:CubeSource ;
+  view:cube <https://ld.stadt-zuerich.ch/statistics/000004> ;
+  rdfs:label "Grundstückflächen in Ha. nach Bebauungsart (Level 2)" ;
+  <urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/STF>
+.

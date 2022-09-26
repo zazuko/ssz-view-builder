@@ -1,0 +1,5 @@
+prefix view-builder: <https://view-builder.described.at/>
+
+# TODO owl:sameAs
+<> a </api/Entrypoint> .
+</> a </api/Entrypoint> .

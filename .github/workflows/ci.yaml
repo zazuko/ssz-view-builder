@@ -8,6 +8,16 @@ on:
       - "v*.*.*"
 
 jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: yarn
+      - run: yarn build
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -16,13 +26,28 @@ jobs:
       - run: yarn
       - run: yarn test
 
+  Test-API:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker-practice/actions-setup-docker@1.0.4
+        with:
+          docker_version: 20.10.8
+      - uses: tpluscode/action-setup-lando@v0.1.3
+        with:
+          healthcheck: http://view-builder.lndo.site/app
+          timeout: 30000
+      - run: yarn bootstrap
+      - run: lando test-api test/api/**/*.http
+
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - run: yarn
-      - run: yarn   lint
+      - run: yarn lint
 
   docker:
     runs-on: ubuntu-latest

@@ -1,0 +1,81 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX code: <https://code.described.at/>
+PREFIX schema: <http://schema.org/>
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+PREFIX knossos: <https://hypermedia.app/knossos#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX view: <https://cube.link/view/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX query: <https://hypermedia.app/query#>
+
+<>
+  a sh:NodeShape, rdfs:Class, hydra:Class ;
+  rdfs:subClassOf view:View, hydra:Resource ;
+  query:include
+    [
+      query:path <urn:ssz:source> ;
+    ] ;
+  hydra:supportedOperation
+    [
+      a schema:ReplaceAction ;
+      hydra:title "Save" ;
+      hydra:method "PUT" ;
+      hydra:expects <> ;
+      code:implementedBy
+        [
+          a code:EcmaScript ;
+          code:link <node:@hydrofoil/knossos/resource#PUT> ;
+        ] ;
+    ],
+    [
+      a schema:DeleteAction ;
+      hydra:title "Delete" ;
+      hydra:method "DELETE" ;
+      code:implementedBy
+        [
+          a code:EcmaScript ;
+          code:link <node:@hydrofoil/knossos/resource#DELETE> ;
+        ] ;
+    ] ;
+  sh:property
+    [
+      sh:path schema:identifier ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:minLength 1 ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property
+    [
+      sh:path view:dimension ;
+      sh:class view:Dimension ;
+      sh:nodeKind sh:BlankNode ;
+      sh:node <#DimensionShape> ;
+    ] ;
+.
+
+<#DimensionShape>
+  sh:property
+    [
+      sh:path view:from ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:BlankNode ;
+      sh:node
+        [
+          sh:property
+            [
+              sh:path view:source ;
+              sh:minCount 1 ;
+              sh:class view:CubeSource ;
+            ],
+            [
+              sh:path view:path ;
+              sh:nodeKind sh:IRI ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+            ] ;
+        ] ;
+    ] ;
+.

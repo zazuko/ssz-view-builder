@@ -1,0 +1,6 @@
+PREFIX schema: <http://schema.org/>
+
+<>
+  a </api/View> ;
+  schema:identifier "empty view" ;
+.

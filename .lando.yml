@@ -1,0 +1,89 @@
+name: view-builder
+env_file:
+  - .env.local
+  - .env
+services:
+  apis:
+    type: node:custom
+    build:
+      - npm i -g nodemon
+    command: nodemon -w packages -w apps -i apps/www --ext ts,js,ttl --exec npm --node-options --inspect=0.0.0.0:32272 --inspect start
+    ssl: true
+    overrides:
+      image: node:16
+      ports:
+        - '32272:32272'
+      environment:
+        TS_NODE_TRANSPILE_ONLY: "true"
+        DEBUG: view-builder*,hydra*,hydra-box*,labyrinth*,SPARQL,-labyrinth:request:headers
+    scanner: false
+    moreHttpPorts:
+      - 32272
+  www:
+    type: node
+    command: yarn wsrun -p @view-builder/app -c start --disable-host-check --host 0.0.0.0
+    ssl: true
+    scanner: false
+    port: 8080
+  store:
+    type: compose
+    volumes:
+      stardog-home:
+    build_as_root:
+      - adduser www-data
+    run:
+      - /opt/stardog/bin/stardog-admin db create -o preserve.bnode.ids=false query.describe.strategy=cbd -n view-builder || true
+    services:
+      image: stardog/stardog:8.1.0-java11-preview
+      command: /opt/stardog/bin/stardog-admin server start --foreground
+      environment:
+        LANDO_NO_USER_PERMS: NOTGONNADOIT
+        STARDOG_PROPERTIES: /app/.stardog/stardog.properties
+      volumes:
+        #- stardog-home:/var/opt/stardog # TODO: permissions issue
+        - ~/stardog-home/stardog-license-key.bin:/var/opt/stardog/stardog-license-key.bin
+  trifid:
+    type: compose
+    app_mount: false
+    ssl: true
+    services:
+      image: zazuko/trifid
+      command: tini -- /start.sh
+      user: root
+      environment:
+        DEBUG: "trifid*"
+      volumes:
+        - ./apps/trifid/start.sh:/start.sh
+  ontodia:
+    type: node
+    command: yarn wsrun -p @view-builder/explorer -c start --disable-host-check --host 0.0.0.0
+    scanner: false
+  rest-cli:
+    type: compose
+    scanner: false
+    services:
+      image: j4yf7o/restcli-node
+      command: tail -f /dev/null
+
+tooling:
+  stardog-admin:
+    service: store
+    cmd: /opt/stardog/bin/stardog-admin
+  stardog:
+    service: store
+    cmd: /opt/stardog/bin/stardog
+  test-api:
+    service: rest-cli
+    cmd: rest-cli -d test/api -e dev
+
+proxy:
+  store:
+    - db.view-builder.lndo.site:5820
+  apis:
+    - view-builder.lndo.site:8888
+  trifid:
+    - trifid.view-builder.lndo.site:8080
+  ontodia:
+    - explore.view-builder.lndo.site:8080
+  www:
+    - view-builder.lndo.site:8080/app

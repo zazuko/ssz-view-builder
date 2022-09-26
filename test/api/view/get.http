@@ -1,0 +1,12 @@
+### Empty View
+GET {{base}}/view/example
+Content-Type: text/turtle
+Authorization: Basic YWRtaW46YWRtaW4=
+
+> ./good/ok.js
+
+### Anonymous
+GET {{base}}/view/example
+Content-Type: text/turtle
+
+> ./bad/unauthorized.js

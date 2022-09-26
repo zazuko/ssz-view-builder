@@ -1,3 +1,6 @@
 node_modules/
 .idea/
 dist/
+.env
+test-reports/
+restcli.jar
