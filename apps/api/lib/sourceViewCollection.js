@@ -31,7 +31,7 @@ export const get = asyncMiddleware(async (req, res) => {
     FILTER NOT EXISTS {
       [
         # Exclude views which already exist in view builder
-        a ${cube('view/View')} ; ${schema.isBasedOn} ?view
+        a ${cube('view/View')} ; ${schema.sameAs} ?view
       ]
     }
   `.execute(req.labyrinth.sparql.query)

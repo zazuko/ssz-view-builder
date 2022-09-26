@@ -9,7 +9,7 @@ import fromStream from 'rdf-dataset-ext/fromStream.js'
  * @param pointer The payload, which is new instance of `</api/View>`
  */
 export async function importMetadata({ req, pointer }) {
-  const sourceDataset = pointer.out(schema.isBasedOn).term
+  const sourceDataset = pointer.out(schema.sameAs).term
   const view = pointer.term
 
   if (sourceDataset) {
