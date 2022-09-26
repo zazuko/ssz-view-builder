@@ -10,9 +10,25 @@ CONSTRUCT {
   ?term rdfs:label ?label
 }
 WHERE {
+  {
+    SELECT ?cube WHERE {
+      BIND ("{CUBE}" as ?cubes)
+      VALUES ?n { 1 2 3 4 5 6 7 8 9 10 }
+
+      BIND (concat("^([^,]*,){", str(?n) ,"} *") AS ?skipN)
+      BIND (iri(replace(replace(?cubes, ?skipN, ""), ",.*$", "")) AS ?cube)
+    }
+  }
+
+  VALUES ?dimension { <{DIMENSION}> }
   VALUES ?filter { <{FILTER}> }
 
   ?filter schema:hasDefinedTerm ?term .
   ?term schema:name ?label ;
         schema:position ?position .
-} 
+
+  FILTER EXISTS {
+    ?cube cube:observationSet/cube:observation ?observation .
+    ?observation ?dimension ?term .
+  }
+}

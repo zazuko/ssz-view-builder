@@ -231,6 +231,12 @@ view:In rdfs:label "one of" .
                             hydra:required true ;
                         ],
                         [
+                            hydra:property view:cube ;
+                            sh:path ( view:source view:cube ) ;
+                            hydra:variable "CUBE" ;
+                            hydra:required true ;
+                        ],
+                        [
                             hydra:property hydra:freetextQuery ;
                             hydra:variable "Q" ;
                             sh:minLength 0 ;
@@ -247,6 +253,21 @@ view:In rdfs:label "one of" .
                     a hydra:IriTemplate ;
                     hydra:template [ code:name "filter-terms" ] ;
                     hydra:mapping
+                        [
+                            hydra:property view:path ;
+                            sh:path ( view:dimension view:from view:path ) ;
+                            hydra:variable "DIMENSION" ;
+                            hydra:required true ;
+                        ],
+                        [
+                            hydra:property view:cube ;
+                            sh:path
+                            (
+                                view:dimension view:from view:source view:cube
+                            ) ;
+                            hydra:variable "CUBE" ;
+                            hydra:required true ;
+                        ],
                         [
                             hydra:property :filterTermSet ;
                             hydra:variable "FILTER" ;
