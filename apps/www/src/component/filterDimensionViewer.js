@@ -2,7 +2,7 @@ import { toSparql } from 'clownface-shacl-path'
 import clownface from 'clownface'
 import $rdf from '@rdfjs/dataset'
 import { rdf } from '@tpluscode/rdf-ns-builders'
-import { ssz, view } from '../ns.js'
+import { ssz, view } from '@view-builder/core/ns.js'
 
 export default {
   editor: ssz.FilterDimensionViewer,

@@ -3,8 +3,8 @@ import sinon from 'sinon'
 import clownface from 'clownface'
 import $rdf from 'rdf-ext'
 import { toSparql } from 'clownface-shacl-path'
+import { ssz, view } from '@view-builder/core/ns.js'
 import viewer from '../../src/component/filterDimensionViewer.js'
-import { ssz, view } from '../../src/ns.js'
 import { testData } from '../_helpers.js'
 
 describe('component/filterDimensionViewer.js', () => {

@@ -1,7 +1,7 @@
 import clownface from 'clownface'
 import $rdf from '@rdfjs/dataset'
 import View from 'rdf-cube-view-query/lib/View.js'
-import * as ns from './ns.js'
+import * as ns from '@view-builder/core/ns.js'
 
 export function prepareViewPointer(pointer) {
   const dataset = $rdf.dataset([...pointer.dataset])

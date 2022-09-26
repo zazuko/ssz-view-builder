@@ -1,7 +1,7 @@
 import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
 import TermMap from '@rdfjs/term-map'
+import * as ns from '@view-builder/core/ns.js'
 import * as dimensionQueries from './queries/dimensions.js'
-import * as ns from './ns.js'
 import { deleteCbd, newReference } from './clownface.js'
 
 export async function generateDimensions(view, queries = dimensionQueries) {
