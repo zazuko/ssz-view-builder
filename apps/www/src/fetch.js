@@ -26,13 +26,6 @@ export function fetchShapes(id) {
   return fetch(id, 'shapes')
 }
 
-/**
- * @param id resource URI or path to local shape
- */
-export function fetchResource(id) {
-  return fetch(id, 'resource')
-}
-
 export async function fetchQuery(id) {
   const uri = `./dist/query/${id}.sparql`
   const res = await window.fetch(uri)
