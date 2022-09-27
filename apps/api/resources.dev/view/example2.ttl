@@ -1,3 +1,4 @@
+PREFIX view-builder: <https://view-builder.described.at/>
 PREFIX schema: <http://schema.org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
@@ -6,7 +7,7 @@ prefix view: <https://cube.link/view/>
   schema:identifier "example2" ;
   schema:alternateName "TEST2" ;
   schema:name "Another dev testing view" ;
-  <urn:ssz:source> <#source-bew>, <#source-stf>  ;
+  view-builder:source <#source-bew>, <#source-stf>  ;
   schema:author </user/cvasquez> ;
 .
 
@@ -14,12 +15,12 @@ prefix view: <https://cube.link/view/>
   a view:CubeSource ;
   view:cube <https://ld.stadt-zuerich.ch/statistics/000003> ;
   rdfs:label "Wirtschaftliche Bevölkerung" ;
-  <urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BEW>
+  view-builder:keyFigure <https://ld.stadt-zuerich.ch/statistics/measure/BEW>
 .
 
 <#source-stf>
   a view:CubeSource ;
   view:cube <https://ld.stadt-zuerich.ch/statistics/000004> ;
   rdfs:label "Grundstückflächen in Ha. nach Bebauungsart (Level 2)" ;
-  <urn:ssz:keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/STF>
+  view-builder:keyFigure <https://ld.stadt-zuerich.ch/statistics/measure/STF>
 .

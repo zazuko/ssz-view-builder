@@ -1,5 +1,5 @@
 import { hydra, rdf, schema } from '@tpluscode/rdf-ns-builders'
-import * as ns from '../../ns.js'
+import * as ns from '@view-builder/core/ns.js'
 
 export const viewCollection = {
   model: {

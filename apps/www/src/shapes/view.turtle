@@ -7,7 +7,7 @@
 @prefix view: <https://cube.link/view/> .
 @prefix code: <https://code.described.at/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix : <urn:ssz:> .
+@prefix : <https://view-builder.described.at/> .
 @prefix sh1: <https://hypermedia.app/shaperone#> .
 @prefix schema: <http://schema.org/> .
 

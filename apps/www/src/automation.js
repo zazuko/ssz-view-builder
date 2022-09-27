@@ -5,7 +5,7 @@ import * as dimensionQueries from './queries/dimensions.js'
 import { deleteCbd, newReference } from './clownface.js'
 
 export async function generateDimensions(view, queries = dimensionQueries) {
-  const sources = view.out(ns.ssz.source)
+  const sources = view.out(ns.viewBuilder.source)
 
   clearGeneratedDimensions(view)
 
@@ -32,7 +32,7 @@ async function createKeyDimensions(view, pointer, { findKeyDimensions }) {
     view.addOut(ns.view.dimension, (viewDim) => {
       viewDim
         .addOut(rdf.type, ns.view.Dimension)
-        .addOut(ns.ssz.generated, true)
+        .addOut(ns.viewBuilder.generated, true)
         .addOut(ns.view.from, (from) => {
           from.addOut(ns.view.source, sources)
             .addOut(ns.view.path, dimension)
@@ -61,7 +61,7 @@ async function createMeasureDimensions(view, sources, { findMeasureDimensions })
       view.addOut(ns.view.dimension, (viewDim) => {
         viewDim
           .addOut(rdf.type, ns.view.Dimension)
-          .addOut(ns.ssz.generated, true)
+          .addOut(ns.viewBuilder.generated, true)
           .addOut(ns.view.from, (from) => {
             from.addOut(ns.view.source, source)
               .addOut(ns.view.path, dimension)
@@ -78,7 +78,7 @@ async function createMeasureDimensions(view, sources, { findMeasureDimensions })
 function clearGeneratedDimensions(view) {
   const generatedDimensions = view.any()
     .has(rdf.type, ns.view.Dimension)
-    .has(ns.ssz.generated, true)
+    .has(ns.viewBuilder.generated, true)
 
   generatedDimensions.forEach((dim) => {
     dim.deleteIn(ns.view.dimension)
