@@ -17,6 +17,7 @@ app.use('/app', conditional(
 
 const apis = knossos.default({
   endpointUrl: `${process.env.SPARQL_ENDPOINT}`,
+  updateUrl: `${process.env.SPARQL_UPDATE_ENDPOINT}`,
   name: 'view-builder',
   user: process.env.SPARQL_USER,
   password: process.env.SPARQL_PASSWORD,
