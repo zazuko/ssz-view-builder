@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires,no-console */
-const express = require('express')
-const fallback = require('express-history-api-fallback')
-const conditional = require('express-conditional-middleware')
-const knossos = require('@hydrofoil/knossos')
-const compression = require('compression')
+import express from 'express'
+import fallback from 'express-history-api-fallback'
+import conditional from 'express-conditional-middleware'
+import knossos from '@hydrofoil/knossos'
+import compression from 'compression'
 
 const app = express()
 
@@ -22,6 +21,11 @@ const apis = knossos.default({
   user: process.env.SPARQL_USER,
   password: process.env.SPARQL_PASSWORD,
 })
+
+app.get('/', conditional(
+  req => req.accepts('html'),
+  (req, res) => res.redirect('/app'),
+))
 app.use('/', apis)
 
 app.listen(parseInt(process.env.PORT, 10) || 8080)
