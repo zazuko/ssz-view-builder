@@ -8,6 +8,7 @@ export function generateLookupSources(filter) {
 
   filter
     .deleteOut(view.argument)
+    .deleteList(view.argument)
     .addOut(view.argument, filter.out(viewBuilder.filterTermSet))
 
   filter.addOut(view.dimension, (dimension) => {
