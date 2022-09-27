@@ -175,32 +175,6 @@ view:In rdfs:label "one of" .
                                     hydra:required true ;
                                 ] ;
                         ] ;
-                ],
-                [
-                    sh:name "operator" ;
-                    sh:path view:operation ;
-                    sh:minCount 1 ;
-                    sh:maxCount 1 ;
-                    sh:order 4 ;
-                    sh:defaultValue view:In ;
-                    sh:in
-                        (
-                            view:In
-                            view:Gte
-                            view:Lte
-                            view:Lt
-                            view:Gt
-                            view:Eq
-                        ) ;
-                ],
-                [
-                    sh:name "effective path" ;
-                    sh:path view:dimension ;
-                    sh:minCount 1 ;
-                    sh:maxCount 1 ;
-                    sh:order 100 ;
-                    dash:editor :FilterDimensionViewer ;
-                    sh1:showInDebugOnly true ;
                 ] ;
         ] ;
 .
@@ -241,44 +215,27 @@ view:In rdfs:label "one of" .
                             sh:minLength 0 ;
                         ] ;
                 ] ;
-        ],
-        [
-            sh:name "values" ;
-            sh:path view:argument ;
-            sh:order 5 ;
-            dash:editor sh1:InstancesMultiSelectEditor ;
-            hydra:search
-                [
-                    a hydra:IriTemplate ;
-                    hydra:template [ code:name "filter-terms" ] ;
-                    hydra:mapping
-                        [
-                            hydra:property view:path ;
-                            sh:path ( view:dimension view:from view:path ) ;
-                            hydra:variable "DIMENSION" ;
-                            hydra:required true ;
-                        ],
-                        [
-                            hydra:property view:cube ;
-                            sh:path
-                            (
-                                view:dimension view:from view:source view:cube
-                            ) ;
-                            hydra:variable "CUBE" ;
-                            hydra:required true ;
-                        ],
-                        [
-                            hydra:property :filterTermSet ;
-                            hydra:variable "FILTER" ;
-                            hydra:required true ;
-                        ] ;
-                ] ;
         ] ;
 .
 
 :DateFilter
     sh1:discriminatorValue <https://ld.stadt-zuerich.ch/schema/hasEnd> ;
     sh:property
+        [
+            sh:name "operator" ;
+            sh:path view:operation ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:in
+                (
+                    view:Gte
+                    view:Lte
+                    view:Lt
+                    view:Gt
+                    view:Eq
+                ) ;
+        ],
         [
             sh:name "value" ;
             sh:path view:argument ;
