@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import sinon from 'sinon'
 import $rdf from 'rdf-ext'
 import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
-import { ssz, view } from '@view-builder/core/ns.js'
+import { viewBuilder, view } from '@view-builder/core/ns.js'
 import { ex, testData } from '@view-builder/testing'
 import { generateDimensions } from '../src/automation.js'
 
@@ -25,7 +25,7 @@ describe('automation.js', () => {
 
       const before = await testData`
         <> a ${view.View} ;
-           ${ssz.source} [
+           ${viewBuilder.source} [
              ${view.cube} ${ex.cube} ;
            ] ;
            . 
@@ -39,7 +39,7 @@ describe('automation.js', () => {
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Kennzahl)
       expect(dimensions.out(view.from).out(view.source).term)
-        .to.deep.eq(before.out(ssz.source).term)
+        .to.deep.eq(before.out(viewBuilder.source).term)
       expect(dimensions.out(rdfs.label).value).to.contain('KENNZAHL')
     })
 
@@ -52,7 +52,7 @@ describe('automation.js', () => {
 
       const before = await testData`
         <> a ${view.View} ;
-           ${ssz.source} [
+           ${viewBuilder.source} [
              ${view.cube} ${ex.Cube} ;
            ] ;
            . 
@@ -66,8 +66,8 @@ describe('automation.js', () => {
       expect(dimensions.terms).to.have.length(2)
       expect(dimensions.out(view.from).out(view.path).terms).to.deep.eq([ex.Width, ex.Height])
       expect(dimensions.out(view.from).out(view.source).terms).to.have.all.members([
-        before.out(ssz.source).term,
-        before.out(ssz.source).term,
+        before.out(viewBuilder.source).term,
+        before.out(viewBuilder.source).term,
       ])
     })
 
@@ -80,7 +80,7 @@ describe('automation.js', () => {
 
       const before = await testData`
         <> a ${view.View} ;
-           ${ssz.source} [
+           ${viewBuilder.source} [
              ${view.cube} ${ex.Cube1} ;
            ] , [
              ${view.cube} ${ex.Cube2} ;
@@ -96,7 +96,7 @@ describe('automation.js', () => {
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Width)
       expect(dimensions.out(view.from).out(view.source).terms)
-        .to.have.all.members(before.out(ssz.source).terms)
+        .to.have.all.members(before.out(viewBuilder.source).terms)
     })
 
     it('removes all existing generated dimensions', async () => {
@@ -107,16 +107,16 @@ describe('automation.js', () => {
 
       const before = await testData`
         <> a ${view.View} ;
-           ${ssz.source} <source> ;
+           ${viewBuilder.source} <source> ;
            ${view.dimension} [
              a ${view.Dimension} ;
-             ${ssz.generated} true ;
+             ${viewBuilder.generated} true ;
              ${view.source} <source> ;
            ] ;
         .
         
-        <dangling1> a ${view.Dimension} ; ${ssz.generated} true ; ${view.source} <source> .
-        <dangling2> a ${view.Dimension} ; ${ssz.generated} true ; ${view.source} <source> .
+        <dangling1> a ${view.Dimension} ; ${viewBuilder.generated} true ; ${view.source} <source> .
+        <dangling2> a ${view.Dimension} ; ${viewBuilder.generated} true ; ${view.source} <source> .
         
         <source> ${view.cube} ${ex.cube} .
       `
@@ -129,7 +129,7 @@ describe('automation.js', () => {
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Kennzahl)
       expect(dimensions.out(view.from).out(view.source).term)
-        .to.deep.eq(before.out(ssz.source).term)
+        .to.deep.eq(before.out(viewBuilder.source).term)
       expect(dimensions.out(rdfs.label).value).to.contain('KENNZAHL')
     })
   })
