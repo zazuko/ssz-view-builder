@@ -1,3 +1,4 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix code: <https://code.described.at/>
 prefix acl: <http://www.w3.org/ns/auth/acl#>
@@ -18,3 +19,4 @@ prefix view: <https://cube.link/view/>
 .
 
 </api/View> hydra:supportedOperation <> .
+sh:NodeShape hydra:supportedOperation <> .

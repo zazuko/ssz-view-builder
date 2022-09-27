@@ -13,12 +13,16 @@ PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
     [
       hydra:property rdf:type ;
       hydra:object </api/View> ;
+    ],
+    [
+      hydra:property rdf:type ;
+      hydra:object view:View ;
     ] ;
   hydra:supportedOperation
     [
       a schema:CreateAction ;
       hydra:method "POST" ;
-      hydra:expects </api/View> ;
+      hydra:expects </api/View/New> ;
       hydra:title "Create view" ;
       code:implementedBy
         [
@@ -34,6 +38,14 @@ PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
           hydra:variable "id" ;
           hydra:property schema:identifier ;
           hydra:required true ;
+        ] ;
+    ] ;
+  knossos:preprocessPayload
+    [
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/view/create.js#importMetadata>
         ] ;
     ] ;
 .

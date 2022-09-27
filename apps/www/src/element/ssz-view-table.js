@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
-import { rdfs, skos } from '@tpluscode/rdf-ns-builders'
+import { schema } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js'
 
 customElements.define('ssz-view-table', class extends LitElement {
@@ -49,8 +49,8 @@ customElements.define('ssz-view-table', class extends LitElement {
   renderRow(view) {
     return html`
       <tr class="view-row" @click="${() => this.dispatchEvent(new CustomEvent('view-select', { detail: { view } }))}">
-        <td>${view.out(skos.notation).value}</td>
-        <td>${view.out(rdfs.label).value}</td>
+        <td>${view.out(schema.alternateName).value}</td>
+        <td>${view.out(schema.name).value}</td>
         <td></td>
         <td></td>
         <td>
