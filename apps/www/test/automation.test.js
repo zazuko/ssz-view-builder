@@ -3,8 +3,8 @@ import sinon from 'sinon'
 import $rdf from 'rdf-ext'
 import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
 import { ssz, view } from '@view-builder/core/ns.js'
+import { ex, testData } from '@view-builder/testing'
 import { generateDimensions } from '../src/automation.js'
-import { ex, testData } from './_helpers.js'
 
 describe('automation.js', () => {
   let queries

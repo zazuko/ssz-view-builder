@@ -1,0 +1,14 @@
+{
+  "name": "@view-builder/testing",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "@rdfjs/namespace": "^2.0.0",
+    "@tpluscode/rdf-string": "^0.2.26",
+    "clownface": "^1.5.1",
+    "n3": "^1.16.2",
+    "rdf-ext": "^2.0.1",
+    "string-to-stream": "^3.0.1"
+  }
+}
