@@ -1,5 +1,5 @@
 import { fromPointer } from '@rdfine/hydra/lib/Collection'
-import { dash } from '@tpluscode/rdf-ns-builders'
+import { dash, hydra, sh } from '@tpluscode/rdf-ns-builders'
 import { hyper_query as query } from '@hydrofoil/vocabularies/builders'
 import { html } from 'lit'
 
@@ -20,9 +20,13 @@ export function searchForm(pointer) {
 
 function doFilter(template) {
   return (e) => {
+    if (!searchHasMinLength(template, e.detail.focusNode)) {
+      return
+    }
+
     const resource = template.expand(e.detail.focusNode)
 
-    return e.target.dispatchEvent(new CustomEvent('show-resource', {
+    e.target.dispatchEvent(new CustomEvent('show-resource', {
       bubbles: true,
       composed: true,
       detail: {
@@ -30,4 +34,16 @@ function doFilter(template) {
       },
     }))
   }
+}
+
+function searchHasMinLength(template, ptr) {
+  const { value } = ptr.out(hydra.freetextQuery)
+  if (value === '') {
+    return true
+  }
+
+  const mapping = template.mapping.find(({ property }) => property.id.equals(hydra.freetextQuery))
+  const minLength = mapping?.getNumber(sh.minLength)
+
+  return minLength && minLength <= value.length
 }
