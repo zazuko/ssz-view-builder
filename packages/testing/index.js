@@ -6,6 +6,7 @@ import clownface from 'clownface'
 import { StreamParser } from 'n3'
 
 export const ex = namespace('http://example.com/')
+export const ssz = namespace('https://ld.stadt-zuerich.ch/statistics/')
 
 export async function testData(strings, ...values) {
   const turtleStream = toStream(turtle(strings, ...values).toString())

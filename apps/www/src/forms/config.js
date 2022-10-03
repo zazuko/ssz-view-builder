@@ -10,7 +10,6 @@ import * as decorators from '../component/decorators.js'
 import * as editors from '../editor/index.js'
 import dynamicXone from './dynamicXone.js'
 import debugProperties from './debugProperties.js'
-import filterDimensionViewer from '../component/filterDimensionViewer.js'
 
 shaperoneHydra(configure)
 
@@ -26,7 +25,6 @@ configure.renderer.setTemplates({
 configure.components.pushComponents({
   ...shoelace,
   instancesMultiSelectEditor,
-  filterDimensionViewer,
 })
 
 Object.values(decorators)

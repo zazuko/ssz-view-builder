@@ -6,8 +6,8 @@ import { fromPointer } from '@rdfine/shacl/lib/NodeShape'
 import { fromPointer as propertyShape } from '@rdfine/shacl/lib/PropertyShape'
 import { owl, sh } from '@tpluscode/rdf-ns-builders'
 import sh1 from '@hydrofoil/shaperone-core/ns.js'
+import { ex, testData } from '@view-builder/testing'
 import dynamicXone from '../../src/forms/dynamicXone.js'
-import { ex, testData } from '../_helpers.js'
 
 global.requestAnimationFrame = cb => cb()
 

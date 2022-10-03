@@ -1,7 +1,7 @@
 import { SELECT } from '@tpluscode/sparql-builder'
 import { schema, sh } from '@tpluscode/rdf-ns-builders'
 import { VALUES } from '@tpluscode/sparql-builder/expressions'
-import * as ns from '../ns.js'
+import * as ns from '@view-builder/core/ns.js'
 import { client } from './index.js'
 
 /**

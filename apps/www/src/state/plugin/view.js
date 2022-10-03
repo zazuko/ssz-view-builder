@@ -2,8 +2,8 @@ import { rdf } from '@tpluscode/rdf-ns-builders'
 import { turtle } from '@tpluscode/rdf-string'
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
+import * as ns from '@view-builder/core/ns.js'
 import { getAllTriplesFromRoot } from '../../clownface.js'
-import * as ns from '../../ns.js'
 import { endpoint } from '../../queries/index.js'
 
 export const viewForm = {
@@ -44,7 +44,7 @@ export const viewForm = {
           dispatch.setView(await generateDimensions(pointer))
         },
         async showView() {
-          const { prepareViewPointer } = await import('../../view.js')
+          const { prepareViewPointer } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
           const view = prepareViewPointer(pointer)
@@ -54,7 +54,7 @@ export const viewForm = {
           window.open(converterUrl, 'converter')
         },
         async showQuery() {
-          const { prepareViewPointer, createViewQuery } = await import('../../view.js')
+          const { prepareViewPointer, createViewQuery } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
           const view = prepareViewPointer(pointer)
@@ -71,7 +71,7 @@ export const viewForm = {
           window.open(converterUrl.toString(), 'yasgui')
         },
         async showInCubeViewer() {
-          const { prepareViewPointer } = await import('../../view.js')
+          const { prepareViewPointer } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
           const view = prepareViewPointer(pointer)

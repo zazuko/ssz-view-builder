@@ -2,7 +2,7 @@ import $rdf from '@rdfjs/data-model'
 import { rdf } from '@tpluscode/rdf-ns-builders'
 import TermSet from '@rdfjs/term-set'
 import url from 'url-state'
-import * as ns from '../../ns.js'
+import * as ns from '@view-builder/core/ns.js'
 
 export default function effects(store) {
   const dispatch = store.getDispatch()
