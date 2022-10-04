@@ -5,7 +5,7 @@ import clownface from 'clownface'
 import $rdf from 'rdf-ext'
 import asyncMiddleware from 'middleware-async'
 import { DESCRIBE } from '@tpluscode/sparql-builder'
-import { rdf, schema, vcard } from '@tpluscode/rdf-ns-builders'
+import { rdf, vcard } from '@tpluscode/rdf-ns-builders'
 import { isNamedNode } from 'is-graph-pointer'
 
 const require = createRequire(import.meta.url)
@@ -54,7 +54,6 @@ function setAgent(client) {
         .namedNode(id)
         .addOut(rdf.type, vcard.Individual)
         .addOut(vcard.hasUID, userName)
-        .addOut(schema.author, id)
       await req.knossos.store.save(foundUser)
         .then(() => req.knossos.log(`Created user resource ${foundUser.value}`))
         .catch(req.knossos.log)
