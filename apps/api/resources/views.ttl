@@ -31,7 +31,7 @@ PREFIX view-builder: <https://view-builder.described.at/>
           sh:property
             [
               sh:name "Search" ;
-              sh:description "Type 3 characters to search" ;
+              sh:description "Type at least 3 characters to search" ;
               sh:path hydra:freetextQuery ;
               sh:minCount 1 ;
               sh:maxCount 1 ;
