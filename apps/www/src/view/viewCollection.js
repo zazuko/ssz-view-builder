@@ -2,12 +2,14 @@ import { html } from 'lit'
 import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '../element/ssz-view-table.js'
+import { searchForm } from './searchForm.js'
 
 export async function init() {
   await import('../forms/index.js')
 
   return {
     content,
+    menu,
   }
 }
 
@@ -17,6 +19,13 @@ export function content(arg) {
   }
 
   return table(arg)
+}
+
+function menu({ dispatch }) {
+  return html`
+    <sl-menu-label>Views</sl-menu-label>
+    <sl-menu-item @click=${() => dispatch.app.viewParam('#create')}>Create new view</sl-menu-item>
+  `
 }
 
 function table({ state, dispatch }) {
@@ -30,7 +39,8 @@ function table({ state, dispatch }) {
       return leftId.localeCompare(rightId)
     }) || []
   return html`
-    <sl-button @click="${() => dispatch.app.viewParam('#create')}">Create new View</sl-button>
+    ${searchForm(state.viewCollection.pointer)}
+    <hr/>
     <ssz-view-table .views="${views}"
                     @view-select="${e => dispatch.routing.goTo(e.detail.view.value)}"
                     @view-delete="${e => dispatch.viewCollection.deleteView(e.detail.view)}">

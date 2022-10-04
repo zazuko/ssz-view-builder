@@ -72,4 +72,11 @@ customElements.define('ssz-view-builder', class extends connect(store, LitElemen
       state,
     }
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  mapEvents() {
+    return {
+      'show-resource': ({ detail }) => store.dispatch.routing.goTo(detail.resource),
+    }
+  }
 })

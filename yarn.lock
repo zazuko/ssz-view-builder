@@ -1405,10 +1405,10 @@
     replacestream "^4.0.3"
     sparql-http-client "^2.4.1"
 
-"@hydrofoil/vocabularies@^0.3", "@hydrofoil/vocabularies@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/vocabularies/-/vocabularies-0.3.1.tgz#4529dd7d144dd4990f66d3bb5497b72ddcc285e3"
-  integrity sha512-3OauOEZ8fEHkqCDGYlnCP1+Jaw1xVQE6jLhzpa8B5n+XMt82c8+ySm0Fg8GcfYO75esC0f0F3yxbpn1DRHw1uw==
+"@hydrofoil/vocabularies@^0.3", "@hydrofoil/vocabularies@^0.3.1", "@hydrofoil/vocabularies@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/vocabularies/-/vocabularies-0.3.2.tgz#a19835882d4061a1e86bd704f855cac487a93ba1"
+  integrity sha512-Rj+9qbPer52oHrHT79dvM8OIb+hX8n7/2cXAZLydBHE9llcnGsNjgMfoo0RDD93CmIw79wXL046yOwhV5LTjZA==
   dependencies:
     "@rdf-esm/namespace" "^0.5.3"
     "@rdfjs/parser-n3" "^1.1.4"
@@ -1892,7 +1892,7 @@
     "@tpluscode/rdf-ns-builders" "^2.0.1"
     "@tpluscode/rdfine" "^0.5.39"
 
-"@rdfine/hydra@^0.8.4", "@rdfine/hydra@^0.8.5":
+"@rdfine/hydra@^0.8.4", "@rdfine/hydra@^0.8.5", "@rdfine/hydra@^0.8.6":
   version "0.8.6"
   resolved "https://registry.yarnpkg.com/@rdfine/hydra/-/hydra-0.8.6.tgz#578d4672e13bab6beb39aaff5e0a0978f1c21b00"
   integrity sha512-WVQPdF/qLvx0eIGxHZ4xflOn+vtJJl04cavdKqUKdvMlD1b/5GSeg0qP3LpVC9j8YaQSQnrETfVAPxH9rtMMEg==

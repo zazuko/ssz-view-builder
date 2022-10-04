@@ -1,6 +1,41 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dash: <http://datashapes.org/dash#>
+PREFIX code: <https://code.described.at/>
+prefix query: <https://hypermedia.app/query#>
 prefix hydra: <http://www.w3.org/ns/hydra/core#>
 PREFIX view-builder: <https://view-builder.described.at/>
 
 <>
   a </api/ViewCollection>, view-builder:ViewCollection, hydra:Collection ;
+  hydra:search
+    [
+      hydra:template "{?q}" ;
+      hydra:mapping
+        [
+          hydra:variable "q" ;
+          hydra:property hydra:freetextQuery ;
+          sh:minLength 3 ;
+          query:filter
+            [
+              code:implementedBy
+                [
+                  a code:EcmaScriptModule ;
+                  code:link <file:apps/api/lib/viewCollection.js#textFilter> ;
+                ] ;
+            ] ;
+        ] ;
+      dash:shape
+        [
+          rdfs:label "Search" ;
+          sh:property
+            [
+              sh:name "Search" ;
+              sh:description "Type at least 3 characters to search" ;
+              sh:path hydra:freetextQuery ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+            ] ;
+        ] ;
+    ] ;
 .
