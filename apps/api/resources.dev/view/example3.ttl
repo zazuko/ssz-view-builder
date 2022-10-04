@@ -5,6 +5,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
 
 <> a </api/View>, view:View ;
+  schema:sameAs <https://example.org/view/example3> ;
   schema:identifier "example3" ;
   schema:alternateName "TEST3" ;
   schema:name "Test filtering" ;
