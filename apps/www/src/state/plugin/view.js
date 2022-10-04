@@ -5,13 +5,23 @@ import clownface from 'clownface'
 import * as ns from '@view-builder/core/ns.js'
 import { getAllTriplesFromRoot } from '../../clownface.js'
 import { endpoint } from '../../queries/index.js'
+import toggleButtons from './viewForm/toggleButtons.js'
 
 export const viewForm = {
   model: {
-    state: {},
+    state: {
+      validityReport: {},
+      sourcesValidity: {},
+    },
     reducers: {
       setView(state, pointer) {
         return { ...state, pointer }
+      },
+      setSourcesValidity(state, report) {
+        return { ...state, sourcesValidity: report }
+      },
+      setViewValidity(state, validityReport) {
+        return { ...state, validityReport }
       },
     },
     effects(store) {
@@ -103,6 +113,8 @@ export const viewForm = {
 
           dispatch.setView(clownface({ dataset }).node(term))
         },
+        toggleButtons: toggleButtons(store),
+        setView: toggleButtons(store),
       }
     },
   },

@@ -1,0 +1,113 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix view: <https://cube.link/view/>
+
+<>
+  a sh:NodeShape ;
+  sh:targetClass view:View ;
+  sh:property
+    [
+      sh:path view:dimension ;
+      sh:minCount 1 ;
+      sh:xone
+        (
+          [
+            sh:node <#CubeDimension> ;
+          ]
+          [
+            sh:node <#JoinedDimension> ;
+          ]
+        ) ;
+    ],
+    [
+      sh:path view:filter ;
+      sh:or
+        (
+          [ sh:node <#TermSetFilter> ; ]
+          [ sh:node <#OperationFilter> ; ]
+        ) ;
+    ] ;
+.
+
+<#CubeDimension>
+  sh:property
+    [
+      sh:path ( view:from view:source ) ;
+      sh:node <#source> ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path ( view:from view:path ) ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+    ],
+    [
+      sh:path view:as ;
+      sh:nodeKind sh:IRI ;
+      sh:maxCount 1 ;
+    ] ;
+.
+
+<#JoinedDimension>
+  sh:property
+    [
+      sh:path ( view:from view:source ) ;
+      sh:class view:LookupSource ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+    ],
+    [
+      sh:path ( view:from view:join ) ;
+      sh:node <#CubeDimension> ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+    ],
+    [
+      sh:path ( view:from view:path ) ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+.
+
+<#source>
+  sh:property
+    [
+      sh:path view:cube ;
+      sh:nodeKind sh:IRI ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+    ] ;
+.
+
+<#TermSetFilter>
+  sh:property
+    [
+      sh:path view:dimension ;
+      sh:node <#JoinedDimension> ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+    ] ;
+.
+
+<#OperationFilter>
+  sh:property
+    [
+      sh:path view:operation ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:in
+        (
+          view:Gte
+          view:Lte
+          view:Lt
+          view:Gt
+          view:Eq
+        ) ;
+    ],
+    [
+      sh:path view:argument ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+    ] ;
+.
