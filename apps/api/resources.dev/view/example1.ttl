@@ -4,6 +4,7 @@ prefix view: <https://cube.link/view/>
 prefix view-builder: <https://view-builder.described.at/>
 
 <> a </api/View>, view:View ;
+  schema:sameAs <https://example.org/view/example1> ;
   schema:identifier "example1" ;
   schema:alternateName "TEST1" ;
   schema:name "Test filtering by term set" ;
