@@ -17,24 +17,29 @@ export async function init() {
   }
 }
 
-function content({ state }) {
+function content({ state, dispatch }) {
   return html`
     <h2>${state.viewForm.pointer.out(schema.name).value || 'Unnamed view'}</h2>
     
     <shaperone-form .shapes=${shapes} 
-                    .resource=${state.viewForm.pointer}></shaperone-form>`
+                    .resource=${state.viewForm.pointer}
+                    @changed="${dispatch.viewForm.toggleButtons}"></shaperone-form>`
 }
 
-function menu({ dispatch }) {
+function menu({ state, dispatch }) {
   return html`
     <sl-menu-label>View</sl-menu-label>
     <sl-menu-item @click=${dispatch.viewForm.saveView}>Save</sl-menu-item>
-    <sl-menu-item @click=${dispatch.viewForm.generateDimensions}>Generate dimensions</sl-menu-item>
+    <sl-menu-item ?disabled="${!state.viewForm.sourcesValidity.conforms}"
+                  @click=${dispatch.viewForm.generateDimensions}>Generate dimensions</sl-menu-item>
     <sl-divider></sl-divider>
     <sl-menu-label>Actions</sl-menu-label>
-    <sl-menu-item @click=${dispatch.viewForm.showView}>Show view</sl-menu-item>
-    <sl-menu-item @click=${dispatch.viewForm.showQuery}>Show query</sl-menu-item>
-    <sl-menu-item @click=${dispatch.viewForm.showInCubeViewer}>Show in cube viewer</sl-menu-item>`
+    <sl-menu-item ?disabled="${!state.viewForm.validityReport.conforms}"
+                  @click=${dispatch.viewForm.showView}>Show view</sl-menu-item>
+    <sl-menu-item ?disabled="${!state.viewForm.validityReport.conforms}"
+                  @click=${dispatch.viewForm.showQuery}>Show query</sl-menu-item>
+    <sl-menu-item ?disabled="${!state.viewForm.validityReport.conforms}"
+                  @click=${dispatch.viewForm.showInCubeViewer}>Show in cube viewer</sl-menu-item>`
 }
 
 async function loadShapes() {

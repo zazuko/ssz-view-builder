@@ -41,6 +41,7 @@
     "lit": "^2.3.0",
     "n3": "^1.16.2",
     "rdf-ext": "^2.0.1",
+    "rdf-validate-shacl": "^0.4.4",
     "sparql-http-client": "^2.4.1",
     "string-to-stream": "^3.0.1",
     "url-state": "^3"
