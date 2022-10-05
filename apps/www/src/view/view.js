@@ -34,8 +34,7 @@ function menu({ state, dispatch }) {
                   @click=${dispatch.viewForm.generateDimensions}>Generate dimensions</sl-menu-item>
     <sl-divider></sl-divider>
     <sl-menu-label>Actions</sl-menu-label>
-    <sl-menu-item ?disabled="${!state.viewForm.validityReport.conforms}"
-                  @click=${dispatch.viewForm.showView}>Show view</sl-menu-item>
+    <sl-menu-item @click=${dispatch.viewForm.showView}>Show view</sl-menu-item>
     <sl-menu-item ?disabled="${!state.viewForm.validityReport.conforms}"
                   @click=${dispatch.viewForm.showQuery}>Show query</sl-menu-item>
     <sl-menu-item ?disabled="${!state.viewForm.validityReport.conforms}"
