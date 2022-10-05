@@ -3,8 +3,10 @@ import $rdf from '@rdfjs/dataset'
 import View from 'rdf-cube-view-query/lib/View.js'
 import * as ns from '@view-builder/core/ns.js'
 import { createFilterDimension, generateLookupSources } from './lib/filters.js'
+import { getColumns } from './lib/projection.js'
+import { CubeLookup } from './lib/cubeLookup.js'
 
-export function prepareViewPointer(pointer) {
+export async function prepareViewPointer(pointer, { client, cubeLookup = new CubeLookup(client) }) {
   const dataset = $rdf.dataset([...pointer.dataset])
 
   const view = clownface({ dataset }).node(pointer)
@@ -19,8 +21,10 @@ export function prepareViewPointer(pointer) {
     }
   }
 
+  const columns = [...await getColumns(view, cubeLookup)]
+  view.addOut(ns.view.dimension, columns)
   view.out(ns.view.projection)
-    .addList(ns.view.columns, view.out(ns.view.dimension))
+    .addList(ns.view.columns, columns)
 
   view.addOut(ns.view.dimension, view.out(ns.view.filter).out(ns.view.dimension))
 

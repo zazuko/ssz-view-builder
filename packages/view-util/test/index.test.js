@@ -2,9 +2,18 @@ import { expect } from 'chai'
 import { ssz, testData } from '@view-builder/testing'
 import { view, viewBuilder } from '@view-builder/core/ns.js'
 import { rdf, schema, xsd } from '@tpluscode/rdf-ns-builders'
-import { prepareViewPointer } from '../index.js'
+import sinon from 'sinon'
+import { prepareViewPointer, createViewQuery } from '../index.js'
+import { CubeLookup } from '../lib/cubeLookup.js'
 
 describe('@view-builder/view-util', () => {
+  let cubeLookup
+
+  beforeEach(() => {
+    cubeLookup = sinon.createStubInstance(CubeLookup)
+    cubeLookup.isIriDimension.resolves(false)
+  })
+
   describe('prepareViewPointer', () => {
     context('filter with simple operator', () => {
       it('creates dimension for filter with deep path', async () => {
@@ -30,7 +39,7 @@ describe('@view-builder/view-util', () => {
       `
 
         // when
-        const viewView = prepareViewPointer(builderView)
+        const viewView = await prepareViewPointer(builderView, { cubeLookup })
 
         // then
         const filterDimension = viewView.out(view.filter).out(view.dimension)
@@ -72,7 +81,7 @@ describe('@view-builder/view-util', () => {
         . 
       `
 
-        viewView = prepareViewPointer(builderView)
+        viewView = await prepareViewPointer(builderView, { cubeLookup })
       })
 
       it('sets operation to view:Eq', () => {
@@ -94,6 +103,92 @@ describe('@view-builder/view-util', () => {
           .out(view.join)
           .out(view.as)
         expect(joined.value).to.deep.eq(ssz('property/RAUM').value)
+      })
+    })
+
+    context('IRI dimension', () => {
+      context('with single source', () => {
+        it('generates a join for schema:name when dimension is sh:IRI', async function () {
+          // given
+          cubeLookup.isIriDimension.resolves(true)
+
+          const builderView = await testData`
+            <>
+              ${view.dimension} <#RAUM> ;
+              ${view.projection} [] ;
+            .
+            
+            <#RAUM>
+              ${view.from} [
+                ${view.source} [ a ${view.CubeSource} ; ${view.cube} ${ssz('000003')} ] ;
+                ${view.path} ${ssz('property/RAUM')} ;
+              ] ;
+            . 
+          `
+
+          // when
+          const viewView = await prepareViewPointer(builderView, { cubeLookup })
+          const query = createViewQuery(viewView)
+
+          // then
+          expect(query).to.matchSnapshot(this)
+        })
+
+        it('does not generate a join for when dimension is not sh:IRI', async function () {
+          // given
+          cubeLookup.isIriDimension.resolves(false)
+
+          const builderView = await testData`
+            <>
+              ${view.dimension} <#RAUM> ;
+              ${view.projection} [] ;
+            .
+            
+            <#RAUM>
+              ${view.from} [
+                ${view.source} [ a ${view.CubeSource} ; ${view.cube} ${ssz('000003')} ] ;
+                ${view.path} ${ssz('property/RAUM')} ;
+              ] ;
+            . 
+          `
+
+          // when
+          const viewView = await prepareViewPointer(builderView, { cubeLookup })
+          const query = createViewQuery(viewView)
+
+          // then
+          expect(query).to.matchSnapshot(this)
+        })
+      })
+
+      context('with multiple sources', () => {
+        it('generates a join for schema:name when dimension is sh:IRI', async function () {
+          // given
+          cubeLookup.isIriDimension.resolves(true)
+
+          const builderView = await testData`
+            <>
+              ${view.dimension} <#RAUM> ;
+              ${view.projection} [] ;
+            .
+            
+            <#RAUM>
+              ${view.from} [
+                ${view.source} 
+                  [ a ${view.CubeSource} ; ${view.cube} ${ssz('000003')} ] ,
+                  [ a ${view.CubeSource} ; ${view.cube} ${ssz('000015')} ] ;
+                ${view.path} ${ssz('property/RAUM')} ;
+              ] ;
+            . 
+          `
+
+          // when
+          const viewView = await prepareViewPointer(builderView, { cubeLookup })
+          const query = createViewQuery(viewView)
+
+          // then
+          expect(query).to.matchSnapshot(this)
+        })
       })
     })
   })

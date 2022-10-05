@@ -4,7 +4,7 @@ import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import * as ns from '@view-builder/core/ns.js'
 import { getAllTriplesFromRoot } from '../../clownface.js'
-import { endpoint } from '../../queries/index.js'
+import { client, endpoint } from '../../queries/index.js'
 
 export const viewForm = {
   model: {
@@ -47,7 +47,7 @@ export const viewForm = {
           const { prepareViewPointer } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
-          const view = prepareViewPointer(pointer)
+          const view = await prepareViewPointer(pointer, { client })
 
           const resourceTurtle = turtle`${view.dataset}`.toString()
           const converterUrl = `https://converter.zazuko.com/#value=${encodeURIComponent(resourceTurtle)}&format=text%2Fturtle`
@@ -57,7 +57,7 @@ export const viewForm = {
           const { prepareViewPointer, createViewQuery } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
-          const view = prepareViewPointer(pointer)
+          const view = await prepareViewPointer(pointer, { client })
           const query = createViewQuery(view)
 
           const params = new URLSearchParams({
@@ -74,7 +74,7 @@ export const viewForm = {
           const { prepareViewPointer } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
-          const view = prepareViewPointer(pointer)
+          const view = await prepareViewPointer(pointer, { client })
           const resourceTurtle = turtle`${view.dataset}`.toString()
 
           const cubeViewerUrl = `https://cubeviewerdemo.netlify.app/?endpointUrl=${encodeURIComponent(endpoint)}&view=${encodeURIComponent(resourceTurtle)}`
@@ -88,8 +88,8 @@ export const viewForm = {
         },
         async populateForm(term) {
           // first, need to retrieve a minimal representation
-          const { client } = store.getState().core
-          const { representation } = await client.loadResource(term.value, {
+          const apiClient = store.getState().core.client
+          const { representation } = await apiClient.loadResource(term.value, {
             Prefer: 'return=minimal',
           })
 

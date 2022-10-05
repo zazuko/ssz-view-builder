@@ -6,12 +6,15 @@
   "dependencies": {
     "@rdfjs/dataset": "^2.0.0",
     "@tpluscode/rdf-ns-builders": "^2.0.1",
+    "@tpluscode/sparql-builder": "^0.3.23",
     "@view-builder/core": "0.0.0",
     "clownface": "^1.5.1",
     "rdf-cube-view-query": "^1.10.0"
   },
   "devDependencies": {
     "@view-builder/testing": "0.0.0",
-    "chai": "^4.3.6"
+    "chai": "^4.3.6",
+    "rdf-dataset-ext": "^1.0.1",
+    "sinon": "^14.0.1"
   }
 }
