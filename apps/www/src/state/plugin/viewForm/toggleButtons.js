@@ -1,11 +1,11 @@
 import generateDimensionsShapeQuads from '@view-builder/core/shape/ViewWithSource.ttl'
 import viewValidationShapeQuads from '@view-builder/core/shape/ViewValidationShape.ttl'
 import { prepareViewPointer } from '@view-builder/view-util'
-import factory from 'rdf-ext'
+import $rdf from 'rdf-ext'
 
-const GenerateDimensionsShapes = factory.dataset(generateDimensionsShapeQuads({ factory }))
+const GenerateDimensionsShapes = $rdf.dataset(generateDimensionsShapeQuads($rdf))
 
-const ViewValidationShapes = factory.dataset(viewValidationShapeQuads({ factory }))
+const ViewValidationShapes = $rdf.dataset(viewValidationShapeQuads($rdf))
 
 export default function (store) {
   const dispatch = store.getDispatch().viewForm

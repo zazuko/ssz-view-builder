@@ -2133,15 +2133,16 @@
     "@rdfjs/to-ntriples" "^1.0.2"
     readable-to-readable "^0.1.0"
 
-"@rdfjs/serializer-rdfjs@^0.1":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@rdfjs/serializer-rdfjs/-/serializer-rdfjs-0.1.0.tgz#64437f937b6115fb0537ec221f85d14a0baf51fc"
-  integrity sha512-dIyd5zPbSG+3z8f+hz0WacJyHajR3RNnbwFa+o7wp4kYkbd0oAWebX3MZ2EOFZM8JTn0bYEL1tKKccdoFYkhCA==
+"@rdfjs/serializer-rdfjs@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@rdfjs/serializer-rdfjs/-/serializer-rdfjs-0.0.4.tgz#cfe90a3351f934ce91f887e014d4976973618fe9"
+  integrity sha512-JcAfP5J9UWfd7zOLtMNO8ZZfJ4ox2umCN6fVGa7YKT3tqkYShIESmwOD2UUx/ISTUtO06gn+GQe/pnQP2AAjkg==
   dependencies:
     "@rdfjs/sink" "^1.0.3"
-    get-stream "^6.0.1"
-    js-string-escape "^1.0.1"
+    "@zazuko/rdf-vocabularies" latest
+    get-stream "^5.1.0"
     readable-stream "^3.6.0"
+    safe-identifier "^0.4.1"
 
 "@rdfjs/sink-map@^1.0.0", "@rdfjs/sink-map@^1.0.1":
   version "1.0.1"
@@ -3091,7 +3092,7 @@
   dependencies:
     whatwg-url "^5.0.0"
 
-"@zazuko/rdf-vocabularies@*":
+"@zazuko/rdf-vocabularies@*", "@zazuko/rdf-vocabularies@latest":
   version "2022.6.29"
   resolved "https://registry.yarnpkg.com/@zazuko/rdf-vocabularies/-/rdf-vocabularies-2022.6.29.tgz#f81be16f5df6545c87ba0480be30a1ef65f4217c"
   integrity sha512-E1IyTK3WfeeB0LAPxtDapcBPB+uizhYFGBgjK0z9xMnGIeWWtWb59jpGxLTfVjHMbGbxeTm/HPAKLwtB1gX1xQ==
@@ -7364,11 +7365,6 @@ js-levenshtein-esm@^1.2.0:
   resolved "https://registry.yarnpkg.com/js-levenshtein-esm/-/js-levenshtein-esm-1.2.0.tgz#96532c34e0c90df198c9419963c64ca3cf43ae92"
   integrity sha512-fzreKVq1eD7eGcQr7MtRpQH94f8gIfhdrc7yeih38xh684TNMK9v5aAu2wxfIRMk/GpAJRrzcirMAPIaSDaByQ==
 
-js-string-escape@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
-  integrity sha512-Smw4xcfIQ5LVjAOuJCvN/zIodzA/BBSsluuoSykP+lUvScIi4U6RJLfwHet5cxFnCswUjISV8oAXaqaJDY3chg==
-
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -9835,6 +9831,11 @@ safe-buffer@5.2.1, safe-buffer@>=5.1.0, safe-buffer@^5.0.1, safe-buffer@^5.1.0, 
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.1.tgz#1eaf9fa9bdb1fdd4ec75f58f9cdb4e6b7827eec6"
   integrity sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==
 
+safe-identifier@^0.4.1:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/safe-identifier/-/safe-identifier-0.4.2.tgz#cf6bfca31c2897c588092d1750d30ef501d59fcb"
+  integrity sha512-6pNbSMW6OhAi9j+N8V+U715yBQsaWJ7eyEUaOrawX+isg5ZxhUlV1NipNtgaKHmFGiABwt+ZF04Ii+3Xjkg+8w==
+
 safe-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
@@ -11378,13 +11379,13 @@ webpack-dev-server@^3.11.2:
     ws "^6.2.1"
     yargs "^13.3.2"
 
-webpack-loader-rdf@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/webpack-loader-rdf/-/webpack-loader-rdf-0.2.0.tgz#cfe6dea5bc5df5e54eff555c50f206941bf204f5"
-  integrity sha512-o35jDpohUR+6eR1j2ul9AI5fNPwIjIakEaT74yWELGnWNFl5inGQg7U1iNojndLmMYTdN+bumicPUQGP5niTVQ==
+webpack-loader-rdf@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/webpack-loader-rdf/-/webpack-loader-rdf-0.1.1.tgz#de83f0439a5113416a9189475c999d2c403b2859"
+  integrity sha512-hYrDKBUTzdz1hJkjRXon/AM9NoOAt8w27Cfu74wtTqMrY/8LxT45Id8Px/9zNJX6qH6e635KEMF0vPcKtxG9ew==
   dependencies:
     "@rdfjs/formats-common" "^2.2.0"
-    "@rdfjs/serializer-rdfjs" "^0.1"
+    "@rdfjs/serializer-rdfjs" "^0.0.4"
     rdf-utils-fs "^2.2.0"
     string-to-stream "^3.0.1"
 
