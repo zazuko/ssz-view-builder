@@ -9,6 +9,8 @@
     "clownface": "^1.5.1",
     "n3": "^1.16.2",
     "rdf-ext": "^2.0.1",
+    "sinon": "^14.0.1",
+    "sparql-http-client": "^2.4.1",
     "string-to-stream": "^3.0.1"
   }
 }

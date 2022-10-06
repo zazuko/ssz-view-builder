@@ -15,6 +15,7 @@
     "@view-builder/testing": "0.0.0",
     "chai": "^4.3.6",
     "rdf-dataset-ext": "^1.0.1",
-    "sinon": "^14.0.1"
+    "sinon": "^14.0.1",
+    "sparql-http-client": "^2.4.1"
   }
 }
