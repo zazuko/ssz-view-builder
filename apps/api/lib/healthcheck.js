@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { ASK, DELETE } from '@tpluscode/sparql-builder'
 import StreamClient from 'sparql-http-client'
 import { hydra } from '@tpluscode/rdf-ns-builders'
@@ -24,7 +25,7 @@ const metadataEndpoint = new StreamClient({
 export default asyncMiddleware(async (req, res, next) => {
   try {
     const result = await ASK`
-      ${req.rdf.namedNode('/api')} a ${hydra.ApiDocumentation}
+      <${process.env.API_BASE}/api> a ${hydra.ApiDocumentation}
     `
       .execute(viewBuilderClient.query)
 
@@ -32,7 +33,7 @@ export default asyncMiddleware(async (req, res, next) => {
       return next('API Documentation resource not found in view builder database')
     }
   } catch (e) {
-    req.knossos.log(e)
+    console.log(e)
     return next('Failed to connect to view builder database for reading')
   }
 
@@ -44,21 +45,21 @@ export default asyncMiddleware(async (req, res, next) => {
     `
       .execute(viewBuilderClient.query)
   } catch (e) {
-    req.knossos.log(e)
+    console.log(e)
     return next('Failed to connect to view builder database for writing')
   }
 
   try {
     await ASK`?s ?p ?o`.execute(publishingStoreClient.query)
   } catch (e) {
-    req.knossos.log(e)
+    console.log(e)
     return next('Failed to connect to publishing database')
   }
 
   try {
     await ASK`?s ?p ?o`.execute(metadataEndpoint.query)
   } catch (e) {
-    req.knossos.log(e)
+    console.log(e)
     return next('Failed to connect to metadata database')
   }
 

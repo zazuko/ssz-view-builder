@@ -11,21 +11,12 @@ import { isNamedNode } from 'is-graph-pointer'
 const require = createRequire(import.meta.url)
 
 export function basic({ client }) {
-  const authMiddleware = auth({
-    users: loadUsers(),
-    challenge: true,
-    realm: 'view builder',
-  })
-
   return Router()
-    .use((req, res, next) => {
-      if (req.path === '/api/health') {
-        // Skip authentication for ping endpoint
-        return next()
-      }
-
-      return authMiddleware(req, res, next)
-    })
+    .use(auth({
+      users: loadUsers(),
+      challenge: true,
+      realm: 'view builder',
+    }))
     .use(setAgent(client))
 }
 
