@@ -25,7 +25,7 @@ const metadataEndpoint = new StreamClient({
 export default asyncMiddleware(async (req, res, next) => {
   try {
     const result = await ASK`
-      ${req.rdf.namedNode('/api')} a ${hydra.ApiDocumentation}
+      <${process.env.API_BASE}/api> a ${hydra.ApiDocumentation}
     `
       .execute(viewBuilderClient.query)
 
