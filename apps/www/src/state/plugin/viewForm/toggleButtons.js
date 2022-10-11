@@ -12,7 +12,7 @@ export default function (store) {
 
   return async () => {
     const { pointer } = store.getState().viewForm
-    const view = prepareViewPointer(pointer)
+    const view = prepareViewPointer(pointer, { cleanup: false })
 
     dispatch.setViewValidity(await validate(view, ViewValidationShapes))
     dispatch.setSourcesValidity(await validate(view, GenerateDimensionsShapes))
