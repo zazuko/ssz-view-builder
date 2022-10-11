@@ -3,7 +3,6 @@ import { ASK, DELETE } from '@tpluscode/sparql-builder'
 import StreamClient from 'sparql-http-client'
 import { hydra } from '@tpluscode/rdf-ns-builders'
 import asyncMiddleware from 'middleware-async'
-import expressRdf from 'rdf-express-node-factory'
 
 const viewBuilderClient = new StreamClient({
   endpointUrl: process.env.SPARQL_ENDPOINT,
@@ -24,8 +23,6 @@ const metadataEndpoint = new StreamClient({
 })
 
 export default asyncMiddleware(async (req, res, next) => {
-  expressRdf.attach(req)
-
   try {
     const result = await ASK`
       ${req.rdf.namedNode('/api')} a ${hydra.ApiDocumentation}
