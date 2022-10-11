@@ -5,7 +5,7 @@ import * as ns from '@view-builder/core/ns.js'
 import { createFilterDimension, generateLookupSources } from './lib/filters.js'
 import { removeApiProperties, sourcesToBlankNodes } from './lib/viewGraph.js'
 
-export function prepareViewPointer(pointer, { cleanup = true } = {}) {
+export function prepareViewPointer(pointer, { cleanup = true, removeLimitOffset } = {}) {
   let dataset = $rdf.dataset([...pointer.dataset])
   if (cleanup) {
     dataset = sourcesToBlankNodes(dataset)
@@ -23,8 +23,12 @@ export function prepareViewPointer(pointer, { cleanup = true } = {}) {
     }
   }
 
-  view.out(ns.view.projection)
-    .addList(ns.view.columns, view.out(ns.view.dimension))
+  const projection = view.out(ns.view.projection)
+  projection.addList(ns.view.columns, view.out(ns.view.dimension))
+
+  if (removeLimitOffset) {
+    projection.deleteOut([ns.view.limit, ns.view.offset])
+  }
 
   view.addOut(ns.view.dimension, view.out(ns.view.filter).out(ns.view.dimension))
 

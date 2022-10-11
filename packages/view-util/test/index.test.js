@@ -46,6 +46,32 @@ describe('@view-builder/view-util', () => {
     expect(viewView.dataset.size).to.eq(0)
   })
 
+  it("can remove projection's limit/offset", async () => {
+    // given
+    const builderView = await testData`
+      <>
+        ${view.dimension} [
+          ${view.from} [
+            ${view.source} [ ${view.cube} ${ssz('000003')} ] ;
+            ${view.path} ${ssz('property/ZEIT')} ;
+          ] ;
+          ${view.as} ${ssz('property/ZEIT')} ;
+        ] ;
+        ${view.projection} [
+          ${view.limit} 100 ;
+          ${view.offset} 100 ;
+        ] ;
+      .
+    `
+
+    // when
+    const viewView = prepareViewPointer(builderView, { removeLimitOffset: true })
+
+    // then
+    expect(viewView.out(view.projection).out(view.limit).term).to.be.undefined
+    expect(viewView.out(view.projection).out(view.offset).term).to.be.undefined
+  })
+
   describe('prepareViewPointer', () => {
     context('filter with simple operator', () => {
       it('creates dimension for filter with deep path', async () => {
