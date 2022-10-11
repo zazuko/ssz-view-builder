@@ -5,17 +5,3 @@ prefix hydra: <http://www.w3.org/ns/hydra/core#>
   a hydra:ApiDocumentation ;
   hydra:entrypoint </views> ;
 .
-
-<#HealthCheck>
-  a hydra:Class ;
-  hydra:apiDocumentation <> ;
-  hydra:supportedOperation
-  [
-    hydra:method "GET" ;
-    code:implementedBy
-    [
-      a code:EcmaScriptModule ;
-      code:link <file:apps/api/lib/healthcheck.js#default> ;
-    ] ;
-  ] ;
-.
