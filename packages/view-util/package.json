@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@view-builder/testing": "0.0.0",
-    "chai": "^4.3.6"
+    "chai": "^4.3.6",
+    "is-graph-pointer": "^1.2.2"
   }
 }

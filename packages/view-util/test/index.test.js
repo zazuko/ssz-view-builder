@@ -1,33 +1,74 @@
 import { expect } from 'chai'
 import { ssz, testData } from '@view-builder/testing'
 import { view, viewBuilder } from '@view-builder/core/ns.js'
-import { rdf, schema, xsd } from '@tpluscode/rdf-ns-builders'
+import { hydra, rdf, schema, xsd } from '@tpluscode/rdf-ns-builders'
+import { isBlankNode } from 'is-graph-pointer'
 import { prepareViewPointer } from '../index.js'
 
 describe('@view-builder/view-util', () => {
+  it('turns cube source to blank nodes', async () => {
+    // given
+    const builderView = await testData`
+      <>
+        ${view.dimension} [
+          ${view.from} [
+            ${view.source} <#source> ;
+            ${view.path} ${ssz('property/ZEIT')} ;
+          ] ;
+          ${view.as} ${ssz('property/ZEIT')} ;
+        ] ;
+      .
+      
+      <#source> ${view.cube} ${ssz('000003')} .
+    `
+
+    // when
+    const viewView = prepareViewPointer(builderView)
+
+    // then
+    const source = viewView.out(view.dimension).out(view.from).out(view.source)
+    expect(isBlankNode(source)).to.be.true
+  })
+
+  it('removes view builder and hydra properties', async () => {
+    // given
+    const builderView = await testData`
+      <>
+        ${hydra.apiDocumentation} </api> ;
+        ${viewBuilder.source} <#source> ;
+      .      
+    `
+
+    // when
+    const viewView = prepareViewPointer(builderView)
+
+    // then
+    expect(viewView.dataset.size).to.eq(0)
+  })
+
   describe('prepareViewPointer', () => {
     context('filter with simple operator', () => {
       it('creates dimension for filter with deep path', async () => {
         // given
         const builderView = await testData`
-        <>
-          ${view.dimension} <#ZEIT> ;
-          ${view.filter} [
-            ${view.operation} ${view.Lt} ;
-            ${view.argument} "1950-01-01"^^${xsd.date} ;
-            ${viewBuilder.baseDimension} <#ZEIT> ;
-            ${viewBuilder.drillDownProperty} <https://ld.stadt-zuerich.ch/schema/hasEnd> ;
-          ] ;
-        .
-        
-        <#ZEIT>
-          ${view.from} [
-            ${view.source} [ ${view.cube} ${ssz('000003')} ] ;
-            ${view.path} ${ssz('property/ZEIT')} ;
-          ] ;
-          ${view.as} ${ssz('property/ZEIT')} ;
-        . 
-      `
+          <>
+            ${view.dimension} <#ZEIT> ;
+            ${view.filter} [
+              ${view.operation} ${view.Lt} ;
+              ${view.argument} "1950-01-01"^^${xsd.date} ;
+              ${viewBuilder.baseDimension} <#ZEIT> ;
+              ${viewBuilder.drillDownProperty} <https://ld.stadt-zuerich.ch/schema/hasEnd> ;
+            ] ;
+          .
+          
+          <#ZEIT>
+            ${view.from} [
+              ${view.source} [ ${view.cube} ${ssz('000003')} ] ;
+              ${view.path} ${ssz('property/ZEIT')} ;
+            ] ;
+            ${view.as} ${ssz('property/ZEIT')} ;
+          . 
+        `
 
         // when
         const viewView = prepareViewPointer(builderView)
