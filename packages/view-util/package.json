@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {
     "@rdfjs/term-map": "^2",
-    "@rdfjs/traverser": "^0.1.0",
     "@tpluscode/rdf-ns-builders": "^2.0.1",
     "@view-builder/core": "0.0.0",
     "clownface": "^1.5.1",
