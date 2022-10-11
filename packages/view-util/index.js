@@ -28,9 +28,11 @@ export function prepareViewPointer(pointer, { cleanup = true } = {}) {
 
   view.addOut(ns.view.dimension, view.out(ns.view.filter).out(ns.view.dimension))
 
-  return clownface({
-    dataset: dataset.filter(removeApiProperties),
-  }).node(pointer)
+  if (cleanup) {
+    dataset = dataset.filter(removeApiProperties)
+  }
+
+  return clownface({ dataset }).node(pointer)
 }
 
 export function createViewQuery(pointer) {
