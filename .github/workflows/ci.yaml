@@ -84,3 +84,15 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
+          build-args: |
+            COMMIT=${{ github.sha }}
+
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: zazuko
+          SENTRY_PROJECT: ssz-view-builder
+        with:
+          version_prefix: ssz-view-builder@
+          ignore_empty: true

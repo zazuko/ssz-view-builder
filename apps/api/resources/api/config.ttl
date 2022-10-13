@@ -21,6 +21,22 @@ PREFIX knossos: <https://hypermedia.app/knossos#>
           a code:EcmaScriptModule ;
           code:link <file:apps/api/lib/auth.js#basic> ;
         ] ;
+    ],
+    [
+      schema:name "before" ;
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <node:@view-builder/sentry/index.js#beforeHandler> ;
+        ] ;
+    ],
+    [
+      schema:name "error" ;
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <node:@view-builder/sentry/index.js#errorHandler> ;
+        ] ;
     ] ;
   knossos:minimalRepresentationLoader
     [
