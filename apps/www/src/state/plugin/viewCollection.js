@@ -73,6 +73,14 @@ export const viewCollection = {
           pointer.deleteOut(hydra.member, deleted)
           dispatch.viewCollection.setPointer(pointer)
         },
+        publish() {
+          const { resource, viewCollection: { pointer } } = store.getState()
+
+          const collection = resource.representations.get(pointer.term).root
+          const publishUrl = collection.get(ns.viewBuilder.publish).id.value
+
+          window.open(publishUrl, '_blank')
+        },
       }
     },
   },

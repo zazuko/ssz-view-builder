@@ -10,6 +10,7 @@ prefix view: <https://cube.link/view/>
   schema:name "Dev testing view" ;
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/tpluscode> ;
+  view-builder:publish true ;
 .
 
 <#source-bew>

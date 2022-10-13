@@ -8,6 +8,7 @@ PREFIX view-builder: <https://view-builder.described.at/>
 
 <>
   a </api/ViewCollection>, view-builder:ViewCollection, hydra:Collection ;
+  view-builder:publish </views/publish> ;
   hydra:search
     [
       hydra:template "{?q}" ;

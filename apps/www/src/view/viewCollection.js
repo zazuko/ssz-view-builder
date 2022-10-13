@@ -25,6 +25,7 @@ function menu({ dispatch }) {
   return html`
     <sl-menu-label>Views</sl-menu-label>
     <sl-menu-item @click=${() => dispatch.app.viewParam('#create')}>Create new view</sl-menu-item>
+    <sl-menu-item @click=${() => dispatch.viewCollection.publish()}>Publish views</sl-menu-item>
   `
 }
 

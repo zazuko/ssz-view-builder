@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "@hydrofoil/knossos": "^0.9.9",
+    "@rdfjs-elements/formats-pretty": "^0.5.1",
     "@tpluscode/rdf-ns-builders": "^2.0.1",
     "@tpluscode/sparql-builder": "^0.3.23",
+    "@view-builder/publish-pipeline": "^0.0.0",
     "@zazuko/vocabulary-extras": "^1.2.3",
     "clownface": "^1.5.1",
     "cors": "^2.8.5",
