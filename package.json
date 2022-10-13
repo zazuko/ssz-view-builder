@@ -30,7 +30,9 @@
     "express-conditional-middleware": "^2.1.1",
     "express-history-api-fallback": "^2.2.1",
     "npm-run-all": "^4.1.5",
+    "patch-package": "^6.4.7",
     "path-to-regexp": "^6.2.0",
+    "postinstall-postinstall": "^2.1.0",
     "wsrun": "^5.2.4"
   },
   "resolutions": {
@@ -56,8 +58,6 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "mocha": "^10.0.0",
-    "patch-package": "^6.4.7",
-    "postinstall-postinstall": "^2.1.0",
     "sinon-chai": "^3.7.0",
     "standard": "^17.0.0",
     "ts-node": "^10.5.0",
