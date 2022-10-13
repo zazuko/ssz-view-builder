@@ -19,9 +19,13 @@ PREFIX query: <https://hypermedia.app/query#>
       hydra:property rdf:type ;
       hydra:object view:View ;
     ] ;
-  query:memberInclude
+  query:loadMemberDataStrategy
     [
-      query:path schema:author ;
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/viewCollection.js#construct> ;
+        ] ;
     ] ;
   hydra:supportedOperation
     [

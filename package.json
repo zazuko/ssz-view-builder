@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "clean": "git clean -dfx -e node_modules -e .idea -e .vscode -e .husky",
-    "postinstall": "yarn-deduplicate",
+    "postinstall": "yarn-deduplicate && patch-package",
     "prepare": "husky install",
     "lint": "eslint . --ext .ts,.js --quiet --ignore-path .gitignore --ignore-path .eslintignore",
     "test": "c8 mocha **/*.test.js",
@@ -56,6 +56,8 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "mocha": "^10.0.0",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0",
     "sinon-chai": "^3.7.0",
     "standard": "^17.0.0",
     "ts-node": "^10.5.0",
