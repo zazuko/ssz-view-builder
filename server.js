@@ -4,8 +4,11 @@ import conditional from 'express-conditional-middleware'
 import knossos from '@hydrofoil/knossos'
 import compression from 'compression'
 import healthcheck from '@view-builder/api/lib/healthcheck.js'
+import * as Sentry from '@view-builder/sentry'
 
 const app = express()
+
+Sentry.setup(app)
 
 app.enable('trust proxy')
 app.use(compression())
