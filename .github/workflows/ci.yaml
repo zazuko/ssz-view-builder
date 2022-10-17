@@ -41,6 +41,9 @@ jobs:
       - run: yarn bootstrap
       - run: yarn test
         working-directory: ./packages/publish-views
+      - name: logs on fail
+        if: ${{ failure() }}
+        run: lando logs
 
   Test-API:
     if: false
