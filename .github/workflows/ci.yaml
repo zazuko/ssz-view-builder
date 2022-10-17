@@ -37,7 +37,7 @@ jobs:
         with:
           docker_version: 20.10.8
       - run: yarn
-      - uses: tpluscode/action-setup-lando@v0.1.3
+      - uses: tpluscode/action-setup-lando@v0.1.4
         with:
           healthcheck: http://admin:admin@db.view-builder.lndo.site/view-builder
           timeout: 30000
