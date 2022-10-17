@@ -40,12 +40,12 @@ _:upload
   code:arguments
     [
       code:name "user" ;
-      code:value "PUBLIC_UPDATE_ENDPOINT_USER"^^:VariableName
+      code:value "PUBLIC_ENDPOINT_USER"^^:VariableName
     ] ;
   code:arguments
     [
       code:name "password" ;
-      code:value "PUBLIC_UPDATE_ENDPOINT_PASSWORD"^^:VariableName
+      code:value "PUBLIC_ENDPOINT_PASSWORD"^^:VariableName
     ] ;
   code:arguments
     [

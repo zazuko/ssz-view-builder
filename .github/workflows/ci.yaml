@@ -38,9 +38,6 @@ jobs:
           docker_version: 20.10.8
       - run: yarn
       - uses: tpluscode/action-setup-lando@v0.1.4
-        with:
-          healthcheck: http://admin:admin@db.view-builder.lndo.site/view-builder
-          timeout: 30000
       - run: yarn bootstrap
       - run: yarn test
         working-directory: ./packages/publish-views

@@ -6,6 +6,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 PREFIX query: <https://hypermedia.app/query#>
+prefix view-builder: <https://view-builder.described.at/>
 
 <>
   a hydra:Class ;
@@ -39,6 +40,10 @@ PREFIX query: <https://hypermedia.app/query#>
           code:link <node:@hydrofoil/knossos/collection#CreateMember> ;
         ] ;
     ] ;
+  hydra:supportedProperty
+  [
+    hydra:property view-builder:publish ;
+  ] ;
   knossos:memberTemplate
     [
       hydra:template "/view/{id}" ;
