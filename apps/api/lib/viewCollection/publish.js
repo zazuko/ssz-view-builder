@@ -23,14 +23,14 @@ async function downloadViews(req, res) {
 async function publish(req, res, next) {
   const {
     PUBLIC_ENDPOINT,
-    PUBLIC_UPDATE_ENDPOINT,
+    PUBLIC_STORE_ENDPOINT,
     PUBLIC_ENDPOINT_USER,
     PUBLIC_ENDPOINT_PASSWORD,
     PUBLIC_VIEWS_GRAPH,
   } = process.env
   const { run } = await publishViews.toStore(req.labyrinth.sparql, {
     PUBLIC_ENDPOINT,
-    PUBLIC_UPDATE_ENDPOINT,
+    PUBLIC_STORE_ENDPOINT,
     PUBLIC_ENDPOINT_USER,
     PUBLIC_ENDPOINT_PASSWORD,
     PUBLIC_VIEWS_GRAPH,

@@ -13,7 +13,7 @@ const viewBuilderClient = new StreamClient({
 
 const publishingStoreClient = new StreamClient({
   endpointUrl: process.env.PUBLIC_ENDPOINT,
-  updateUrl: process.env.PUBLIC_UPDATE_ENDPOINT,
+  updateUrl: process.env.PUBLIC_STORE_ENDPOINT,
   user: process.env.PUBLIC_ENDPOINT_USER,
   password: process.env.PUBLIC_ENDPOINT_PASSWORD,
 })
