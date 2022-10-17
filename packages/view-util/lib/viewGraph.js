@@ -1,5 +1,5 @@
 import * as ns from '@view-builder/core/ns.js'
-import { hydra } from '@tpluscode/rdf-ns-builders'
+import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import $rdf from 'rdf-ext'
 import TermMap from '@rdfjs/term-map'
 
@@ -41,4 +41,15 @@ export function sourcesToBlankNodes(dataset) {
 
     return $rdf.quad(subject, predicate, object, graph)
   })
+}
+
+export function rebase(pointer) {
+  const publicView = pointer.out(schema.sameAs)
+
+  pointer.dataset.match(pointer.term).forEach(({ predicate, object }) => {
+    publicView.addOut(predicate, object)
+  })
+  pointer.deleteOut()
+
+  return publicView
 }

@@ -1,7 +1,7 @@
 @prefix : <https://pipeline.described.at/> .
 @prefix code: <https://code.described.at/> .
 
-<>
+<Main>
   a :Pipeline, :ReadableObjectMode ;
   :steps
     [
@@ -16,7 +16,7 @@
   a :Step ;
   code:implementedBy
     [
-      code:link <file:lib/loadViews.js#default> ;
+      code:link <file:../lib/loadViews.js#default> ;
       a code:EcmaScriptModule ;
     ] ;
 .
@@ -32,7 +32,7 @@
     (
       [
         a code:EcmaScriptModule ;
-        code:link <file:lib/prepareView.js#default>
+        code:link <file:../lib/prepareView.js#default>
       ]
     ) ;
 .

@@ -1,0 +1,25 @@
+@prefix schema: <http://schema.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix view: <https://cube.link/view/> .
+
+<no-lndo-site>
+  a sh:NodeShape ;
+  sh:targetNode <https://view-builder.lndo.site/view/example> ;
+  sh:property
+    [
+      sh:path rdf:type ;
+      sh:maxCount 0 ;
+      sh:message "*.lndo.site resources should not exist in output" ;
+    ] ;
+.
+
+<public-view>
+  a sh:NodeShape ;
+  sh:targetClass view:View ;
+  sh:property
+    [
+      sh:path schema:sameAs ;
+      sh:maxCount 0 ;
+    ] ;
+.
