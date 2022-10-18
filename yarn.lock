@@ -1350,9 +1350,9 @@
     clownface "^1.4.0"
 
 "@hydrofoil/shell-resources@^0.2.2":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shell-resources/-/shell-resources-0.2.3.tgz#e5e270770ef8072ccf27bb97940553be7368c562"
-  integrity sha512-xWkDOT6ZNZVqfa5N4nPfOop8jDBS0HxYPQrecQIP+4Fh5y4pEzUinIdHIqdPF+Iq/8BW0RYKoXcdWIbGmKgx0Q==
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shell-resources/-/shell-resources-0.2.4.tgz#410a2010e83f42a740212d5fc11887d0fe061d6c"
+  integrity sha512-xVLJjY4UeyjEjQ81oFHhoHKagTEKhV8VXmYehTONRI1SS8u4OP68y0oDjTtLayxuJlndh0gdU+nwjL36Sq24pA==
   dependencies:
     "@captaincodeman/rdx" "^1.0.0-rc.9"
     "@hydrofoil/shell-core" "^0.1.4"
