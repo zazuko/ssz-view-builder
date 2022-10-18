@@ -4,6 +4,7 @@ import { hydra } from '@tpluscode/rdf-ns-builders'
 
 export { viewForm } from './plugin/view.js'
 export { viewCollection } from './plugin/viewCollection.js'
+export { notifications } from './plugin/notifications.js'
 
 export const routing = shell.routing({
   appPath: '/app',
