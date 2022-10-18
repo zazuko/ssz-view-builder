@@ -1,5 +1,6 @@
 import { hydra, rdf, schema } from '@tpluscode/rdf-ns-builders'
 import * as ns from '@view-builder/core/ns.js'
+import { nanoid } from 'nanoid'
 
 export const viewCollection = {
   model: {
@@ -72,15 +73,14 @@ export const viewCollection = {
             bySupportedOperation: schema.DeleteAction,
           }).shift()
 
-          dispatch.notifications.show({
-            variant: 'primary',
-            content: 'Deleting view',
-          })
+          const task = nanoid()
+          dispatch.notifications.addTask(task)
           await operation.invoke()
 
           pointer.deleteOut(hydra.member, deleted)
           dispatch.viewCollection.setPointer(pointer)
 
+          dispatch.notifications.deleteTask(task)
           dispatch.notifications.show({
             variant: 'success',
             content: 'View deleted',

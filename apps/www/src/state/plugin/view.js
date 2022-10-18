@@ -3,6 +3,7 @@ import { turtle } from '@tpluscode/rdf-string'
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import * as ns from '@view-builder/core/ns.js'
+import { nanoid } from 'nanoid'
 import { getAllTriplesFromRoot } from '../../clownface.js'
 import { endpoint } from '../../queries/index.js'
 import toggleButtons from './viewForm/toggleButtons.js'
@@ -37,10 +38,6 @@ export const viewForm = {
 
           const dataset = $rdf.dataset([...getAllTriplesFromRoot(pointer)])
           const payload = clownface({ dataset }).node(pointer)
-          dispatch.notifications.show({
-            variant: 'primary',
-            content: 'Saving view',
-          })
           dispatch.operation.invoke({
             operation: saveOperation,
             payload,
@@ -63,14 +60,13 @@ export const viewForm = {
 
           const { pointer } = store.getState().viewForm
 
-          dispatch.notifications.show({
-            variant: 'primary',
-            content: 'Generating dimensions',
-          })
+          const task = nanoid()
+          dispatch.notifications.addTask(task)
           const updatedView = await generateDimensions(pointer)
           dispatch.viewForm.setView(updatedView)
 
           const count = updatedView.any().has(ns.viewBuilder.generated, true).terms.length
+          dispatch.notifications.deleteTask(task)
           dispatch.notifications.show({
             variant: 'success',
             content: `${count} dimension(s) generated`,
