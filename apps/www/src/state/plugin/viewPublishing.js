@@ -52,10 +52,11 @@ export const viewPublishing = {
             viewCollection: { pointer: views },
           } = store.getState()
 
-          if (operation === succeeded.operation) {
-            dispatch.routing.goTo(views.term.value)
+          if (operation !== succeeded.operation) {
+            return
           }
 
+          dispatch.routing.goTo(views.term.value)
           const { xhr } = succeeded.response
           if (xhr.headers.has('content-disposition')) {
             const contentDisposition = parse(xhr.headers.get('content-disposition'))
@@ -70,9 +71,10 @@ export const viewPublishing = {
             link.click()
 
             // For Firefox it is necessary to delay revoking the ObjectURL.
-            setTimeout(() => { window.URL.revokeObjectURL(objUrl) }, 250)
+            setTimeout(() => {
+              window.URL.revokeObjectURL(objUrl)
+            }, 250)
           }
-
           dispatch.notifications.show({
             variant: 'success',
             content: 'Publishing complete',
