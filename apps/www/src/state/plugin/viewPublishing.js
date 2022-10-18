@@ -72,6 +72,11 @@ export const viewPublishing = {
             // For Firefox it is necessary to delay revoking the ObjectURL.
             setTimeout(() => { window.URL.revokeObjectURL(objUrl) }, 250)
           }
+
+          dispatch.notifications.show({
+            variant: 'success',
+            content: 'Publishing complete',
+          })
         },
       }
     },
