@@ -12,7 +12,6 @@
     "bootstrap": "dotenv -c local -- run-s bootstrap:dev bootstrap:vocabs",
     "bootstrap:dev": "wsrun -msc bootstrap resources resources.dev",
     "bootstrap:prod": "wsrun -msc bootstrap resources",
-    "bootstrap:vocabs": "talos put-vocabs --endpoint $SPARQL_UPDATE_ENDPOINT --user $SPARQL_USER --password $SPARQL_PASSWORD",
     "start": "knossos serve $SPARQL_ENDPOINT --updateUrl $SPARQL_UPDATE_ENDPOINT --name view-builder --user $SPARQL_USER --password $SPARQL_PASSWORD",
     "precommit": "yarn lint && wsrun -m -c precommit",
     "build": "wsrun -m -c build",
