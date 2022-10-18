@@ -120,7 +120,7 @@ export const viewForm = {
           if (pointer.has(rdf.type, ns.view.View).term) {
             dispatch.viewForm.populateForm(pointer.term)
           } else {
-            dispatch.clearView()
+            dispatch.viewForm.clearView()
           }
         },
         async populateForm(term) {
