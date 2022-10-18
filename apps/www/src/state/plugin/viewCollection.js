@@ -56,6 +56,10 @@ export const viewCollection = {
           if (operation === newViewOperation && response.createdResourceUri) {
             const created = response.createdResourceUri
             dispatch.routing.goTo(created)
+            dispatch.notifications.show({
+              variant: 'success',
+              content: 'View created',
+            })
           }
         },
         async deleteView({ term: deleted }) {
@@ -68,10 +72,19 @@ export const viewCollection = {
             bySupportedOperation: schema.DeleteAction,
           }).shift()
 
+          dispatch.notifications.show({
+            variant: 'primary',
+            content: 'Deleting view',
+          })
           await operation.invoke()
 
           pointer.deleteOut(hydra.member, deleted)
           dispatch.viewCollection.setPointer(pointer)
+
+          dispatch.notifications.show({
+            variant: 'success',
+            content: 'View deleted',
+          })
         },
       }
     },
