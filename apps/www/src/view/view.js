@@ -5,6 +5,7 @@ import { code } from '@zazuko/vocabulary-extras/builders'
 import '../forms/index.js'
 import { fetchQuery, fetchShapes } from '../fetch.js'
 import { getSparqlUrl } from '../queries/index.js'
+import * as loading from './loading.js'
 
 let shapes
 
@@ -18,6 +19,10 @@ export async function init() {
 }
 
 function content({ state, dispatch }) {
+  if (!state.viewForm.pointer) {
+    return loading.content()
+  }
+
   return html`
     <h2>${state.viewForm.pointer.out(schema.name).value || 'Unnamed view'}</h2>
     

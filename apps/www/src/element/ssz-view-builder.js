@@ -7,6 +7,7 @@ import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js'
 import '@material/mwc-drawer/mwc-drawer.js'
 import { connect } from '@captaincodeman/rdx'
 import { store } from '../state/store.js'
+import './ssz-notifications.js'
 
 customElements.define('ssz-view-builder', class extends connect(store, LitElement) {
   static get styles() {
@@ -46,6 +47,7 @@ customElements.define('ssz-view-builder', class extends connect(store, LitElemen
     const viewRenderParams = { state: this.state, dispatch: store.dispatch }
 
     return html`
+      <ssz-notifications></ssz-notifications>
       <mwc-drawer>
         <div>
           <sl-menu>
