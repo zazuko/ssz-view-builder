@@ -1,6 +1,7 @@
 import { css, html, LitElement, render } from 'lit'
 import { connect } from '@captaincodeman/rdx'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
+import '@shoelace-style/shoelace/dist/components/progress-bar/progress-bar.js'
 import { store } from '../state/store'
 
 export class SszNotifications extends connect(store, LitElement) {
@@ -8,10 +9,18 @@ export class SszNotifications extends connect(store, LitElement) {
 
   static get styles() {
     return css`
-      :host {
-        display: none;
+      sl-progress-bar {
+        --height: 5px;
+        margin-bottom: 2px;
+        --sl-border-radius-pill: 0px;
       }
     `
+  }
+
+  static get properties() {
+    return {
+      loading: { type: Boolean },
+    }
   }
 
   icons = new Map([
@@ -22,12 +31,18 @@ export class SszNotifications extends connect(store, LitElement) {
     ['danger', 'exclamation-octagon'],
   ])
 
+  render() {
+    return html`<sl-progress-bar ?indeterminate="${this.loading}"></sl-progress-bar>`
+  }
+
   mapState(state) {
     for (const [key, notification] of state.notifications.list.entries()) {
       this.show(key, notification)
     }
 
-    return {}
+    return {
+      loading: state.notifications.backgroundTasks.size > 0,
+    }
   }
 
   show(key, { variant = 'neutral', content, autoHide = true }) {
