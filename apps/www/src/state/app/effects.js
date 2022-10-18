@@ -3,6 +3,7 @@ import { rdf } from '@tpluscode/rdf-ns-builders'
 import TermSet from '@rdfjs/term-set'
 import url from 'url-state'
 import * as ns from '@view-builder/core/ns.js'
+import * as loading from '../../view/loading.js'
 
 export default function effects(store) {
   const dispatch = store.getDispatch()
@@ -29,6 +30,9 @@ export default function effects(store) {
 
       const { resource } = store.getState().routing
       dispatch.resource.load(resource)
+    },
+    'resource/load': () => {
+      dispatch.app.showView(loading)
     },
     'resource/succeeded': ({ id, representation }) => {
       const { resource } = store.getState().routing

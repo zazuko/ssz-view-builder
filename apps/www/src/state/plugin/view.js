@@ -19,6 +19,12 @@ export const viewForm = {
       setView(state, pointer) {
         return { ...state, pointer }
       },
+      clearView(state) {
+        if (!('pointer' in state)) return state
+
+        const { pointer, ...rest } = state
+        return rest
+      },
       setSaveOperation(state, saveOperation) {
         return { ...state, saveOperation }
       },
@@ -113,6 +119,8 @@ export const viewForm = {
         'core/setContentResource': ({ pointer }) => {
           if (pointer.has(rdf.type, ns.view.View).term) {
             dispatch.viewForm.populateForm(pointer.term)
+          } else {
+            dispatch.clearView()
           }
         },
         async populateForm(term) {
