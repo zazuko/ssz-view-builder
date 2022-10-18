@@ -7,6 +7,14 @@ PREFIX knossos: <https://hypermedia.app/knossos#>
   a knossos:Configuration ;
   knossos:middleware
     [
+      schema:name "operations" ;
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/hydra-box.js#dedupeOperations> ;
+        ] ;
+    ],
+    [
       schema:name "before" ;
       code:implementedBy
         [

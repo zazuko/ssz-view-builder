@@ -1,0 +1,60 @@
+@prefix : <https://pipeline.described.at/> .
+@prefix code: <https://code.described.at/> .
+
+<Main>
+  a :Pipeline, :ReadableObjectMode ;
+  :steps
+    [
+      :stepList
+        (
+          <#loadViews> <#prepareView> <#pointerToDataset> <#flatten>
+        )
+    ] ;
+.
+
+<#loadViews>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <file:../lib/loadViews.js#default> ;
+      a code:EcmaScriptModule ;
+    ] ;
+.
+
+<#prepareView>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <node:barnard59-base/map.js#default> ;
+      a code:EcmaScriptModule ;
+    ] ;
+  code:arguments
+    (
+      [
+        a code:EcmaScriptModule ;
+        code:link <file:../lib/prepareView.js#default>
+      ]
+    ) ;
+.
+
+<#pointerToDataset>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <node:barnard59-base/map.js#default> ;
+      a code:EcmaScriptModule ;
+    ] ;
+  code:arguments
+    (
+      "({ dataset }) => dataset"^^code:EcmaScript
+    ) ;
+.
+
+<#flatten>
+  a :Step ;
+  code:implementedBy
+    [
+      a code:EcmaScriptModule ;
+      code:link <node:barnard59-base/flatten.js#default> ;
+    ] ;
+.

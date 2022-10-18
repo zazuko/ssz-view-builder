@@ -10,6 +10,8 @@
     "@hydrofoil/knossos": "^0.9.9",
     "@tpluscode/rdf-ns-builders": "^2.0.1",
     "@tpluscode/sparql-builder": "^0.3.23",
+    "@view-builder/core": "^0.0.0",
+    "@view-builder/publish-views": "^0.0.0",
     "@zazuko/vocabulary-extras": "^1.2.3",
     "clownface": "^1.5.1",
     "cors": "^2.8.5",

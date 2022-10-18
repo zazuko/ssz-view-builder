@@ -1,0 +1,33 @@
+{
+  "name": "@view-builder/publish-views",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "prestart:file": "mkdir .pipeline output; cat pipeline/main.ttl pipeline/to-ntriples.ttl pipeline/to-file.ttl > .pipeline/to-file.ttl",
+    "start:file": "dotenv -e ../../.env.local -- barnard59 run --pipeline ToFile --variable-all .pipeline/to-file.ttl",
+    "prestart:store": "mkdir .pipeline; cat pipeline/main.ttl pipeline/to-ntriples.ttl pipeline/to-store.ttl > .pipeline/to-store.ttl",
+    "start:store": "dotenv -e ../../.env.local -- barnard59 run --pipeline ToStore --variable-all .pipeline/to-store.ttl",
+    "pretest": "yarn start:file",
+    "test": "shacl-cli validate --shapes test/shapes.ttl --data output/views.nt"
+  },
+  "dependencies": {
+    "@tpluscode/sparql-builder": "^0.3.24",
+    "@view-builder/core": "^0.0.0",
+    "@view-builder/view-util": "^0.0.0",
+    "barnard59": "^1.1.2",
+    "barnard59-base": "^1.1.0",
+    "barnard59-formats": "^1.2.0",
+    "barnard59-graph-store": "^1.0.1",
+    "barnard59-rdf": "^1.3.1",
+    "clownface": "^1.5.1",
+    "rdf-ext": "^2.1.0",
+    "rdf-utils-fs": "^2.2.0",
+    "rimraf": "^3.0.2",
+    "sparql-http-client": "^2.4.1",
+    "through2": "^4.0.2"
+  },
+  "devDependencies": {
+    "@tpluscode/shacl-cli": "^0.0.3"
+  }
+}

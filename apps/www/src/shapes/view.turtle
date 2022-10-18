@@ -1,3 +1,4 @@
+@prefix view-builder: <https://view-builder.described.at/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -17,6 +18,7 @@
     rdfs:label "View" ;
     sh:property
         :IdentifierProperty,
+        :PublishProperty,
         :CubeSourceProperty,
         :DimensionProperty,
         :FiltersProperty,
@@ -71,6 +73,18 @@ view:In rdfs:label "one of" .
     sh:minLength 1 ;
     dash:readOnly true ;
     sh:path schema:alternateName ;
+    sh:order 1 ;
+.
+
+:PublishProperty
+    sh:name "Publish" ;
+    sh:path view-builder:publish ;
+    sh:group :Group_Meta ;
+    sh:order 2 ;
+    sh:datatype xsd:boolean ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:defaultValue false ;
 .
 
 :PrimaryProperty

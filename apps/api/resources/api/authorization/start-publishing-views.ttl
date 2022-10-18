@@ -1,0 +1,8 @@
+prefix acl: <http://www.w3.org/ns/auth/acl#>
+
+<>
+  a acl:Authorization ;
+  acl:accessTo </views/publish> ;
+  acl:agentClass acl:AuthenticatedAgent ;
+  acl:mode acl:Write ;
+.

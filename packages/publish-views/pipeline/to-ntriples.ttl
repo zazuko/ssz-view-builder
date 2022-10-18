@@ -1,0 +1,22 @@
+@prefix : <https://pipeline.described.at/> .
+@prefix code: <https://code.described.at/> .
+
+<ToNtriples>
+  a :Pipeline, :Readable ;
+  :steps
+    [
+      :stepList
+        (
+          <Main> _:serialize
+        )
+    ] ;
+.
+
+_:serialize
+  a :Step ;
+  code:implementedBy
+    [
+      a code:EcmaScriptModule ;
+      code:link <node:barnard59-formats/ntriples.js#serialize> ;
+    ] ;
+.

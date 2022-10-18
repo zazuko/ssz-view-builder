@@ -1,0 +1,26 @@
+@prefix : <https://pipeline.described.at/> .
+@prefix code: <https://code.described.at/> .
+
+<ToFile>
+  a :Pipeline ;
+  :steps
+    [
+      :stepList
+        (
+          <ToNtriples> _:save
+        )
+    ] ;
+.
+
+_:save
+  a :Step ;
+  code:implementedBy
+    [
+      a code:EcmaScript ;
+      code:link <node:fs#createWriteStream> ;
+    ] ;
+  code:arguments
+    (
+      "output/views.nt"
+    )
+.
