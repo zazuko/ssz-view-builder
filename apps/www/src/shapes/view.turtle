@@ -132,6 +132,7 @@ view:In rdfs:label "one of" .
                     sh:datatype xsd:integer ;
                     sh:maxCount 1 ;
                     sh:order 30 ;
+                    sh:default 100 ;
                 ] ;
         ]
 .

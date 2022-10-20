@@ -7,9 +7,15 @@ prefix view: <https://cube.link/view/>
   schema:sameAs <https://example.org/view/example2> ;
   schema:identifier "example2" ;
   schema:alternateName "TEST2" ;
-  schema:name "Another dev testing view" ;
-  view-builder:source <#source-bew>, <#source-stf>  ;
+  schema:name "View with limit/offset" ;
+  view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/cvasquez> ;
+  view-builder:publish true ;
+  view:projection
+    [
+      view:limit 100 ;
+      view:offset 1000 ;
+    ] ;
 .
 
 <#source-bew>

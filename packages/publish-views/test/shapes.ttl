@@ -14,6 +14,21 @@
     ] ;
 .
 
+<no-offset>
+  a sh:NodeShape ;
+  sh:targetNode <https://example.org/view/example2> ;
+  sh:property
+    [
+      sh:path
+        (
+          view:projection
+          [ sh:alternativePath ( view:offset view:limit ) ]
+        ) ;
+      sh:maxCount 0 ;
+      sh:message "Published view must not have offset or limit" ;
+    ] ;
+.
+
 <public-view>
   a sh:NodeShape ;
   sh:targetClass view:View ;
