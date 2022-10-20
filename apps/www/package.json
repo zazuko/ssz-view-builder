@@ -14,7 +14,7 @@
     "@hydrofoil/shaperone-core": "0.9.9",
     "@hydrofoil/shaperone-hydra": "0.3.14",
     "@hydrofoil/shaperone-wc": "0.7.6",
-    "@hydrofoil/shaperone-wc-shoelace": "0.1.18",
+    "@hydrofoil/shaperone-wc-shoelace": "0.1.19",
     "@hydrofoil/shell": "^0.3.3",
     "@hydrofoil/vocabularies": "^0.3.2",
     "@material/mwc-drawer": "^0.27",
