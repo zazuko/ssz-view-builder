@@ -66,7 +66,9 @@ export const viewCollection = {
         async deleteView({ term: deleted }) {
           const { resource, viewCollection: { pointer } } = store.getState()
 
-          const collection = resource.representations.get(pointer.term).root
+          const collection = [...resource.representations]
+            .map(([, { root }]) => root)
+            .find(it => it.equals(pointer.term))
           const viewResource = collection.member.find(member => member.id.equals(deleted))
 
           const operation = viewResource.findOperations({
