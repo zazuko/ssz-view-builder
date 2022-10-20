@@ -12,6 +12,7 @@
     "test": "shacl-cli validate --shapes test/shapes.ttl --data output/views.nt"
   },
   "dependencies": {
+    "@tpluscode/rdf-ns-builders": "^2.0.1",
     "@tpluscode/sparql-builder": "^0.3.24",
     "@view-builder/core": "^0.0.0",
     "@view-builder/view-util": "^0.0.0",

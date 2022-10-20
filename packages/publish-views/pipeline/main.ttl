@@ -3,6 +3,15 @@
 
 <Main>
   a :Pipeline, :ReadableObjectMode ;
+  :variables
+    [
+      :variable
+        [
+          a :Variable ;
+          :name "well-known-views-dataset" ;
+          :value "https://ld.stadt-zuerich.ch/catalog/SSZ/view" ;
+        ] ;
+    ] ;
   :steps
     [
       :stepList
