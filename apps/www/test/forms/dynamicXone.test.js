@@ -46,6 +46,7 @@ describe('forms/dynamicXone.js', () => {
     actions = {
       showProperty: sinon.spy(),
       hideProperty: sinon.spy(),
+      clearProperty: sinon.spy(),
     }
   })
 
@@ -57,6 +58,13 @@ describe('forms/dynamicXone.js', () => {
           focusNode,
           logicalConstraints: { xone },
           shape: fromPointer(shape),
+          properties: [{
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBar')),
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
+          }],
         },
         actions,
       }
@@ -67,6 +75,7 @@ describe('forms/dynamicXone.js', () => {
       // then
       expect(actions.showProperty).not.to.have.been.called
       expect(actions.hideProperty).to.have.callCount(3)
+      expect(actions.clearProperty).to.have.callCount(3)
     })
 
     it('displays properties from shape matching actual value and hides others', () => {
@@ -77,6 +86,13 @@ describe('forms/dynamicXone.js', () => {
           focusNode,
           logicalConstraints: { xone },
           shape: fromPointer(shape),
+          properties: [{
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBar')),
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
+          }],
         },
         actions,
       }
@@ -91,6 +107,7 @@ describe('forms/dynamicXone.js', () => {
         }),
       )
       expect(actions.hideProperty).to.have.callCount(2)
+      expect(actions.clearProperty).to.have.callCount(2)
     })
 
     it('displays properties from shape with negative condition', () => {
@@ -101,6 +118,13 @@ describe('forms/dynamicXone.js', () => {
           focusNode,
           logicalConstraints: { xone },
           shape: fromPointer(shape),
+          properties: [{
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBar')),
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
+          }],
         },
         actions,
       }
@@ -115,6 +139,42 @@ describe('forms/dynamicXone.js', () => {
         }),
       )
       expect(actions.hideProperty).to.have.callCount(2)
+      expect(actions.clearProperty).to.have.callCount(2)
+    })
+
+    it('does nothing when properties are already hidden', () => {
+      // given
+      focusNode.addOut(ex.predicate, 'BAZ')
+      const context = {
+        focusNode: {
+          focusNode,
+          logicalConstraints: { xone },
+          shape: fromPointer(shape),
+          properties: [{
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
+            hidden: true,
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBar')),
+            hidden: true,
+          }, {
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
+            hidden: true,
+          }],
+        },
+        actions,
+      }
+
+      // when
+      template(context)
+
+      // then
+      expect(actions.showProperty).to.have.been.calledOnceWith(
+        sinon.match({
+          id: $rdf.namedNode('PropertyBaz'),
+        }),
+      )
+      expect(actions.hideProperty).not.to.have.been.called
+      expect(actions.clearProperty).not.to.have.been.called
     })
   })
 })

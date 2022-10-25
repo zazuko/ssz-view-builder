@@ -42,7 +42,7 @@ export default decorate(wrapped => function dynamicXone(context, args) {
           } else {
             properties.forEach((propShape) => {
               const propState = focusNode.properties.find(arg => arg.shape.equals(propShape))
-              if (!propState.hidden) {
+              if (propState && !propState.hidden) {
                 actions.clearProperty(propShape)
                 actions.hideProperty(propShape)
               }
