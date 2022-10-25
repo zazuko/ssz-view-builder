@@ -1271,10 +1271,10 @@
     stream-to-array "^2.3.0"
     valid-url "^1.0.9"
 
-"@hydrofoil/shaperone-core@0.9.9", "@hydrofoil/shaperone-core@^0.9.9":
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-core/-/shaperone-core-0.9.9.tgz#9cecd48802afbf03c9bc6a5c6f72c9f3b517a963"
-  integrity sha512-Ut9vCi7oMua9J6BIo4Gi2hX0zxstchBNKi+x5VGKlGvwU8EPnUD033kf8EnJQNMloLTTaK7B3MESXlC6N28LZQ==
+"@hydrofoil/shaperone-core@0.9.10", "@hydrofoil/shaperone-core@^0.9.9":
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-core/-/shaperone-core-0.9.10.tgz#b3a11a6090e2910892fd95d866fdee7e5319f498"
+  integrity sha512-E3wdpIULI7Z+q2TyAQkRhJzTvyc3411X/GJFbhuhl/Mp63h/isto7Sqo4DjlMEyh/tBlK7QGUT3j2HO8BWMRTw==
   dependencies:
     "@captaincodeman/rdx" "^1.0.0-rc.8"
     "@rdf-esm/data-model" "^0.5.3"
@@ -1324,10 +1324,10 @@
     is-graph-pointer "^1.2.2"
     lit "^2"
 
-"@hydrofoil/shaperone-wc@0.7.6", "@hydrofoil/shaperone-wc@^0.7.6":
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-wc/-/shaperone-wc-0.7.6.tgz#4afe904578c71784031669c6f064c691153d5f0e"
-  integrity sha512-dYAKlJZl6fdmX57Ec0jV7wMm3na/9SPVt6ESbI8P++j8aKwYu3l1YqyuX1CnF6q8x+/wwO/6CrTmQWMYQeMohg==
+"@hydrofoil/shaperone-wc@0.7.7", "@hydrofoil/shaperone-wc@^0.7.6":
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-wc/-/shaperone-wc-0.7.7.tgz#9fb6ddb04046a12973ec36d3d7e93beab5690b0a"
+  integrity sha512-prVGB91ZFt+PWmePvkXdnsJ6Cdvn8nROWwFsHuP5x+PFlKNSjYSe3MPSkRoLoS9OYncy07EAurgufVhoiDTYBg==
   dependencies:
     "@captaincodeman/rdx" "^1.0.0-rc.8"
     "@hydrofoil/shaperone-core" "^0.9.9"

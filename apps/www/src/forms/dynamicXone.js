@@ -26,11 +26,12 @@ import sh1 from '@hydrofoil/shaperone-core/ns.js'
  * .
  */
 export default decorate(wrapped => function dynamicXone(context, args) {
-  const { focusNode: { focusNode, logicalConstraints: { xone }, shape }, actions } = context
+  const { focusNode, actions } = context
+  const { focusNode: pointer, logicalConstraints: { xone }, shape } = focusNode
 
   const discriminator = shape?.pointer.out(sh1.xoneDiscriminator)
   if (isGraphPointer(discriminator)) {
-    const [actualValue] = findNodes(focusNode, discriminator).terms
+    const [actualValue] = findNodes(pointer, discriminator).terms
 
     for (const group of xone) {
       for (const shapeInGroup of group.shapes) {
@@ -39,7 +40,13 @@ export default decorate(wrapped => function dynamicXone(context, args) {
           if (shouldDisplay(shapeInGroup, actualValue)) {
             properties.forEach(propShape => actions.showProperty(propShape))
           } else {
-            properties.forEach(propShape => actions.hideProperty(propShape))
+            properties.forEach((propShape) => {
+              const propState = focusNode.properties.find(arg => arg.shape.equals(propShape))
+              if (propState && !propState.hidden) {
+                actions.clearProperty(propShape)
+                actions.hideProperty(propShape)
+              }
+            })
           }
         })
       }
