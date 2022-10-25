@@ -11,9 +11,9 @@
   "dependencies": {
     "@captaincodeman/rdx": "^1.0.0-rc.9",
     "@graphy/content.ttl.read": "^4.3.4",
-    "@hydrofoil/shaperone-core": "0.9.9",
+    "@hydrofoil/shaperone-core": "0.9.10",
     "@hydrofoil/shaperone-hydra": "0.3.14",
-    "@hydrofoil/shaperone-wc": "0.7.6",
+    "@hydrofoil/shaperone-wc": "0.7.7",
     "@hydrofoil/shaperone-wc-shoelace": "0.1.19",
     "@hydrofoil/shell": "^0.3.3",
     "@hydrofoil/vocabularies": "^0.3.2",
