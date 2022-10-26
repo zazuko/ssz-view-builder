@@ -47,14 +47,12 @@ customElements.define('ssz-view-table', class extends LitElement {
   }
 
   renderRow(view) {
-    const author = view.out(schema.author)
-
     return html`
       <tr class="view-row" @click="${() => this.dispatchEvent(new CustomEvent('view-select', { detail: { view } }))}">
         <td>${view.out(schema.alternateName).value}</td>
         <td>${view.out(schema.name).value}</td>
         <td></td>
-        <td>${author.out(vcard.hasName).value || author.out(vcard.hasUID).value}</td>
+        <td>${view.out(schema.author).out(vcard.hasName).value}</td>
         <td>
           <sl-icon-button name="trash"
                           label="Delete"
