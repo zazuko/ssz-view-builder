@@ -52,7 +52,7 @@ customElements.define('ssz-view-table', class extends LitElement {
         <td>${view.out(schema.alternateName).value}</td>
         <td>${view.out(schema.name).value}</td>
         <td></td>
-        <td>${view.out(schema.author).out(vcard.hasUID).value}</td>
+        <td>${view.out(schema.author).out(vcard.hasName).value}</td>
         <td>
           <sl-icon-button name="trash"
                           label="Delete"

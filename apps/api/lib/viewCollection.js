@@ -11,18 +11,24 @@ export function textFilter({ subject, object, variable }) {
 
   return sparql`
     {
-      ${subject} ${schema.name} ${q}
-    }
-    UNION
-    {
-      ${subject} ${schema.alternateName} ${q}
-    }
-    UNION
-    {
-      ${subject} ${schema.author}/${vcard.hasUID} ${q}
-    }
+      {
+        ${subject} ${schema.name} ${q}
+      }
+      UNION
+      {
+        ${subject} ${schema.alternateName} ${q}
+      }
+      UNION
+      {
+        ${subject} ${schema.author}/${vcard.hasName} ${q}
+      }
   
-    FILTER( REGEX(str(${q}), "${object.value}", "i") )
+      FILTER( REGEX(str(${q}), "${object.value}", "i") )
+    }
+    UNION
+    {
+      ${subject} ${schema.author}/${vcard.hasUID} "${object.value}"
+    }
   `
 }
 
@@ -37,7 +43,8 @@ export function construct({ client }) {
                 ${schema.name} ?name ; 
                 ${schema.alternateName} ?alt .
                 
-      ?resource ${schema.author} ?author . ?author ${vcard.hasUID} ?authorName .
+      ?resource ${schema.author} ?author . 
+      ?author ${vcard.hasName} ?authorName .
     `.WHERE`
       ${VALUES(...resources)}
 
@@ -47,7 +54,7 @@ export function construct({ client }) {
                 ${schema.alternateName} ?alt .
                 
       OPTIONAL {
-        ?resource ${schema.author} ?author . ?author ${vcard.hasUID} ?authorName .
+        ?resource ${schema.author} ?author . ?author ${vcard.hasName} ?authorName .
       }
     `.execute(client.query)
   }
