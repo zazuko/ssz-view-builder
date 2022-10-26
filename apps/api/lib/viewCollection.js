@@ -44,7 +44,7 @@ export function construct({ client }) {
                 ${schema.alternateName} ?alt .
                 
       ?resource ${schema.author} ?author . 
-      ?author ${vcard.hasUID} ?authorId ; ${vcard.hasName} ?authorName .
+      ?author ${vcard.hasName} ?authorName .
     `.WHERE`
       ${VALUES(...resources)}
 
@@ -53,9 +53,6 @@ export function construct({ client }) {
                 ${schema.name} ?name ; 
                 ${schema.alternateName} ?alt .
                 
-      OPTIONAL {
-        ?resource ${schema.author} ?author . ?author ${vcard.hasUID} ?authorId .
-      }
       OPTIONAL {
         ?resource ${schema.author} ?author . ?author ${vcard.hasName} ?authorName .
       }
