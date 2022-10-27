@@ -4,23 +4,30 @@ import { viewBuilder } from '@view-builder/core/ns.js'
 import { DELETE } from '@tpluscode/sparql-builder'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import { toRdf } from 'rdf-literal'
+import { temporaryFileTask } from 'tempy'
 
 export default asyncMiddleware(async (req, res, next) => {
   const payload = await req.resource()
   if (payload.out(viewBuilder.downloadOnly).value === 'false') {
     await publish(req, res, next)
   } else {
-    await downloadViews(req, res, next)
+    downloadViews(req, res, next)
   }
 })
 
-async function downloadViews(req, res) {
-  const { stream } = await publishViews.toNtriples(req.labyrinth.sparql)
+function downloadViews(req, res, next) {
+  temporaryFileTask(async (temporaryPath) => {
+    const { run } = await publishViews.toNtriples(req.labyrinth.sparql, temporaryPath)
 
-  res.setHeader('Content-type', 'text/plain')
-  res.setHeader('Content-Disposition', 'attachment; filename=views.nt')
-
-  stream.pipe(res)
+    await run.finished
+      .then(async () => new Promise((resolve) => {
+        res.setHeader('Content-type', 'text/plain')
+        res.setHeader('Content-Disposition', 'attachment; filename=views.nt')
+        res.sendFile(temporaryPath)
+        res.on('finish', resolve)
+      }))
+      .catch(next)
+  })
 }
 
 async function publish(req, res, next) {

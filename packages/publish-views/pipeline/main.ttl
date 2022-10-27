@@ -7,8 +7,17 @@
     [
       :stepList
         (
-          <#loadViews> <#prepareView> <#pointerToDataset> <#flatten>
+          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten>
         )
+    ] ;
+  :variables
+    [
+      :variable
+        [
+          a :Variable ;
+          :name "ech-shapes" ;
+          :value "https://raw.githubusercontent.com/factsmission/dcat-ap-ch-shacl/eb33c02912f8acbcbd9c18f2afc118d4e9751683/ech-0200.shacl.ttl" ;
+        ] ;
     ] ;
 .
 
@@ -48,6 +57,59 @@
     (
       "({ dataset }) => dataset"^^code:EcmaScript
     ) ;
+.
+
+<#validate>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <node:barnard59-validate-shacl/validate.js#shacl> ;
+      a code:EcmaScriptModule ;
+    ] ;
+  code:arguments
+    [ code:name "shape" ; code:value <#Shapes> ] ,
+    [
+      code:name "onViolation" ;
+      code:value [ a code:EcmaScriptModule ; code:link <file:../lib/shacl.js#combineShaclReports> ] ;
+    ];
+.
+
+<#checkShaclReports>
+   a :Step ;
+  code:implementedBy
+    [
+      code:link <file:../lib/shacl.js#failOnAnyViolations> ;
+      a code:EcmaScriptModule ;
+    ] ;
+.
+
+<#Shapes>
+  a :Pipeline, :ReadableObjectMode ;
+  :steps
+    [
+      :stepList
+        (
+          [
+            code:implementedBy
+              [
+                a code:EcmaScriptModule ;
+                code:link <node:barnard59-http#get> ;
+              ] ;
+            code:arguments
+              [
+                code:name "url" ;
+                code:value "ech-shapes"^^:VariableName ;
+              ] ;
+          ]
+          [
+            code:implementedBy
+              [
+                a code:EcmaScriptModule ;
+                code:link <node:barnard59-formats/n3.js#parse> ;
+              ] ;
+          ]
+        )
+    ]
 .
 
 <#flatten>

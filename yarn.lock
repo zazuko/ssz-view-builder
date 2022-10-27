@@ -1194,7 +1194,7 @@
     rdf-express-node-factory "^1.1"
     rdf-ext "^1.3.5"
 
-"@hydrofoil/knossos@^0.9.6", "@hydrofoil/knossos@^0.9.7", "@hydrofoil/knossos@^0.9.9":
+"@hydrofoil/knossos@^0.9.11", "@hydrofoil/knossos@^0.9.6", "@hydrofoil/knossos@^0.9.7":
   version "0.9.11"
   resolved "https://registry.yarnpkg.com/@hydrofoil/knossos/-/knossos-0.9.11.tgz#657251219134b3b477d271870dc34d6f8e04b05d"
   integrity sha512-j5MKv+Vm6JTugYjsgFLRJNijKkW8QzTIm3DCIEcAZPdz6HtKHMS01OKgqwb1cPAb0xxMtwBjUn00y6Z+51iOGg==
@@ -3929,6 +3929,17 @@ barnard59-graph-store@^1.0.1:
     readable-stream "^3.6.0"
     sparql-http-client "^2.4.0"
 
+barnard59-http@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/barnard59-http/-/barnard59-http-1.1.0.tgz#afb446d77227a0e61b09b632a90ac1321efc3720"
+  integrity sha512-3TUXtgiaAQZBDu+HvsLTLEXeoh/p3hfoN1Uxc49QVNrej/K5epzSSw3bjl6VQuSjCeoxsi6xuJu7hCbnEeid+Q==
+  dependencies:
+    "@opentelemetry/api" "^1.0.1"
+    duplex-to "^1.0.1"
+    duplexify "^4.0.0"
+    node-fetch "^2.6.1"
+    readable-stream "^3.6.0"
+
 barnard59-rdf@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/barnard59-rdf/-/barnard59-rdf-1.3.1.tgz#b89b3f7eb4d6d12bd96c52a9bfcb6af92e213fef"
@@ -3948,6 +3959,17 @@ barnard59-rdf@^1.3.1:
     rdf-literal "^1.3.0"
     rdf-transform-triple-to-quad "^1.0.2"
     readable-stream "^3.6.0"
+
+barnard59-validate-shacl@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/barnard59-validate-shacl/-/barnard59-validate-shacl-0.3.7.tgz#f38c4fc1595c4a5b85e6f9d6cd517bda02852e11"
+  integrity sha512-WD2BhV1wSnz1C4xuApN3LqhyW1NY2Sb3/I1dveErkuh9O+j/g6sqtFJaT3TVnNgI5vSgpcK1uv+YypXSXJ2uhw==
+  dependencies:
+    "@rdfjs/fetch" "^3.0.0"
+    is-stream "^3.0.0"
+    rdf-dataset-ext "^1.0.0"
+    rdf-ext "^2.0.1"
+    rdf-validate-shacl "^0.4.0"
 
 barnard59@^1.1.2:
   version "1.1.2"
@@ -5090,6 +5112,13 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
+crypto-random-string@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-4.0.0.tgz#5a3cc53d7dd86183df5da0312816ceeeb5bb1fc2"
+  integrity sha512-x8dy3RnvYdlUcPOjkEHqozhiwzKNSq7GcPuXFbnyMOCHxX8V3OgIg/pYuabl2sbUPfIJaeAQB7PMOK8DFIdoRA==
+  dependencies:
+    type-fest "^1.0.1"
+
 csstype@^3.0.2:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
@@ -5521,7 +5550,7 @@ duplexify@^3.4.2, duplexify@^3.6.0, duplexify@^3.6.1:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
-duplexify@^4.1.1:
+duplexify@^4.0.0, duplexify@^4.1.1:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-4.1.2.tgz#18b4f8d28289132fa0b9573c898d9f903f81c7b0"
   integrity sha512-fz3OjcNCHmRP12MJoZMPglx8m4rrFP8rovnk4vT8Fs+aonZoCwGg10dSsQsfP/E62eZcPTMSMP6686fu9Qlqtw==
@@ -10103,18 +10132,18 @@ rdf-utils-fs@^2.1.0, rdf-utils-fs@^2.2.0:
     "@rdfjs/formats-common" "^2.2.0"
     readable-stream "^3.6.0"
 
-rdf-validate-datatype@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/rdf-validate-datatype/-/rdf-validate-datatype-0.1.4.tgz#bef7267a84d56344b75b91135254285842674b0d"
-  integrity sha512-NA2Nv2mf3nGDr9eaefHfSkaTEDh68PPPbylgvXXeAxoU5uKCP1siJjIRzeVD2+IfUfNqTCUrO6F/6Os0YVLFiw==
+rdf-validate-datatype@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/rdf-validate-datatype/-/rdf-validate-datatype-0.1.5.tgz#1ebfe4a506aa7ff55e6c20eb4d559e55cf3936d7"
+  integrity sha512-gU+cD+AT1LpFwbemuEmTDjwLyFwJDiw21XHyIofKhFnEpXODjShBuxhgDGnZqW3qIEwu/vECjOecuD60e5ngiQ==
   dependencies:
     "@rdfjs/namespace" "^1.1.0"
-    "@rdfjs/to-ntriples" "^1.0.2"
+    "@rdfjs/to-ntriples" "^2.0.0"
 
-rdf-validate-shacl@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/rdf-validate-shacl/-/rdf-validate-shacl-0.4.4.tgz#6f3d8b0bb30539a0f7575dc4f98a8bb7ea44c520"
-  integrity sha512-LuayoHFEN0VYv2YASBaHW2cAQVkFZS9FHZYY1QZPq0NmNQPff6v0vLWqnX32T2zPpz0CXu5I/iRrfsnO9nSL5A==
+rdf-validate-shacl@^0.4.0, rdf-validate-shacl@^0.4.4:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/rdf-validate-shacl/-/rdf-validate-shacl-0.4.5.tgz#a95e92e22ff45c9ffd5131229c3cb08a4a5c668e"
+  integrity sha512-tGYnssuPzmsPua1dju4hEtGkT1zouvwzVTNrFhNiqj2aZFO5pQ7lvLd9Cv9H9vKAlpIdC/x0zL6btxG3PCss0w==
   dependencies:
     "@rdfjs/dataset" "^1.1.1"
     "@rdfjs/namespace" "^1.0.0"
@@ -10122,7 +10151,7 @@ rdf-validate-shacl@^0.4.4:
     clownface "^1.4.0"
     debug "^4.3.2"
     rdf-literal "^1.3.0"
-    rdf-validate-datatype "^0.1.4"
+    rdf-validate-datatype "^0.1.5"
 
 rdf-web-access-control@^1.3.2:
   version "1.3.2"
@@ -11404,6 +11433,21 @@ tar@^6.0.2:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
+temp-dir@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/temp-dir/-/temp-dir-2.0.0.tgz#bde92b05bdfeb1516e804c9c00ad45177f31321e"
+  integrity sha512-aoBAniQmmwtcKp/7BzsH8Cxzv8OL736p7v1ihGb5e9DJ9kTwGWHrQrVB5+lfVDzfGrdRzXch+ig7LHaY1JTOrg==
+
+tempy@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/tempy/-/tempy-3.0.0.tgz#a6c0a15f5534a820e92c3e1369f1c1e87ebd6b68"
+  integrity sha512-B2I9X7+o2wOaW4r/CWMkpOO9mdiTRCxXNgob6iGvPmfPWgH/KyUD6Uy5crtWBxIBe3YrNZKR2lSzv1JJKWD4vA==
+  dependencies:
+    is-stream "^3.0.0"
+    temp-dir "^2.0.0"
+    type-fest "^2.12.2"
+    unique-string "^3.0.0"
+
 terser-webpack-plugin@^1.4.3:
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-1.4.5.tgz#a217aefaea330e734ffacb6120ec1fa312d6040b"
@@ -11693,6 +11737,16 @@ type-fest@^0.3.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.3.1.tgz#63d00d204e059474fe5e1b7c011112bbd1dc29e1"
   integrity sha512-cUGJnCdr4STbePCgqNFbpVNCepa+kAVohJs1sLhxzdH+gnEoOd8VhbYa7pD3zZYGiURWM2xzEII3fQcRizDkYQ==
 
+type-fest@^1.0.1:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-1.4.0.tgz#e9fb813fe3bf1744ec359d55d1affefa76f14be1"
+  integrity sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==
+
+type-fest@^2.12.2:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
+  integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
+
 type-is@^1.6.16, type-is@~1.6.18:
   version "1.6.18"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.18.tgz#4e552cd05df09467dcbc4ef739de89f2cf37c131"
@@ -11782,6 +11836,13 @@ unique-slug@^2.0.0:
   integrity sha512-zoWr9ObaxALD3DOPfjPSqxt4fnZiWblxHIgeWqW8x7UqDzEtHEQLzji2cuJYQFCU6KmoJikOYAZlrTHHebjx2w==
   dependencies:
     imurmurhash "^0.1.4"
+
+unique-string@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/unique-string/-/unique-string-3.0.0.tgz#84a1c377aff5fd7a8bc6b55d8244b2bd90d75b9a"
+  integrity sha512-VGXBUVwxKMBUznyffQweQABPRRW1vHZAbadFZud4pLFAqRGvv/96vafgjWFqzourzr8YonlQiPgH0YCJfawoGQ==
+  dependencies:
+    crypto-random-string "^4.0.0"
 
 universalify@^0.1.0:
   version "0.1.2"

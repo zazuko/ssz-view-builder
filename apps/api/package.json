@@ -7,7 +7,9 @@
     "bootstrap": "talos put --api $API_BASE --endpoint $SPARQL_ENDPOINT --updateEndpoint $SPARQL_UPDATE_ENDPOINT --user $SPARQL_USER --password $SPARQL_PASSWORD"
   },
   "dependencies": {
-    "@hydrofoil/knossos": "^0.9.9",
+    "@hydrofoil/knossos": "^0.9.11",
+    "@hydrofoil/vocabularies": "^0.3.3",
+    "@rdfine/shacl": "^0.8.7",
     "@tpluscode/rdf-ns-builders": "^2.0.1",
     "@tpluscode/sparql-builder": "^0.3.23",
     "@view-builder/core": "^0.0.0",
@@ -17,13 +19,15 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-basic-auth": "^1.2.1",
+    "http-problem-details": "^0.1.5",
     "is-graph-pointer": "^1.2.2",
     "middleware-async": "^1.3.5",
     "onetime": "^6.0.0",
     "rdf-dataset-ext": "^1.0.1",
     "rdf-ext": "^2.0.1",
     "rdf-literal": "^1.3.0",
-    "sparql-http-client": "^2.4.1"
+    "sparql-http-client": "^2.4.1",
+    "tempy": "^3.0.0"
   },
   "devDependencies": {
     "@hydrofoil/talos": "^0.4.4"

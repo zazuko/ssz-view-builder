@@ -10,6 +10,15 @@
           <ToNtriples> _:save
         )
     ] ;
+  :variables
+    [
+      :variable
+        [
+          a :Variable ;
+          :name "outfile" ;
+          :value "output/views.nt" ;
+        ] ;
+    ] ;
 .
 
 _:save
@@ -21,6 +30,6 @@ _:save
     ] ;
   code:arguments
     (
-      "output/views.nt"
+      "outfile"^^:VariableName
     )
 .

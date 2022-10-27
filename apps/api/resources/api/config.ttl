@@ -71,4 +71,12 @@ PREFIX knossos: <https://hypermedia.app/knossos#>
           code:link <file:apps/api/lib/shacl.js#shapesQuery> ;
         ] ;
     ] ;
+  knossos:errorMapper
+    [
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/errors.js#ValidationErrorMapper> ;
+        ] ;
+    ] ;
 .

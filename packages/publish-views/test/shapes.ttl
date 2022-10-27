@@ -1,3 +1,4 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
 @prefix schema: <http://schema.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -36,5 +37,9 @@
     [
       sh:path schema:sameAs ;
       sh:maxCount 0 ;
+    ] ,
+    [
+      sh:path rdf:type ;
+      sh:hasValue dcat:Dataset ;
     ] ;
 .

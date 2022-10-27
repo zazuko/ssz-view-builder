@@ -10,12 +10,16 @@ const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'pipel
 const pipelinePath = path.join(__dirname, 'main.ttl')
 const storeStepsPath = path.join(__dirname, 'to-store.ttl')
 const ntriplesStepsPath = path.join(__dirname, 'to-ntriples.ttl')
+const fileStepsPath = path.join(__dirname, 'to-file.ttl')
 
-export function toNtriples(client) {
+export function toNtriples(client, tempFile) {
   return startRun({
     client,
-    term: 'ToNtriples',
-    outStepsPath: ntriplesStepsPath,
+    term: 'ToFile',
+    outSteps: [ntriplesStepsPath, fileStepsPath],
+    variables: [
+      ['outfile', tempFile],
+    ],
   })
 }
 
@@ -23,14 +27,14 @@ export async function toStore(client, variables) {
   return startRun({
     client,
     term: 'ToStore',
-    outStepsPath: storeStepsPath,
+    outSteps: [storeStepsPath],
     variables: Object.entries(variables),
   })
 }
 
-async function startRun({ client, term, outStepsPath, variables = [] }) {
+async function startRun({ client, term, outSteps, variables = [] }) {
   const dataset = await $rdf.dataset().import(fromFile(pipelinePath))
-  await dataset.import(fromFile(outStepsPath))
+  await Promise.all(outSteps.map(src => dataset.import(fromFile(src))))
   const pipeline = clownface({ dataset }).namedNode(term)
 
   const outputStream = new PassThrough()

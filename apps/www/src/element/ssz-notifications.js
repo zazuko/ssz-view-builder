@@ -1,7 +1,12 @@
 import { css, html, LitElement, render } from 'lit'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { connect } from '@captaincodeman/rdx'
+import '@shoelace-style/shoelace/dist/components/dialog/dialog.js'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 import '@shoelace-style/shoelace/dist/components/progress-bar/progress-bar.js'
+import './ssz-shacl-report.js'
+import { rdfs } from '@tpluscode/rdf-ns-builders'
+import { hex } from '@hydrofoil/vocabularies/builders'
 import { store } from '../state/store'
 
 export class SszNotifications extends connect(store, LitElement) {
@@ -20,6 +25,7 @@ export class SszNotifications extends connect(store, LitElement) {
   static get properties() {
     return {
       loading: { type: Boolean },
+      error: { type: Object },
     }
   }
 
@@ -32,7 +38,10 @@ export class SszNotifications extends connect(store, LitElement) {
   ])
 
   render() {
-    return html`<sl-progress-bar ?indeterminate="${this.loading}"></sl-progress-bar>`
+    return html`
+      <sl-progress-bar ?indeterminate="${this.loading}"></sl-progress-bar>
+      ${this.renderError()}
+    `
   }
 
   mapState(state) {
@@ -41,6 +50,7 @@ export class SszNotifications extends connect(store, LitElement) {
     }
 
     return {
+      error: state.notifications.error,
       loading: state.notifications.backgroundTasks.size > 0,
     }
   }
@@ -71,6 +81,14 @@ export class SszNotifications extends connect(store, LitElement) {
           slAlert.toast()
         })
     }
+  }
+
+  renderError() {
+    return html`<sl-dialog .open="${!!this.error}"
+                           .label="${ifDefined(this.error?.out(rdfs.comment).value)}"
+                           @sl-after-hide="${() => store.dispatch.notifications.hideError()}">
+      <ssz-shacl-report .report="${this.error?.out(hex.report)}"></ssz-shacl-report>
+    </sl-dialog>`
   }
 }
 
