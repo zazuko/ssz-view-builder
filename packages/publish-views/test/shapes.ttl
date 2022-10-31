@@ -39,6 +39,11 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
       sh:maxCount 0 ;
     ] ,
     [
+      sh:path schema:author ;
+      sh:maxCount 0 ;
+      sh:message "Published view must not have the user link" ;
+    ],
+    [
       sh:path rdf:type ;
       sh:hasValue dcat:Dataset ;
     ] ;

@@ -41,7 +41,7 @@ export function prepareViewPointer(pointer, { cleanup = true, removeLimitOffset,
     dataset = dataset.filter(removeApiProperties)
   }
 
-  return clownface({ dataset }).node(pointer)
+  return clownface({ dataset }).node(view)
 }
 
 export function createViewQuery(pointer) {
