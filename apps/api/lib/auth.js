@@ -36,7 +36,7 @@ export function populateUsers({ client }) {
       DROP SILENT GRAPH ${userId};
       ${INSERT.DATA`
         GRAPH ${userId} {
-          ${userId} a ${vcard.Individual} ; ${vcard.hasUID} "${id}" ; ${vcard.name} "${name || id}" .
+          ${userId} a ${vcard.Individual} ; ${vcard.hasUID} "${id}" ; ${vcard.hasName} "${name || id}" .
         }`};`
     }, sparql``)
 

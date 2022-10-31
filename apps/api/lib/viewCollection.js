@@ -33,7 +33,7 @@ export function textFilter({ subject, object, variable }) {
 }
 
 export function construct({ client }) {
-  return (members) => {
+  return (...members) => {
     const resources = members.map(resource => ({ resource }))
 
     // TODO: Construct generated from NodeShape
