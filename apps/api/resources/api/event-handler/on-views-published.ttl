@@ -1,0 +1,24 @@
+PREFIX view-builder: <https://view-builder.described.at/>
+PREFIX code: <https://code.described.at/>
+PREFIX as: <https://www.w3.org/ns/activitystreams#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix events: <https://hypermedia.app/events#>
+
+<>
+  a events:EventHandler ;
+  events:eventSpec
+    [
+      rdf:predicate rdf:type ;
+      rdf:object view-builder:ViewsPublished ;
+    ] ;
+  events:objectSpec
+    [
+      rdf:predicate rdf:type ;
+      rdf:object </api/ViewsPublishing> ;
+    ] ;
+  code:implementedBy
+    [
+      a code:EcmaScriptModule ;
+      code:link <file:apps/api/lib/viewCollection/publish.js#setPublishedDate> ;
+    ] ;
+.

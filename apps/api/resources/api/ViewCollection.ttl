@@ -28,6 +28,10 @@ prefix view-builder: <https://view-builder.described.at/>
           code:link <file:apps/api/lib/viewCollection.js#construct> ;
         ] ;
     ] ;
+  query:include
+  [
+    query:path view-builder:publish ;
+  ];
   hydra:supportedOperation
     [
       a schema:CreateAction ;

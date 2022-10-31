@@ -1,6 +1,9 @@
 import * as publishViews from '@view-builder/publish-views'
 import asyncMiddleware from 'middleware-async'
 import { viewBuilder } from '@view-builder/core/ns.js'
+import { DELETE } from '@tpluscode/sparql-builder'
+import { schema } from '@tpluscode/rdf-ns-builders'
+import { toRdf } from 'rdf-literal'
 
 export default asyncMiddleware(async (req, res, next) => {
   const payload = await req.resource()
@@ -37,6 +40,32 @@ async function publish(req, res, next) {
   })
 
   run.finished
-    .then(() => res.sendStatus(204))
+    .then(() => {
+      res.event({
+        types: [viewBuilder.ViewsPublished],
+        object: req.hydra.term,
+      })
+      res.sendStatus(204)
+    })
     .catch(next)
+}
+
+export async function setPublishedDate({ req, event }) {
+  const object = event.object.pointer.term
+
+  await DELETE`
+    graph ${object} {
+      ${object} ${schema.datePublished} ?previous
+    }
+  `.INSERT`
+    graph ${object} {
+      ${object} ${schema.datePublished} ${toRdf(new Date())}
+    }
+  `.WHERE`
+    OPTIONAL {
+      graph ${object} {
+        ${object} ${schema.datePublished} ?previous
+      }
+    }
+  `.execute(req.labyrinth.sparql.query)
 }
