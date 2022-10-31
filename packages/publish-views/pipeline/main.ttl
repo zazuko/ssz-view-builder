@@ -15,8 +15,8 @@
       :variable
         [
           a :Variable ;
-          :name "ech-shapes" ;
-          :value "https://raw.githubusercontent.com/factsmission/dcat-ap-ch-shacl/eb33c02912f8acbcbd9c18f2afc118d4e9751683/ech-0200.shacl.ttl" ;
+          :name "view-shapes" ;
+          :value "shapes.ttl" ;
         ] ;
     ] ;
 .
@@ -93,13 +93,9 @@
             code:implementedBy
               [
                 a code:EcmaScriptModule ;
-                code:link <node:barnard59-http#get> ;
+                code:link <node:fs#createReadStream> ;
               ] ;
-            code:arguments
-              [
-                code:name "url" ;
-                code:value "ech-shapes"^^:VariableName ;
-              ] ;
+            code:arguments ("view-shapes"^^:VariableName) ;
           ]
           [
             code:implementedBy

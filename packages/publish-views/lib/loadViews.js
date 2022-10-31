@@ -1,27 +1,43 @@
-import { DESCRIBE, SELECT } from '@tpluscode/sparql-builder'
+import { CONSTRUCT, DESCRIBE, SELECT } from '@tpluscode/sparql-builder'
 import * as ns from '@view-builder/core/ns.js'
 import through2 from 'through2'
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import StreamClient from 'sparql-http-client'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 export default async function loadViewsToPublish() {
   const client = this.variables.get('client') || createClient(this.variables)
+  const metaClient = new StreamClient({
+    endpointUrl: this.variables.get('METADATA_ENDPOINT'),
+  })
 
-  const views = await SELECT`?view`
+  const views = await SELECT`?view ?destination`
     .WHERE`
-      ?view a ${ns.view.View} ; ${ns.viewBuilder.publish} true ;
+      ?view 
+        a ${ns.view.View} ;
+        ${schema.sameAs} ?destination ; 
+        ${ns.viewBuilder.publish} true ;
     `
     .execute(client.query)
 
-  return views.pipe(through2.obj(async function ({ view }, _, next) {
+  return views.pipe(through2.obj(async function ({ view, destination }, _, next) {
     const viewQuads = await DESCRIBE`${view}`.execute(client.query)
+    const metaQuads = await loadViewMeta(destination, metaClient)
 
-    const dataset = await $rdf.dataset().import(viewQuads)
+    const dataset = $rdf.dataset()
+    await Promise.all([dataset.import(viewQuads), dataset.import(metaQuads)])
     this.push(clownface({ dataset, term: view }))
 
     next()
   }))
+}
+
+function loadViewMeta(view, client) {
+  return CONSTRUCT.WHERE`
+    ${view} ${schema.name} ?name .
+  `
+    .execute(client.query)
 }
 
 function createClient(variables) {
