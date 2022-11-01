@@ -4,10 +4,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
 
 <> a </api/View>, view:View ;
-  schema:sameAs <https://example.org/view/example> ;
-  schema:identifier "example" ;
-  schema:alternateName "TEST" ;
-  schema:name "Dev testing view" ;
+  schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/677> ;
+  schema:identifier "677" ;
+  schema:alternateName "BEV344OD3440" ;
+  schema:name "Bevölkerungsszenarien 2022 – 2040" ;
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/tpluscode> ;
   view-builder:publish true ;

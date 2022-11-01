@@ -12,13 +12,14 @@ const storeStepsPath = path.join(__dirname, 'to-store.ttl')
 const ntriplesStepsPath = path.join(__dirname, 'to-ntriples.ttl')
 const fileStepsPath = path.join(__dirname, 'to-file.ttl')
 
-export function toNtriples(client, tempFile) {
+export function toNtriples(client, tempFile, variables) {
   return startRun({
     client,
     term: 'ToFile',
     outSteps: [ntriplesStepsPath, fileStepsPath],
     variables: [
       ['outfile', tempFile],
+      ...Object.entries(variables),
     ],
   })
 }

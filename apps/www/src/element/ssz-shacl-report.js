@@ -40,10 +40,39 @@ customElements.define('ssz-shacl-report', class extends LitElement {
   }
 
   renderFocusNodeResults([focusNode, results]) {
+    const grouped = results.reduce(({ warnings, violations }, result) => {
+      if (result.out(sh.resultSeverity).term?.equals(sh.Warning)) {
+        return { violations, warnings: [...warnings, result] }
+      }
+
+      return { violations: [...violations, result], warnings }
+    }, {
+      warnings: [], violations: [],
+    })
+
+    let errors = ''
+    if (grouped.violations.length) {
+      errors = html`
+        <p><b>Errors:</b></p>
+        <ul>
+          ${grouped.violations.map(this.renderResult.bind(this))}
+        </ul>
+      `
+    }
+
+    let warnings = ''
+    if (grouped.warnings.length) {
+      warnings = html`
+        <p><b>Warnings:</b></p>
+        <ul>
+          ${grouped.warnings.map(this.renderResult.bind(this))}
+        </ul>
+      `
+    }
+
     return html`<sl-details .summary="${focusNode.value}">
-      <ul>
-        ${results.map(this.renderResult.bind(this))}
-      </ul>
+      ${errors}
+      ${warnings}
     </sl-details>`
   }
 

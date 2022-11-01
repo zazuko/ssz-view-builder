@@ -1,5 +1,4 @@
 import { css, html, LitElement, render } from 'lit'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { connect } from '@captaincodeman/rdx'
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
@@ -85,7 +84,7 @@ export class SszNotifications extends connect(store, LitElement) {
 
   renderError() {
     return html`<sl-dialog .open="${!!this.error}"
-                           .label="${ifDefined(this.error?.out(rdfs.comment).value)}"
+                           .label="${this.error?.out(rdfs.comment).value || ''}"
                            @sl-after-hide="${() => store.dispatch.notifications.hideError()}">
       <ssz-shacl-report .report="${this.error?.out(hex.report)}"></ssz-shacl-report>
     </sl-dialog>`

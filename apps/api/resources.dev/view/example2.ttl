@@ -4,10 +4,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
 
 <> a </api/View>, view:View ;
-  schema:sameAs <https://example.org/view/example2> ;
-  schema:identifier "example2" ;
-  schema:alternateName "TEST2" ;
-  schema:name "View with limit/offset" ;
+  schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/679> ;
+  schema:identifier "679" ;
+  schema:alternateName "BAU698OD6981" ;
+  schema:name "Wohnungsbestand und Personenzahl in Gebäuden nach Statistischer Zone seit 2008" ;
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/cvasquez> ;
   view-builder:publish true ;

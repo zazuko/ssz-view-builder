@@ -1,10 +1,12 @@
-import { CONSTRUCT, DESCRIBE, SELECT } from '@tpluscode/sparql-builder'
+import { DESCRIBE, SELECT } from '@tpluscode/sparql-builder'
 import * as ns from '@view-builder/core/ns.js'
 import through2 from 'through2'
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import StreamClient from 'sparql-http-client'
 import { schema } from '@tpluscode/rdf-ns-builders'
+import * as shapeTo from '@hydrofoil/shape-to-query'
+import { viewShape } from './shapes.js'
 
 export default async function loadViewsToPublish() {
   const client = this.variables.get('client') || createClient(this.variables)
@@ -33,11 +35,13 @@ export default async function loadViewsToPublish() {
   }))
 }
 
-function loadViewMeta(view, client) {
-  return CONSTRUCT.WHERE`
-    ${view} ${schema.name} ?name .
-  `
-    .execute(client.query)
+async function loadViewMeta(view, client) {
+  const shape = await viewShape()
+
+  const subjectVariable = 'view'
+  const query = shapeTo.construct(shape, { focusNode: view, subjectVariable })
+
+  return query.execute(client.query)
 }
 
 function createClient(variables) {

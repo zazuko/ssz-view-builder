@@ -1272,10 +1272,10 @@
     stream-to-array "^2.3.0"
     valid-url "^1.0.9"
 
-"@hydrofoil/shape-to-query@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shape-to-query/-/shape-to-query-0.2.0.tgz#dd818419e8115a37671be50f736422d8110ba318"
-  integrity sha512-CETWcMHA4gPgAtY4qzIiLEWDUMVdNE+0wupyaTfRt4pMJoTy5AfpoyQ3kpjWkefMMU6Afp+MFX5xvwe54wMLNw==
+"@hydrofoil/shape-to-query@^0.2.0", "@hydrofoil/shape-to-query@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shape-to-query/-/shape-to-query-0.2.2.tgz#72c8fd1a81ba7f8efdb4f5ee184f8527937a0b34"
+  integrity sha512-5ea517VbmBdfauTYZys3Cv5lCvP51xgQ66eVVnTLuEXOJVhL+2JHUtMsyd0f1FOvyCNsc/dhrQKGSrzr2qWneA==
   dependencies:
     "@rdfjs/data-model" "^1"
     "@tpluscode/rdf-ns-builders" "^2.0.1"

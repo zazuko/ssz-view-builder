@@ -5,19 +5,31 @@ import { DELETE } from '@tpluscode/sparql-builder'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import { toRdf } from 'rdf-literal'
 import { temporaryFileTask } from 'tempy'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
 
 export default asyncMiddleware(async (req, res, next) => {
   const payload = await req.resource()
+  const ignoreWarnings = payload.out(viewBuilder.ignoreWarnings).value === 'true'
   if (payload.out(viewBuilder.downloadOnly).value === 'false') {
-    await publish(req, res, next)
+    await publish(req, res, next, ignoreWarnings)
   } else {
-    downloadViews(req, res, next)
+    downloadViews(req, res, next, ignoreWarnings)
   }
 })
 
-function downloadViews(req, res, next) {
+function downloadViews(req, res, next, ignoreWarnings) {
   temporaryFileTask(async (temporaryPath) => {
-    const { run } = await publishViews.toNtriples(req.labyrinth.sparql, temporaryPath)
+    const { run } = await publishViews.toNtriples(
+      req.labyrinth.sparql,
+      temporaryPath,
+      {
+        METADATA_ENDPOINT: process.env.METADATA_ENDPOINT,
+        'view-shapes': require.resolve('@view-builder/publish-views/shapes.ttl'),
+        ignoreWarnings,
+      },
+    )
 
     await run.finished
       .then(async () => new Promise((resolve) => {
@@ -30,13 +42,14 @@ function downloadViews(req, res, next) {
   })
 }
 
-async function publish(req, res, next) {
+async function publish(req, res, next, ignoreWarnings) {
   const {
     PUBLIC_ENDPOINT,
     PUBLIC_STORE_ENDPOINT,
     PUBLIC_ENDPOINT_USER,
     PUBLIC_ENDPOINT_PASSWORD,
     PUBLIC_VIEWS_GRAPH,
+    METADATA_ENDPOINT,
   } = process.env
   const { run } = await publishViews.toStore(req.labyrinth.sparql, {
     PUBLIC_ENDPOINT,
@@ -44,6 +57,9 @@ async function publish(req, res, next) {
     PUBLIC_ENDPOINT_USER,
     PUBLIC_ENDPOINT_PASSWORD,
     PUBLIC_VIEWS_GRAPH,
+    METADATA_ENDPOINT,
+    ignoreWarnings,
+    'view-shapes': require.resolve('@view-builder/publish-views/shapes.ttl'),
   })
 
   run.finished
