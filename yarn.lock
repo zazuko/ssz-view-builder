@@ -1195,14 +1195,14 @@
     rdf-ext "^1.3.5"
 
 "@hydrofoil/knossos@^0.9.6", "@hydrofoil/knossos@^0.9.7", "@hydrofoil/knossos@^0.9.9":
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/knossos/-/knossos-0.9.9.tgz#26cc648618fc45a2c1c1bb853204fee10012ab9f"
-  integrity sha512-uRybOvRU3izrktHSLHTBARt09uRTYjKEBDUUQ7zoFwe8OXcltz7gdrxSIjm5hWyS/zk1UvRnAvA5CNp8kxhBJQ==
+  version "0.9.11"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/knossos/-/knossos-0.9.11.tgz#657251219134b3b477d271870dc34d6f8e04b05d"
+  integrity sha512-j5MKv+Vm6JTugYjsgFLRJNijKkW8QzTIm3DCIEcAZPdz6HtKHMS01OKgqwb1cPAb0xxMtwBjUn00y6Z+51iOGg==
   dependencies:
     "@fcostarodrigo/walk" "^5.0.1"
     "@graphy/content.trig.read" "^4.3.3"
     "@hydrofoil/knossos-events" "^0.3.12"
-    "@hydrofoil/labyrinth" "^0.13.6"
+    "@hydrofoil/labyrinth" "^0.13.12"
     "@hydrofoil/vocabularies" "^0.3"
     "@rdfine/hydra" "^0.8.4"
     "@rdfjs-elements/formats-pretty" "^0.5.1"
@@ -1236,12 +1236,13 @@
     stream-to-array "^2.3.0"
     stream-to-promise "^3.0.0"
 
-"@hydrofoil/labyrinth@^0.13.6":
-  version "0.13.6"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/labyrinth/-/labyrinth-0.13.6.tgz#fdbe9b8ab2867d02d6dd7adc35f5e7bbf00ca6e2"
-  integrity sha512-1KaMywXzJhXE+6ZxC59zjyzfnIcofLyxi/u84AGWqOozfJQF4J0sbN9EXgaH5GEH6cG+fdVs0KychXgAwiDK/A==
+"@hydrofoil/labyrinth@^0.13.12":
+  version "0.13.12"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/labyrinth/-/labyrinth-0.13.12.tgz#3c781ddc0da7efb5f840a6e6cf2c264d9cb8011b"
+  integrity sha512-g7U0yjycvOnUNyQhQT8IE8sZ60yfWQ0ebvB8l6q/l43BP7juQgDldn3bgPl+rLUFnPpzWpy/CXbthyTAq0dGtA==
   dependencies:
-    "@hydrofoil/vocabularies" "^0.3.2"
+    "@hydrofoil/shape-to-query" "^0.2.0"
+    "@hydrofoil/vocabularies" "^0.3.3"
     "@rdfine/hydra" "^0.8.4"
     "@rdfjs/data-model" "^1.2"
     "@rdfjs/term-map" "^1.0.0"
@@ -1271,10 +1272,20 @@
     stream-to-array "^2.3.0"
     valid-url "^1.0.9"
 
-"@hydrofoil/shaperone-core@0.9.9", "@hydrofoil/shaperone-core@^0.9.9":
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-core/-/shaperone-core-0.9.9.tgz#9cecd48802afbf03c9bc6a5c6f72c9f3b517a963"
-  integrity sha512-Ut9vCi7oMua9J6BIo4Gi2hX0zxstchBNKi+x5VGKlGvwU8EPnUD033kf8EnJQNMloLTTaK7B3MESXlC6N28LZQ==
+"@hydrofoil/shape-to-query@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shape-to-query/-/shape-to-query-0.2.0.tgz#dd818419e8115a37671be50f736422d8110ba318"
+  integrity sha512-CETWcMHA4gPgAtY4qzIiLEWDUMVdNE+0wupyaTfRt4pMJoTy5AfpoyQ3kpjWkefMMU6Afp+MFX5xvwe54wMLNw==
+  dependencies:
+    "@rdfjs/data-model" "^1"
+    "@tpluscode/rdf-ns-builders" "^2.0.1"
+    "@tpluscode/rdf-string" "^0.2.26"
+    "@tpluscode/sparql-builder" "^0.3"
+
+"@hydrofoil/shaperone-core@0.9.10", "@hydrofoil/shaperone-core@^0.9.9":
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-core/-/shaperone-core-0.9.10.tgz#b3a11a6090e2910892fd95d866fdee7e5319f498"
+  integrity sha512-E3wdpIULI7Z+q2TyAQkRhJzTvyc3411X/GJFbhuhl/Mp63h/isto7Sqo4DjlMEyh/tBlK7QGUT3j2HO8BWMRTw==
   dependencies:
     "@captaincodeman/rdx" "^1.0.0-rc.8"
     "@rdf-esm/data-model" "^0.5.3"
@@ -1324,10 +1335,10 @@
     is-graph-pointer "^1.2.2"
     lit "^2"
 
-"@hydrofoil/shaperone-wc@0.7.6", "@hydrofoil/shaperone-wc@^0.7.6":
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-wc/-/shaperone-wc-0.7.6.tgz#4afe904578c71784031669c6f064c691153d5f0e"
-  integrity sha512-dYAKlJZl6fdmX57Ec0jV7wMm3na/9SPVt6ESbI8P++j8aKwYu3l1YqyuX1CnF6q8x+/wwO/6CrTmQWMYQeMohg==
+"@hydrofoil/shaperone-wc@0.7.7", "@hydrofoil/shaperone-wc@^0.7.6":
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-wc/-/shaperone-wc-0.7.7.tgz#9fb6ddb04046a12973ec36d3d7e93beab5690b0a"
+  integrity sha512-prVGB91ZFt+PWmePvkXdnsJ6Cdvn8nROWwFsHuP5x+PFlKNSjYSe3MPSkRoLoS9OYncy07EAurgufVhoiDTYBg==
   dependencies:
     "@captaincodeman/rdx" "^1.0.0-rc.8"
     "@hydrofoil/shaperone-core" "^0.9.9"
@@ -1419,10 +1430,10 @@
     replacestream "^4.0.3"
     sparql-http-client "^2.4.1"
 
-"@hydrofoil/vocabularies@^0.3", "@hydrofoil/vocabularies@^0.3.1", "@hydrofoil/vocabularies@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/vocabularies/-/vocabularies-0.3.2.tgz#a19835882d4061a1e86bd704f855cac487a93ba1"
-  integrity sha512-Rj+9qbPer52oHrHT79dvM8OIb+hX8n7/2cXAZLydBHE9llcnGsNjgMfoo0RDD93CmIw79wXL046yOwhV5LTjZA==
+"@hydrofoil/vocabularies@^0.3", "@hydrofoil/vocabularies@^0.3.1", "@hydrofoil/vocabularies@^0.3.2", "@hydrofoil/vocabularies@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/vocabularies/-/vocabularies-0.3.3.tgz#54194a1a7424916a829ec12642d97f9d889efca7"
+  integrity sha512-TgszCUIuU+l8yrEaQEWeSFqoXhg1xDeYzkxDqoTRQQFOPNhLGfD1KJaJsS4tYSyZfsi0oPI80cTDfUQSYZP7ng==
   dependencies:
     "@rdf-esm/namespace" "^0.5.3"
     "@rdfjs/parser-n3" "^1.1.4"
@@ -2142,7 +2153,7 @@
     clownface "^1.5.1"
     lit "^2"
 
-"@rdfjs/data-model@^1.0.1", "@rdfjs/data-model@^1.1.0", "@rdfjs/data-model@^1.1.2", "@rdfjs/data-model@^1.2", "@rdfjs/data-model@^1.2.0", "@rdfjs/data-model@^1.3.2", "@rdfjs/data-model@^1.3.3", "@rdfjs/data-model@^1.3.4":
+"@rdfjs/data-model@^1", "@rdfjs/data-model@^1.0.1", "@rdfjs/data-model@^1.1.0", "@rdfjs/data-model@^1.1.2", "@rdfjs/data-model@^1.2", "@rdfjs/data-model@^1.2.0", "@rdfjs/data-model@^1.3.2", "@rdfjs/data-model@^1.3.3", "@rdfjs/data-model@^1.3.4":
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/@rdfjs/data-model/-/data-model-1.3.4.tgz#2b1b3e52755ab1283bf66aa2d3ac97fd8a0332c2"
   integrity sha512-iKzNcKvJotgbFDdti7GTQDCYmL7GsGldkYStiP0K8EYtN7deJu5t7U11rKTz+nR7RtesUggT+lriZ7BakFv8QQ==
@@ -2570,7 +2581,7 @@
     rdf-utils-fs "^2.2.0"
     rdf-validate-shacl "^0.4.4"
 
-"@tpluscode/sparql-builder@^0.3.22", "@tpluscode/sparql-builder@^0.3.23", "@tpluscode/sparql-builder@^0.3.24":
+"@tpluscode/sparql-builder@^0.3", "@tpluscode/sparql-builder@^0.3.22", "@tpluscode/sparql-builder@^0.3.23", "@tpluscode/sparql-builder@^0.3.24":
   version "0.3.24"
   resolved "https://registry.yarnpkg.com/@tpluscode/sparql-builder/-/sparql-builder-0.3.24.tgz#8fccd8f1323597ca3ad11b7a86c469529ed774f6"
   integrity sha512-5DjQafLbdAOn3BwHv6eianSfO8jV54IJDy8usY6rO8Rz81e+BkpdUcqzx9gHoghISVgffgq2hwSLL44Fa/PG+Q==

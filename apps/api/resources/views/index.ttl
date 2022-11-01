@@ -39,4 +39,12 @@ PREFIX view-builder: <https://view-builder.described.at/>
             ] ;
         ] ;
     ] ;
+  query:memberDescribeStrategy
+    [
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/viewCollection.js#construct> ;
+        ] ;
+    ] ;
 .

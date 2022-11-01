@@ -20,14 +20,10 @@ prefix view-builder: <https://view-builder.described.at/>
       hydra:property rdf:type ;
       hydra:object view:View ;
     ] ;
-  query:loadMemberDataStrategy
-    [
-      code:implementedBy
-        [
-          a code:EcmaScriptModule ;
-          code:link <file:apps/api/lib/viewCollection.js#construct> ;
-        ] ;
-    ] ;
+  query:include
+  [
+    query:path view-builder:publish ;
+  ];
   hydra:supportedOperation
     [
       a schema:CreateAction ;

@@ -1,5 +1,13 @@
 {
-  "admin": "admin",
-  "cvasquez": "cristian",
-  "tpluscode": "tomasz"
+  "admin": {
+    "name": "The View Builder",
+    "password": "admin"
+  },
+  "cvasquez": {
+    "name": "Cristian Vasquez",
+    "password": "cristian"
+  },
+  "tpluscode": {
+    "password": "tomasz"
+  }
 }
