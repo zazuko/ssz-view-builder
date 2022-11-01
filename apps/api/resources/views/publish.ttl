@@ -1,3 +1,5 @@
+prefix talos: <existingResource:merge>
+
 <>
   a </api/ViewsPublishing> ;
 .
