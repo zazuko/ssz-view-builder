@@ -41,9 +41,5 @@
       sh:path schema:author ;
       sh:maxCount 0 ;
       sh:message "Published view must not have the user link" ;
-    ],
-    [
-      sh:path rdf:type ;
-      sh:hasValue schema:Dataset ;
     ] ;
 .

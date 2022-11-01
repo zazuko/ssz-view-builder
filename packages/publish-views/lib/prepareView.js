@@ -1,5 +1,5 @@
 import { prepareViewPointer } from '@view-builder/view-util'
-import { schema } from '@tpluscode/rdf-ns-builders'
+import { _void, dcat, rdf, schema } from '@tpluscode/rdf-ns-builders'
 
 export default function (pointer) {
   const view = prepareViewPointer(pointer, {
@@ -9,6 +9,7 @@ export default function (pointer) {
   })
 
   view
+    .addOut(rdf.type, [dcat.Dataset, _void.Dataset])
     .deleteOut(schema.author)
 
   return view
