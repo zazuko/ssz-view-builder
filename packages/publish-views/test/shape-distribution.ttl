@@ -1,0 +1,70 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+prefix view: <https://cube.link/view/>
+
+<example-view-distribution>
+  a sh:NodeShape ;
+  sh:targetNode <https://example.org/view/example> ;
+  sh:property
+  [
+    sh:path (dcat:distribution dcat:downloadURL) ;
+    sh:in
+    (
+      <https://example.org/view/example/observation/>
+      <https://example.org/view/example/observation/?format=csv>
+    )
+  ] ;
+.
+
+
+<require-distribution>
+  a sh:NodeShape ;
+  sh:targetClass view:View ;
+  sh:property
+    [
+      sh:path dcat:distribution ;
+      sh:minCount 1 ;
+      sh:property
+        [
+          sh:path rdf:type ;
+          sh:hasValue dcat:Distribution ;
+        ],
+        [
+          sh:path dcat:downloadURL ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          sh:nodeKind sh:IRI ;
+        ] ;
+      sh:xone
+        (
+          [ sh:node <require-distribution#rdf> ]
+          [ sh:node <require-distribution#csv> ]
+        )
+    ] ;
+.
+
+<require-distribution#rdf>
+  sh:property
+    [
+      sh:path dcat:mediaType ;
+      sh:hasValue "application/n-triples" ;
+    ],
+    [
+      sh:path dcterms:format ;
+      sh:hasValue "RDF" ;
+    ] ;
+.
+
+<require-distribution#csv>
+  sh:property
+    [
+      sh:path dcat:mediaType ;
+      sh:hasValue "text/csv" ;
+    ],
+    [
+      sh:path dcterms:format ;
+      sh:hasValue "CSV" ;
+    ] ;
+.
