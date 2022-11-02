@@ -11,7 +11,15 @@ export class ValidationError extends Error {
 
     super(`${reports.length} views failed. ${total} issues found`)
 
-    this.reports = combineReports(reports)
+    Object.defineProperty(this, 'dataset', {
+      enumerable: false,
+      value: combineReports(reports),
+    })
+    Object.defineProperty(this, 'reports', {
+      enumerable: false,
+      value: clownface({ dataset: this.dataset })
+        .has(rdf.type, sh.ValidationReport),
+    })
   }
 }
 
@@ -22,8 +30,7 @@ function combineReports(reports) {
     dataset.addAll([...pointer.dataset].map(prefixBlankNodes(`r${index}`)))
   })
 
-  return clownface({ dataset })
-    .has(rdf.type, sh.ValidationReport)
+  return dataset
 }
 
 function prefixBlankNodes(prefix) {
