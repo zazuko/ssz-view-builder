@@ -16,7 +16,7 @@ export function combineShaclReports({ context, report }) {
 }
 
 export function failOnAnyViolations() {
-  const { variables } = this
+  const { variables, logger } = this
   const ignoreWarnings = variables.get('ignoreWarnings')
 
   return through2.obj(function (chunk, _, next) {
@@ -25,7 +25,9 @@ export function failOnAnyViolations() {
   }, function (done) {
     const reports = variables.get(REPORTS_KEY)
     if (reports?.some(hasViolations(ignoreWarnings))) {
-      this.destroy(new ValidationError(reports))
+      const error = new ValidationError(reports)
+      logger.error(error.dataset.toString())
+      this.destroy(error)
     }
 
     done()

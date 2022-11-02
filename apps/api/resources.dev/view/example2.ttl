@@ -16,6 +16,15 @@ prefix view: <https://cube.link/view/>
       view:limit 100 ;
       view:offset 1000 ;
     ] ;
+  view:dimension
+    [
+      rdfs:label "ZEIT" ;
+      view:from
+        [
+          view:source <#source-bew>, <#source-stf> ;
+          view:path <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> ;
+        ] ;
+    ] ;
 .
 
 <#source-bew>

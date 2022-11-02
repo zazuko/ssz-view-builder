@@ -19,15 +19,6 @@
           <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten>
         )
     ] ;
-  :variables
-    [
-      :variable
-        [
-          a :Variable ;
-          :name "view-shapes" ;
-          :value "shapes.ttl" ;
-        ] ;
-    ] ;
 .
 
 <#loadViews>
@@ -102,15 +93,7 @@
             code:implementedBy
               [
                 a code:EcmaScriptModule ;
-                code:link <node:fs#createReadStream> ;
-              ] ;
-            code:arguments ("view-shapes"^^:VariableName) ;
-          ]
-          [
-            code:implementedBy
-              [
-                a code:EcmaScriptModule ;
-                code:link <node:barnard59-formats/n3.js#parse> ;
+                code:link <file:../lib/shapes.js#validationShapes> ;
               ] ;
           ]
         )

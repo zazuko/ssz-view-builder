@@ -5,9 +5,6 @@ import { DELETE } from '@tpluscode/sparql-builder'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import { toRdf } from 'rdf-literal'
 import { temporaryFileTask } from 'tempy'
-import { createRequire } from 'module'
-
-const require = createRequire(import.meta.url)
 
 export default asyncMiddleware(async (req, res, next) => {
   const payload = await req.resource()
@@ -26,7 +23,6 @@ function downloadViews(req, res, next, ignoreWarnings) {
       temporaryPath,
       {
         METADATA_ENDPOINT: process.env.METADATA_ENDPOINT,
-        'view-shapes': require.resolve('@view-builder/publish-views/shapes.ttl'),
         ignoreWarnings,
       },
     )
@@ -59,7 +55,6 @@ async function publish(req, res, next, ignoreWarnings) {
     PUBLIC_VIEWS_GRAPH,
     METADATA_ENDPOINT,
     ignoreWarnings,
-    'view-shapes': require.resolve('@view-builder/publish-views/shapes.ttl'),
   })
 
   run.finished
