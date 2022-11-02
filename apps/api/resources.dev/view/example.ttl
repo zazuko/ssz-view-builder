@@ -11,6 +11,15 @@ prefix view: <https://cube.link/view/>
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/tpluscode> ;
   view-builder:publish true ;
+  view:dimension
+    [
+      rdfs:label "ZEIT" ;
+      view:from
+        [
+          view:source <#source-bew>, <#source-stf> ;
+          view:path <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> ;
+        ] ;
+    ] ;
 .
 
 <#source-bew>
