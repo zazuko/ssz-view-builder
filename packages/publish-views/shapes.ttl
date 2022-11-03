@@ -39,6 +39,7 @@ prefix view: <https://cube.link/view/>
     [
       sh:path dcterms:publisher ;
       sh:nodeKind sh:IRI ;
+      sh:maxCount 1 ;
       sh:severity sh:Warning ;
     ],
     [
@@ -54,27 +55,32 @@ prefix view: <https://cube.link/view/>
     [
       sh:path schema:endDate ;
       sh:datatype xsd:date ;
+      sh:maxCount 1 ;
       sh:severity sh:Warning ;
     ],
     [
       sh:path schema:startDate ;
       sh:datatype xsd:date ;
+      sh:maxCount 1 ;
       sh:severity sh:Warning ;
     ],
     [
       sh:path dcterms:modified ;
       sh:datatype xsd:date ;
+      sh:maxCount 1 ;
       sh:severity sh:Warning ;
     ],
     [
     # TODO
       sh:deactivated true ;
       sh:path dcterms:license ;
+      sh:maxCount 1 ;
     ],
     [
     # TODO
       sh:deactivated true ;
       sh:path dcterms:accrualPeriodicity ;
+      sh:maxCount 1 ;
     ],
     [
       sh:path dcterms:language ;
