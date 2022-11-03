@@ -79,7 +79,7 @@
     [ code:name "shape" ; code:value <#Shapes> ] ,
     [
       code:name "onViolation" ;
-      code:value [ a code:EcmaScriptModule ; code:link <file:../lib/shacl.js#combineShaclReports> ] ;
+      code:value [ a code:EcmaScriptModule ; code:link <file:../lib/shacl.js#collectShaclReports> ] ;
     ];
 .
 

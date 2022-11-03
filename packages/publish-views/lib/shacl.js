@@ -4,7 +4,7 @@ import { ValidationError } from './ValidationError.js'
 
 const REPORTS_KEY = 'COMBINED_SHACL_REPORTS'
 
-export function combineShaclReports({ context, report }) {
+export function collectShaclReports({ context, report }) {
   const variables = context.variables.has(REPORTS_KEY)
     ? context.variables
     : context.variables.set(REPORTS_KEY, [])
