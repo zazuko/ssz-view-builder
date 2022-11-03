@@ -7,7 +7,7 @@
     [
       :stepList
         (
-          <ToNtriples> _:save
+          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten> <#serialize> _:save
         )
     ] ;
   :variables

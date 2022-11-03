@@ -7,12 +7,12 @@
     [
       :stepList
         (
-          <Main> _:serialize
+          <Main> <#serialize>
         )
     ] ;
 .
 
-_:serialize
+<#serialize>
   a :Step ;
   code:implementedBy
     [
