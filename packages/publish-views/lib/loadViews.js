@@ -14,11 +14,11 @@ export default async function loadViewsToPublish() {
     endpointUrl: this.variables.get('METADATA_ENDPOINT'),
   })
 
-  const views = await SELECT`?viewBuilderView ?publishedViewUri`
+  const views = await SELECT`?viewBuilderView ?publishedView`
     .WHERE`
       ?viewBuilderView 
         a ${ns.view.View} ;
-        ${schema.sameAs} ?publishedViewUri ; 
+        ${schema.sameAs} ?publishedView ; 
         ${ns.viewBuilder.publish} true ;
     `
     .execute(client.query)
