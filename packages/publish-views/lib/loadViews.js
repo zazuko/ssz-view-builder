@@ -14,22 +14,22 @@ export default async function loadViewsToPublish() {
     endpointUrl: this.variables.get('METADATA_ENDPOINT'),
   })
 
-  const views = await SELECT`?view ?destination`
+  const views = await SELECT`?viewBuilderView ?publishedViewUri`
     .WHERE`
-      ?view 
+      ?viewBuilderView 
         a ${ns.view.View} ;
-        ${schema.sameAs} ?destination ; 
+        ${schema.sameAs} ?publishedViewUri ; 
         ${ns.viewBuilder.publish} true ;
     `
     .execute(client.query)
 
-  return views.pipe(through2.obj(async function ({ view, destination }, _, next) {
-    const viewQuads = await DESCRIBE`${view}`.execute(client.query)
-    const metaQuads = await loadViewMeta(destination, metaClient)
+  return views.pipe(through2.obj(async function ({ viewBuilderView, publishedView }, _, next) {
+    const viewQuads = await DESCRIBE`${viewBuilderView}`.execute(client.query)
+    const metaQuads = await loadViewMeta(publishedView, metaClient)
 
     const dataset = $rdf.dataset()
     await Promise.all([dataset.import(viewQuads), dataset.import(metaQuads)])
-    this.push(clownface({ dataset, term: view }))
+    this.push(clownface({ dataset, term: viewBuilderView }))
 
     next()
   }))
