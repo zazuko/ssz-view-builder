@@ -10,7 +10,7 @@
     "prestart:store": "mkdir .pipeline; cat pipeline/main.ttl pipeline/to-ntriples.ttl pipeline/to-store.ttl > .pipeline/to-store.ttl",
     "start:store": "dotenv -e ../../.env.local -e .env.local -- barnard59 run --pipeline ToStore --variable-all .pipeline/to-store.ttl",
     "pretest": "yarn postinstall; yarn start:file",
-    "test": "shacl-cli validate --shapes test/shape*.ttl --data output/views.nt"
+    "test": "shacl-cli validate --shapes test/shape*.ttl --shapes ../../packages/core/shape/ViewValidationShape.ttl --data output/views.nt"
   },
   "dependencies": {
     "@hydrofoil/shape-to-query": "^0.2.3",

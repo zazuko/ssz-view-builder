@@ -1,4 +1,4 @@
-import { DESCRIBE, SELECT } from '@tpluscode/sparql-builder'
+import { CONSTRUCT, SELECT } from '@tpluscode/sparql-builder'
 import * as ns from '@view-builder/core/ns.js'
 import through2 from 'through2'
 import $rdf from 'rdf-ext'
@@ -24,7 +24,10 @@ export default async function loadViewsToPublish() {
     .execute(client.query)
 
   return views.pipe(through2.obj(async function ({ viewBuilderView, publishedView }, _, next) {
-    const viewQuads = await DESCRIBE`${viewBuilderView}`.execute(client.query)
+    const viewQuads = await CONSTRUCT`?s ?p ?o`
+      .FROM(viewBuilderView)
+      .WHERE`?s ?p ?o`
+      .execute(client.query)
     const metaQuads = await loadViewMeta(publishedView, metaClient)
 
     const dataset = $rdf.dataset()
