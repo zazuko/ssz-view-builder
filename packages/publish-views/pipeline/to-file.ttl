@@ -15,7 +15,7 @@
       :variable
         [
           a :Variable ;
-          :name "outfile" ;
+          :name "outFile" ;
           :value "output/views.nt" ;
         ] ;
     ] ;
@@ -30,6 +30,6 @@ _:save
     ] ;
   code:arguments
     (
-      "outfile"^^:VariableName
+      "outFile"^^:VariableName
     )
 .
