@@ -19,11 +19,13 @@ export default asyncMiddleware(async (req, res, next) => {
 function downloadViews(req, res, next, ignoreWarnings) {
   temporaryFileTask(async (temporaryPath) => {
     const { run } = await publishViews.toNtriples(
-      req.labyrinth.sparql,
-      temporaryPath,
       {
-        METADATA_ENDPOINT: process.env.METADATA_ENDPOINT,
-        ignoreWarnings,
+        outFile: temporaryPath,
+        variables: {
+          client: req.labyrinth.sparql,
+          METADATA_ENDPOINT: process.env.METADATA_ENDPOINT,
+          ignoreWarnings,
+        },
       },
     )
 
@@ -47,7 +49,8 @@ async function publish(req, res, next, ignoreWarnings) {
     PUBLIC_VIEWS_GRAPH,
     METADATA_ENDPOINT,
   } = process.env
-  const { run } = await publishViews.toStore(req.labyrinth.sparql, {
+  const { run } = await publishViews.toStore({
+    client: req.labyrinth.sparql,
     PUBLIC_ENDPOINT,
     PUBLIC_STORE_ENDPOINT,
     PUBLIC_ENDPOINT_USER,
