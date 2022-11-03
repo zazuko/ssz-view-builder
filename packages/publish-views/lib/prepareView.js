@@ -1,5 +1,5 @@
 import { prepareViewPointer } from '@view-builder/view-util'
-import { dcat, dcterms, rdf, schema } from '@tpluscode/rdf-ns-builders'
+import { _void, dcat, dcterms, rdf, schema } from '@tpluscode/rdf-ns-builders'
 
 export default function (pointer) {
   const view = prepareViewPointer(pointer, {
@@ -7,6 +7,10 @@ export default function (pointer) {
     rename: true,
     removeLimitOffset: true,
   })
+
+  view
+    .addOut(rdf.type, [dcat.Dataset, _void.Dataset])
+    .deleteOut(schema.author)
 
   view.addIn(schema.dataset, view.namedNode(this.variables.get('well-known-views-dataset')))
 

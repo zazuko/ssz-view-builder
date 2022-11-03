@@ -4,10 +4,10 @@ prefix view: <https://cube.link/view/>
 prefix view-builder: <https://view-builder.described.at/>
 
 <> a </api/View>, view:View ;
-  schema:sameAs <https://example.org/view/example1> ;
-  schema:identifier "example1" ;
-  schema:alternateName "TEST1" ;
-  schema:name "Test filtering by term set" ;
+  schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/678> ;
+  schema:identifier "678" ;
+  schema:alternateName "BAU699OD6991" ;
+  schema:name "Haushalte in Neubau-Wohnungen nach Bauperiode, Zimmerzahl, Eigentumsart, Haushalttyp und Quartier, seit 2006" ;
   view-builder:source <#source-bew> ;
   schema:author </user/tpluscode> ;
   view:dimension <#dim-raum>, <#measure> ;

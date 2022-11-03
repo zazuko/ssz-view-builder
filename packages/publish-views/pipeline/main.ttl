@@ -16,17 +16,8 @@
     [
       :stepList
         (
-          <#loadViews> <#prepareView> <#pointerToDataset> <#flatten>
+          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten>
         )
-    ] ;
-.
-
-<#loadViews>
-  a :Step ;
-  code:implementedBy
-    [
-      code:link <file:../lib/loadViews.js#default> ;
-      a code:EcmaScriptModule ;
     ] ;
 .
 
@@ -57,6 +48,47 @@
     (
       "({ dataset }) => dataset"^^code:EcmaScript
     ) ;
+.
+
+<#validate>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <node:barnard59-validate-shacl/validate.js#shacl> ;
+      a code:EcmaScriptModule ;
+    ] ;
+  code:arguments
+    [ code:name "shape" ; code:value <#Shapes> ] ,
+    [
+      code:name "onViolation" ;
+      code:value [ a code:EcmaScriptModule ; code:link <file:../lib/shacl.js#collectShaclReports> ] ;
+    ];
+.
+
+<#checkShaclReports>
+   a :Step ;
+  code:implementedBy
+    [
+      code:link <file:../lib/shacl.js#failOnAnyViolations> ;
+      a code:EcmaScriptModule ;
+    ] ;
+.
+
+<#Shapes>
+  a :Pipeline, :ReadableObjectMode ;
+  :steps
+    [
+      :stepList
+        (
+          [
+            code:implementedBy
+              [
+                a code:EcmaScriptModule ;
+                code:link <file:../lib/shapes.js#validationShapes> ;
+              ] ;
+          ]
+        )
+    ]
 .
 
 <#flatten>

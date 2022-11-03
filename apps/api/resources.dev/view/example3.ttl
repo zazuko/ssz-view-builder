@@ -5,10 +5,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
 
 <> a </api/View>, view:View ;
-  schema:sameAs <https://example.org/view/example3> ;
-  schema:identifier "example3" ;
-  schema:alternateName "TEST3" ;
-  schema:name "Test filtering" ;
+  schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/660> ;
+  schema:identifier "660" ;
+  schema:alternateName "BEV525OD5251" ;
+  schema:name "Aufenthaltsdauer beim Wegzug nach auswärts nach Alter, Geschlecht, Herkunft und Stadtkreis" ;
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/cvasquez> ;
 .

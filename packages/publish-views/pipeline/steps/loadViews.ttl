@@ -1,0 +1,11 @@
+PREFIX code: <https://code.described.at/>
+prefix : <https://pipeline.described.at/>
+
+<#loadViews>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <file:../lib/loadViews.js#default> ;
+      a code:EcmaScriptModule ;
+    ] ;
+.

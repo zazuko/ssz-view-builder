@@ -7,39 +7,44 @@ import { fileURLToPath } from 'url'
 import { PassThrough } from 'stream'
 
 const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'pipeline')
-const pipelinePath = path.join(__dirname, 'main.ttl')
-const storeStepsPath = path.join(__dirname, 'to-store.ttl')
-const ntriplesStepsPath = path.join(__dirname, 'to-ntriples.ttl')
+const pipelinePath = 'main.ttl'
+const storeStepsPath = 'to-store.ttl'
+const ntriplesStepsPath = 'to-ntriples.ttl'
+const fileStepsPath = 'to-file.ttl'
+const loadViewsFromStoreStepPath = 'steps/loadViews.ttl'
 
-export function toNtriples(client) {
+export function toNtriples({
+  outFile,
+  variables = {},
+  loadViewsStepsPath = loadViewsFromStoreStepPath,
+}) {
   return startRun({
-    client,
-    term: 'ToNtriples',
-    outStepsPath: ntriplesStepsPath,
+    term: 'ToFile',
+    steps: [ntriplesStepsPath, fileStepsPath, loadViewsStepsPath],
+    variables: {
+      outFile,
+      ...variables,
+    },
   })
 }
 
-export async function toStore(client, variables) {
+export async function toStore(variables = {}) {
   return startRun({
-    client,
     term: 'ToStore',
-    outStepsPath: storeStepsPath,
-    variables: Object.entries(variables),
+    steps: [storeStepsPath, loadViewsFromStoreStepPath],
+    variables,
   })
 }
 
-async function startRun({ client, term, outStepsPath, variables = [] }) {
-  const dataset = await $rdf.dataset().import(fromFile(pipelinePath))
-  await dataset.import(fromFile(outStepsPath))
+async function startRun({ term, steps, variables }) {
+  const dataset = await $rdf.dataset().import(fromFile(path.resolve(__dirname, pipelinePath)))
+  await Promise.all(steps.map(src => dataset.import(fromFile(path.resolve(__dirname, src)))))
   const pipeline = clownface({ dataset }).namedNode(term)
 
   const outputStream = new PassThrough()
   const run = await Runner(pipeline, {
     basePath: __dirname,
-    variables: new Map([
-      ['client', client],
-      ...variables,
-    ]),
+    variables: new Map(Object.entries(variables)),
     outputStream,
   })
 

@@ -23,6 +23,15 @@ export const notifications = {
         state.backgroundTasks.delete(taskId)
         return state
       },
+      errorDialog(state, error) {
+        return { ...state, error }
+      },
+      hideError(state) {
+        return {
+          ...state,
+          error: undefined,
+        }
+      },
     },
     effects(store) {
       const dispatch = store.getDispatch().notifications

@@ -32,6 +32,14 @@ _:PublishViews
           sh:defaultValue true ;
           sh:minCount 1 ;
           sh:maxCount 1 ;
+        ],
+        [
+          sh:path view-builder:ignoreWarnings ;
+          sh:name "Ignore warnings" ;
+          sh:datatype xsd:boolean ;
+          sh:defaultValue false ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
         ] ;
     ] ;
 .

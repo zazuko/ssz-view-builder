@@ -1,0 +1,104 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix view: <https://cube.link/view/>
+
+<ViewShape>
+  a sh:NodeShape ;
+  sh:targetClass view:View, schema:Dataset ;
+  sh:property
+    [
+      sh:path rdf:type ;
+      sh:hasValue dcat:Dataset, void:Dataset ;
+    ],
+    [
+      sh:path schema:name ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:Literal ;
+    ],
+    [
+      sh:path schema:identifier ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:Literal ;
+    ],
+    [
+      sh:path dcterms:issued ;
+      sh:maxCount 1 ;
+      sh:or
+        (
+          [ sh:datatype xsd:date ]
+          [ sh:datatype xsd:dateTime ]
+        ) ;
+      sh:severity sh:Warning ;
+    ],
+    [
+      sh:path dcterms:publisher ;
+      sh:nodeKind sh:IRI ;
+      sh:maxCount 1 ;
+      sh:severity sh:Warning ;
+    ],
+    [
+      sh:path schema:alternateName ;
+      sh:nodeKind sh:Literal ;
+      sh:severity sh:Warning ;
+    ],
+    [
+      sh:path schema:description ;
+      sh:nodeKind sh:Literal ;
+      sh:severity sh:Warning ;
+    ],
+    [
+      sh:path schema:endDate ;
+      sh:datatype xsd:date ;
+      sh:maxCount 1 ;
+      sh:severity sh:Warning ;
+    ],
+    [
+      sh:path schema:startDate ;
+      sh:datatype xsd:date ;
+      sh:maxCount 1 ;
+      sh:severity sh:Warning ;
+    ],
+    [
+      sh:path dcterms:modified ;
+      sh:datatype xsd:date ;
+      sh:maxCount 1 ;
+      sh:severity sh:Warning ;
+    ],
+    [
+    # TODO
+      sh:deactivated true ;
+      sh:path dcterms:license ;
+      sh:maxCount 1 ;
+    ],
+    [
+    # TODO
+      sh:deactivated true ;
+      sh:path dcterms:accrualPeriodicity ;
+      sh:maxCount 1 ;
+    ],
+    [
+      sh:path dcterms:language ;
+      sh:nodeKind sh:IRI ;
+    ],
+    [
+      sh:path <https://ld.stadt-zuerich.ch/schema/legalFoundation> ;
+      sh:nodeKind sh:IRI ;
+    ],
+    [
+    # TODO
+      sh:deactivated true ;
+      sh:path dcterms:spatial ;
+      sh:nodeKind sh:IRI ;
+    ],
+    [
+      sh:path <https://ld.stadt-zuerich.ch/schema/usageNotes> ;
+      sh:nodeKind sh:Literal ;
+      sh:severity sh:Warning ;
+    ] ;
+.

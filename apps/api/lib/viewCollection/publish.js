@@ -4,39 +4,60 @@ import { viewBuilder } from '@view-builder/core/ns.js'
 import { DELETE } from '@tpluscode/sparql-builder'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import { toRdf } from 'rdf-literal'
+import { temporaryFileTask } from 'tempy'
 
 export default asyncMiddleware(async (req, res, next) => {
   const payload = await req.resource()
+  const ignoreWarnings = payload.out(viewBuilder.ignoreWarnings).value === 'true'
   if (payload.out(viewBuilder.downloadOnly).value === 'false') {
-    await publish(req, res, next)
+    await publish(req, res, next, ignoreWarnings)
   } else {
-    await downloadViews(req, res, next)
+    downloadViews(req, res, next, ignoreWarnings)
   }
 })
 
-async function downloadViews(req, res) {
-  const { stream } = await publishViews.toNtriples(req.labyrinth.sparql)
+function downloadViews(req, res, next, ignoreWarnings) {
+  temporaryFileTask(async (temporaryPath) => {
+    const { run } = await publishViews.toNtriples(
+      {
+        outFile: temporaryPath,
+        variables: {
+          client: req.labyrinth.sparql,
+          METADATA_ENDPOINT: process.env.METADATA_ENDPOINT,
+          ignoreWarnings,
+        },
+      },
+    )
 
-  res.setHeader('Content-type', 'text/plain')
-  res.setHeader('Content-Disposition', 'attachment; filename=views.nt')
-
-  stream.pipe(res)
+    await run.finished
+      .then(async () => new Promise((resolve) => {
+        res.setHeader('Content-type', 'text/plain')
+        res.setHeader('Content-Disposition', 'attachment; filename=views.nt')
+        res.sendFile(temporaryPath)
+        res.on('finish', resolve)
+      }))
+      .catch(next)
+  })
 }
 
-async function publish(req, res, next) {
+async function publish(req, res, next, ignoreWarnings) {
   const {
     PUBLIC_ENDPOINT,
     PUBLIC_STORE_ENDPOINT,
     PUBLIC_ENDPOINT_USER,
     PUBLIC_ENDPOINT_PASSWORD,
     PUBLIC_VIEWS_GRAPH,
+    METADATA_ENDPOINT,
   } = process.env
-  const { run } = await publishViews.toStore(req.labyrinth.sparql, {
+  const { run } = await publishViews.toStore({
+    client: req.labyrinth.sparql,
     PUBLIC_ENDPOINT,
     PUBLIC_STORE_ENDPOINT,
     PUBLIC_ENDPOINT_USER,
     PUBLIC_ENDPOINT_PASSWORD,
     PUBLIC_VIEWS_GRAPH,
+    METADATA_ENDPOINT,
+    ignoreWarnings,
   })
 
   run.finished

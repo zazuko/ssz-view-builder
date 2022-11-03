@@ -7,8 +7,17 @@
     [
       :stepList
         (
-          <ToNtriples> _:save
+          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten> <#serialize> _:save
         )
+    ] ;
+  :variables
+    [
+      :variable
+        [
+          a :Variable ;
+          :name "outFile" ;
+          :value "output/views.nt" ;
+        ] ;
     ] ;
 .
 
@@ -21,6 +30,6 @@ _:save
     ] ;
   code:arguments
     (
-      "output/views.nt"
+      "outFile"^^:VariableName
     )
 .
