@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "clean": "git clean -dfx -e node_modules -e .idea -e .vscode -e .husky",
-    "postinstall": "yarn-deduplicate && patch-package",
+    "postinstall": "yarn-deduplicate && patch-package && wsrun -m -c postinstall",
     "prepare": "husky install",
     "lint": "eslint . --ext .ts,.js --quiet --ignore-path .gitignore --ignore-path .eslintignore",
     "test": "c8 mocha **/*.test.js",

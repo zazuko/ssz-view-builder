@@ -4,11 +4,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "prestart:file": "mkdir .pipeline output; cat pipeline/main.ttl pipeline/to-ntriples.ttl pipeline/to-file.ttl pipeline/steps/*.ttl > .pipeline/to-file.ttl",
+    "postinstall": "mkdir -p .pipeline output",
+    "prestart:file": "cat pipeline/main.ttl pipeline/to-ntriples.ttl pipeline/to-file.ttl pipeline/steps/*.ttl > .pipeline/to-file.ttl",
     "start:file": "dotenv -e ../../.env.local -e .env.local -- barnard59 run --pipeline ToFile --variable-all .pipeline/to-file.ttl",
     "prestart:store": "mkdir .pipeline; cat pipeline/main.ttl pipeline/to-ntriples.ttl pipeline/to-store.ttl > .pipeline/to-store.ttl",
     "start:store": "dotenv -e ../../.env.local -e .env.local -- barnard59 run --pipeline ToStore --variable-all .pipeline/to-store.ttl",
-    "pretest": "yarn start:file",
+    "pretest": "yarn postinstall; yarn start:file",
     "test": "shacl-cli validate --shapes test/shape*.ttl --data output/views.nt"
   },
   "dependencies": {
