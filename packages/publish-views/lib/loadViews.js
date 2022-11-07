@@ -3,16 +3,14 @@ import * as ns from '@view-builder/core/ns.js'
 import through2 from 'through2'
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
-import StreamClient from 'sparql-http-client'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import * as shapeTo from '@hydrofoil/shape-to-query'
 import { viewShape } from './shapes.js'
+import { getViewBuilderClient, getMetadataClient } from './sparql.js'
 
 export default async function loadViewsToPublish() {
-  const client = this.variables.get('client') || createClient(this.variables)
-  const metaClient = new StreamClient({
-    endpointUrl: this.variables.get('METADATA_ENDPOINT'),
-  })
+  const client = getViewBuilderClient(this.variables)
+  const metaClient = getMetadataClient(this.variables)
 
   const views = await SELECT`?viewBuilderView ?publishedView`
     .WHERE`
@@ -45,12 +43,4 @@ async function loadViewMeta(view, client) {
   const query = shapeTo.construct(shape, { focusNode: view, subjectVariable })
 
   return query.execute(client.query)
-}
-
-function createClient(variables) {
-  return new StreamClient({
-    endpointUrl: variables.get('SPARQL_ENDPOINT'),
-    user: variables.get('SPARQL_USER'),
-    password: variables.get('SPARQL_PASSWORD'),
-  })
 }

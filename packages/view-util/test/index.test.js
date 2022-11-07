@@ -32,7 +32,7 @@ describe('@view-builder/view-util', () => {
     `
 
     // when
-    const viewView = prepareViewPointer(builderView)
+    const viewView = await prepareViewPointer(builderView, { cubeLookup })
 
     // then
     const source = viewView.out(view.dimension).out(view.from).out(view.source)
@@ -49,7 +49,7 @@ describe('@view-builder/view-util', () => {
     `
 
     // when
-    const viewView = prepareViewPointer(builderView)
+    const viewView = await prepareViewPointer(builderView)
 
     // then
     expect(viewView.dataset.size).to.eq(0)
@@ -74,7 +74,7 @@ describe('@view-builder/view-util', () => {
     `
 
     // when
-    const viewView = prepareViewPointer(builderView, { removeLimitOffset: true })
+    const viewView = await prepareViewPointer(builderView, { removeLimitOffset: true, cubeLookup })
 
     // then
     expect(viewView.out(view.projection).out(view.limit).term).to.be.undefined
@@ -175,33 +175,53 @@ describe('@view-builder/view-util', () => {
 
     context('IRI dimension', () => {
       context('with single source', () => {
-        it('generates a join for schema:name when dimension is sh:IRI', async function () {
-          // given
-          cubeLookup.isIriDimension.resolves(true)
+        context('when dimension is sh:IRI', () => {
+          let viewView
 
-          const builderView = await testData`
-            <>
-              ${view.dimension} <#RAUM> ;
-              ${view.projection} [] ;
-            .
-            
-            <#RAUM>
-              ${view.from} [
-                ${view.source} [ a ${view.CubeSource} ; ${view.cube} ${ssz('000003')} ] ;
-                ${view.path} ${ssz('property/RAUM')} ;
-              ] ;
-            . 
-          `
+          beforeEach(async () => {
+            // given
+            cubeLookup.isIriDimension.resolves(true)
 
-          // when
-          const viewView = await prepareViewPointer(builderView, { cubeLookup })
-          const query = createViewQuery(viewView)
+            const builderView = await testData`
+              <>
+                ${view.dimension} <#RAUM> ;
+                ${view.projection} [] ;
+              .
+              
+              <#RAUM>
+                ${view.from} [
+                  ${view.source} [ a ${view.CubeSource} ; ${view.cube} ${ssz('000003')} ] ;
+                  ${view.path} ${ssz('property/RAUM')} ;
+                ] ;
+              . 
+            `
 
-          // then
-          expect(query).to.matchSnapshot(this)
+            // when
+            viewView = await prepareViewPointer(builderView, { cubeLookup })
+          })
+
+          it('generates a join for schema:name and schema:termCode when dimension is sh:IRI', async function () {
+            const query = createViewQuery(viewView)
+
+            // then
+            expect(query).to.matchSnapshot(this)
+          })
+
+          it('marks schema:name join dimension as label for its IRI dimension', () => {
+            const iriDimension = viewView.any()
+              .has(view.path, ssz('property/RAUM'))
+              .in(view.from)
+              .term
+
+            const labelDimension = viewView.any()
+              .has(view.path, schema.name)
+              .in(view.from)
+
+            expect(labelDimension.out(view.labelFor).term).to.deep.eq(iriDimension)
+          })
         })
 
-        it('does not generate a join for when dimension is not sh:IRI', async function () {
+        it('does not generate joins for when dimension is not sh:IRI', async function () {
           // given
           cubeLookup.isIriDimension.resolves(false)
 
@@ -229,7 +249,7 @@ describe('@view-builder/view-util', () => {
       })
 
       context('with multiple sources', () => {
-        it('generates a join for schema:name when dimension is sh:IRI', async function () {
+        it('generates a join for schema:name and schema:termCode when dimension is sh:IRI', async function () {
           // given
           cubeLookup.isIriDimension.resolves(true)
 

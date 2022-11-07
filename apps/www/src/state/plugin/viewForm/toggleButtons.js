@@ -2,6 +2,7 @@ import generateDimensionsShapeQuads from '@view-builder/core/shape/ViewWithSourc
 import viewValidationShapeQuads from '@view-builder/core/shape/ViewValidationShape.ttl'
 import { prepareViewPointer } from '@view-builder/view-util'
 import $rdf from 'rdf-ext'
+import { client } from '../../../queries/index.js'
 
 const GenerateDimensionsShapes = $rdf.dataset(generateDimensionsShapeQuads($rdf))
 
@@ -18,7 +19,7 @@ export default function (store) {
       return
     }
 
-    const view = prepareViewPointer(pointer, { cleanup: false })
+    const view = await prepareViewPointer(pointer, { cleanup: false, client })
 
     dispatch.setViewValidity(await validate(view, ViewValidationShapes))
     dispatch.setSourcesValidity(await validate(view, GenerateDimensionsShapes))

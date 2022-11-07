@@ -1,12 +1,21 @@
 import { prepareViewPointer } from '@view-builder/view-util'
 import { _void, dcat, dcterms, rdf, schema } from '@tpluscode/rdf-ns-builders'
+import { getMetadataClient } from './sparql.js'
 
-export default function (pointer) {
-  const view = prepareViewPointer(pointer, {
+export default async function (pointer) {
+  const prepareOptions = {
     removeEventListener: true,
     rename: true,
     removeLimitOffset: true,
-  })
+  }
+
+  if (this.variables.has('cubeLookup')) {
+    prepareOptions.cubeLookup = this.variables.get('cubeLookup')
+  } else {
+    prepareOptions.client = getMetadataClient(this.variables)
+  }
+
+  const view = await prepareViewPointer(pointer, prepareOptions)
 
   view
     .addOut(rdf.type, [dcat.Dataset, _void.Dataset])
