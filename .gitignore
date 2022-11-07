@@ -5,3 +5,5 @@ dist/
 test-reports/
 restcli.jar
 coverage/
+packages/publish-views/.pipeline/
+packages/publish-views/output/

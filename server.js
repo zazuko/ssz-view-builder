@@ -3,8 +3,12 @@ import fallback from 'express-history-api-fallback'
 import conditional from 'express-conditional-middleware'
 import knossos from '@hydrofoil/knossos'
 import compression from 'compression'
+import healthcheck from '@view-builder/api/lib/healthcheck.js'
+import * as Sentry from '@view-builder/sentry'
 
 const app = express()
+
+Sentry.setup(app)
 
 app.enable('trust proxy')
 app.use(compression())
@@ -22,6 +26,8 @@ const apis = knossos.default({
   user: process.env.SPARQL_USER,
   password: process.env.SPARQL_PASSWORD,
 })
+
+app.get('/api/health', healthcheck)
 
 app.get('/', conditional(
   req => req.accepts('html'),

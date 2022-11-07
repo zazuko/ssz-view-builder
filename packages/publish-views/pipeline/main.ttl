@@ -1,0 +1,101 @@
+@prefix : <https://pipeline.described.at/> .
+@prefix code: <https://code.described.at/> .
+
+<Main>
+  a :Pipeline, :ReadableObjectMode ;
+  :variables
+    [
+      :variable
+        [
+          a :Variable ;
+          :name "well-known-views-dataset" ;
+          :value "https://ld.stadt-zuerich.ch/catalog/SSZ/view" ;
+        ] ;
+    ] ;
+  :steps
+    [
+      :stepList
+        (
+          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten>
+        )
+    ] ;
+.
+
+<#prepareView>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <node:barnard59-base/map.js#default> ;
+      a code:EcmaScriptModule ;
+    ] ;
+  code:arguments
+    (
+      [
+        a code:EcmaScriptModule ;
+        code:link <file:../lib/prepareView.js#default>
+      ]
+    ) ;
+.
+
+<#pointerToDataset>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <node:barnard59-base/map.js#default> ;
+      a code:EcmaScriptModule ;
+    ] ;
+  code:arguments
+    (
+      "({ dataset }) => dataset"^^code:EcmaScript
+    ) ;
+.
+
+<#validate>
+  a :Step ;
+  code:implementedBy
+    [
+      code:link <node:barnard59-validate-shacl/validate.js#shacl> ;
+      a code:EcmaScriptModule ;
+    ] ;
+  code:arguments
+    [ code:name "shape" ; code:value <#Shapes> ] ,
+    [
+      code:name "onViolation" ;
+      code:value [ a code:EcmaScriptModule ; code:link <file:../lib/shacl.js#collectShaclReports> ] ;
+    ];
+.
+
+<#checkShaclReports>
+   a :Step ;
+  code:implementedBy
+    [
+      code:link <file:../lib/shacl.js#failOnAnyViolations> ;
+      a code:EcmaScriptModule ;
+    ] ;
+.
+
+<#Shapes>
+  a :Pipeline, :ReadableObjectMode ;
+  :steps
+    [
+      :stepList
+        (
+          [
+            code:implementedBy
+              [
+                a code:EcmaScriptModule ;
+                code:link <file:../lib/shapes.js#validationShapes> ;
+              ] ;
+          ]
+        )
+    ]
+.
+
+<#flatten>
+  a :Step ;
+  code:implementedBy
+    [
+      a code:EcmaScriptModule ;
+      code:link <node:barnard59-base/flatten.js#default> ;
+    ] ;
+.

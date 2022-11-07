@@ -8,6 +8,7 @@ PREFIX view-builder: <https://view-builder.described.at/>
 
 <>
   a </api/ViewCollection>, view-builder:ViewCollection, hydra:Collection ;
+  view-builder:publish </views/publish> ;
   hydra:search
     [
       hydra:template "{?q}" ;
@@ -36,6 +37,14 @@ PREFIX view-builder: <https://view-builder.described.at/>
               sh:minCount 1 ;
               sh:maxCount 1 ;
             ] ;
+        ] ;
+    ] ;
+  query:memberDescribeStrategy
+    [
+      code:implementedBy
+        [
+          a code:EcmaScriptModule ;
+          code:link <file:apps/api/lib/viewCollection.js#construct> ;
         ] ;
     ] ;
 .

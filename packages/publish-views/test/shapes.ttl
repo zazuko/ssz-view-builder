@@ -1,0 +1,51 @@
+@prefix schema: <http://schema.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix view: <https://cube.link/view/> .
+
+<no-lndo-site>
+  a sh:NodeShape ;
+  sh:targetNode <https://view-builder.lndo.site/view/example> ;
+  sh:property
+    [
+      sh:path rdf:type ;
+      sh:maxCount 0 ;
+      sh:message "*.lndo.site resources should not exist in output" ;
+    ] ;
+.
+
+<no-offset>
+  a sh:NodeShape ;
+  sh:targetNode <https://example.org/view/example2> ;
+  sh:property
+    [
+      sh:path
+        (
+          view:projection
+          [ sh:alternativePath ( view:offset view:limit ) ]
+        ) ;
+      sh:maxCount 0 ;
+      sh:message "Published view must not have offset or limit" ;
+    ] ;
+.
+
+<public-view>
+  a sh:NodeShape ;
+  sh:targetClass view:View ;
+  sh:property
+    [
+      sh:path schema:sameAs ;
+      sh:maxCount 0 ;
+    ] ,
+    [
+      sh:path [ sh:inversePath schema:dataset ] ;
+      sh:minCount 1 ;
+      sh:hasValue <https://ld.stadt-zuerich.ch/catalog/SSZ/view> ;
+      sh:message "Every view must link back to void dataset" ;
+    ],
+    [
+      sh:path schema:author ;
+      sh:maxCount 0 ;
+      sh:message "Published view must not have the user link" ;
+    ] ;
+.

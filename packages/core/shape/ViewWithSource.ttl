@@ -1,0 +1,24 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix view: <https://cube.link/view/>
+prefix : <https://view-builder.described.at/>
+
+<>
+  a sh:NodeShape ;
+  sh:targetClass view:View ;
+  sh:property
+    [
+      sh:path :source ;
+      sh:class view:CubeSource ;
+      sh:nodeKind sh:IRI ;
+      sh:minCount 1 ;
+      sh:node
+        [
+          sh:property
+            [
+              sh:path view:cube ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+            ]
+        ] ;
+    ] ;
+.

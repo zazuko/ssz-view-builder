@@ -21,5 +21,9 @@ RUN yarn global add yarn-deduplicate \
 ENV APP_NAME="view-builder"
 ENV PORT="8080"
 
+# build with `docker build --build-arg COMMIT=$(git rev-parse HEAD)`
+ARG COMMIT
+ENV SENTRY_RELEASE=ssz-view-builder@$COMMIT
+
 EXPOSE 8080
 CMD [ "/app/entrypoint.sh" ]

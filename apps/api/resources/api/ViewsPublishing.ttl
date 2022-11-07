@@ -1,0 +1,45 @@
+prefix sh: <http://www.w3.org/ns/shacl#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX code: <https://code.described.at/>
+PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+prefix view-builder: <https://view-builder.described.at/>
+
+<>
+  a hydra:Class ;
+  hydra:supportedOperation _:PublishViews ;
+.
+
+view-builder:publish hydra:supportedOperation _:PublishViews .
+
+_:PublishViews
+  a view-builder:PublishAction ;
+  hydra:title "Publish views" ;
+  hydra:method "POST" ;
+  code:implementedBy
+    [
+      a code:EcmaScriptModule ;
+      code:link <file:apps/api/lib/viewCollection/publish.js#default> ;
+    ] ;
+  hydra:expects
+    [
+      rdfs:label "Publish views" ;
+      sh:property
+        [
+          sh:path view-builder:downloadOnly ;
+          sh:name "Download only" ;
+          sh:datatype xsd:boolean ;
+          sh:defaultValue true ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+        ],
+        [
+          sh:path view-builder:ignoreWarnings ;
+          sh:name "Ignore warnings" ;
+          sh:datatype xsd:boolean ;
+          sh:defaultValue false ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+        ] ;
+    ] ;
+.

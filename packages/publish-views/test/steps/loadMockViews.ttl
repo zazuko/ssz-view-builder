@@ -1,0 +1,13 @@
+PREFIX code: <https://code.described.at/>
+prefix : <https://pipeline.described.at/>
+
+# Streams view pointers prepared in test setup,
+# stored in the `views` variable
+<#loadViews>
+  a :Step ;
+  code:implementedBy
+    """function () {
+         return require('stream').Readable.from(this.variables.get('views') || [])
+       }
+    """^^code:EcmaScript ;
+.

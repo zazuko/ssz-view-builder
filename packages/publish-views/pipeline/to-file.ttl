@@ -1,0 +1,35 @@
+@prefix : <https://pipeline.described.at/> .
+@prefix code: <https://code.described.at/> .
+
+<ToFile>
+  a :Pipeline ;
+  :steps
+    [
+      :stepList
+        (
+          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten> <#serialize> _:save
+        )
+    ] ;
+  :variables
+    [
+      :variable
+        [
+          a :Variable ;
+          :name "outFile" ;
+          :value "output/views.nt" ;
+        ] ;
+    ] ;
+.
+
+_:save
+  a :Step ;
+  code:implementedBy
+    [
+      a code:EcmaScript ;
+      code:link <node:fs#createWriteStream> ;
+    ] ;
+  code:arguments
+    (
+      "outFile"^^:VariableName
+    )
+.
