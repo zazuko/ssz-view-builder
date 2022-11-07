@@ -15,13 +15,21 @@ export async function getColumns(view, cubeLookup) {
     })))
 
   return (function * iterate() {
+    let i = 0
+    function nextColumnProperty() {
+      i += 1
+      return view.namedNode(`${view.value}#column${i}`)
+    }
+
     for (const { dimension, isIri } of dimensions) {
+      dimension.addOut(ns.view.as, nextColumnProperty())
       yield dimension
 
       if (isIri) {
         const labelDimension = view.blankNode()
 
         labelDimension
+          .addOut(ns.view.as, nextColumnProperty())
           .addOut(ns.view.labelFor, dimension)
           .addOut(ns.view.from, (from) => {
             from.addOut(ns.view.source, (source) => {
@@ -36,6 +44,7 @@ export async function getColumns(view, cubeLookup) {
         const termCodeDimension = view.blankNode()
 
         termCodeDimension
+          .addOut(ns.view.as, nextColumnProperty())
           .addOut(ns.view.from, (from) => {
             from.addOut(ns.view.source, (source) => {
               source.addOut(rdf.type, ns.view.LookupSource)
