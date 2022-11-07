@@ -166,10 +166,12 @@ describe('@view-builder/view-util', () => {
           .has(view.path, schema.inDefinedTermSet)
         expect(dimension.out(view.source).out(rdf.type).term).to.deep.eq(view.LookupSource)
 
-        const joined = dimension
-          .out(view.join)
-          .out(view.as)
-        expect(joined.value).to.deep.eq(ssz('property/RAUM').value)
+        const raum = dimension
+          .any()
+          .has(view.path, ssz('property/RAUM'))
+          .in(view.from)
+        const joined = dimension.out(view.join)
+        expect(joined.term).to.deep.eq(raum.term)
       })
     })
 
