@@ -1,9 +1,10 @@
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import asyncMiddleware from 'middleware-async'
-import { hydra, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
+import { dcterms, hydra, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import { cube } from '@zazuko/vocabulary-extras/builders'
+import { viewBuilder } from '@view-builder/core/ns.js'
 
 /**
  * GET handler for loading view metadata from the metadata endpoint
@@ -11,6 +12,8 @@ import { cube } from '@zazuko/vocabulary-extras/builders'
  * The response is a hydra collection
  */
 export const get = asyncMiddleware(async (req, res) => {
+  const publisher = req.knossos.config.out(viewBuilder.publisher).term
+
   const collection = clownface({
     dataset: $rdf.dataset(),
     term: req.hydra.term,
@@ -25,13 +28,14 @@ export const get = asyncMiddleware(async (req, res) => {
       ?view a ${schema.Dataset} ;
             ${schema.name} ?label ;
             ${schema.alternateName} ?uniqueId ;
+            ${dcterms.publisher} ${publisher} ;
       .
     }
     
     FILTER NOT EXISTS {
       [
         # Exclude views which already exist in view builder
-        a ${cube('view/View')} ; ${schema.sameAs} ?view
+        a ${cube('view/View')} ; ${schema.alternateName} ?uniqueId
       ]
     }
   `.execute(req.labyrinth.sparql.query)

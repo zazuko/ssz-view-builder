@@ -4,8 +4,8 @@ prefix view: <https://cube.link/view/>
 prefix view-builder: <https://view-builder.described.at/>
 
 <> a </api/View>, view:View ;
-  schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/678> ;
-  schema:identifier "678" ;
+  schema:isBasedOn <https://ld.stadt-zuerich.ch/statistics/meta/object/678> ;
+  schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/BAU699OD6991> ;
   schema:alternateName "BAU699OD6991" ;
   schema:name "Haushalte in Neubau-Wohnungen nach Bauperiode, Zimmerzahl, Eigentumsart, Haushalttyp und Quartier, seit 2006" ;
   view-builder:source <#source-bew> ;

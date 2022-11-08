@@ -46,7 +46,7 @@ prefix view-builder: <https://view-builder.described.at/>
       hydra:mapping
         [
           hydra:variable "id" ;
-          hydra:property schema:identifier ;
+          hydra:property schema:alternateName ;
           hydra:required true ;
         ] ;
     ] ;

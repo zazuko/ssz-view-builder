@@ -1,3 +1,5 @@
+PREFIX view-builder: <https://view-builder.described.at/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 PREFIX code: <https://code.described.at/>
 PREFIX schema: <http://schema.org/>
@@ -5,6 +7,19 @@ PREFIX knossos: <https://hypermedia.app/knossos#>
 
 <>
   a knossos:Configuration ;
+  # TODO: make these env specific
+  view-builder:publisher <https://ld.stadt-zuerich.ch/statistics/meta/org/4> ;
+  view-builder:publishedViewTemplate
+    [
+      a hydra:IriTemplate ;
+      hydra:template "https://ld.stadt-zuerich.ch/statistics/view/{id}" ;
+      hydra:mapping
+        [
+          hydra:variable "id" ;
+          hydra:property schema:alternateName ;
+          hydra:required true ;
+        ] ;
+    ] ;
   knossos:middleware
     [
       schema:name "operations" ;

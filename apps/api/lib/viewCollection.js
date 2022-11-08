@@ -39,7 +39,6 @@ export function construct({ client }) {
     // TODO: Construct generated from NodeShape
     return CONSTRUCT`
       ?resource a ?type ;
-                ${schema.identifier} ?id ; 
                 ${schema.name} ?name ; 
                 ${schema.alternateName} ?alt .
                 
@@ -49,7 +48,6 @@ export function construct({ client }) {
       ${VALUES(...resources)}
 
       ?resource a ?type ;
-                ${schema.identifier} ?id ; 
                 ${schema.name} ?name ; 
                 ${schema.alternateName} ?alt .
                 

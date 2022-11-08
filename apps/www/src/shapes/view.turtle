@@ -87,17 +87,6 @@ view:In rdfs:label "one of" .
     sh:defaultValue false ;
 .
 
-:PrimaryProperty
-    sh:group :Group_Meta ;
-    sh:name "Internal ID" ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:minLength 1 ;
-    dash:readOnly true ;
-    dash:hidden true ;
-    sh:path schema:identifier ;
-.
-
 :CubeSourceProperty
     sh:path :source ;
     sh:class view:CubeSource ;

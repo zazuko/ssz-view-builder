@@ -38,6 +38,14 @@
       sh:maxCount 0 ;
     ] ,
     [
+      sh:path schema:isBasedOn ;
+      sh:maxCount 0 ;
+    ] ,
+    [
+      sh:path schema:identifier ;
+      sh:maxCount 0 ;
+    ] ,
+    [
       sh:path [ sh:inversePath schema:dataset ] ;
       sh:minCount 1 ;
       sh:hasValue <https://ld.stadt-zuerich.ch/catalog/SSZ/view> ;

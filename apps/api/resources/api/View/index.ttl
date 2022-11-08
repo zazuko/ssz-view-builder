@@ -40,11 +40,18 @@ PREFIX query: <https://hypermedia.app/query#>
     ] ;
   sh:property
     [
-      sh:path schema:identifier ;
+      sh:path schema:alternateName ;
       sh:minCount 1 ;
       sh:maxCount 1 ;
       sh:minLength 1 ;
       sh:datatype xsd:string ;
+    ] ;
+  sh:property
+    [
+      sh:path schema:sameAs ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
     ] ;
   sh:property
     [

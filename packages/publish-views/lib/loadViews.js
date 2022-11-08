@@ -12,21 +12,24 @@ export default async function loadViewsToPublish() {
   const client = this.variables.client || getViewBuilderClient(this.variables)
   const metaClient = getMetadataClient(this.variables)
 
-  const views = await SELECT`?viewBuilderView ?publishedView`
+  const views = await SELECT`?viewBuilderView ?publishedView ?metaObject`
     .WHERE`
       ?viewBuilderView 
         a ${ns.view.View} ;
         ${schema.sameAs} ?publishedView ; 
+        ${schema.isBasedOn} ?metaObject ;
         ${ns.viewBuilder.publish} true ;
     `
     .execute(client.query)
 
-  return views.pipe(through2.obj(async function ({ viewBuilderView, publishedView }, _, next) {
+  return views.pipe(through2.obj(async function (bindings, _, next) {
+    const { viewBuilderView, publishedView, metaObject } = bindings
+
     const viewQuads = await CONSTRUCT`?s ?p ?o`
       .FROM(viewBuilderView)
       .WHERE`?s ?p ?o`
       .execute(client.query)
-    const metaQuads = await loadViewMeta(publishedView, metaClient)
+    const metaQuads = await loadViewMeta(publishedView, metaObject, metaClient)
 
     const dataset = $rdf.dataset()
     await Promise.all([dataset.import(viewQuads), dataset.import(metaQuads)])
@@ -36,11 +39,25 @@ export default async function loadViewsToPublish() {
   }))
 }
 
-async function loadViewMeta(view, client) {
+async function loadViewMeta(publishedView, metaObject, client) {
   const shape = await viewShape()
 
   const subjectVariable = 'view'
-  const query = shapeTo.construct(shape, { focusNode: view, subjectVariable })
+  const query = shapeTo.construct(shape, { focusNode: metaObject, subjectVariable })
+  const metaStream = await query.execute(client.query)
 
-  return query.execute(client.query)
+  return metaStream.pipe(through2.obj(viewIdTransform(metaObject, publishedView)))
+}
+
+function viewIdTransform(from, to) {
+  const rename = term => (term.equals(from) ? to : from)
+
+  return function renameToPublishedView(quad, cb, next) {
+    const subject = rename(quad.subject)
+    const predicate = rename(quad.predicate)
+    const object = rename(quad.object)
+
+    this.push($rdf.quad(subject, predicate, object))
+    next()
+  }
 }
