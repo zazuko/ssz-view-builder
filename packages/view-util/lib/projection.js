@@ -4,14 +4,14 @@ import { rdf, schema } from '@tpluscode/rdf-ns-builders'
 /**
  * Iterated view dimensions and return a set of columns to set as `view:projection/view:columns`.
  *
- * For every dimension whose values are IRIs, yields a new label lookup dimension.
- * Otherwise, yields the dimension itself.
+ * For every dimension whose values are IRIs, yields a additional lookup dimension
+ * which join their `schema:label` and `schema:termCode`.
  */
 export async function getColumns(view, cubeLookup) {
   const dimensions = await Promise.all(view.out(ns.view.dimension)
     .map(async dimension => ({
       dimension,
-      isIri: await cubeLookup.isIriDimension(dimension),
+      needsLookupDimensions: await cubeLookup.isIriDimension(dimension),
     })))
 
   return (function * iterate() {
@@ -21,11 +21,11 @@ export async function getColumns(view, cubeLookup) {
       return view.namedNode(`${view.value}#column${i}`)
     }
 
-    for (const { dimension, isIri } of dimensions) {
+    for (const { dimension, needsLookupDimensions } of dimensions) {
       dimension.addOut(ns.view.as, nextColumnProperty())
       yield dimension
 
-      if (isIri) {
+      if (needsLookupDimensions) {
         const labelDimension = view.blankNode()
 
         labelDimension
