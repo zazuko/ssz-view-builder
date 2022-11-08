@@ -41,8 +41,8 @@ function table({ state, dispatch }) {
     ?.out(hydra.member)
     .toArray()
     .sort((l, r) => {
-      const leftId = l.out(schema.identifier).value || ''
-      const rightId = r.out(schema.identifier).value || ''
+      const leftId = l.out(schema.alternateName).value || ''
+      const rightId = r.out(schema.alternateName).value || ''
 
       return leftId.localeCompare(rightId)
     }) || []

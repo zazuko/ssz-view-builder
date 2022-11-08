@@ -1,6 +1,12 @@
 import { schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import fromStream from 'rdf-dataset-ext/fromStream.js'
+import { IriTemplateBundle } from '@rdfine/hydra/bundles'
+import { fromPointer } from '@rdfine/hydra/lib/IriTemplate'
+import { viewBuilder } from '@view-builder/core/ns.js'
+import RdfResource from '@tpluscode/rdfine'
+
+RdfResource.factory.addMixin(...IriTemplateBundle)
 
 /**
  * Queries the metadata endpoint to load necessary metadata for a view
@@ -9,25 +15,31 @@ import fromStream from 'rdf-dataset-ext/fromStream.js'
  * @param pointer The payload, which is new instance of `</api/View>`
  */
 export async function importMetadata({ req, pointer }) {
-  const sourceDataset = pointer.out(schema.sameAs).term
-  const view = pointer.term
+  const sourceDataset = pointer.out(schema.isBasedOn).term
 
   if (sourceDataset) {
-    const metadata = await CONSTRUCT`
-      ${view} ${schema.identifier} ?identifier ;
-              ${schema.alternateName} ?alternateName ;
-              ${schema.name} ?name .
-    `
-      .WHERE`
-        SERVICE <${process.env.METADATA_ENDPOINT}> {
-          ${sourceDataset} ${schema.identifier} ?identifier ;
-                           ${schema.alternateName} ?alternateName ;
-                           ${schema.name} ?name .
-        }
-      `.execute(req.labyrinth.sparql.query)
+    const metadataQuery = await constructMetadata(pointer, sourceDataset)
+    await fromStream(pointer.dataset, await metadataQuery.execute(req.labyrinth.sparql.query))
 
-    await fromStream(pointer.dataset, metadata)
+    const template = fromPointer(req.knossos.config.out(viewBuilder.publishedViewTemplate))
+    const publishedUri = template.expand(pointer)
+    pointer.addOut(schema.sameAs, pointer.namedNode(publishedUri))
   }
+}
+
+function constructMetadata(pointer, sourceDataset) {
+  const view = pointer.term
+
+  return CONSTRUCT`
+    ${view} ${schema.alternateName} ?alternateName ;
+            ${schema.name} ?name .
+    `
+    .WHERE`
+      SERVICE <${process.env.METADATA_ENDPOINT}> {
+        ${sourceDataset} ${schema.alternateName} ?alternateName ;
+                         ${schema.name} ?name .
+      }
+    `
 }
 
 export function setAuthor({ req, pointer }) {

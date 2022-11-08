@@ -10,7 +10,7 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
   sh:property
     [
       sh:name "Base View" ;
-      sh:path schema:sameAs ;
+      sh:path schema:isBasedOn ;
       sh:minCount 1 ;
       sh:maxCount 1 ;
       dash:editor dash:InstancesSelectEditor ;

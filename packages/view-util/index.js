@@ -15,7 +15,7 @@ export function prepareViewPointer(pointer, { cleanup = true, removeLimitOffset,
   let view = clownface({ dataset }).node(pointer)
   if (rename) {
     view = rebase(view)
-    view.deleteOut(schema.sameAs)
+    view.deleteOut(schema.sameAs).deleteOut(schema.isBasedOn)
   }
 
   const filters = view.out(ns.view.filter).toArray()

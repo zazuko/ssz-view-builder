@@ -3,7 +3,7 @@ PREFIX view: <https://cube.link/view/>
 
 <>
   a </api/View> ;
-  schema:identifier "single dimension" ;
+  schema:alternateName "single dimension" ;
   view:dimension
     [
       a view:Dimension ;

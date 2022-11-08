@@ -26,6 +26,7 @@ describe('@view-builder/publish-views', () => {
         const ptr = await testData`
           <>
             a ${view.View}, ${schema.Dataset} ;
+            ${schema.isBasedOn} <https://example.com/view/meta> ;
             ${schema.sameAs} <https://example.com/published/view> ;
             ${view.dimension} [
               ${view.from} [
@@ -40,7 +41,7 @@ describe('@view-builder/publish-views', () => {
           <https://example.com/published/view>
             a ${dcat.Dataset}, ${_void.Dataset} ;
             ${schema.name} "Test view" ;
-            ${schema.identifier} "TEST" ;
+            ${schema.alternateName} "TEST" ;
           .
         `
 
@@ -59,6 +60,7 @@ describe('@view-builder/publish-views', () => {
         const ptr = await testData`
           <>
             a ${view.View}, ${schema.Dataset} ;
+            ${schema.isBasedOn} <https://example.com/view/meta> ;
             ${schema.sameAs} <https://example.com/published/view> ; 
           .`
 
@@ -66,7 +68,7 @@ describe('@view-builder/publish-views', () => {
         const { run } = await runPipeline(ptr)
 
         // then
-        await expect(run.finished).to.be.rejectedWith(ValidationError, '1 views failed. 3 issues found')
+        await expect(run.finished).to.be.rejectedWith(ValidationError, '1 views failed. 2 issues found')
       })
     })
   })
