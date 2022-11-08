@@ -45,6 +45,7 @@
     "@typescript-eslint/parser": "^5.35.1",
     "c8": "^7.12.0",
     "chai-as-promised": "^7.1.1",
+    "chai-snapshot-matcher": "^2.0.3",
     "dotenv-cli": "^6.0.0",
     "eslint": "8.22.0",
     "eslint-config-standard": "^17.0.0",

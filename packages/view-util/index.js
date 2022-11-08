@@ -5,8 +5,18 @@ import * as ns from '@view-builder/core/ns.js'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import { createFilterDimension, generateLookupSources } from './lib/filters.js'
 import { removeApiProperties, sourcesToBlankNodes, rebase } from './lib/viewGraph.js'
+import { getColumns } from './lib/projection.js'
+import { CubeLookup } from './lib/cubeLookup.js'
 
-export function prepareViewPointer(pointer, { cleanup = true, removeLimitOffset, rename } = {}) {
+export async function prepareViewPointer(pointer, options = {}) {
+  const {
+    cleanup = true,
+    removeLimitOffset,
+    rename,
+    client,
+    cubeLookup = new CubeLookup(client),
+  } = options
+
   let dataset = $rdf.dataset([...pointer.dataset])
   if (cleanup) {
     dataset = sourcesToBlankNodes(dataset)
@@ -28,8 +38,10 @@ export function prepareViewPointer(pointer, { cleanup = true, removeLimitOffset,
     }
   }
 
+  const columns = [...await getColumns(view, cubeLookup)]
+  view.addOut(ns.view.dimension, columns)
   const projection = view.out(ns.view.projection)
-  projection.addList(ns.view.columns, view.out(ns.view.dimension))
+  projection.addList(ns.view.columns, columns)
 
   if (removeLimitOffset) {
     projection.deleteOut([ns.view.limit, ns.view.offset])

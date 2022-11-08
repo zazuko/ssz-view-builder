@@ -8,6 +8,7 @@ prefix view: <https://cube.link/view/>
     [
       sh:path view:dimension ;
       sh:minCount 1 ;
+      sh:node <#Dimension> ;
       sh:xone
         (
           [
@@ -28,23 +29,28 @@ prefix view: <https://cube.link/view/>
     ] ;
 .
 
+<#Dimension>
+  sh:property
+    [
+      sh:path view:as ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ],
+    [
+      sh:path ( view:from view:path ) ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+.
+
 <#CubeDimension>
   sh:property
     [
       sh:path ( view:from view:source ) ;
       sh:node <#source> ;
       sh:minCount 1 ;
-    ],
-    [
-      sh:path ( view:from view:path ) ;
-      sh:nodeKind sh:BlankNodeOrIRI ;
-      sh:minCount 1 ;
-      sh:maxCount 1 ;
-    ],
-    [
-      sh:path view:as ;
-      sh:nodeKind sh:IRI ;
-      sh:maxCount 1 ;
     ] ;
 .
 
@@ -61,12 +67,6 @@ prefix view: <https://cube.link/view/>
       sh:node <#CubeDimension> ;
       sh:minCount 1 ;
       sh:maxCount 1 ;
-    ],
-    [
-      sh:path ( view:from view:path ) ;
-      sh:minCount 1 ;
-      sh:maxCount 1 ;
-      sh:nodeKind sh:BlankNodeOrIRI ;
     ] ;
 .
 
