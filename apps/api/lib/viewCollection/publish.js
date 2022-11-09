@@ -34,6 +34,7 @@ function downloadViews(req, res, next, ignoreWarnings) {
       {
         outFile: temporaryPath,
         variables: {
+          client: req.labyrinth.sparql,
           METADATA_ENDPOINT,
           SPARQL_ENDPOINT,
           SPARQL_USER,

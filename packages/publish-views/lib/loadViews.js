@@ -9,7 +9,7 @@ import { viewShape } from './shapes.js'
 import { getViewBuilderClient, getMetadataClient } from './sparql.js'
 
 export default async function loadViewsToPublish() {
-  const client = getViewBuilderClient(this.variables)
+  const client = this.variables.client || getViewBuilderClient(this.variables)
   const metaClient = getMetadataClient(this.variables)
 
   const views = await SELECT`?viewBuilderView ?publishedView`
