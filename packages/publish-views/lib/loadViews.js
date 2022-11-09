@@ -56,8 +56,9 @@ function viewIdTransform(from, to) {
     const subject = rename(quad.subject)
     const predicate = rename(quad.predicate)
     const object = rename(quad.object)
+    const graph = rename(object)
 
-    this.push($rdf.quad(subject, predicate, object))
+    this.push($rdf.quad(subject, predicate, object, graph))
     next()
   }
 }
