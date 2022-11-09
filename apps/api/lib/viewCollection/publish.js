@@ -6,6 +6,18 @@ import { schema } from '@tpluscode/rdf-ns-builders'
 import { toRdf } from 'rdf-literal'
 import { temporaryFileTask } from 'tempy'
 
+const {
+  PUBLIC_ENDPOINT,
+  PUBLIC_STORE_ENDPOINT,
+  PUBLIC_ENDPOINT_USER,
+  PUBLIC_ENDPOINT_PASSWORD,
+  PUBLIC_VIEWS_GRAPH,
+  METADATA_ENDPOINT,
+  SPARQL_ENDPOINT,
+  SPARQL_USER,
+  SPARQL_PASSWORD,
+} = process.env
+
 export default asyncMiddleware(async (req, res, next) => {
   const payload = await req.resource()
   const ignoreWarnings = payload.out(viewBuilder.ignoreWarnings).value === 'true'
@@ -22,8 +34,10 @@ function downloadViews(req, res, next, ignoreWarnings) {
       {
         outFile: temporaryPath,
         variables: {
-          client: req.labyrinth.sparql,
-          METADATA_ENDPOINT: process.env.METADATA_ENDPOINT,
+          METADATA_ENDPOINT,
+          SPARQL_ENDPOINT,
+          SPARQL_USER,
+          SPARQL_PASSWORD,
           ignoreWarnings,
         },
       },
@@ -41,14 +55,6 @@ function downloadViews(req, res, next, ignoreWarnings) {
 }
 
 async function publish(req, res, next, ignoreWarnings) {
-  const {
-    PUBLIC_ENDPOINT,
-    PUBLIC_STORE_ENDPOINT,
-    PUBLIC_ENDPOINT_USER,
-    PUBLIC_ENDPOINT_PASSWORD,
-    PUBLIC_VIEWS_GRAPH,
-    METADATA_ENDPOINT,
-  } = process.env
   const { run } = await publishViews.toStore({
     client: req.labyrinth.sparql,
     PUBLIC_ENDPOINT,
