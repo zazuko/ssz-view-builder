@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { ASK, DELETE } from '@tpluscode/sparql-builder'
+import { ASK } from '@tpluscode/sparql-builder'
 import StreamClient from 'sparql-http-client'
 import { hydra } from '@tpluscode/rdf-ns-builders'
 import asyncMiddleware from 'middleware-async'
@@ -36,7 +36,7 @@ export default asyncMiddleware(async (req, res, next) => {
     return next('Failed to connect to view builder database for reading')
   }
 
-  try {
+  /* try {
     await DELETE.DATA`
       GRAPH <urn:health:check> {
         <urn:healthcheck:s> <urn:healthcheck:p> <urn:healthcheck:o>
@@ -46,7 +46,7 @@ export default asyncMiddleware(async (req, res, next) => {
   } catch (e) {
     console.log(e)
     return next('Failed to connect to view builder database for writing')
-  }
+  } */
 
   try {
     await ASK`?s ?p ?o`.execute(publishingStoreClient.query)
