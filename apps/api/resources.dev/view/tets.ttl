@@ -1,0 +1,32 @@
+<> a <https://cube.link/view/View> , <https://view-builder.ld.integ.stadt-zuerich.ch/api/View> .
+<#source-5WrgYQW7AHPsMjvetTgeT> a <https://cube.link/view/CubeSource> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-23511A10B6EBF5D2121A16E44AC997D3 a <https://cube.link/view/Dimension> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-C317A458CC3C298D304DFDBF19501891 a <https://cube.link/view/Dimension> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-71AED30544D3DDF76CD2A695BC8F50E5 a <https://cube.link/view/Dimension> .
+<> <http://schema.org/sameAs> <https://ld.stadt-zuerich.ch/statistics/view/BAU698OD6983> ;
+  <http://schema.org/author> <https://view-builder.ld.integ.stadt-zuerich.ch/user/ssz> ;
+  <https://cube.link/view/dimension> _:genid-ca339ebdff5a49c8a424d46674f0a290-23511A10B6EBF5D2121A16E44AC997D3 , _:genid-ca339ebdff5a49c8a424d46674f0a290-C317A458CC3C298D304DFDBF19501891 , _:genid-ca339ebdff5a49c8a424d46674f0a290-71AED30544D3DDF76CD2A695BC8F50E5 .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-23511A10B6EBF5D2121A16E44AC997D3 <https://cube.link/view/from> _:genid-ca339ebdff5a49c8a424d46674f0a290-F87B0EA08AC6131140311E6855713AB8 .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-C317A458CC3C298D304DFDBF19501891 <https://cube.link/view/from> _:genid-ca339ebdff5a49c8a424d46674f0a290-C0CD22C2807E580DA728C719D7BB406C .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-71AED30544D3DDF76CD2A695BC8F50E5 <https://cube.link/view/from> _:genid-ca339ebdff5a49c8a424d46674f0a290-B044D862E2B496C42917C88A3733C1E5 .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-F87B0EA08AC6131140311E6855713AB8 <https://cube.link/view/source> <#source-5WrgYQW7AHPsMjvetTgeT> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-C0CD22C2807E580DA728C719D7BB406C <https://cube.link/view/source> <#source-5WrgYQW7AHPsMjvetTgeT> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-B044D862E2B496C42917C88A3733C1E5 <https://cube.link/view/source> <#source-5WrgYQW7AHPsMjvetTgeT> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-F87B0EA08AC6131140311E6855713AB8 <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/measure/BEW> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-C0CD22C2807E580DA728C719D7BB406C <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-B044D862E2B496C42917C88A3733C1E5 <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/RAUM> .
+<> <https://view-builder.described.at/publish> true .
+<#source-5WrgYQW7AHPsMjvetTgeT> <http://www.w3.org/2000/01/rdf-schema#label> "Wirtschaftliche Bevölkerung" .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-23511A10B6EBF5D2121A16E44AC997D3 <http://www.w3.org/2000/01/rdf-schema#label> "Measure Wirtschaftliche Wohnbevölkerung (Wirtschaftliche Bevölkerung)" .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-C317A458CC3C298D304DFDBF19501891 <http://www.w3.org/2000/01/rdf-schema#label> "Key Zeit" .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-71AED30544D3DDF76CD2A695BC8F50E5 <http://www.w3.org/2000/01/rdf-schema#label> "Key Raum" .
+<> <http://schema.org/name> "Altersklassen der Bewohnenden nach Gebäudeeigentum und Stadtquartieren in der Stadt Zürich seit 2008" ;
+  <http://schema.org/alternateName> "BAU698OD6983" ;
+  <https://cube.link/view/projection> _:genid-ca339ebdff5a49c8a424d46674f0a290-F52C9AC0C7ABA32018C9E04271FCBB90 ;
+  <https://view-builder.described.at/source> <#source-5WrgYQW7AHPsMjvetTgeT> .
+<#source-5WrgYQW7AHPsMjvetTgeT> <https://cube.link/view/cube> <https://ld.stadt-zuerich.ch/statistics/000201> ;
+  <https://view-builder.described.at/keyFigure> <https://ld.stadt-zuerich.ch/statistics/measure/BEW> .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-23511A10B6EBF5D2121A16E44AC997D3 <https://view-builder.described.at/generated> true .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-C317A458CC3C298D304DFDBF19501891 <https://view-builder.described.at/generated> true .
+_:genid-ca339ebdff5a49c8a424d46674f0a290-71AED30544D3DDF76CD2A695BC8F50E5 <https://view-builder.described.at/generated> true .
+<> <http://schema.org/isBasedOn> <https://ld.stadt-zuerich.ch/statistics/meta/object/828> .

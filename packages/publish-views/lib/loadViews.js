@@ -50,13 +50,13 @@ async function loadViewMeta(publishedView, metaObject, client) {
 }
 
 function viewIdTransform(from, to) {
-  const rename = term => (term.equals(from) ? to : from)
+  const rename = term => (term.equals(from) ? to : term)
 
   return function renameToPublishedView(quad, cb, next) {
     const subject = rename(quad.subject)
     const predicate = rename(quad.predicate)
     const object = rename(quad.object)
-    const graph = rename(object)
+    const graph = rename(quad.graph)
 
     this.push($rdf.quad(subject, predicate, object, graph))
     next()

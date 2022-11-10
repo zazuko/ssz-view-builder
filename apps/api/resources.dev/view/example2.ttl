@@ -10,7 +10,7 @@ prefix view: <https://cube.link/view/>
   schema:name "Wohnungsbestand und Personenzahl in Gebäuden nach Statistischer Zone seit 2008" ;
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/cvasquez> ;
-  view-builder:publish true ;
+  view-builder:publish false ;
   view:projection
     [
       view:limit 100 ;
