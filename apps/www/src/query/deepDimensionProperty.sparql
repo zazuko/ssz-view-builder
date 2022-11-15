@@ -10,27 +10,18 @@ CONSTRUCT {
   ?prop rdfs:label ?prop
 }
 where {
-  {
-    SELECT DISTINCT ?prop
+  select distinct ?prop {
     {
+      SELECT ?prop
       {
-        SELECT ?observation
-        {
-          # BIND(iri("{CUBE}") as ?cube)
+        ?cube cube:observationSet/cube:observation ?observation .
 
-          # TODO currently there is no way to bind the cube to a template
-          # because it's nested under view:source
-          # For that reason, a sample of observation is selected instead in a subquery
+        ?observation <{DIMENSION}> ?observationValue .
+        ?observationValue ?prop ?any .
 
-          ?cube cube:observationSet/cube:observation ?observation .
-        }
-        limit 10000
+        FILTER (?prop NOT IN (schema:inDefinedTermSet, rdf:type ))
       }
-
-      BIND(iri("{DIMENSION}") as ?dimension)
-      ?observation ?dimension ?observationValue .
-      ?observationValue ?prop ?any .
+      limit 1000
     }
   }
-  FILTER (?prop NOT IN (schema:inDefinedTermSet, rdf:type ))
 }
