@@ -34,7 +34,6 @@ function downloadViews(req, res, next, ignoreWarnings) {
       {
         outFile: temporaryPath,
         variables: {
-          client: req.labyrinth.sparql,
           METADATA_ENDPOINT,
           SPARQL_ENDPOINT,
           SPARQL_USER,
@@ -57,7 +56,6 @@ function downloadViews(req, res, next, ignoreWarnings) {
 
 async function publish(req, res, next, ignoreWarnings) {
   const { run } = await publishViews.toStore({
-    client: req.labyrinth.sparql,
     PUBLIC_ENDPOINT,
     PUBLIC_STORE_ENDPOINT,
     PUBLIC_ENDPOINT_USER,
