@@ -18,6 +18,18 @@ const {
   SPARQL_PASSWORD,
 } = process.env
 
+const processVariables = {
+  PUBLIC_ENDPOINT,
+  PUBLIC_STORE_ENDPOINT,
+  PUBLIC_ENDPOINT_USER,
+  PUBLIC_ENDPOINT_PASSWORD,
+  PUBLIC_VIEWS_GRAPH,
+  METADATA_ENDPOINT,
+  SPARQL_ENDPOINT,
+  SPARQL_USER,
+  SPARQL_PASSWORD,
+}
+
 export default asyncMiddleware(async (req, res, next) => {
   const payload = await req.resource()
   const ignoreWarnings = payload.out(viewBuilder.ignoreWarnings).value === 'true'
@@ -34,10 +46,7 @@ function downloadViews(req, res, next, ignoreWarnings) {
       {
         outFile: temporaryPath,
         variables: {
-          METADATA_ENDPOINT,
-          SPARQL_ENDPOINT,
-          SPARQL_USER,
-          SPARQL_PASSWORD,
+          ...processVariables,
           ignoreWarnings,
         },
       },
@@ -56,12 +65,7 @@ function downloadViews(req, res, next, ignoreWarnings) {
 
 async function publish(req, res, next, ignoreWarnings) {
   const { run } = await publishViews.toStore({
-    PUBLIC_ENDPOINT,
-    PUBLIC_STORE_ENDPOINT,
-    PUBLIC_ENDPOINT_USER,
-    PUBLIC_ENDPOINT_PASSWORD,
-    PUBLIC_VIEWS_GRAPH,
-    METADATA_ENDPOINT,
+    ...processVariables,
     ignoreWarnings,
   })
 
