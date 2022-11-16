@@ -46,6 +46,7 @@ async function startRun({ term, steps, variables }) {
     basePath: __dirname,
     variables: new Map(Object.entries(variables)),
     outputStream,
+    level: 'debug',
   })
 
   return { stream: outputStream, run }
