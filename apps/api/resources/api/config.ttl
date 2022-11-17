@@ -50,14 +50,6 @@ PREFIX knossos: <https://hypermedia.app/knossos#>
       code:implementedBy
         [
           a code:EcmaScriptModule ;
-          code:link <file:apps/api/lib/auth.js#populateUsers> ;
-        ] ;
-    ],
-    [
-      schema:name "before" ;
-      code:implementedBy
-        [
-          a code:EcmaScriptModule ;
           code:link <node:@view-builder/sentry/index.js#beforeHandler> ;
         ] ;
     ],
