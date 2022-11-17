@@ -72,6 +72,7 @@
   "mocha": {
     "exclude": "**/node_modules/**",
     "recursive": true,
+    "loader": "node-loader-raw",
     "require": [
       "mocha-setup.cjs"
     ]

@@ -13,6 +13,8 @@ describe('@view-builder/view-util', () => {
   beforeEach(() => {
     metaLookup = sinon.createStubInstance(MetaLookup)
     metaLookup.isIriDimension.resolves(false)
+    metaLookup.getDimensionIdentifiers.resolves(new Map())
+    metaLookup.getCubeKeys.resolves([])
   })
 
   it('turns cube source to blank nodes', async () => {
@@ -49,7 +51,7 @@ describe('@view-builder/view-util', () => {
     `
 
     // when
-    const viewView = await prepareViewPointer(builderView)
+    const viewView = await prepareViewPointer(builderView, { metaLookup })
 
     // then
     expect(viewView.dataset.size).to.eq(0)

@@ -19,6 +19,7 @@ describe('@view-builder/publish-views', () => {
 
     beforeEach(async () => {
       metaLookup = sinon.createStubInstance(MetaLookup)
+      metaLookup.getDimensionIdentifiers.resolves(new Map())
 
       for (const file of await fs.readdir(outDir)) {
         // eslint-disable-next-line no-await-in-loop
