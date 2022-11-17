@@ -3,18 +3,18 @@ import { view } from '@view-builder/core/ns.js'
 import { testData } from '@view-builder/testing'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import SparqlClient from '@view-builder/testing/SparqlClient.js'
-import { CubeLookup } from '../../lib/cubeLookup.js'
+import { MetaLookup } from '../../lib/metaLookup.js'
 
-describe('@view-builder/view-util/lib/cubeLookup.js', () => {
-  let cubeLookup
+describe('@view-builder/view-util/lib/metaLookup.js', () => {
+  let metaLookup
   let client
 
   beforeEach(() => {
     client = new SparqlClient()
-    cubeLookup = new CubeLookup(client)
+    metaLookup = new MetaLookup(client)
   })
 
-  describe('CubeLookup', () => {
+  describe('MetaLookup', () => {
     describe('isIriDimension', () => {
       it('runs a check across all cubes', async function () {
         // given
@@ -32,7 +32,7 @@ describe('@view-builder/view-util/lib/cubeLookup.js', () => {
         `
 
         // when
-        await cubeLookup.isIriDimension(dimension)
+        await metaLookup.isIriDimension(dimension)
 
         // then
         const query = client.query.ask.firstCall.firstArg
@@ -51,7 +51,7 @@ describe('@view-builder/view-util/lib/cubeLookup.js', () => {
         `
 
         // when
-        await cubeLookup.isIriDimension(dimension)
+        await metaLookup.isIriDimension(dimension)
 
         // then
         const query = client.query.ask.firstCall.firstArg

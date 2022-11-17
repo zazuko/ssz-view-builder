@@ -9,8 +9,8 @@ export default async function (pointer) {
     removeLimitOffset: true,
   }
 
-  if (this.variables.has('cubeLookup')) {
-    prepareOptions.cubeLookup = this.variables.get('cubeLookup')
+  if (this.variables.has('metaLookup')) {
+    prepareOptions.metaLookup = this.variables.get('metaLookup')
   } else {
     prepareOptions.client = getMetadataClient(this.variables)
   }

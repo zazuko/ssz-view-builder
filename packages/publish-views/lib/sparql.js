@@ -1,4 +1,5 @@
 import StreamClient from 'sparql-http-client'
+import ParsingClient from 'sparql-http-client/ParsingClient.js'
 
 const ViewBuilderClient = 'ViewBuilderClient'
 const MetadataClient = 'MetadataClient'
@@ -17,7 +18,7 @@ export const getViewBuilderClient = (variables) => {
 
 export const getMetadataClient = (variables) => {
   if (!variables.has(MetadataClient)) {
-    variables.set(MetadataClient, new StreamClient({
+    variables.set(MetadataClient, new ParsingClient({
       endpointUrl: variables.get('METADATA_ENDPOINT'),
     }))
   }

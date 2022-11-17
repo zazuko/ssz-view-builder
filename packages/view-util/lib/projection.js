@@ -7,11 +7,11 @@ import { rdf, schema } from '@tpluscode/rdf-ns-builders'
  * For every dimension whose values are IRIs, yields a additional lookup dimension
  * which join their `schema:label` and `schema:termCode`.
  */
-export async function getColumns(view, cubeLookup) {
+export async function getColumns(view, metaLookup) {
   const dimensions = await Promise.all(view.out(ns.view.dimension)
     .map(async dimension => ({
       dimension,
-      needsLookupDimensions: await cubeLookup.isIriDimension(dimension),
+      needsLookupDimensions: await metaLookup.isIriDimension(dimension),
     })))
 
   return (function * iterate() {

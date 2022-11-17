@@ -23,6 +23,9 @@ module.exports = merge(
       rules: [{
         test: /\.(ttl|nt|nq|rdf|jsonld|trig)$/,
         use: 'webpack-loader-rdf',
+      }, {
+        test: /\.(sparql|rq)$/,
+        use: 'raw-loader',
       }],
     },
     node: {

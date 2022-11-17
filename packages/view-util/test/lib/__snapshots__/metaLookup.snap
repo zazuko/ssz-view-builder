@@ -1,0 +1,4 @@
+exports["@view-builder/view-util/lib/metaLookup.js MetaLookup isIriDimension runs a check across all cubes"] = "PREFIX sh: <http://www.w3.org/ns/shacl#>\n\nASK  { \n      VALUES ( ?cube )\n{\n( <#CUBE1> )\n( <#CUBE2> )\n}\n      \n      ?cube <https://cube.link/observationConstraint>/sh:property ?dimension .\n      ?dimension sh:path  ; sh:nodeKind sh:IRI .\n     }\n";
+
+exports["@view-builder/view-util/lib/metaLookup.js MetaLookup isIriDimension runs a check from single cubes"] = "PREFIX sh: <http://www.w3.org/ns/shacl#>\n\nASK  { \n      \n      \n      ?cube <https://cube.link/observationConstraint>/sh:property ?dimension .\n      ?dimension sh:path  ; sh:nodeKind sh:IRI .\n     }\n";
+

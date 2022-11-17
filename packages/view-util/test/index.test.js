@@ -5,14 +5,14 @@ import { hydra, rdf, schema, xsd } from '@tpluscode/rdf-ns-builders'
 import { isBlankNode } from 'is-graph-pointer'
 import sinon from 'sinon'
 import { prepareViewPointer, createViewQuery } from '../index.js'
-import { CubeLookup } from '../lib/cubeLookup.js'
+import { MetaLookup } from '../lib/metaLookup.js'
 
 describe('@view-builder/view-util', () => {
-  let cubeLookup
+  let metaLookup
 
   beforeEach(() => {
-    cubeLookup = sinon.createStubInstance(CubeLookup)
-    cubeLookup.isIriDimension.resolves(false)
+    metaLookup = sinon.createStubInstance(MetaLookup)
+    metaLookup.isIriDimension.resolves(false)
   })
 
   it('turns cube source to blank nodes', async () => {
@@ -32,7 +32,7 @@ describe('@view-builder/view-util', () => {
     `
 
     // when
-    const viewView = await prepareViewPointer(builderView, { cubeLookup })
+    const viewView = await prepareViewPointer(builderView, { metaLookup })
 
     // then
     const source = viewView.out(view.dimension).out(view.from).out(view.source)
@@ -74,7 +74,7 @@ describe('@view-builder/view-util', () => {
     `
 
     // when
-    const viewView = await prepareViewPointer(builderView, { removeLimitOffset: true, cubeLookup })
+    const viewView = await prepareViewPointer(builderView, { removeLimitOffset: true, metaLookup })
 
     // then
     expect(viewView.out(view.projection).out(view.limit).term).to.be.undefined
@@ -106,7 +106,7 @@ describe('@view-builder/view-util', () => {
         `
 
         // when
-        const viewView = await prepareViewPointer(builderView, { cubeLookup })
+        const viewView = await prepareViewPointer(builderView, { metaLookup })
 
         // then
         const filterDimension = viewView.out(view.filter).out(view.dimension)
@@ -148,7 +148,7 @@ describe('@view-builder/view-util', () => {
         . 
       `
 
-        viewView = await prepareViewPointer(builderView, { cubeLookup })
+        viewView = await prepareViewPointer(builderView, { metaLookup })
       })
 
       it('sets operation to view:Eq', () => {
@@ -182,7 +182,7 @@ describe('@view-builder/view-util', () => {
 
           beforeEach(async () => {
             // given
-            cubeLookup.isIriDimension.resolves(true)
+            metaLookup.isIriDimension.resolves(true)
 
             const builderView = await testData`
               <>
@@ -199,7 +199,7 @@ describe('@view-builder/view-util', () => {
             `
 
             // when
-            viewView = await prepareViewPointer(builderView, { cubeLookup })
+            viewView = await prepareViewPointer(builderView, { metaLookup })
           })
 
           it('generates a join for schema:name and schema:termCode when dimension is sh:IRI', async function () {
@@ -225,7 +225,7 @@ describe('@view-builder/view-util', () => {
 
         it('does not generate joins for when dimension is not sh:IRI', async function () {
           // given
-          cubeLookup.isIriDimension.resolves(false)
+          metaLookup.isIriDimension.resolves(false)
 
           const builderView = await testData`
             <>
@@ -242,7 +242,7 @@ describe('@view-builder/view-util', () => {
           `
 
           // when
-          const viewView = await prepareViewPointer(builderView, { cubeLookup })
+          const viewView = await prepareViewPointer(builderView, { metaLookup })
           const query = createViewQuery(viewView)
 
           // then
@@ -253,7 +253,7 @@ describe('@view-builder/view-util', () => {
       context('with multiple sources', () => {
         it('generates a join for schema:name and schema:termCode when dimension is sh:IRI', async function () {
           // given
-          cubeLookup.isIriDimension.resolves(true)
+          metaLookup.isIriDimension.resolves(true)
 
           const builderView = await testData`
             <>
@@ -272,7 +272,7 @@ describe('@view-builder/view-util', () => {
           `
 
           // when
-          const viewView = await prepareViewPointer(builderView, { cubeLookup })
+          const viewView = await prepareViewPointer(builderView, { metaLookup })
           const query = createViewQuery(viewView)
 
           // then

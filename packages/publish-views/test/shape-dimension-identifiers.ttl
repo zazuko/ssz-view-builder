@@ -1,0 +1,76 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix view: <https://cube.link/view/>
+prefix measure: <https://ld.stadt-zuerich.ch/statistics/measure/>
+prefix property: <https://ld.stadt-zuerich.ch/statistics/property/>
+
+<example-dimension-identifiers>
+  a sh:NodeShape ;
+  sh:targetObjectsOf view:dimension ;
+  sh:xone
+    (
+      <example-dimension-identifiers#measure>
+      <example-dimension-identifiers#key>
+      <example-dimension-identifiers#lookup>
+    ) ;
+  sh:message "Every dimension must have measure-, key- or lookup-specific schema:identifier" ;
+.
+
+<example-dimension-identifiers#measure>
+  sh:property
+    [
+      sh:path ( view:from view:path ) ;
+      sh:hasValue measure:BEW ;
+      sh:minCount 1 ; sh:maxCount 1;
+    ],
+    [
+      sh:path schema:identifier ;
+      sh:hasValue "bew" ;
+    ] ;
+.
+
+<example-dimension-identifiers#key>
+  sh:property
+    [
+      sh:path ( view:from view:path ) ;
+      sh:in ( property:ZEIT property:RAUM ) ;
+    ],
+    [
+      sh:path schema:identifier ;
+      sh:pattern "^[a-z]+_uri$" ;
+    ] ;
+.
+
+<example-dimension-identifiers#lookup>
+  sh:property
+    [
+      sh:path ( view:from view:source rdf:type ) ;
+      sh:hasValue view:LookupSource ;
+    ] ;
+  sh:xone
+    (
+      [
+        sh:property
+          [
+            sh:path ( view:from view:path ) ;
+            sh:hasValue schema:termCode ;
+          ],
+          [
+            sh:path schema:identifier ;
+            sh:pattern "^[a-z]+_code$" ;
+          ]
+      ]
+      [
+        sh:property
+          [
+            sh:path ( view:from view:path ) ;
+            sh:hasValue schema:name ;
+          ],
+          [
+            sh:path schema:identifier ;
+            sh:pattern "^[a-z]+_lang$" ;
+          ]
+      ]
+    )
+.

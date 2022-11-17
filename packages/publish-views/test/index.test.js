@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 import { testData } from '@view-builder/testing'
 import { view } from '@view-builder/core/ns.js'
 import { _void, dcat, foaf, schema } from '@tpluscode/rdf-ns-builders'
-import { CubeLookup } from '@view-builder/view-util/lib/cubeLookup.js'
+import { MetaLookup } from '@view-builder/view-util/lib/metaLookup.js'
 import sinon from 'sinon'
 import { toNtriples } from '../index.js'
 import { ValidationError } from '../lib/ValidationError.js'
@@ -15,10 +15,10 @@ const outDir = path.join(__dirname, '../output')
 
 describe('@view-builder/publish-views', () => {
   describe('pipeline', () => {
-    let cubeLookup
+    let metaLookup
 
     beforeEach(async () => {
-      cubeLookup = sinon.createStubInstance(CubeLookup)
+      metaLookup = sinon.createStubInstance(MetaLookup)
 
       for (const file of await fs.readdir(outDir)) {
         // eslint-disable-next-line no-await-in-loop
@@ -61,7 +61,7 @@ describe('@view-builder/publish-views', () => {
 
       it('when dimension has generated lookup dimensions', async () => {
         // given
-        cubeLookup.isIriDimension.resolves(true)
+        metaLookup.isIriDimension.resolves(true)
         // given
         const ptr = await testData`
           <>
@@ -120,7 +120,7 @@ describe('@view-builder/publish-views', () => {
         loadViewsStepsPath,
         variables: {
           views,
-          cubeLookup,
+          metaLookup,
         },
       })
     }

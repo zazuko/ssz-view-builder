@@ -6,7 +6,8 @@ import { schema } from '@tpluscode/rdf-ns-builders'
 import { createFilterDimension, generateLookupSources } from './lib/filters.js'
 import { removeApiProperties, sourcesToBlankNodes, rebase } from './lib/viewGraph.js'
 import { getColumns } from './lib/projection.js'
-import { CubeLookup } from './lib/cubeLookup.js'
+import { MetaLookup } from './lib/metaLookup.js'
+import { populateDimensionIdentifiers } from './lib/dimensionIdentifiers.js'
 
 export async function prepareViewPointer(pointer, options = {}) {
   const {
@@ -14,7 +15,7 @@ export async function prepareViewPointer(pointer, options = {}) {
     removeLimitOffset,
     rename,
     client,
-    cubeLookup = new CubeLookup(client),
+    metaLookup = new MetaLookup(client),
   } = options
 
   let dataset = $rdf.dataset([...pointer.dataset])
@@ -38,7 +39,7 @@ export async function prepareViewPointer(pointer, options = {}) {
     }
   }
 
-  const columns = [...await getColumns(view, cubeLookup)]
+  const columns = [...await getColumns(view, metaLookup)]
   view.addOut(ns.view.dimension, columns)
   const projection = view.out(ns.view.projection)
   projection.addList(ns.view.columns, columns)
@@ -48,6 +49,8 @@ export async function prepareViewPointer(pointer, options = {}) {
   }
 
   view.addOut(ns.view.dimension, view.out(ns.view.filter).out(ns.view.dimension))
+
+  await populateDimensionIdentifiers(view, metaLookup)
 
   if (cleanup) {
     dataset = dataset.filter(removeApiProperties)
