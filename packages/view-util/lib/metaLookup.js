@@ -2,7 +2,7 @@ import * as ns from '@view-builder/core/ns.js'
 import { ASK } from '@tpluscode/sparql-builder'
 import { VALUES } from '@tpluscode/sparql-builder/expressions'
 import { sh } from '@tpluscode/rdf-ns-builders'
-import TermMap from '@rdfjs/term-map' assert { fooo: 'bar' }
+import TermMap from '@rdfjs/term-map'
 import { cubeQuery } from '../query/cubeQuery.js'
 import dimensionIdentifiersQuery from '../query/dimensionIdentifiers.rq'
 import getCubeKeys from '../query/cubeKeys.rq'

@@ -8,7 +8,6 @@ export async function load(url, context, defaultLoad) {
     return {
       format: 'module',
       source: `export default \`${content.toString()}\`;`,
-      shortCircuit: true,
     }
   }
 
