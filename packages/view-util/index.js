@@ -51,6 +51,7 @@ export async function prepareViewPointer(pointer, options = {}) {
   view.addOut(ns.view.dimension, view.out(ns.view.filter).out(ns.view.dimension))
 
   await populateDimensionIdentifiers(view, metaLookup)
+  dataset.addAll(await metaLookup.getDataAttributes(view.term, pointer.out(schema.isBasedOn).term))
 
   if (cleanup) {
     dataset = dataset.filter(removeApiProperties)

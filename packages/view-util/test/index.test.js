@@ -15,6 +15,7 @@ describe('@view-builder/view-util', () => {
     metaLookup.isIriDimension.resolves(false)
     metaLookup.getDimensionIdentifiers.resolves(new Map())
     metaLookup.getCubeKeys.resolves([])
+    metaLookup.getDataAttributes.resolves([])
   })
 
   it('turns cube source to blank nodes', async () => {
