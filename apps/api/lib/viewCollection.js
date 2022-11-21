@@ -43,7 +43,7 @@ export function construct({ client }) {
       ?author ${vcard.hasName} ?authorName .
 
       ?resource  <https://ld.stadt-zuerich.ch/schema/metadataCreator> ?metadataCreator . 
-      ?metadataCreator ${vcard.hasName} ?authorName .
+      ?metadataCreator ${vcard.hasName} ?metadataCreatorName .
     `.WHERE`
       FILTER ( ?resource ${IN(...members)} )
 
@@ -55,7 +55,7 @@ export function construct({ client }) {
         ?resource <https://ld.stadt-zuerich.ch/schema/metadataCreator> ?metadataCreator .
 
         OPTIONAL {
-          ?metadataCreator ${vcard.hasName} ?authorName .
+          ?metadataCreator ${vcard.hasName} ?metadataCreatorName .
         }
       }
                 
