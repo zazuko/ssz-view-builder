@@ -2,6 +2,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix view: <https://cube.link/view/> .
+@prefix ssz: <https://ld.stadt-zuerich.ch/schema/> .
 
 <no-lndo-site>
   a sh:NodeShape ;
@@ -36,15 +37,15 @@
     [
       sh:path schema:sameAs ;
       sh:maxCount 0 ;
-    ] ,
+    ],
     [
       sh:path schema:isBasedOn ;
       sh:maxCount 0 ;
-    ] ,
+    ],
     [
       sh:path schema:identifier ;
       sh:maxCount 0 ;
-    ] ,
+    ],
     [
       sh:path [ sh:inversePath schema:dataset ] ;
       sh:minCount 1 ;
@@ -55,5 +56,10 @@
       sh:path schema:author ;
       sh:maxCount 0 ;
       sh:message "Published view must not have the user link" ;
+    ],
+    [
+      sh:path ssz:metadataCreator ;
+      sh:nodeKind sh:Literal ;
+      sh:maxCount 0 ;
     ] ;
 .
