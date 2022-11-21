@@ -1,0 +1,32 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ssz: <https://ld.stadt-zuerich.ch/schema/>
+
+<shape-attributes>
+  a sh:NodeShape ;
+  sh:targetNode <https://ld.stadt-zuerich.ch/statistics/view/BAU698OD6983> ;
+  sh:property
+    [
+      sh:path ssz:dataAttribute ;
+      sh:minCount 1 ;
+      sh:node
+        [
+          sh:property
+            [
+              sh:path rdf:type ;
+              sh:hasValue ssz:Attribute ;
+            ],
+            [
+              sh:path schema:name ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+            ],
+            [
+              sh:path schema:alternateName ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+            ] ;
+        ] ;
+    ] ;
+.

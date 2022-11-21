@@ -7,7 +7,7 @@ services:
     type: node:custom
     build:
       - npm i -g nodemon
-    command: nodemon -w packages -w apps -i apps/www --ext ts,js,ttl --exec npm --node-options --inspect=0.0.0.0:32272 --inspect start
+    command: nodemon -w packages -w apps -i apps/www --ext ts,js,ttl --exec npm --node-options '--loader node-loader-raw --inspect=0.0.0.0:32272 --inspect' start
     ssl: true
     overrides:
       image: node:16

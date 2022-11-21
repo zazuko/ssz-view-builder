@@ -6,6 +6,7 @@ import TermMap from '@rdfjs/term-map'
 import { cubeQuery } from '../query/cubeQuery.js'
 import dimensionIdentifiersQuery from '../query/dimensionIdentifiers.rq'
 import getCubeKeys from '../query/cubeKeys.rq'
+import constructAttributes from '../query/attributes.rq'
 
 export class MetaLookup {
   constructor(client) {
@@ -50,5 +51,11 @@ export class MetaLookup {
     }
 
     return this._dimensionIdentifiers
+  }
+
+  async getDataAttributes(view, datenobjekt) {
+    const constructAttributesQuery = await cubeQuery(constructAttributes, { view, datenobjekt })
+
+    return this.client.query.construct(constructAttributesQuery.toString())
   }
 }

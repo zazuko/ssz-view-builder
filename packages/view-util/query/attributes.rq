@@ -1,0 +1,25 @@
+PREFIX schema: <http://schema.org/>
+PREFIX ssz: <https://ld.stadt-zuerich.ch/schema/>
+
+CONSTRUCT {
+  ?view ssz:dataAttribute ?bnode .
+
+  ?bnode ?attributepred ?attributeobject .
+}
+FROM <https://lindas.admin.ch/stadtzuerich/stat>
+WHERE {
+  {
+    SELECT DISTINCT ?datenobjekt ?datenattribut ?bnode
+    WHERE {
+      ?datenobjekt a schema:Dataset .
+
+      ?datenattribut a ssz:Attribute ;
+        ssz:dataObject ?datenobjekt ;
+
+      BIND( bnode() AS ?bnode )
+    }
+  }
+
+  ?datenattribut ?attributepred ?attributeobject .
+  FILTER ( ?attributepred != ssz:dataObject )
+}

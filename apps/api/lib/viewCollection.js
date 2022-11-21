@@ -44,15 +44,30 @@ export function construct({ client }) {
                 
       ?resource ${schema.author} ?author . 
       ?author ${vcard.hasName} ?authorName .
+
+      ?resource  <https://ld.stadt-zuerich.ch/schema/metadataCreator> ?metadataCreator . 
+      ?metadataCreator ${vcard.hasName} ?authorName .
     `.WHERE`
       ${VALUES(...resources)}
 
       ?resource a ?type ;
                 ${schema.name} ?name ; 
-                ${schema.alternateName} ?alt .
+                ${schema.alternateName} ?alt ;
+
+      OPTIONAL {
+        ?resource <https://ld.stadt-zuerich.ch/schema/metadataCreator> ?metadataCreator .
+
+        OPTIONAL {
+          ?metadataCreator ${vcard.hasName} ?authorName .
+        }
+      }
                 
       OPTIONAL {
-        ?resource ${schema.author} ?author . ?author ${vcard.hasName} ?authorName .
+        ?resource ${schema.author} ?author .
+      
+        OPTIONAL {
+          ?author ${vcard.hasName} ?authorName .
+        }
       }
     `.execute(client.query)
   }
