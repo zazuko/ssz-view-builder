@@ -10,17 +10,19 @@ CONSTRUCT {
 }
 FROM <https://lindas.admin.ch/stadtzuerich/stat>
 WHERE {
-  ?sub a cube:MeasureDimension ;
-       schema:identifier ?kennzahl ;
-       schema:name ?kennzahlLabel .
+  SELECT DISTINCT ?sub ?kennzahlLabel {
+    ?sub a cube:MeasureDimension ;
+      schema:identifier ?kennzahl ;
+      schema:name ?kennzahlLabel .
 
-  # Limit only those whaich are used in cubes
-  ?shape a cube:Constraint;
-        sh:property/sh:path ?sub .
-  
-  FILTER( 
-    CONTAINS(LCASE(?kennzahlLabel), LCASE("{Q}")) ||
-    LCASE(?kennzahl) = LCASE("{Q}")
-  )
-} 
-LIMIT 10
+    # Limit only those whaich are used in cubes
+    ?shape a cube:Constraint ;
+      sh:property/sh:path ?sub .
+
+    FILTER (
+      CONTAINS(LCASE(?kennzahlLabel), LCASE("{Q}")) ||
+      LCASE(?kennzahl) = LCASE("{Q}")
+    )
+  }
+  LIMIT 10
+}
