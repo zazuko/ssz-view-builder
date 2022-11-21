@@ -10,7 +10,8 @@ prefix view: <https://cube.link/view/>
   schema:name "Bevölkerungsszenarien 2022 – 2040" ;
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/tpluscode> ;
-  view-builder:publish false ;
+  <https://ld.stadt-zuerich.ch/schema/metadataCreator> </user/tpluscode> ;
+  view-builder:publish true ;
   view:dimension
     [
       rdfs:label "ZEIT" ;
