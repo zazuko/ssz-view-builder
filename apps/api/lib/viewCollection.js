@@ -1,6 +1,6 @@
 import { CONSTRUCT, sparql } from '@tpluscode/sparql-builder'
 import { schema, vcard } from '@tpluscode/rdf-ns-builders'
-import { VALUES } from '@tpluscode/sparql-builder/expressions'
+import { IN } from '@tpluscode/sparql-builder/expressions'
 
 export function textFilter({ subject, object, variable }) {
   if (!object.value) {
@@ -33,11 +33,8 @@ export function textFilter({ subject, object, variable }) {
 }
 
 export function construct({ client }) {
-  return (...members) => {
-    const resources = members.map(resource => ({ resource }))
-
-    // TODO: Construct generated from NodeShape
-    return CONSTRUCT`
+  // TODO: Construct generated from NodeShape
+  return (...members) => CONSTRUCT`
       ?resource a ?type ;
                 ${schema.name} ?name ; 
                 ${schema.alternateName} ?alt .
@@ -48,7 +45,7 @@ export function construct({ client }) {
       ?resource  <https://ld.stadt-zuerich.ch/schema/metadataCreator> ?metadataCreator . 
       ?metadataCreator ${vcard.hasName} ?authorName .
     `.WHERE`
-      ${VALUES(...resources)}
+      FILTER ( ?resource ${IN(...members)} )
 
       ?resource a ?type ;
                 ${schema.name} ?name ; 
@@ -70,5 +67,4 @@ export function construct({ client }) {
         }
       }
     `.execute(client.query)
-  }
 }
