@@ -8,6 +8,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX view: <https://cube.link/view/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX query: <https://hypermedia.app/query#>
+prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
 
 <>
   a sh:NodeShape, rdfs:Class, hydra:Class ;
@@ -49,6 +50,20 @@ PREFIX query: <https://hypermedia.app/query#>
   sh:property
     [
       sh:path schema:sameAs ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property
+    [
+      sh:path schema:metadataCreator ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property
+    [
+      sh:path schema:author ;
       sh:minCount 1 ;
       sh:maxCount 1 ;
       sh:nodeKind sh:IRI ;

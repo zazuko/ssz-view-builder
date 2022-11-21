@@ -44,7 +44,7 @@ function constructMetadata(pointer, sourceDataset, userBase) {
                          ${schema.name} ?name ;
                          ${metadataCreator} ?metadataCreator .
                          
-        BIND( CONCAT("${userBase}", str(?metadataCreator)) as ?metadataCreatorUser)
+        BIND( IRI(CONCAT("${userBase}", str(?metadataCreator))) as ?metadataCreatorUser)
       }
     `
 }
