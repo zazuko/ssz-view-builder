@@ -28,7 +28,7 @@ The glob pattern can be replaced with a concrete path to anny of the test `.http
 
 Tests are executed using [restcli](https://github.com/restcli/restcli).
 
-_API tests are now disabled on CI because the containers refuse to start for some reason_
+_API tests are now disabled on CI because we need a way to provide a Stardog license to the workflow_
 
 [cube]: https://github.com/zazuko/cube-link
 
