@@ -56,7 +56,7 @@ prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
     ] ;
   sh:property
     [
-      sh:path schema:metadataCreator ;
+      sh:path ssz:metadataCreator ;
       sh:minCount 1 ;
       sh:maxCount 1 ;
       sh:nodeKind sh:IRI ;
