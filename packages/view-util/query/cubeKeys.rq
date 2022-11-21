@@ -1,0 +1,33 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX cube: <https://cube.link/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?cube ?kennzahl (lcase(CONCAT
+                              (?kennzahlIdentifier, IF(?dimensionKey = "", "", "_"), ?dimensionKey )) AS ?cubeKey)
+FROM <https://lindas.admin.ch/stadtzuerich/stat>
+{
+  ?cube a cube:Cube ;
+    cube:observationConstraint/sh:property/sh:path ?kennzahl .
+
+  ?kennzahl a cube:MeasureDimension ;
+    schema:identifier ?kennzahlIdentifier .
+
+  {
+    SELECT ?cube (GROUP_CONCAT(?dimensionIdentifier; separator="_") AS ?dimensionKey)
+    {
+      ?cube a cube:Cube ;
+        cube:observationConstraint/sh:property/sh:path ?dimension .
+
+      FILTER (?dimension NOT IN
+              (<https://ld.stadt-zuerich.ch/statistics/property/ZEIT>, <https://ld.stadt-zuerich.ch/statistics/property/RAUM> )
+      )
+
+      OPTIONAL {
+        ?dimension a cube:KeyDimension ;
+          schema:identifier ?dimensionIdentifier .
+      }
+
+    }
+    GROUP BY ?cube ?kennzahl
+  }
+}

@@ -1,0 +1,8 @@
+PREFIX schema: <http://schema.org/>
+PREFIX cube: <https://cube.link/>
+
+select ?dimension ?type (lcase(?id) as ?identifier) {
+  ?dimension a ?type ; schema:identifier ?id
+
+  FILTER ( ?type in (cube:KeyDimension, cube:MeasureDimension) )
+}

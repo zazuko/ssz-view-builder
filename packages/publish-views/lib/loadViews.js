@@ -5,6 +5,7 @@ import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import { schema } from '@tpluscode/rdf-ns-builders'
 import * as shapeTo from '@hydrofoil/shape-to-query'
+import toStream from 'rdf-dataset-ext/toStream.js'
 import { viewShape } from './shapes.js'
 import { getViewBuilderClient, getMetadataClient } from './sparql.js'
 
@@ -44,9 +45,9 @@ async function loadViewMeta(publishedView, metaObject, client) {
 
   const subjectVariable = 'view'
   const query = shapeTo.construct(shape, { focusNode: metaObject, subjectVariable })
-  const metaStream = await query.execute(client.query)
+  const dataset = await query.execute(client.query)
 
-  return metaStream.pipe(through2.obj(viewIdTransform(metaObject, publishedView)))
+  return toStream(dataset).pipe(through2.obj(viewIdTransform(metaObject, publishedView)))
 }
 
 function viewIdTransform(from, to) {
