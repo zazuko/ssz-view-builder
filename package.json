@@ -17,7 +17,7 @@
     "build": "wsrun -m -c build",
     "copier:api": "copier -a .copier-api.yaml update",
     "preprod": "run-s bootstrap:prod",
-    "prod": "node server.js"
+    "prod": "node --loader node-loader-raw server.js"
   },
   "author": "Zazuko GmbH <no-reply@zazuko.com>",
   "repository": "https://github.com/zazuko/ssz-view-builder",
