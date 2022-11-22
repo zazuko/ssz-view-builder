@@ -5,7 +5,6 @@ import clownface from 'clownface'
 import * as ns from '@view-builder/core/ns.js'
 import { nanoid } from 'nanoid'
 import { getAllTriplesFromRoot } from '../../clownface.js'
-import { client, endpoint } from '../../queries/index.js'
 import toggleButtons from './viewForm/toggleButtons.js'
 import { multiEffect } from '../lib/multiEffect.js'
 
@@ -65,10 +64,11 @@ export const viewForm = {
           const { generateDimensions } = await import('../../automation.js')
 
           const { pointer } = store.getState().viewForm
+          const client = store.getState().app.sparqlClient
 
           const task = nanoid()
           dispatch.notifications.addTask(task)
-          const updatedView = await generateDimensions(pointer)
+          const updatedView = await generateDimensions(pointer, { client })
           dispatch.viewForm.setView(updatedView)
 
           const count = updatedView.any().has(ns.viewBuilder.generated, true).terms.length
@@ -82,6 +82,7 @@ export const viewForm = {
           const { prepareViewPointer } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
+          const client = store.getState().app.sparqlClient
           const view = await prepareViewPointer(pointer, { client })
 
           const resourceTurtle = turtle`${view.dataset}`.toString()
@@ -89,6 +90,8 @@ export const viewForm = {
           window.open(converterUrl, 'converter')
         },
         async showQuery() {
+          const client = store.getState().app.sparqlClient
+          const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer, createViewQuery } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm
@@ -106,6 +109,8 @@ export const viewForm = {
           window.open(converterUrl.toString(), 'yasgui')
         },
         async showInCubeViewer() {
+          const client = store.getState().app.sparqlClient
+          const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer } = await import('@view-builder/view-util')
 
           const { pointer } = store.getState().viewForm

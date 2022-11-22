@@ -1,4 +1,5 @@
 import { createModel } from '@captaincodeman/rdx'
+import ParsingClient from 'sparql-http-client/ParsingClient.js'
 import * as loadingView from '../../view/loading.js'
 import effects from './effects.js'
 
@@ -16,6 +17,14 @@ export const app = createModel({
     },
     viewParam(state, param) {
       return { ...state, view: { ...state.view, param } }
+    },
+    setSparqlEndpoint(state, endpointUrl) {
+      return {
+        ...state,
+        sparqlClient: new ParsingClient({
+          endpointUrl,
+        }),
+      }
     },
   },
   effects,

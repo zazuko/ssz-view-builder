@@ -31,6 +31,6 @@
     "tempy": "^3.0.0"
   },
   "devDependencies": {
-    "@hydrofoil/talos": "^0.4.4"
+    "@hydrofoil/talos": "^0.5.1"
   }
 }

@@ -2,7 +2,6 @@ import generateDimensionsShapeQuads from '@view-builder/core/shape/ViewWithSourc
 import viewValidationShapeQuads from '@view-builder/core/shape/ViewValidationShape.ttl'
 import { prepareViewPointer } from '@view-builder/view-util'
 import $rdf from 'rdf-ext'
-import { client } from '../../../queries/index.js'
 
 const GenerateDimensionsShapes = $rdf.dataset(generateDimensionsShapeQuads($rdf))
 
@@ -12,6 +11,7 @@ export default function (store) {
   const dispatch = store.getDispatch().viewForm
 
   return async () => {
+    const client = store.getState().app.sparqlClient
     const { pointer } = store.getState().viewForm
     if (!pointer) {
       dispatch.setViewValidity({})

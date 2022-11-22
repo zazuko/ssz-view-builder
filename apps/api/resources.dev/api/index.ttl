@@ -1,0 +1,3 @@
+PREFIX view-builder: <https://view-builder.described.at/>
+
+<> view-builder:endpoint <https://ld.integ.stadt-zuerich.ch/query> .

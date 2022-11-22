@@ -3,7 +3,7 @@ import { SELECT } from '@tpluscode/sparql-builder'
 import { isGraphPointer, isNamedNode } from 'is-graph-pointer'
 import { findNodes, toSparql } from 'clownface-shacl-path'
 import sh1 from '@hydrofoil/shaperone-core/ns.js'
-import { client } from '../queries/index.js'
+import { store } from '../state/store.js'
 
 export const dataGraphInstanceSource = {
   applicableTo(component) {
@@ -45,7 +45,7 @@ export const autoName = {
         try {
           const [result] = await SELECT`?label`
             .WHERE`${id.term} ${propertyPath} ?label`
-            .execute(client.query)
+            .execute(store.state.app.sparqlClient.query)
 
           return result?.label.value || id.value
         } catch (e) {
