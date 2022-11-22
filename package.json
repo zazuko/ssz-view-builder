@@ -39,6 +39,7 @@
     "url-state": "3.0.2"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.2",
     "@open-wc/eslint-config": "^8.0.2",
     "@tpluscode/eslint-config": "^0.3.0",
     "@types/sparql-http-client": "^2.2.7",
@@ -86,7 +87,10 @@
   },
   "c8": {
     "all": true,
-    "reporter": ["lcov", "text"],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
     "exclude": [
       "mocha-setup.cjs",
       "server.js",
