@@ -12,7 +12,7 @@
     "copier:root": "copier -a .copier-project.yaml -s apps/api update",
     "bootstrap": "dotenv -c local -- run-s bootstrap:dev bootstrap:users",
     "bootstrap:dev": "wsrun -msc bootstrap resources resources.dev",
-    "bootstrap:prod": "wsrun -msc bootstrap resources",
+    "bootstrap:prod": "wsrun -msc bootstrap resources resources.prod",
     "bootstrap:users": "node apps/api/loadUsers.js",
     "start": "knossos serve $SPARQL_ENDPOINT --updateUrl $SPARQL_UPDATE_ENDPOINT --name view-builder --user $SPARQL_USER --password $SPARQL_PASSWORD",
     "precommit": "yarn lint && wsrun -m -c precommit",
@@ -25,7 +25,7 @@
   "repository": "https://github.com/zazuko/ssz-view-builder",
   "dependencies": {
     "@hydrofoil/knossos": "^0.9.6",
-    "@hydrofoil/talos": "^0.4.4",
+    "@hydrofoil/talos": "^0.5.1",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-conditional-middleware": "^2.1.1",

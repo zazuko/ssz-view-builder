@@ -1606,16 +1606,18 @@
     "@hydrofoil/shell-resources" "^0.2.2"
     "@hydrofoil/shell-routing" "^0.2.2"
 
-"@hydrofoil/talos@^0.4.4":
-  version "0.4.17"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/talos/-/talos-0.4.17.tgz#67d0d04dda14700fae05dfc975423299bec05ebc"
-  integrity sha512-FzXJCylTb+VMUkjYeDTxPwYN+rZcYhmnju9cj6FUYz5vcKFLQw1nsMQxmX6FFuc/NjQ9LUK6HY67rV5IvWoFvA==
+"@hydrofoil/talos@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/talos/-/talos-0.5.1.tgz#6fd6994495a834c782c0a553f1c8f363927d106b"
+  integrity sha512-LQ+3DgbzzPs6q9WJhd41mSpAkwFIDGzAmT1EOiYwdwjLFlgcP3OKV7FFzBnBcnQGm5stOzAoUHyZq1Wst1YO/Q==
   dependencies:
     "@fcostarodrigo/walk" "^5.0.1"
     "@hydrofoil/knossos" "^0.9.7"
     "@hydrofoil/vocabularies" "^0.3"
     "@rdfjs/formats-common" "^2.2.0"
+    "@rdfjs/namespace" "^1.1.0"
     "@rdfjs/term-map" "^1"
+    "@rdfjs/term-set" "^1"
     "@tpluscode/rdf-ns-builders" "^2.0.0"
     "@tpluscode/rdf-string" "^0.2.26"
     "@tpluscode/sparql-builder" "^0.3.23"
@@ -1624,8 +1626,10 @@
     commander "^9.4.0"
     debug "^4.3.4"
     is-absolute-url "^3"
+    is-graph-pointer "^1.2.2"
     mime-types "^2.1.35"
     node-fetch "^2.6.7"
+    rdf-dataset-ext "^1.0.1"
     rdf-ext "^1.3.5"
     replacestream "^4.0.3"
     sparql-http-client "^2.4.1"
@@ -2596,7 +2600,7 @@
   dependencies:
     "@rdfjs/to-ntriples" "^2.0.0"
 
-"@rdfjs/term-set@^1.0.0", "@rdfjs/term-set@^1.0.1", "@rdfjs/term-set@^1.1.0":
+"@rdfjs/term-set@^1", "@rdfjs/term-set@^1.0.0", "@rdfjs/term-set@^1.0.1", "@rdfjs/term-set@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@rdfjs/term-set/-/term-set-1.1.0.tgz#36adb73683262e94f135f0bb0cdf71d983e70960"
   integrity sha512-QQ4yzVe1Rvae/GN9SnOhweHNpaxQtnAjeOVciP/yJ0Gfxtbphy2tM56ZsRLV04Qq5qMcSclZIe6irYyEzx/UwQ==
@@ -7998,7 +8002,7 @@ is-builtin-module@^3.0.0:
   dependencies:
     builtin-modules "^3.3.0"
 
-is-callable@^1.1.4, is-callable@^1.2.4, is-callable@^1.2.7:
+is-callable@^1.1.4, is-callable@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.2.7.tgz#3bc2a85ea742d9e36205dcacdd72ca1fdc51b055"
   integrity sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==
@@ -9682,7 +9686,7 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
-object-inspect@^1.12.0, object-inspect@^1.12.2, object-inspect@^1.9.0:
+object-inspect@^1.12.2, object-inspect@^1.9.0:
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.2.tgz#c0641f26394532f28ab8d796ab954e43c009a8ea"
   integrity sha512-z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==

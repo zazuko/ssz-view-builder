@@ -1,0 +1,3 @@
+PREFIX view-builder: <https://view-builder.described.at/>
+
+<> view-builder:endpoint <$METADATA_ENDPOINT> .
