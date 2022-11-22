@@ -5,6 +5,8 @@ WORKDIR /app
 # copy everything
 COPY . ./
 
+RUN apk add --no-cache gettext
+
 # first do the build
 RUN yarn --frozen-lockfile \
   && yarn build \
