@@ -1,8 +1,8 @@
-import $rdf from '@rdfjs/data-model'
 import { rdf } from '@tpluscode/rdf-ns-builders'
 import TermSet from '@rdfjs/term-set'
 import url from 'url-state'
 import * as ns from '@view-builder/core/ns.js'
+import { viewBuilder } from '@view-builder/core/ns.js'
 import * as loading from '../../view/loading.js'
 
 export default function effects(store) {
@@ -37,14 +37,15 @@ export default function effects(store) {
     'resource/succeeded': ({ id, representation }) => {
       const { resource } = store.getState().routing
       if (id.value === resource && representation?.root) {
-        dispatch.core.setContentResource({
-          id: $rdf.namedNode(resource),
-          pointer: representation.root.pointer,
-        })
+        dispatch.core.setContentResource(representation.root)
       }
     },
-    'core/setContentResource': async ({ pointer }) => {
+    'core/setContentResource': async ({ pointer, apiDocumentation }) => {
       let view
+
+      const endpoint = apiDocumentation.pointer.out(viewBuilder.endpoint).value
+      dispatch.app.setSparqlEndpoint(endpoint)
+      const client = store.getState().app.sparqlClient
 
       const types = new TermSet(pointer.out(rdf.type).terms)
       if (types.has(ns.viewBuilder.ViewCollection)) {
@@ -58,7 +59,7 @@ export default function effects(store) {
       }
 
       if ('init' in view) {
-        view = await view.init()
+        view = await view.init({ client })
       }
 
       dispatch.app.showView(({ ...view, param: url.hash }))

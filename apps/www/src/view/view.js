@@ -9,8 +9,8 @@ import * as loading from './loading.js'
 
 let shapes
 
-export async function init() {
-  shapes = shapes || await loadShapes()
+export async function init({ client }) {
+  shapes = shapes || await loadShapes(client)
 
   return {
     content,
@@ -46,7 +46,7 @@ function menu({ state, dispatch }) {
                   @click=${dispatch.viewForm.showInCubeViewer}>Show in cube viewer</sl-menu-item>`
 }
 
-async function loadShapes() {
+async function loadShapes(client) {
   const graph = await fetchShapes('view')
 
   const templates = graph
@@ -61,7 +61,7 @@ async function loadShapes() {
 
     const name = iriTemplate.out(code.name).value
     const query = await fetchQuery(name)
-    const sparqlUrl = getSparqlUrl(query, template)
+    const sparqlUrl = getSparqlUrl({ query, template, client })
 
     iriTemplate.deleteOut().deleteIn()
     template.addOut(hydra.template, sparqlUrl)

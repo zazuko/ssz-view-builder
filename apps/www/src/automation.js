@@ -4,21 +4,21 @@ import * as ns from '@view-builder/core/ns.js'
 import * as dimensionQueries from './queries/dimensions.js'
 import { deleteCbd, newReference } from './clownface.js'
 
-export async function generateDimensions(view, queries = dimensionQueries) {
+export async function generateDimensions(view, client, queries = dimensionQueries) {
   const sources = view.out(ns.viewBuilder.source)
 
   clearGeneratedDimensions(view)
 
-  await createMeasureDimensions(view, sources, queries)
-  await createKeyDimensions(view, sources, queries)
+  await createMeasureDimensions(view, sources, client, queries)
+  await createKeyDimensions(view, sources, client, queries)
 
   // create a new pointer reference
   // to force form re-render
   return newReference(view)
 }
 
-async function createKeyDimensions(view, pointer, { findKeyDimensions }) {
-  const results = await findKeyDimensions(pointer.out(ns.view.cube).terms)
+async function createKeyDimensions(view, pointer, client, { findKeyDimensions }) {
+  const results = await findKeyDimensions(pointer.out(ns.view.cube).terms, client)
 
   const dimensions = results.reduce((map, { cube, dimension, label }) => {
     const value = map.get(dimension) || { label, sources: [] }
@@ -45,13 +45,13 @@ async function createKeyDimensions(view, pointer, { findKeyDimensions }) {
   }
 }
 
-async function createMeasureDimensions(view, sources, { findMeasureDimensions }) {
+async function createMeasureDimensions(view, sources, client, { findMeasureDimensions }) {
   const dimensions = await Promise.all(
     sources.map(async (source) => {
       const cube = source.out(ns.view.cube).term
       return {
         source,
-        measures: await findMeasureDimensions(cube),
+        measures: await findMeasureDimensions(cube, client),
       }
     }),
   )
