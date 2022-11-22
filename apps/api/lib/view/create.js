@@ -3,13 +3,10 @@ import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import fromStream from 'rdf-dataset-ext/fromStream.js'
 import { IriTemplateBundle } from '@rdfine/hydra/bundles'
 import { fromPointer } from '@rdfine/hydra/lib/IriTemplate'
-import { viewBuilder } from '@view-builder/core/ns.js'
+import { ssz, viewBuilder } from '@view-builder/core/ns.js'
 import RdfResource from '@tpluscode/rdfine'
-import $rdf from 'rdf-ext'
 
 RdfResource.factory.addMixin(...IriTemplateBundle)
-
-const metadataCreator = $rdf.namedNode('https://ld.stadt-zuerich.ch/schema/metadataCreator')
 
 /**
  * Queries the metadata endpoint to load necessary metadata for a view
@@ -36,13 +33,13 @@ function constructMetadata(pointer, sourceDataset, userBase) {
   return CONSTRUCT`
     ${view} ${schema.alternateName} ?alternateName ;
             ${schema.name} ?name ;
-            ${metadataCreator} ?metadataCreatorUser .
+            ${ssz.metadataCreator} ?metadataCreatorUser .
     `
     .WHERE`
       SERVICE <${process.env.METADATA_ENDPOINT}> {
         ${sourceDataset} ${schema.alternateName} ?alternateName ;
                          ${schema.name} ?name ;
-                         ${metadataCreator} ?metadataCreator .
+                         ${ssz.metadataCreator} ?metadataCreator .
                          
         BIND( IRI(CONCAT("${userBase}", str(?metadataCreator))) as ?metadataCreatorUser)
       }

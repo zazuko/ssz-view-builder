@@ -2,6 +2,7 @@ import { css, html, LitElement } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
 import { schema, vcard } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js'
+import { ssz } from '@view-builder/core/ns.js'
 
 customElements.define('ssz-view-table', class extends LitElement {
   static get styles() {
@@ -47,7 +48,7 @@ customElements.define('ssz-view-table', class extends LitElement {
   }
 
   renderRow(view) {
-    const metadataCreator = view.out(view.namedNode('https://ld.stadt-zuerich.ch/schema/metadataCreator'))
+    const metadataCreator = view.out(ssz.metadataCreator)
 
     return html`
       <tr class="view-row" @click="${() => this.dispatchEvent(new CustomEvent('view-select', { detail: { view } }))}">
