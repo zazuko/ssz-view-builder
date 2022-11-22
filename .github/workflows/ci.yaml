@@ -5,7 +5,7 @@ on:
     branches:
       - "**"
     tags:
-      - "v*.*.*"
+      - "view-builder-app/v*.*.*"
 
 jobs:
   Build:
@@ -94,6 +94,7 @@ jobs:
         with:
           images: ghcr.io/zazuko/ssz-view-builder
           include-pipeline-id: true
+          strip-tag-prefix: view-builder-app/
 
       - name: Build and push Docker images
         id: docker_build

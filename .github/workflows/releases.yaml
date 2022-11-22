@@ -49,9 +49,26 @@ jobs:
           app_id: ${{ secrets.GH_APP_ID }}
           private_key: ${{ secrets.GH_PRIVATE_KEY }}
 
-      - name: Create Tag
+      - name: Tag API
         uses: butlerlogic/action-autotag@stable
         with:
-          tag_prefix: v
+          root: apps/api
+          tag_prefix: view-builder-api/v
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+
+      - name: Tag UI
+        uses: butlerlogic/action-autotag@stable
+        with:
+          root: apps/www
+          tag_prefix: view-builder-ui/v
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+
+      - name: Tag APP
+        uses: butlerlogic/action-autotag@stable
+        with:
+          root: apps/app
+          tag_prefix: view-builder-app/v
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}

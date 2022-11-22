@@ -1,6 +1,6 @@
 {
-  "name": "@view-builder/app",
-  "version": "1.0.0",
+  "name": "@view-builder/ui",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
