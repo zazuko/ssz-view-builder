@@ -55,7 +55,8 @@ describe('@view-builder/view-util', () => {
     const viewView = await prepareViewPointer(builderView, { metaLookup })
 
     // then
-    expect(viewView.dataset.size).to.eq(0)
+    expect(viewView.out(hydra.apiDocumentation).value).to.be.undefined
+    expect(viewView.out(viewBuilder.source).value).to.be.undefined
   })
 
   it("can remove projection's limit/offset", async () => {
