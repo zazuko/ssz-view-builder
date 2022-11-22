@@ -2,7 +2,8 @@ import clownface from 'clownface'
 import $rdf from 'rdf-ext'
 import View from 'rdf-cube-view-query/lib/View.js'
 import * as ns from '@view-builder/core/ns.js'
-import { schema } from '@tpluscode/rdf-ns-builders'
+import { rdf, schema } from '@tpluscode/rdf-ns-builders'
+import { ssz } from '@view-builder/core/ns.js'
 import { createFilterDimension, generateLookupSources } from './lib/filters.js'
 import { removeApiProperties, sourcesToBlankNodes, rebase } from './lib/viewGraph.js'
 import { getColumns } from './lib/projection.js'
@@ -24,6 +25,8 @@ export async function prepareViewPointer(pointer, options = {}) {
   }
 
   let view = clownface({ dataset }).node(pointer)
+  view.deleteOut(ssz.metadataCreator)
+
   if (rename) {
     view = rebase(view)
     view.deleteOut(schema.sameAs).deleteOut(schema.isBasedOn)
@@ -57,7 +60,9 @@ export async function prepareViewPointer(pointer, options = {}) {
     dataset = dataset.filter(removeApiProperties)
   }
 
-  return clownface({ dataset }).node(view)
+  return clownface({ dataset })
+    .node(view)
+    .addOut(rdf.type, schema.Dataset)
 }
 
 export function createViewQuery(pointer) {

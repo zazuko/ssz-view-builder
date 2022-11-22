@@ -21,12 +21,12 @@ prefix property: <https://ld.stadt-zuerich.ch/statistics/property/>
   sh:property
     [
       sh:path ( view:from view:path ) ;
-      sh:hasValue measure:BEW ;
+      sh:in ( measure:BEW measure:STF ) ;
       sh:minCount 1 ; sh:maxCount 1;
     ],
     [
       sh:path schema:identifier ;
-      sh:hasValue "bew" ;
+      sh:pattern ".+(?<!(uri|lang|code))$" ;
     ] ;
 .
 
@@ -34,7 +34,7 @@ prefix property: <https://ld.stadt-zuerich.ch/statistics/property/>
   sh:property
     [
       sh:path ( view:from view:path ) ;
-      sh:in ( property:ZEIT property:RAUM ) ;
+      sh:in ( property:ZEIT property:RAUM property:BBA ) ;
     ],
     [
       sh:path schema:identifier ;

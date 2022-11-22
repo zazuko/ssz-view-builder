@@ -59,7 +59,6 @@
     ],
     [
       sh:path ssz:metadataCreator ;
-      sh:nodeKind sh:Literal ;
       sh:maxCount 0 ;
     ] ;
 .

@@ -11,7 +11,7 @@ WHERE {
   {
     SELECT DISTINCT ?datenobjekt ?datenattribut ?bnode
     WHERE {
-      ?datenobjekt a schema:Dataset .
+      ?datenobjekt a ssz:Objekte .
 
       ?datenattribut a ssz:Attribute ;
         ssz:dataObject ?datenobjekt ;

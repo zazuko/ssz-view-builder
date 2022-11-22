@@ -4,7 +4,7 @@ import asyncMiddleware from 'middleware-async'
 import { dcterms, hydra, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import { cube } from '@zazuko/vocabulary-extras/builders'
-import { viewBuilder } from '@view-builder/core/ns.js'
+import { ssz, viewBuilder } from '@view-builder/core/ns.js'
 
 /**
  * GET handler for loading view metadata from the metadata endpoint
@@ -25,7 +25,7 @@ export const get = asyncMiddleware(async (req, res) => {
     ?view ${rdfs.label} ?label
   `.WHERE`
     SERVICE <${process.env.METADATA_ENDPOINT}> {
-      ?view a ${schema.Dataset} ;
+      ?view a ${ssz.Objekte} ;
             ${schema.name} ?label ;
             ${schema.alternateName} ?uniqueId ;
             ${dcterms.publisher} ${publisher} ;

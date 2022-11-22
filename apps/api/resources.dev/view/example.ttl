@@ -4,7 +4,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
 
 <> a </api/View>, view:View ;
-  schema:isBasedOn <https://ld.stadt-zuerich.ch/statistics/meta/object/677> ;
+  schema:isBasedOn <https://ld.stadt-zuerich.ch/statistics/meta/object/785> ;
   schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/BEV344OD3440> ;
   schema:alternateName "BEV344OD3440" ;
   schema:name "Bevölkerungsszenarien 2022 – 2040" ;

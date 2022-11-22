@@ -5,7 +5,7 @@ PREFIX ssz: <https://ld.stadt-zuerich.ch/schema/>
 
 <shape-attributes>
   a sh:NodeShape ;
-  sh:targetNode <https://ld.stadt-zuerich.ch/statistics/view/BAU698OD6983> ;
+  sh:targetClass schema:Dataset ;
   sh:property
     [
       sh:path ssz:dataAttribute ;
