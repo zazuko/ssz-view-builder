@@ -64,11 +64,11 @@ export const viewForm = {
           const { generateDimensions } = await import('../../automation.js')
 
           const { pointer } = store.getState().viewForm
-          const { sparqlClient } = store.getState().app
+          const client = store.getState().app.sparqlClient
 
           const task = nanoid()
           dispatch.notifications.addTask(task)
-          const updatedView = await generateDimensions(pointer, sparqlClient)
+          const updatedView = await generateDimensions(pointer, { client })
           dispatch.viewForm.setView(updatedView)
 
           const count = updatedView.any().has(ns.viewBuilder.generated, true).terms.length

@@ -32,7 +32,7 @@ describe('automation.js', () => {
       `
 
       // when
-      const after = await generateDimensions(before, queries)
+      const after = await generateDimensions(before, { queries })
 
       // then
       const dimensions = after.out(view.dimension)
@@ -59,7 +59,7 @@ describe('automation.js', () => {
       `
 
       // when
-      const after = await generateDimensions(before, queries)
+      const after = await generateDimensions(before, { queries })
 
       // then
       const dimensions = after.out(view.dimension)
@@ -89,7 +89,7 @@ describe('automation.js', () => {
       `
 
       // when
-      const after = await generateDimensions(before, queries)
+      const after = await generateDimensions(before, { queries })
 
       // then
       const dimensions = after.out(view.dimension)
@@ -122,7 +122,7 @@ describe('automation.js', () => {
       `
 
       // when
-      const after = await generateDimensions(before, queries)
+      const after = await generateDimensions(before, { queries })
 
       // then
       const dimensions = after.any().has(rdf.type, view.Dimension)

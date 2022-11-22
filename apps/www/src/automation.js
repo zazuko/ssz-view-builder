@@ -4,7 +4,7 @@ import * as ns from '@view-builder/core/ns.js'
 import * as dimensionQueries from './queries/dimensions.js'
 import { deleteCbd, newReference } from './clownface.js'
 
-export async function generateDimensions(view, client, queries = dimensionQueries) {
+export async function generateDimensions(view, { client, queries = dimensionQueries } = {}) {
   const sources = view.out(ns.viewBuilder.source)
 
   clearGeneratedDimensions(view)
