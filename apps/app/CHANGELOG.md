@@ -1,5 +1,12 @@
 # @view-builder/app
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [2981686]
+  - @view-builder/ui@1.0.1
+
 ## 1.0.0
 
 ### Patch Changes
