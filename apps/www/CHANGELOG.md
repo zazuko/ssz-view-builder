@@ -1,5 +1,11 @@
 # @view-builder/ui
 
+## 1.0.1
+
+### Patch Changes
+
+- 2981686: Query for filter properties would timeout on PROD
+
 ## 1.0.0
 
 ### Major Changes
