@@ -4,7 +4,7 @@
   "private": true,
   "description": "Meta package to have a combined version of api+ui",
   "dependencies": {
-    "@view-builder/api": "^1.0.0",
-    "@view-builder/ui": "^1.0.0"
+    "@view-builder/api": "1.0.0",
+    "@view-builder/ui": "1.0.0"
   }
 }
