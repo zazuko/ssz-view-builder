@@ -21,7 +21,7 @@ where {
 
         FILTER (?prop NOT IN (schema:inDefinedTermSet, rdf:type ))
       }
-      limit 1000
+      limit 500
     }
   }
 }
