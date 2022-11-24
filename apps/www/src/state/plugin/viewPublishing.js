@@ -1,4 +1,3 @@
-import { rdf } from '@tpluscode/rdf-ns-builders'
 import * as ns from '@view-builder/core/ns.js'
 import { viewBuilder } from '@view-builder/core/ns.js'
 import { parse } from 'content-disposition'
@@ -15,20 +14,17 @@ export const viewPublishing = {
       const dispatch = store.getDispatch()
 
       return {
-        'core/setContentResource': ({ pointer }) => {
-          if (pointer.has(rdf.type, ns.viewBuilder.ViewCollection).term) {
-            dispatch.viewPublishing.preparePublishOperation()
+        'core/setContentResource': (resource) => {
+          if (resource.hasType(ns.viewBuilder.ViewCollection)) {
+            dispatch.viewPublishing.preparePublishOperation(resource)
           }
         },
-        preparePublishOperation() {
+        preparePublishOperation(collection) {
           const {
-            core,
-            resource,
             viewCollection: { publishShape },
           } = store.getState()
 
           if (!publishShape) {
-            const collection = resource.representations.get(core.contentResource.id).root
             const publishResource = collection.get(viewBuilder.publish)
 
             const operation = publishResource.findOperations({

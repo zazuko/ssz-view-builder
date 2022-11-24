@@ -1,4 +1,4 @@
-import { hydra, rdf, schema } from '@tpluscode/rdf-ns-builders'
+import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import * as ns from '@view-builder/core/ns.js'
 import { nanoid } from 'nanoid'
 
@@ -20,21 +20,18 @@ export const viewCollection = {
       const dispatch = store.getDispatch()
 
       return {
-        'core/setContentResource': ({ pointer }) => {
-          if (pointer.has(rdf.type, ns.viewBuilder.ViewCollection).term) {
-            dispatch.viewCollection.setPointer(pointer)
-            dispatch.viewCollection.loadNewViewShape()
+        'core/setContentResource': (resource) => {
+          if (resource.hasType(ns.viewBuilder.ViewCollection)) {
+            dispatch.viewCollection.setPointer(resource.pointer)
+            dispatch.viewCollection.loadNewViewShape(resource)
           }
         },
-        async loadNewViewShape() {
+        async loadNewViewShape(collection) {
           const {
-            core,
-            resource,
             viewCollection: { newViewShape },
           } = store.getState()
 
           if (!newViewShape) {
-            const collection = resource.representations.get(core.contentResource.id).root
             const operation = collection.findOperations({
               bySupportedOperation: schema.CreateAction,
             }).shift()
