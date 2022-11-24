@@ -1,5 +1,12 @@
 # @view-builder/api
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [37ae0de]
+  - @view-builder/publish-views@0.0.1
+
 ## 1.0.0
 
 ### Major Changes

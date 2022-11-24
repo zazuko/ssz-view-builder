@@ -1,5 +1,13 @@
 # @view-builder/ui
 
+## 1.0.2
+
+### Patch Changes
+
+- 0142990: Adding a new Source, Dimension, etc will show its sub-form expanded by default
+- 365d2e4: Direct links to "Publish views" form or "Create new view" form failed to load
+- 02a4dee: Set a default limit to 100 for every view. It will be removed when publishing
+
 ## 1.0.1
 
 ### Patch Changes
