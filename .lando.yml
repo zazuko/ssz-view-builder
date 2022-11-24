@@ -21,7 +21,7 @@ services:
       - 32272
   www:
     type: node
-    command: yarn wsrun -p @view-builder/app -c start --disable-host-check --host 0.0.0.0
+    command: yarn wsrun -p @view-builder/ui -c start --disable-host-check --host 0.0.0.0
     ssl: true
     scanner: false
     port: 8080
