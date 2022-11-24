@@ -1,0 +1,59 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
+
+<>
+  a sh:NodeShape ;
+  sh:targetNode <https://ld.stadt-zuerich.ch/statistics/view/BEV344OD3440> ;
+  sh:property
+    [
+      sh:path dcterms:issued ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path dcterms:publisher ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path schema:alternateName ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path schema:description ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path schema:endDate ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path schema:startDate ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path dcterms:modified ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path dcterms:accrualPeriodicity ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path ssz:legalFoundation ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path dcterms:spatial ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path ssz:usageNotes ;
+      sh:minCount 1 ;
+    ],
+    [
+      sh:path dcat:theme ;
+      sh:minCount 1 ;
+    ]
+.

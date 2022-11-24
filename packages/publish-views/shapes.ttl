@@ -10,7 +10,7 @@ prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
 
 <ViewShape>
   a sh:NodeShape ;
-  sh:targetClass view:View, schema:Dataset ;
+  sh:targetClass view:View, schema:Dataset, ssz:Objekte ;
   sh:property
     [
       sh:path rdf:type ;
