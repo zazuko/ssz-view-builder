@@ -2,6 +2,7 @@ PREFIX schema: <http://schema.org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
 prefix view-builder: <https://view-builder.described.at/>
+prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
 
 <> a </api/View>, view:View ;
   schema:isBasedOn <https://ld.stadt-zuerich.ch/statistics/meta/object/678> ;
@@ -10,6 +11,7 @@ prefix view-builder: <https://view-builder.described.at/>
   schema:name "Haushalte in Neubau-Wohnungen nach Bauperiode, Zimmerzahl, Eigentumsart, Haushalttyp und Quartier, seit 2006" ;
   view-builder:source <#source-bew> ;
   schema:author </user/tpluscode> ;
+  ssz:metadataCreator </user/tpluscode> ;
   view:dimension <#dim-raum>, <#measure> ;
   view:filter
     [
