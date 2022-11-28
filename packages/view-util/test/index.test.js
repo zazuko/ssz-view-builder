@@ -123,6 +123,36 @@ describe('@view-builder/view-util', () => {
           'https://ld.stadt-zuerich.ch/schema/hasEnd',
         ])
       })
+
+      it('sets view:as to filter dimension', async () => {
+        // given
+        const builderView = await testData`
+          <>
+            ${view.dimension} <#ZEIT> ;
+            ${view.filter} [
+              ${view.operation} ${view.Lt} ;
+              ${view.argument} "1950-01-01"^^${xsd.date} ;
+              ${viewBuilder.baseDimension} <#ZEIT> ;
+              ${viewBuilder.drillDownProperty} <https://ld.stadt-zuerich.ch/schema/hasEnd> ;
+            ] ;
+          .
+          
+          <#ZEIT>
+            ${view.from} [
+              ${view.source} [ ${view.cube} ${ssz('000003')} ] ;
+              ${view.path} ${ssz('property/ZEIT')} ;
+            ] ;
+            ${view.as} ${ssz('property/ZEIT')} ;
+          . 
+        `
+
+        // when
+        const viewView = await prepareViewPointer(builderView, { metaLookup })
+
+        // then
+        const viewAs = viewView.out(view.filter).out(view.dimension).out(view.as)
+        expect(viewAs.term).to.be.ok
+      })
     })
 
     context('filter with term set lookup', () => {
