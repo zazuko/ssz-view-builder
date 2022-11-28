@@ -23,12 +23,20 @@ export function textFilter({ subject, object, variable }) {
       {
         ${subject} ${schema.author}/${vcard.hasName} ${q}
       }
+      UNION
+      {
+        ${subject} ${ssz.metadataCreator}/${vcard.hasName} ${q}
+      }
   
       FILTER( REGEX(str(${q}), "${object.value}", "i") )
     }
     UNION
     {
       ${subject} ${schema.author}/${vcard.hasUID} "${object.value}"
+    }
+    UNION
+    {
+      ${subject} ${ssz.metadataCreator}/${vcard.hasUID} "${object.value}"
     }
   `
 }
