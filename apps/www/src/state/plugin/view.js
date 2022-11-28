@@ -11,8 +11,12 @@ import { multiEffect } from '../lib/multiEffect.js'
 export const viewForm = {
   model: {
     state: {
-      validityReport: {},
-      sourcesValidity: {},
+      validity: {
+        report: {},
+      },
+      sourcesValidity: {
+        report: {},
+      },
     },
     reducers: {
       setView(state, pointer) {
@@ -27,15 +31,27 @@ export const viewForm = {
       setSaveOperation(state, saveOperation) {
         return { ...state, saveOperation }
       },
-      setSourcesValidity(state, report) {
-        return { ...state, sourcesValidity: report }
+      setSourcesValidity(state, { report, shapes, pointer }) {
+        return { ...state, sourcesValidity: { report, shapes, pointer } }
       },
-      setViewValidity(state, validityReport) {
-        return { ...state, validityReport }
+      setViewValidity(state, { report, shapes, pointer }) {
+        return { ...state, validity: { report, shapes, pointer } }
       },
     },
     effects(store) {
       const dispatch = store.getDispatch()
+
+      function whenValid(effect) {
+        return () => {
+          const { report } = store.getState().viewForm.validity
+          if (report?.conforms === false) {
+            dispatch.notifications.errorDialog(report.pointer)
+            return
+          }
+
+          effect()
+        }
+      }
 
       return {
         async saveView() {
@@ -89,7 +105,7 @@ export const viewForm = {
           const converterUrl = `https://converter.zazuko.com/#value=${encodeURIComponent(resourceTurtle)}&format=text%2Fturtle`
           window.open(converterUrl, 'converter')
         },
-        async showQuery() {
+        showQuery: whenValid(async () => {
           const client = store.getState().app.sparqlClient
           const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer, createViewQuery } = await import('@view-builder/view-util')
@@ -107,8 +123,8 @@ export const viewForm = {
           const converterUrl = new URL('https://ld.stadt-zuerich.ch/sparql/')
           converterUrl.hash = params.toString()
           window.open(converterUrl.toString(), 'yasgui')
-        },
-        async showInCubeViewer() {
+        }),
+        showInCubeViewer: whenValid(async () => {
           const client = store.getState().app.sparqlClient
           const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer } = await import('@view-builder/view-util')
@@ -120,7 +136,7 @@ export const viewForm = {
           const cubeViewerUrl = `https://cubeviewerdemo.netlify.app/#endpointUrl=${encodeURIComponent(endpoint)}&view=${encodeURIComponent(resourceTurtle)}`
 
           window.open(cubeViewerUrl, 'cubeViewer')
-        },
+        }),
         'core/setContentResource': ({ pointer }) => {
           if (pointer.has(rdf.type, ns.view.View).term) {
             dispatch.viewForm.populateForm(pointer.term)
@@ -162,6 +178,20 @@ export const viewForm = {
             dispatch.viewForm.setSaveOperation(saveOperation)
           },
         ),
+        async validateSources({ pointer, shapes }) {
+          const Validator = (await import('rdf-validate-shacl')).default
+
+          const report = new Validator(shapes).validate(pointer.dataset)
+
+          dispatch.viewForm.setSourcesValidity({ report, pointer, shapes })
+        },
+        async validateView({ pointer, shapes }) {
+          const Validator = (await import('rdf-validate-shacl')).default
+
+          const report = new Validator(shapes).validate(pointer.dataset)
+
+          dispatch.viewForm.setViewValidity({ report, pointer, shapes })
+        },
       }
     },
   },

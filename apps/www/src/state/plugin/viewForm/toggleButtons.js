@@ -21,13 +21,7 @@ export default function (store) {
 
     const view = await prepareViewPointer(pointer, { cleanup: false, client })
 
-    dispatch.setViewValidity(await validate(view, ViewValidationShapes))
-    dispatch.setSourcesValidity(await validate(view, GenerateDimensionsShapes))
+    dispatch.validateView({ pointer: view, shapes: ViewValidationShapes })
+    dispatch.validateSources({ pointer: view, shapes: GenerateDimensionsShapes })
   }
-}
-
-async function validate(pointer, shapes) {
-  const Validator = (await import('rdf-validate-shacl')).default
-
-  return new Validator(shapes).validate(pointer.dataset)
 }
