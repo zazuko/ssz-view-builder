@@ -41,7 +41,7 @@ export const viewForm = {
     effects(store) {
       const dispatch = store.getDispatch()
 
-      function whenValid(effect) {
+      function whenValidCall(effect) {
         return () => {
           const { report } = store.getState().viewForm.validity
           if (report?.conforms === false) {
@@ -105,7 +105,7 @@ export const viewForm = {
           const converterUrl = `https://converter.zazuko.com/#value=${encodeURIComponent(resourceTurtle)}&format=text%2Fturtle`
           window.open(converterUrl, 'converter')
         },
-        showQuery: whenValid(async () => {
+        showQuery: whenValidCall(async () => {
           const client = store.getState().app.sparqlClient
           const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer, createViewQuery } = await import('@view-builder/view-util')
@@ -124,7 +124,7 @@ export const viewForm = {
           converterUrl.hash = params.toString()
           window.open(converterUrl.toString(), 'yasgui')
         }),
-        showInCubeViewer: whenValid(async () => {
+        showInCubeViewer: whenValidCall(async () => {
           const client = store.getState().app.sparqlClient
           const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer } = await import('@view-builder/view-util')
