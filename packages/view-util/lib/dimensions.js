@@ -52,7 +52,7 @@ export async function populateDimensionIdentifiers(pointer, metaLookup) {
     })
 }
 
-export function setViewAs(view) {
+export function ensureViewAsProperty(view) {
   let i = 0
   function nextColumnProperty() {
     i += 1
