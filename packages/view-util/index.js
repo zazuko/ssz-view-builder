@@ -8,7 +8,7 @@ import { createFilterDimension, generateLookupSources } from './lib/filters.js'
 import { removeApiProperties, sourcesToBlankNodes, rebase } from './lib/viewGraph.js'
 import { getColumns } from './lib/projection.js'
 import { MetaLookup } from './lib/metaLookup.js'
-import { populateDimensionIdentifiers } from './lib/dimensionIdentifiers.js'
+import { populateDimensionIdentifiers, ensureViewAsProperty } from './lib/dimensions.js'
 
 export async function prepareViewPointer(pointer, options = {}) {
   const {
@@ -54,6 +54,7 @@ export async function prepareViewPointer(pointer, options = {}) {
   view.addOut(ns.view.dimension, view.out(ns.view.filter).out(ns.view.dimension))
 
   await populateDimensionIdentifiers(view, metaLookup)
+  ensureViewAsProperty(view)
   dataset.addAll(await metaLookup.getDataAttributes(view.term, pointer.out(schema.isBasedOn).term))
 
   if (cleanup) {

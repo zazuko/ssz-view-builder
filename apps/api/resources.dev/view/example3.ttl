@@ -3,6 +3,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix view: <https://cube.link/view/>
+prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
 
 <> a </api/View>, view:View ;
   schema:isBasedOn <https://ld.stadt-zuerich.ch/statistics/meta/object/660> ;
@@ -11,6 +12,7 @@ prefix view: <https://cube.link/view/>
   schema:name "Aufenthaltsdauer beim Wegzug nach auswärts nach Alter, Geschlecht, Herkunft und Stadtkreis" ;
   view-builder:source <#source-bew>, <#source-stf> ;
   schema:author </user/cvasquez> ;
+  ssz:metadataCreator </user/tpluscode> ;
 .
 
 <#source-bew>

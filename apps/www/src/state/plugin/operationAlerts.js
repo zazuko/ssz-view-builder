@@ -1,5 +1,6 @@
 import { rdfs } from '@tpluscode/rdf-ns-builders'
 import { html } from 'lit'
+import { hex } from '@hydrofoil/vocabularies/builders'
 
 export const operationAlerts = {
   model: {
@@ -19,7 +20,7 @@ export const operationAlerts = {
             dispatch.notifications.show({
               content: html`
                 <strong>${pointer.out(rdfs.label).value}</strong><br>
-                <sl-button outline @click="${() => dispatch.notifications.errorDialog(pointer)}">See details</sl-button>
+                <sl-button outline @click="${() => dispatch.notifications.errorDialog(pointer.out(hex.report))}">See details</sl-button>
               `,
               variant: 'danger',
               autoHide: false,

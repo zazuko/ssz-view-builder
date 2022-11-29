@@ -15,21 +15,13 @@ export async function getColumns(view, metaLookup) {
     })))
 
   return (function * iterate() {
-    let i = 0
-    function nextColumnProperty() {
-      i += 1
-      return view.namedNode(`${view.value}#column${i}`)
-    }
-
     for (const { dimension, needsLookupDimensions } of dimensions) {
-      dimension.addOut(ns.view.as, nextColumnProperty())
       yield dimension
 
       if (needsLookupDimensions) {
         const labelDimension = view.blankNode()
 
         labelDimension
-          .addOut(ns.view.as, nextColumnProperty())
           .addOut(ns.view.labelFor, dimension)
           .addOut(ns.view.from, (from) => {
             from.addOut(ns.view.source, (source) => {
@@ -44,7 +36,6 @@ export async function getColumns(view, metaLookup) {
         const termCodeDimension = view.blankNode()
 
         termCodeDimension
-          .addOut(ns.view.as, nextColumnProperty())
           .addOut(ns.view.from, (from) => {
             from.addOut(ns.view.source, (source) => {
               source.addOut(rdf.type, ns.view.LookupSource)

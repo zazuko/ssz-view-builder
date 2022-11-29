@@ -51,3 +51,19 @@ export async function populateDimensionIdentifiers(pointer, metaLookup) {
       }
     })
 }
+
+export function ensureViewAsProperty(view) {
+  let i = 0
+  function nextColumnProperty() {
+    i += 1
+    return view.namedNode(`${view.value}#column${i}`)
+  }
+
+  const dimensions = view.out(ns.view.dimension).toArray()
+
+  for (const dimension of dimensions) {
+    dimension
+      .deleteOut(ns.view.as)
+      .addOut(ns.view.as, nextColumnProperty())
+  }
+}
