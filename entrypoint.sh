@@ -3,8 +3,8 @@
 set -eu
 
 echo "Preparing environment"
-API_VERSION=$(cat apps/api/package.json | json version)
-UI_VERSION=$(cat apps/www/package.json | json version)
+API_VERSION=$(jq -r .version apps/api/package.json)
+UI_VERSION=$(jq -r .version apps/www/package.json)
 
 export API_VERSION
 export UI_VERSION

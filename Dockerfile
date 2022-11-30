@@ -5,7 +5,7 @@ WORKDIR /app
 # copy everything
 COPY . ./
 
-RUN apk add --no-cache gettext
+RUN apk add --no-cache gettext jq
 
 # first do the build
 RUN yarn --frozen-lockfile \
@@ -14,7 +14,7 @@ RUN yarn --frozen-lockfile \
   && yarn cache clean
 
 # then, install required modules for the runtime
-RUN yarn global add yarn-deduplicate json \
+RUN yarn global add yarn-deduplicate \
   && yarn --production --frozen-lockfile \
   && yarn global remove yarn-deduplicate \
   && yarn cache clean
