@@ -1,3 +1,7 @@
+PREFIX schema: <http://schema.org/>
 PREFIX view-builder: <https://view-builder.described.at/>
 
 <> view-builder:endpoint <$METADATA_ENDPOINT> .
+
+_:api schema:softwareVersion "$API_VERSION" .
+_:ui schema:softwareVersion "$UI_VERSION" .
