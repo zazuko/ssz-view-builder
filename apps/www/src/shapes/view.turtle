@@ -148,13 +148,6 @@ view:In rdfs:label "one of" .
             sh:xone ( :DefinedTermFilter :DateFilter ) ;
             sh:property
                 [
-                    sh:path rdfs:label ;
-                    sh:name "Name" ;
-                    sh:minCount 1 ;
-                    sh:maxCount 1 ;
-                    sh:order 1 ;
-                ],
-                [
                     sh:name "dimension" ;
                     sh:path :baseDimension ;
                     dash:editor dash:InstancesSelectEditor ;
@@ -259,15 +252,6 @@ view:In rdfs:label "one of" .
         :KeyFigureProperty,
         :CubeProperty,
         [
-            sh:path rdfs:label ;
-            sh:name "Name" ;
-            sh:minCount 1 ;
-            sh:maxCount 1 ;
-            sh:order 100 ;
-            sh1:valueFrom view:cube ;
-            sh1:labelPath schema:name ;
-        ],
-        [
             sh:path rdf:type ;
             sh:defaultValue view:CubeSource ;
             dash:hidden true ;
@@ -286,15 +270,6 @@ view:In rdfs:label "one of" .
 :DimensionShape
     rdfs:label "Dimension" ;
     sh:property
-        [
-            sh:path rdfs:label ;
-            sh:name "Name" ;
-            sh:minCount 1 ;
-            sh:maxCount 1 ;
-            sh:order 100 ;
-            sh1:valueFrom ( view:from view:path ) ;
-            sh1:labelPath schema:name ;
-        ],
         [
             sh:order 10 ;
             sh:path view:from ;
@@ -317,6 +292,11 @@ view:In rdfs:label "one of" .
                             sh:nodeKind sh:IRI ;
                             sh:minCount 1 ;
                             sh:maxCount 1 ;
+                            sh1:labelPath schema:name ;
+                            sh1:setFocusNodeLabel
+                                [
+                                    sh:inversePath view:from ;
+                                ] ;
                             dash:editor dash:InstancesSelectEditor ;
                             hydra:search
                                 [
@@ -363,6 +343,8 @@ view:In rdfs:label "one of" .
     dash:editor dash:InstancesSelectEditor ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
+    sh1:labelPath schema:name ;
+    sh1:setFocusNodeLabel true ;
     hydra:search
         [
             a hydra:IriTemplate ;
