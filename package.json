@@ -25,7 +25,7 @@
   "repository": "https://github.com/zazuko/ssz-view-builder",
   "dependencies": {
     "@hydrofoil/knossos": "^0.9.6",
-    "@hydrofoil/talos": "^0.5.1",
+    "@hydrofoil/talos": "^0.6.2",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-conditional-middleware": "^2.1.1",

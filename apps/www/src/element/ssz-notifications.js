@@ -22,7 +22,7 @@ export class SszNotifications extends connect(store, LitElement) {
 
   static get properties() {
     return {
-      loading: { type: Boolean },
+      loading: { type: Boolean, reflect: true },
       error: { type: Object },
     }
   }

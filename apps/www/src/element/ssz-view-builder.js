@@ -3,6 +3,7 @@ import '@shoelace-style/shoelace/dist/components/spinner/spinner.js'
 import '@shoelace-style/shoelace/dist/components/menu/menu.js'
 import '@shoelace-style/shoelace/dist/components/menu-label/menu-label.js'
 import '@shoelace-style/shoelace/dist/components/divider/divider.js'
+import '@shoelace-style/shoelace/dist/components/badge/badge.js'
 import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js'
 import '@material/mwc-drawer/mwc-drawer.js'
 import { connect } from '@captaincodeman/rdx'
@@ -15,19 +16,40 @@ customElements.define('ssz-view-builder', class extends connect(store, LitElemen
       :host {
         display: block;
       }
-      
+
       a {
         text-decoration: none;
         color: unset;
       }
-      
+
       sl-menu-item a {
         display: inline-block;
         width: 100%;
       }
-      
+
       div[slot=appContent] {
         padding: 0 10px;
+      }
+
+      #menu-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      ssz-notifications {
+        display: none;
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+      }
+
+      ssz-notifications[loading] {
+        display: block;
+      }
+      
+      div {
+         height: 100%;
       }
     `
   }
@@ -50,21 +72,34 @@ customElements.define('ssz-view-builder', class extends connect(store, LitElemen
       <ssz-notifications></ssz-notifications>
       <mwc-drawer>
         <div>
-          <sl-menu>
-            <sl-menu-label>View Builder</sl-menu-label>
-            <sl-divider></sl-divider>
-            <sl-menu-item>
-              <a href="${this.state.core.entrypoint?.value}">Home</a>
-            </sl-menu-item>
-            ${this.state.app.view.menu ? html`<sl-divider></sl-divider>` : ''}
-            ${this.state.app.view.menu?.(viewRenderParams)}
-            <slot name="menu"></slot>
-          </sl-menu>
+          <div id="menu-wrapper">
+            <sl-menu>
+              <sl-menu-label>View Builder</sl-menu-label>
+              <sl-divider></sl-divider>
+              <sl-menu-item>
+                <a href="${this.state.core.entrypoint?.value}">Home</a>
+              </sl-menu-item>
+              ${this.state.app.view.menu
+    ? html`
+                  <sl-divider></sl-divider>`
+    : ''}
+              ${this.state.app.view.menu?.(viewRenderParams)}
+              <slot name="menu"></slot>
+            </sl-menu>
+            <sl-menu>
+              ${this.state.app.softwareComponents.map(([name, version]) => html`
+                <sl-menu-item>
+                  ${name}
+                  <sl-badge pill slot="suffix">${version}</sl-badge>
+                </sl-menu-item>
+              `)}
+            </sl-menu>
+          </div>
         </div>
         <div slot="appContent">
           ${this.state.app.view.content(viewRenderParams)}
         </div>
-    </mwc-drawer>
+      </mwc-drawer>
     `
   }
 

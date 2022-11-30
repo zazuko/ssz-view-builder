@@ -1,7 +1,17 @@
+PREFIX schema: <http://schema.org/>
 PREFIX code: <https://code.described.at/>
 prefix hydra: <http://www.w3.org/ns/hydra/core#>
 
 <>
   a hydra:ApiDocumentation ;
   hydra:entrypoint </views> ;
+  schema:application _:api, _:ui ;
+.
+
+_:api
+  schema:name "View Builder API" ;
+.
+
+_:ui
+  schema:name "View Builder UI" ;
 .

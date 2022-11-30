@@ -43,6 +43,8 @@ export default function effects(store) {
     'core/setContentResource': async ({ pointer, apiDocumentation }) => {
       let view
 
+      dispatch.app.setSoftwareComponents(apiDocumentation)
+
       const endpoint = apiDocumentation.pointer.out(viewBuilder.endpoint).value
       dispatch.app.setSparqlEndpoint(endpoint)
       const client = store.getState().app.sparqlClient
