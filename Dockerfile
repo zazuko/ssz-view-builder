@@ -14,7 +14,7 @@ RUN yarn --frozen-lockfile \
   && yarn cache clean
 
 # then, install required modules for the runtime
-RUN yarn global add yarn-deduplicate \
+RUN yarn global add yarn-deduplicate json \
   && yarn --production --frozen-lockfile \
   && yarn global remove yarn-deduplicate \
   && yarn cache clean
