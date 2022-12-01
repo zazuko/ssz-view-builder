@@ -1481,10 +1481,10 @@
     "@tpluscode/rdf-string" "^0.2.26"
     "@tpluscode/sparql-builder" "^0.3"
 
-"@hydrofoil/shaperone-core@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-core/-/shaperone-core-0.10.0.tgz#a45dbc7fc406a0836acc134af977037c60ec2cb9"
-  integrity sha512-2MKR+s2wxWEeWG3AbI0VilNpYA3TEVr7L4He4g+2smUeWWNTYRnUE78f4IWKuEqoo+uvgieMOzsy3yR0Dys8+Q==
+"@hydrofoil/shaperone-core@^0.10.0", "@hydrofoil/shaperone-core@^0.10.3":
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-core/-/shaperone-core-0.10.3.tgz#27cbc437081f4d9d6bf563543715fa47f12a0497"
+  integrity sha512-i3HN7p4Bw87Q2Q9XMAiaByksyKa6fGNnlLrys8qLPhFJ73apyP9H6oLT9I8mM3CQuJxSXxhyuFhzm4nAhDW38w==
   dependencies:
     "@captaincodeman/rdx" "^1.0.0-rc.8"
     "@rdf-esm/data-model" "^0.5.3"
@@ -1536,13 +1536,13 @@
     lit "^2"
     p-debounce "^4"
 
-"@hydrofoil/shaperone-wc@^0.7.11":
-  version "0.7.11"
-  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-wc/-/shaperone-wc-0.7.11.tgz#530ecdc779bcc90c1c25b53e5b6bfd46b7d42fa8"
-  integrity sha512-LwSkXQGhRNUn/26SiomBeQdY1ivpYODsha6WPefwGzwU+Ap3qcCmE2A/am/JUSat4ZT/2XVYuywRUbzbPFHLzg==
+"@hydrofoil/shaperone-wc@^0.7.11", "@hydrofoil/shaperone-wc@^0.7.12":
+  version "0.7.12"
+  resolved "https://registry.yarnpkg.com/@hydrofoil/shaperone-wc/-/shaperone-wc-0.7.12.tgz#e31edcae1193a69de5c528dab0d483501aca8acb"
+  integrity sha512-1DHgXE5pZ8uSZSKOy6IQliJXRfN113mu/WqrCnV6pNjiU4aeFG4ARK0hVWFEsFvYWVmnwDnqSJ2SJ0LMbmvZFw==
   dependencies:
     "@captaincodeman/rdx" "^1.0.0-rc.8"
-    "@hydrofoil/shaperone-core" "^0.10.0"
+    "@hydrofoil/shaperone-core" "^0.10.3"
     "@rdf-esm/data-model" "^0.5.4"
     "@rdf-esm/dataset" "^0.5.1"
     "@rdf-esm/term-map" "^0.5.0"

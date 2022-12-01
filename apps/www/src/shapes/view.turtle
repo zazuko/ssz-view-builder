@@ -89,6 +89,7 @@ view:In rdfs:label "one of" .
 
 :CubeSourceProperty
     sh:path :source ;
+    sh:minCount 1 ;
     sh:class view:CubeSource ;
     sh:node :CubeSourceShape ;
     sh:order 10 ;

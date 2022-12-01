@@ -2,13 +2,12 @@ import { html } from 'lit'
 import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '../element/ssz-view-table.js'
+import '../forms/index.js'
 import { viewBuilder } from '@view-builder/core/ns.js'
 import { fromRdf } from 'rdf-literal'
 import { searchForm } from './searchForm.js'
 
 export async function init() {
-  await import('../forms/index.js')
-
   return {
     content,
     menu,
@@ -60,8 +59,6 @@ function table({ state, dispatch }) {
 }
 
 function publishForm({ state, dispatch }) {
-  import('../forms/index.js')
-
   const { shape, operation } = state.viewPublishing
   if (!shape) {
     return html`<sl-spinner></sl-spinner>`
@@ -91,7 +88,7 @@ function publishForm({ state, dispatch }) {
 }
 
 function newViewForm({ state, dispatch }) {
-  import('../forms/index.js')
+  import('@hydrofoil/shaperone-wc/shaperone-form.js')
 
   const { newViewShape, newViewOperation } = state.viewCollection
   if (!newViewShape || newViewShape instanceof Promise) {
