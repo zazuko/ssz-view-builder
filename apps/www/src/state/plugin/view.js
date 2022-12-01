@@ -41,9 +41,9 @@ export const viewForm = {
     effects(store) {
       const dispatch = store.getDispatch()
 
-      function whenValidCall(effect) {
+      function whenValidCall(stateProperty, effect) {
         return () => {
-          const { report } = store.getState().viewForm.validity
+          const { report } = store.getState().viewForm[stateProperty]
           if (report?.conforms === false) {
             dispatch.notifications.errorDialog(report.pointer)
             return
@@ -76,7 +76,7 @@ export const viewForm = {
             dispatch.viewForm.populateForm(pointer.term)
           }
         },
-        async generateDimensions() {
+        generateDimensions: whenValidCall('sourcesValidity', async () => {
           const { generateDimensions } = await import('../../automation.js')
 
           const { pointer } = store.getState().viewForm
@@ -93,7 +93,7 @@ export const viewForm = {
             variant: 'success',
             content: `${count} dimension(s) generated`,
           })
-        },
+        }),
         async showView() {
           const { prepareViewPointer } = await import('@view-builder/view-util')
 
@@ -105,7 +105,7 @@ export const viewForm = {
           const converterUrl = `https://converter.zazuko.com/#value=${encodeURIComponent(resourceTurtle)}&format=text%2Fturtle`
           window.open(converterUrl, 'converter')
         },
-        showQuery: whenValidCall(async () => {
+        showQuery: whenValidCall('validity', async () => {
           const client = store.getState().app.sparqlClient
           const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer, createViewQuery } = await import('@view-builder/view-util')
@@ -124,7 +124,7 @@ export const viewForm = {
           converterUrl.hash = params.toString()
           window.open(converterUrl.toString(), 'yasgui')
         }),
-        showInCubeViewer: whenValidCall(async () => {
+        showInCubeViewer: whenValidCall('validity', async () => {
           const client = store.getState().app.sparqlClient
           const endpoint = client.query.endpoint.endpointUrl
           const { prepareViewPointer } = await import('@view-builder/view-util')

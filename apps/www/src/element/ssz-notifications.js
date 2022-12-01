@@ -16,13 +16,18 @@ export class SszNotifications extends connect(store, LitElement) {
         --height: 5px;
         margin-bottom: 2px;
         --sl-border-radius-pill: 0px;
+        display: none;
+      }
+      
+      sl-progress-bar[indeterminate] {
+        display: block;
       }
     `
   }
 
   static get properties() {
     return {
-      loading: { type: Boolean, reflect: true },
+      loading: { type: Boolean },
       error: { type: Object },
     }
   }
@@ -82,7 +87,7 @@ export class SszNotifications extends connect(store, LitElement) {
   }
 
   renderError() {
-    return html`<sl-dialog .open="${!!this.error}"
+    return html`<sl-dialog ?open="${!!this.error}"
                            .label="${this.error?.out(rdfs.comment).value || ''}"
                            @sl-after-hide="${() => store.dispatch.notifications.hideError()}">
       <ssz-shacl-report .report="${this.error}"></ssz-shacl-report>

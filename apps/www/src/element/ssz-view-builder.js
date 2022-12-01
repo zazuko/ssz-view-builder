@@ -38,16 +38,11 @@ customElements.define('ssz-view-builder', class extends connect(store, LitElemen
       }
 
       ssz-notifications {
-        display: none;
         position: absolute;
         z-index: 10;
         width: 100%;
       }
 
-      ssz-notifications[loading] {
-        display: block;
-      }
-      
       div {
          height: 100%;
       }
