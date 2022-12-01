@@ -3,5 +3,4 @@ PREFIX view-builder: <https://view-builder.described.at/>
 
 <> view-builder:endpoint <https://ld.integ.stadt-zuerich.ch/query> .
 
-_:api schema:softwareVersion "DEV" .
-_:ui schema:softwareVersion "DEV" .
+_:app schema:softwareVersion "DEV" .

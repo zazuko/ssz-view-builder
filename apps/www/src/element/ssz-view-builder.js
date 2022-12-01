@@ -88,7 +88,7 @@ customElements.define('ssz-view-builder', class extends connect(store, LitElemen
             </sl-menu>
             <sl-menu>
               ${this.state.app.softwareComponents.map(([name, version]) => html`
-                <sl-menu-item>
+                <sl-menu-item disabled>
                   ${name}
                   <sl-badge pill slot="suffix">${version}</sl-badge>
                 </sl-menu-item>

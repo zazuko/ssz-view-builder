@@ -5,13 +5,9 @@ prefix hydra: <http://www.w3.org/ns/hydra/core#>
 <>
   a hydra:ApiDocumentation ;
   hydra:entrypoint </views> ;
-  schema:application _:api, _:ui ;
+  schema:application _:app ;
 .
 
-_:api
-  schema:name "View Builder API" ;
-.
-
-_:ui
-  schema:name "View Builder UI" ;
+_:app
+  schema:name "View Builder" ;
 .
