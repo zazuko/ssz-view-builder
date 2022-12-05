@@ -38,8 +38,10 @@ function constructMetadata(pointer, sourceDataset, userBase) {
     .WHERE`
       SERVICE <${process.env.METADATA_ENDPOINT}> {
         ${sourceDataset} ${schema.alternateName} ?alternateName ;
-                         ${schema.name} ?name ;
-                         ${ssz.metadataCreator} ?metadataCreator .
+                         ${schema.name} ?name .
+        OPTIONAL {
+          ${sourceDataset} ${ssz.metadataCreator} ?metadataCreator .
+        }
                          
         BIND( IRI(CONCAT("${userBase}", str(?metadataCreator))) as ?metadataCreatorUser)
       }
