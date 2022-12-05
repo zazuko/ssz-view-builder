@@ -1,5 +1,13 @@
 # @view-builder/api
 
+## 1.1.0
+
+### Patch Changes
+
+- 77ed34d: Allow missing metadata creator
+- bc78bf2: View search now includes metadata creator (re StatistikStadtZuerich/APD#184)
+  - @view-builder/publish-views@0.0.2
+
 ## 1.0.2
 
 ### Patch Changes

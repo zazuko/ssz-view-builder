@@ -1,6 +1,6 @@
 {
   "name": "@view-builder/ui",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -33,7 +33,7 @@
     "@tpluscode/sparql-builder": "^0.3.23",
     "content-disposition": "^0.5.4",
     "@view-builder/core": "0.0.0",
-    "@view-builder/view-util": "0.0.0",
+    "@view-builder/view-util": "0.0.1",
     "@zazuko/rdf-vocabularies": "^2022.6.29",
     "@zazuko/vocabulary-extras": "^1.2.3",
     "alcaeus": "^2.3.2",
