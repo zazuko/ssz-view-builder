@@ -1,5 +1,13 @@
 # @view-builder/api
 
+## 1.1.1
+
+### Patch Changes
+
+- 10d66f1: `dcat:keyword` were missing from published views (re StatistikStadtZuerich/APD#203)
+- Updated dependencies [10d66f1]
+  - @view-builder/publish-views@0.0.3
+
 ## 1.1.0
 
 ### Patch Changes
