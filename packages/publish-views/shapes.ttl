@@ -92,5 +92,9 @@ prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
     [
       sh:path dcat:theme ;
       sh:nodeKind sh:Literal ;
+    ] ,
+    [
+      sh:path dcat:keyword ;
+      sh:nodeKind sh:Literal ;
     ] ;
 .
