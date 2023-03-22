@@ -133,7 +133,7 @@ export const viewForm = {
           const view = await prepareViewPointer(pointer, { client })
           const resourceTurtle = turtle`${view.dataset}`.toString()
 
-          const cubeViewerUrl = `https://cubeviewerdemo.netlify.app/#endpointUrl=${encodeURIComponent(endpoint)}&view=${encodeURIComponent(resourceTurtle)}`
+          const cubeViewerUrl = `https://cube-viewer.zazuko.com/#endpointUrl=${encodeURIComponent(endpoint)}&view=${encodeURIComponent(resourceTurtle)}`
 
           window.open(cubeViewerUrl, 'cubeViewer')
         }),
