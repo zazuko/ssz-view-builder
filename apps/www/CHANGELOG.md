@@ -1,5 +1,11 @@
 # @view-builder/ui
 
+## 1.1.1
+
+### Patch Changes
+
+- daf4454: Point to the `zazuko.com` Cube Viewer instance
+
 ## 1.1.0
 
 ### Minor Changes
