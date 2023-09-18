@@ -15,7 +15,7 @@ export async function populateDimensionIdentifiers(pointer, metaLookup) {
     .out(ns.view.cube)
     .terms
 
-  const cubeKeys = await metaLookup.getCubeKeys(...cubes)
+  const cubesAndKeys = await metaLookup.getCubeKeys(...cubes)
   const dimensionIdentifiers = await metaLookup.getDimensionIdentifiers()
 
   pointer
@@ -43,9 +43,11 @@ export async function populateDimensionIdentifiers(pointer, metaLookup) {
       const { identifier, type } = dimensionIdentifiers.get(property) || {}
 
       if (ns.cube.MeasureDimension.equals(type)) {
-        const { cubeKey } = cubeKeys.find(bindings => cube.equals(bindings.cube))
+        const found = cubesAndKeys.find(bindings => cube.equals(bindings.cube))
 
-        dimension.addOut(schema.identifier, cubeKey)
+        if (found) {
+          dimension.addOut(schema.identifier, found.cubeKey)
+        }
       } else if (ns.cube.KeyDimension.equals(type)) {
         dimension.addOut(schema.identifier, `${identifier}_uri`)
       }
