@@ -1,10 +1,10 @@
 import $rdf from 'rdf-ext'
 import clownface from 'clownface'
 import asyncMiddleware from 'middleware-async'
-import { dcterms, hydra, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
+import { hydra, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import { cube } from '@zazuko/vocabulary-extras/builders'
-import { ssz, viewBuilder } from '@view-builder/core/ns.js'
+import { ssz } from '@view-builder/core/ns.js'
 
 /**
  * GET handler for loading view metadata from the metadata endpoint
@@ -12,8 +12,6 @@ import { ssz, viewBuilder } from '@view-builder/core/ns.js'
  * The response is a hydra collection
  */
 export const get = asyncMiddleware(async (req, res) => {
-  const publisher = req.knossos.config.out(viewBuilder.publisher).term
-
   const collection = clownface({
     dataset: $rdf.dataset(),
     term: req.hydra.term,
@@ -28,7 +26,6 @@ export const get = asyncMiddleware(async (req, res) => {
       ?view a ${ssz.Objekte} ;
             ${schema.name} ?label ;
             ${schema.alternateName} ?uniqueId ;
-            ${dcterms.publisher} ${publisher} ;
       .
     }
     

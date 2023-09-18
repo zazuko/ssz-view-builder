@@ -7,8 +7,6 @@ PREFIX knossos: <https://hypermedia.app/knossos#>
 
 <>
   a knossos:Configuration ;
-  # TODO: make these env specific
-  view-builder:publisher <https://ld.stadt-zuerich.ch/statistics/meta/org/4> ;
   view-builder:publishedViewTemplate
     [
       a hydra:IriTemplate ;
