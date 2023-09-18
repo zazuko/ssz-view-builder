@@ -57,10 +57,9 @@ describe('@view-builder/publish-views', () => {
 
         // when
         const { run } = await runPipeline(ptr)
-        await run.finished
 
         // then
-        expect(run.pipeline.variables.get('error')).to.be.undefined
+        await expect(run.finished).to.be.eventually.fulfilled
       })
 
       it('when dimension has generated lookup dimensions', async () => {
@@ -90,10 +89,9 @@ describe('@view-builder/publish-views', () => {
 
         // when
         const { run } = await runPipeline(ptr)
-        await run.finished
 
         // then
-        expect(run.pipeline.variables.get('error')).to.be.undefined
+        await expect(run.finished).to.be.eventually.fulfilled
       })
 
       it('when linked source cube is not found', async () => {
@@ -144,7 +142,7 @@ describe('@view-builder/publish-views', () => {
         const { run } = await runPipeline(ptr)
 
         // then
-        await expect(run.finished).to.be.rejectedWith(ValidationError, '1 views failed. 2 issues found')
+        await expect(run.finished).to.be.rejectedWith(ValidationError, '1 views failed. 3 issues found')
       })
     })
 
@@ -158,6 +156,7 @@ describe('@view-builder/publish-views', () => {
         variables: {
           views,
           metaLookup,
+          ignoreWarnings: true,
         },
       })
     }

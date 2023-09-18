@@ -96,5 +96,12 @@ prefix ssz: <https://ld.stadt-zuerich.ch/schema/>
     [
       sh:path dcat:keyword ;
       sh:nodeKind sh:Literal ;
+    ],
+    [
+      sh:path (view:dimension schema:identifier) ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:message "Missing dimension identifier" ;
+      sh:severity sh:Warning ;
     ] ;
 .
