@@ -1,5 +1,14 @@
 # @view-builder/api
 
+## 1.1.2
+
+### Patch Changes
+
+- f389f80: Remove the restriction on searching for `ssz:Objekte`. Fixes the issue where the dropdown would load empty when creating a new view
+- Updated dependencies [043c26d]
+- Updated dependencies [14ef900]
+  - @view-builder/publish-views@0.0.4
+
 ## 1.1.1
 
 ### Patch Changes
