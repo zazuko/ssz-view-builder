@@ -1,9 +1,10 @@
-import $rdf from '@view-builder/core/env.js'
+import $rdf from '@rdfjs/dataset'
 import Traverser from '@rdfjs/traverser'
+import clownface from 'clownface'
 import TermSet from '@rdfjs/term-set'
 
 export function newReference(ptr) {
-  return $rdf.clownface({
+  return clownface({
     dataset: $rdf.dataset([...ptr.dataset]),
     term: ptr.term,
   })

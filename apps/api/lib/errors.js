@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { ProblemDocument } from 'http-problem-details'
-import rdf from '@view-builder/core/env.js'
+import { fromPointer } from '@rdfine/shacl/lib/ValidationReport'
 import { hex } from '@hydrofoil/vocabularies/builders'
 
 export class ValidationErrorMapper {
@@ -9,7 +9,7 @@ export class ValidationErrorMapper {
   }
 
   mapError(error) {
-    const report = error.reports.map(ptr => rdf.rdfine.sh.ValidationReport(ptr).toJSON())
+    const report = error.reports.map(ptr => fromPointer(ptr).toJSON())
 
     const problem = new ProblemDocument({
       title: 'Data issues were found',

@@ -1,6 +1,9 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
-import $rdf from '@view-builder/core/env.js'
+import clownface from 'clownface'
+import $rdf from 'rdf-ext'
+import { fromPointer } from '@rdfine/shacl/lib/NodeShape'
+import { fromPointer as propertyShape } from '@rdfine/shacl/lib/PropertyShape'
 import { owl, sh } from '@tpluscode/rdf-ns-builders'
 import sh1 from '@hydrofoil/shaperone-core/ns.js'
 import { ex, testData } from '@view-builder/testing'
@@ -17,7 +20,7 @@ describe('forms/dynamicXone.js', () => {
   let xone
 
   beforeEach(async () => {
-    focusNode = $rdf.clownface({ dataset: $rdf.dataset() }).blankNode()
+    focusNode = clownface({ dataset: $rdf.dataset() }).blankNode()
     shape = await testData`
       <>
         ${sh1.xoneDiscriminator} ${ex.predicate} ;
@@ -38,7 +41,7 @@ describe('forms/dynamicXone.js', () => {
         ${sh.property} <PropertyBaz> .
     `
     xone = [{
-      shapes: shape.any().has(sh1.discriminatorValue).map($rdf.rdfine.sh.PropertyShape),
+      shapes: shape.any().has(sh1.discriminatorValue).map(propertyShape),
     }]
     actions = {
       showProperty: sinon.spy(),
@@ -54,13 +57,13 @@ describe('forms/dynamicXone.js', () => {
         focusNode: {
           focusNode,
           logicalConstraints: { xone },
-          shape: $rdf.rdfine.sh.NodeShape(shape),
+          shape: fromPointer(shape),
           properties: [{
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyFoo')),
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBar')),
+            shape: propertyShape(shape.namedNode('PropertyBar')),
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBaz')),
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
           }],
         },
         actions,
@@ -82,13 +85,13 @@ describe('forms/dynamicXone.js', () => {
         focusNode: {
           focusNode,
           logicalConstraints: { xone },
-          shape: $rdf.rdfine.sh.NodeShape(shape),
+          shape: fromPointer(shape),
           properties: [{
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyFoo')),
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBar')),
+            shape: propertyShape(shape.namedNode('PropertyBar')),
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBaz')),
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
           }],
         },
         actions,
@@ -114,13 +117,13 @@ describe('forms/dynamicXone.js', () => {
         focusNode: {
           focusNode,
           logicalConstraints: { xone },
-          shape: $rdf.rdfine.sh.NodeShape(shape),
+          shape: fromPointer(shape),
           properties: [{
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyFoo')),
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBar')),
+            shape: propertyShape(shape.namedNode('PropertyBar')),
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBaz')),
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
           }],
         },
         actions,
@@ -146,15 +149,15 @@ describe('forms/dynamicXone.js', () => {
         focusNode: {
           focusNode,
           logicalConstraints: { xone },
-          shape: $rdf.rdfine.sh.NodeShape(shape),
+          shape: fromPointer(shape),
           properties: [{
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyFoo')),
+            shape: propertyShape(shape.namedNode('PropertyFoo')),
             hidden: true,
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBar')),
+            shape: propertyShape(shape.namedNode('PropertyBar')),
             hidden: true,
           }, {
-            shape: $rdf.rdfine.sh.PropertyShape(shape.namedNode('PropertyBaz')),
+            shape: propertyShape(shape.namedNode('PropertyBaz')),
             hidden: true,
           }],
         },
