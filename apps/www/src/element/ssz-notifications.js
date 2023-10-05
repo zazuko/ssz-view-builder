@@ -5,7 +5,7 @@ import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 import '@shoelace-style/shoelace/dist/components/progress-bar/progress-bar.js'
 import './ssz-shacl-report.js'
 import { rdfs } from '@tpluscode/rdf-ns-builders'
-import { store } from '../state/store'
+import { store } from '../state/store.js'
 
 export class SszNotifications extends connect(store, LitElement) {
   alerts = new Set()
