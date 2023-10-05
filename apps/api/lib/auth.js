@@ -1,7 +1,8 @@
 import { createRequire } from 'module'
 import { Router } from 'express'
 import auth from 'express-basic-auth'
-import $rdf from '@view-builder/core/env.js'
+import clownface from 'clownface'
+import $rdf from 'rdf-ext'
 import asyncMiddleware from 'middleware-async'
 import { DESCRIBE } from '@tpluscode/sparql-builder'
 import { rdf, vcard } from '@tpluscode/rdf-ns-builders'
@@ -34,7 +35,7 @@ function setAgent(client) {
       .execute(client.query)
     const dataset = await $rdf.dataset().import(userQuery)
 
-    let [foundUser] = $rdf.clownface({ dataset })
+    let [foundUser] = clownface({ dataset })
       .has(vcard.hasUID, userName)
       .toArray()
       .filter(isNamedNode)
@@ -43,7 +44,7 @@ function setAgent(client) {
       req.knossos.log(`Current user ${foundUser.value}`)
     } else {
       const id = req.rdf.namedNode(`/user/${encodeURIComponent(userName)}`)
-      foundUser = $rdf.clownface({ dataset: $rdf.dataset() })
+      foundUser = clownface({ dataset: $rdf.dataset() })
         .namedNode(id)
         .addOut(rdf.type, vcard.Individual)
         .addOut(vcard.hasUID, userName)

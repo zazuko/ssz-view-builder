@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit'
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js'
-import prefixes from '@zazuko/prefixes'
+import prefixes from '@zazuko/rdf-vocabularies/prefixes'
 import prefixesExtras from '@zazuko/vocabulary-extras/prefixes'
 import { view } from '@view-builder/core/ns.js'
 

@@ -5,10 +5,11 @@ import { ValidationError } from './ValidationError.js'
 const REPORTS_KEY = 'COMBINED_SHACL_REPORTS'
 
 export function collectShaclReports({ context, report }) {
-  context.variables.has(REPORTS_KEY) ||
-    context.variables.set(REPORTS_KEY, [])
+  const variables = context.variables.has(REPORTS_KEY)
+    ? context.variables
+    : context.variables.set(REPORTS_KEY, [])
 
-  context.variables.get(REPORTS_KEY).push(report)
+  variables.get(REPORTS_KEY).push(report)
 
   // continue stream
   return true
@@ -22,7 +23,7 @@ export function failOnAnyViolations() {
     this.push(chunk)
     next()
   }, function (done) {
-    const reports = variables.get(REPORTS_KEY, { allowMissing: true })
+    const reports = variables.get(REPORTS_KEY)
     if (reports?.some(hasViolations(ignoreWarnings))) {
       const error = new ValidationError(reports)
       logger.error(error.dataset.toString())
