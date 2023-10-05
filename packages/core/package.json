@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "type": "module",
   "dependencies": {
+    "@rdfine/env": "^1.0.3",
+    "@rdfine/shacl": "^0.10.2",
     "@rdfjs/namespace": "^2.0.0",
-    "@zazuko/vocabulary-extras": "^1.2.3"
+    "@zazuko/vocabulary-extras": "^2.0.1"
   }
 }

@@ -1,0 +1,125 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<> a
+    <https://cube.link/view/View>,
+    </api/View> ;
+  schema:sameAs <https://ld.stadt-zuerich.ch/statistics/view/BEV353OD3531> ;
+  schema:author <https://view-builder.ld.integ.stadt-zuerich.ch/user/sszmop> ;
+  <https://cube.link/view/dimension>
+    [
+      rdf:type <https://cube.link/view/Dimension> ;
+      <https://cube.link/view/from>
+        [
+          <https://cube.link/view/source>
+            <#source-GSAFVdiQxRnKyjdbADwAT> ;
+          <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/measure/ZUZ> ;
+        ] ;
+      rdfs:label
+        "Measure Zuzüge von Personen (wirtschaftlich) (Zuzüge von Personen (wirtschaftlich) nach Alter (20-Jahres-Altersklasse80), Herkunft und Geschlecht, gemessen nach Ereignisdatum)" ;
+      <https://view-builder.described.at/generated> true ;
+    ],
+    _:genid-ca5f09348634420db5e962546edc79a2-3B61177AC6B4C6D3F94321A240DDAFDA,
+    _:genid-ca5f09348634420db5e962546edc79a2-7C780A7C073A806916F63CD4B645AF36,
+    [
+      rdf:type <https://cube.link/view/Dimension> ;
+      <https://cube.link/view/from>
+        [
+          <https://cube.link/view/source>
+            <#source-GSAFVdiQxRnKyjdbADwAT> ;
+          <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/ALT> ;
+        ] ;
+      rdfs:label "Key Alter" ;
+      <https://view-builder.described.at/generated> true ;
+    ],
+    [
+      rdf:type <https://cube.link/view/Dimension> ;
+      <https://cube.link/view/from>
+        [
+          <https://cube.link/view/source>
+            <#source-GSAFVdiQxRnKyjdbADwAT> ;
+          <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/SEX> ;
+        ] ;
+      rdfs:label "Key Geschlecht" ;
+      <https://view-builder.described.at/generated> true ;
+    ],
+    [
+      rdf:type <https://cube.link/view/Dimension> ;
+      <https://cube.link/view/from>
+        [
+          <https://cube.link/view/source>
+            <#source-GSAFVdiQxRnKyjdbADwAT> ;
+          <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/HEL> ;
+        ] ;
+      rdfs:label "Key Heimatland" ;
+      <https://view-builder.described.at/generated> true ;
+    ],
+    [
+      rdf:type <https://cube.link/view/Dimension> ;
+      <https://cube.link/view/from>
+        [
+          <https://cube.link/view/source>
+            <#source-GSAFVdiQxRnKyjdbADwAT> ;
+          <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/ZEK> ;
+        ] ;
+      rdfs:label "Key Zeitkonzept" ;
+      <https://view-builder.described.at/generated> true ;
+    ] ;
+  <https://view-builder.described.at/publish> true ;
+  schema:name "Zuzüge von auswärts nach Tag, Stadtquartier, Geschlecht, Altersgruppe und Herkunft" ;
+  schema:alternateName "BEV353OD3531" ;
+  <https://cube.link/view/projection>
+    [
+      <https://cube.link/view/limit> 100 ;
+    ] ;
+  <https://view-builder.described.at/source>
+    <#source-GSAFVdiQxRnKyjdbADwAT> ;
+  <https://cube.link/view/filter>
+    [
+      rdf:type <https://cube.link/view/Filter> ;
+      rdfs:label "Raum is one of \"QuartiereZH\"" ;
+      <https://view-builder.described.at/baseDimension>
+        _:genid-ca5f09348634420db5e962546edc79a2-7C780A7C073A806916F63CD4B645AF36 ;
+      <https://view-builder.described.at/filterTermSet> <https://ld.stadt-zuerich.ch/statistics/termset/QuartiereZH> ;
+      <https://view-builder.described.at/drillDownProperty> schema:name ;
+    ],
+    [
+      rdf:type <https://cube.link/view/Filter> ;
+      rdfs:label "Zeit is one of \"Tag\"" ;
+      <https://view-builder.described.at/baseDimension>
+        _:genid-ca5f09348634420db5e962546edc79a2-3B61177AC6B4C6D3F94321A240DDAFDA ;
+      <https://view-builder.described.at/filterTermSet> <https://ld.stadt-zuerich.ch/statistics/termset/Tag> ;
+      <https://view-builder.described.at/drillDownProperty> schema:name ;
+    ],
+    [
+      rdf:type <https://cube.link/view/Filter> ;
+      rdfs:label "Zeit is one of \"Periode\"" ;
+      <https://view-builder.described.at/baseDimension>
+        _:genid-ca5f09348634420db5e962546edc79a2-3B61177AC6B4C6D3F94321A240DDAFDA ;
+      <https://view-builder.described.at/filterTermSet> <https://ld.stadt-zuerich.ch/statistics/termset/Periode> ;
+      <https://view-builder.described.at/drillDownProperty> schema:name ;
+    ] ;
+  schema:isBasedOn <https://ld.stadt-zuerich.ch/statistics/meta/object/640> ;
+  <https://ld.stadt-zuerich.ch/schema/metadataCreator> <https://view-builder.ld.integ.stadt-zuerich.ch/user/sszmop> .
+
+_:genid-ca5f09348634420db5e962546edc79a2-3B61177AC6B4C6D3F94321A240DDAFDA a <https://cube.link/view/Dimension> ;
+  <https://cube.link/view/from>
+    [
+      <https://cube.link/view/source>
+        <#source-GSAFVdiQxRnKyjdbADwAT> ;
+      <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/ZEIT> ;
+    ] ;
+  rdfs:label "Key Zeit" ;
+  <https://view-builder.described.at/generated> true .
+
+_:genid-ca5f09348634420db5e962546edc79a2-7C780A7C073A806916F63CD4B645AF36 a <https://cube.link/view/Dimension> ;
+  <https://cube.link/view/from>
+    [
+      <https://cube.link/view/source>
+        <#source-GSAFVdiQxRnKyjdbADwAT> ;
+      <https://cube.link/view/path> <https://ld.stadt-zuerich.ch/statistics/property/RAUM> ;
+    ] ;
+  rdfs:label "Key Raum" ;
+  <https://view-builder.described.at/generated> true .
+
