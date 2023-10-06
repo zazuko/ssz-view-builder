@@ -1,5 +1,4 @@
-import $rdf from 'rdf-ext'
-import clownface from 'clownface'
+import $rdf from '@view-builder/core/env.js'
 import asyncMiddleware from 'middleware-async'
 import { hydra, rdf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
@@ -12,7 +11,7 @@ import { ssz } from '@view-builder/core/ns.js'
  * The response is a hydra collection
  */
 export const get = asyncMiddleware(async (req, res) => {
-  const collection = clownface({
+  const collection = $rdf.clownface({
     dataset: $rdf.dataset(),
     term: req.hydra.term,
   })

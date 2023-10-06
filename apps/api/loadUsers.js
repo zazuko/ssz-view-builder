@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { INSERT, sparql } from '@tpluscode/sparql-builder'
 import { vcard } from '@tpluscode/rdf-ns-builders'
-import $rdf from 'rdf-ext'
+import $rdf from '@view-builder/core/env.js'
 import StreamClient from 'sparql-http-client'
 import { loadUsers } from './lib/auth.js'
 
