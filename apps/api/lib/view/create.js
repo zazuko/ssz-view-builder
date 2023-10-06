@@ -1,12 +1,8 @@
 import { schema } from '@tpluscode/rdf-ns-builders'
 import { CONSTRUCT } from '@tpluscode/sparql-builder'
 import fromStream from 'rdf-dataset-ext/fromStream.js'
-import { IriTemplateBundle } from '@rdfine/hydra/bundles'
-import { fromPointer } from '@rdfine/hydra/lib/IriTemplate'
+import $rdf from '@view-builder/core/env.js'
 import { ssz, viewBuilder } from '@view-builder/core/ns.js'
-import RdfResource from '@tpluscode/rdfine'
-
-RdfResource.factory.addMixin(...IriTemplateBundle)
 
 /**
  * Queries the metadata endpoint to load necessary metadata for a view
@@ -21,7 +17,9 @@ export async function importMetadata({ req, pointer }) {
     const metadataQuery = await constructMetadata(pointer, sourceDataset, req.rdf.namedNode('/user/').value)
     await fromStream(pointer.dataset, await metadataQuery.execute(req.labyrinth.sparql.query))
 
-    const template = fromPointer(req.knossos.config.out(viewBuilder.publishedViewTemplate))
+    const template = $rdf.rdfine.hydra.IriTemplate(
+      req.knossos.config.out(viewBuilder.publishedViewTemplate),
+    )
     const publishedUri = template.expand(pointer)
     pointer.addOut(schema.sameAs, pointer.namedNode(publishedUri))
   }

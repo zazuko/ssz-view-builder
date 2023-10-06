@@ -9,10 +9,7 @@
   "dependencies": {
     "@hydrofoil/knossos": "^0.9.11",
     "@hydrofoil/vocabularies": "^1.1.1",
-    "@rdfine/hydra": "^0.10.2",
-    "@rdfine/shacl": "^0.10.2",
     "@tpluscode/rdf-ns-builders": "^4",
-    "@tpluscode/rdfine": "^0.7.4",
     "@tpluscode/sparql-builder": "^1",
     "@view-builder/core": "^0.0.0",
     "@view-builder/publish-views": "^0.0.4",
