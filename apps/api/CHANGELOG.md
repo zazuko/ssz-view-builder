@@ -1,5 +1,11 @@
 # @view-builder/api
 
+## 1.1.3
+
+### Patch Changes
+
+- 738e1e4: When publishing views, there was an invalid query being generated
+
 ## 1.1.2
 
 ### Patch Changes
