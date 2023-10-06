@@ -2377,21 +2377,21 @@
     "@tpluscode/rdf-ns-builders" "^2.0.1"
     "@tpluscode/rdfine" "^0.5.39"
 
-"@rdfine/env@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@rdfine/env/-/env-1.0.3.tgz#000b133c890a6ae0cde3000c932e14c64a77eed4"
-  integrity sha512-dHMvapHhxp13kAESeEuJA76Zn9yGij0bVmubE4sXIVG6AWrv5bIrmJctBrM2GRRYHUqKUlSm2j0+ikRUpGPbRg==
+"@rdfine/env@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rdfine/env/-/env-1.0.4.tgz#2831a9a600e6d5fb5944bcdcb2dc9b61be91e243"
+  integrity sha512-+UDbVpVWeXRD6JBjJ1JHxEZzo3qjirGj910sHNzIhugQw0Js7mfu0C05bSEF+sj57dLl5kBd5+qHb2D4kwnVHA==
   dependencies:
     "@tpluscode/rdfine" "^0.7.2"
     "@zazuko/env" "^1.3.1"
 
-"@rdfine/hydra@^0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@rdfine/hydra/-/hydra-0.10.2.tgz#c0cff9a553cd4be3afe3dc100bd2317272bb9bc2"
-  integrity sha512-w+XMnrqq1PCGM5vzgjVArXlRhIEkR+wnVKQH4aJO/Z8xQ5Yz4sJ+0ygPoHuNcHRCpAeXnAwtHvq7BpZ4BqFp2A==
+"@rdfine/hydra@^0.10.2", "@rdfine/hydra@^0.10.3":
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/@rdfine/hydra/-/hydra-0.10.3.tgz#abe67d85af21b1bab208dba783307da7e8df39f6"
+  integrity sha512-M2LhRbNReFpu27VvaVe5zx3rxI30d5vKnz3b8bQvioYjPnmWpVYUoRQqq+7VJa3sMkvsO2U6nrWczAy9VbK5Jw==
   dependencies:
-    "@rdfine/rdf" "^0.7.2"
-    "@rdfine/rdfs" "^0.8.2"
+    "@rdfine/rdf" "^0.7.3"
+    "@rdfine/rdfs" "^0.8.3"
     "@rdfjs/data-model" "^2"
     "@tpluscode/rdf-ns-builders" ">=3.0.2"
     "@tpluscode/rdfine" "^0.7.3"
@@ -2420,13 +2420,13 @@
     "@tpluscode/rdf-ns-builders" "^2.0.1"
     "@tpluscode/rdfine" "^0.5.39"
 
-"@rdfine/owl@^0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@rdfine/owl/-/owl-0.6.2.tgz#bde38c1111543d2702af5aa207058e377be40672"
-  integrity sha512-k7TosIFq3pw8GGV7m4yC5VfIjkxO+oxzD8Vdo0/lPcWyoYXUpbocQ44wRSV3NFVaKufI2flukEBL8DYvPZUPjA==
+"@rdfine/owl@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@rdfine/owl/-/owl-0.6.3.tgz#23d3c6c4bc85d2c4c849060b568f9726611e2647"
+  integrity sha512-Cq8ilP4asPv8wwHmj5XaEfJ9kswTtwqcU3V3FDn4NgxOBwE+BT0I5JJsid1wOubgIKyYKf3pr+zbi/LU0a6uuw==
   dependencies:
-    "@rdfine/rdf" "^0.7.2"
-    "@rdfine/rdfs" "^0.8.2"
+    "@rdfine/rdf" "^0.7.3"
+    "@rdfine/rdfs" "^0.8.3"
     "@rdfjs/data-model" "^2"
     "@tpluscode/rdf-ns-builders" ">=3.0.2"
     "@tpluscode/rdfine" "^0.7.3"
@@ -2440,10 +2440,10 @@
     "@tpluscode/rdf-ns-builders" "^2.0.1"
     "@tpluscode/rdfine" "^0.5.39"
 
-"@rdfine/rdf@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@rdfine/rdf/-/rdf-0.7.2.tgz#db3ec28e3f13dc2194626bb93e5f4f9901846a7c"
-  integrity sha512-xwOkqUKghLfbiOfnKUpgWbIA2FKhfTqcMmtUaKBsMZFcHYpLI9cf93sMEjqYBFztOxX2cvYEIfeFQKM4STHG9A==
+"@rdfine/rdf@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@rdfine/rdf/-/rdf-0.7.3.tgz#1e6bfbba4d86f1cba3a19dff72d9a9eaeb82b236"
+  integrity sha512-YNcZN0Q3ijbr9LFsMzQEvUT6BiRhsN2OlR+TT/5f3UeOuc5xj2s2j1ETcLlADynRg9USjUpBQY3NJlMCpe/lMA==
   dependencies:
     "@rdfjs/data-model" "^2"
     "@tpluscode/rdf-ns-builders" ">=3.0.2"
@@ -2459,24 +2459,24 @@
     "@tpluscode/rdf-ns-builders" "^2.0.1"
     "@tpluscode/rdfine" "^0.5.39"
 
-"@rdfine/rdfs@^0.8.2":
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/@rdfine/rdfs/-/rdfs-0.8.2.tgz#c723529cbc19ac8d35320074851025dab7961e52"
-  integrity sha512-kqyT8Z6Ke4acDVjhehYmQTemGtsbwpnUzjduH58xaJQ9z2yH3g3hzFG3FYLh6B7EHaxjW9UrNvzQen4Z4UrlhQ==
+"@rdfine/rdfs@^0.8.3":
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/@rdfine/rdfs/-/rdfs-0.8.3.tgz#737a8879c0d29b8774624b7fd2f5487dad0811ee"
+  integrity sha512-FTwIW3Huu1pZRRnWKlS8BzxHqx0NL/NOeS4r2Z4LawMuUOhYWQeX53Ld69T/IV2tDX17mNhqwt5TmkXckEL+9g==
   dependencies:
-    "@rdfine/rdf" "^0.7.2"
+    "@rdfine/rdf" "^0.7.3"
     "@rdfjs/data-model" "^2"
     "@tpluscode/rdf-ns-builders" ">=3.0.2"
     "@tpluscode/rdfine" "^0.7.3"
 
-"@rdfine/shacl@^0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@rdfine/shacl/-/shacl-0.10.2.tgz#7a0a7495b02a5b61c68853c54a452103c1e78c61"
-  integrity sha512-Xlg/3S6xUcBC632sZsav/B+c4fcbs0BCSeZUk4l3zjrvNSo6UQy5/SfONHF71E9RwrjcgijqnQyxbFWxDnJ1kA==
+"@rdfine/shacl@^0.10.2", "@rdfine/shacl@^0.10.3":
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/@rdfine/shacl/-/shacl-0.10.3.tgz#70a496ed7d09817d23006f4321c304edcc8dae09"
+  integrity sha512-sD5BreYULQGd1IGhpv9XR/ml378qzAH7BcNPm9AGF7FnzR6Ye0Qo7yeba/39vexzLecNW0iSA3rUoauw5CAAdw==
   dependencies:
-    "@rdfine/owl" "^0.6.2"
-    "@rdfine/rdf" "^0.7.2"
-    "@rdfine/rdfs" "^0.8.2"
+    "@rdfine/owl" "^0.6.3"
+    "@rdfine/rdf" "^0.7.3"
+    "@rdfine/rdfs" "^0.8.3"
     "@rdfjs/data-model" "^2"
     "@tpluscode/rdf-ns-builders" ">=3.0.2"
     "@tpluscode/rdfine" "^0.7.3"
@@ -3015,7 +3015,7 @@
     clownface "^1"
     once "^1.4.0"
 
-"@tpluscode/rdfine@^0.7.2", "@tpluscode/rdfine@^0.7.3", "@tpluscode/rdfine@^0.7.4":
+"@tpluscode/rdfine@^0.7.2", "@tpluscode/rdfine@^0.7.3":
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/@tpluscode/rdfine/-/rdfine-0.7.4.tgz#6143e4a3b2f94675ec0c9e770ecd1b2a9268de3a"
   integrity sha512-za7Y4t5T8gjdzMAjYqQu8lZ+tDvbFmQWCtB29AHxgRcBeV7LI+R0DWr99gwfasIwUQrNUrDISMjJ0mdQ33Tw8g==
@@ -3886,13 +3886,15 @@
   integrity sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==
 
 "@zazuko/env@^1.0.1", "@zazuko/env@^1.1.0", "@zazuko/env@^1.3.1":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@zazuko/env/-/env-1.3.2.tgz#2c0c1dbde3940730785e15e41b16f4de38036768"
-  integrity sha512-bYeFLFGQ2mbpJQAE5iEtOmmreGrH9biuU5wdZAfP2f1HrivBAnf/pgEzcG3ur19J/oFufxaZ2TabFKQ3VK2SdQ==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@zazuko/env/-/env-1.5.0.tgz#b052af906c03db9f344a4a0f4258796cc6d420ef"
+  integrity sha512-0q1Oj4utPIMth//8XQlevF7BB666yjUlY9u+kAqYoC+tfb8hHNS8YHVm4z3iso1xbUXtyGCTPp2189ZrCMZPew==
   dependencies:
+    "@rdfjs/dataset" "^2.0.1"
     "@rdfjs/environment" "^0.1.2"
     "@tpluscode/rdf-ns-builders" "^4.1.0"
     clownface "^2.0.1"
+    rdf-dataset-ext "^1.1.0"
 
 "@zazuko/node-fetch@^2.6.6":
   version "2.6.6"
