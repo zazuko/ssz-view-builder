@@ -11,7 +11,7 @@ import {
   onPageLoad,
   tryLoadLayoutFromLocalStorage,
   saveLayoutToLocalStorage,
-} from './common'
+} from './common.js'
 
 function onWorkspaceMounted(workspace: Workspace) {
   if (!workspace) {

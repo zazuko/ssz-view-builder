@@ -1,7 +1,6 @@
 import { rdf } from '@tpluscode/rdf-ns-builders'
 import { turtle } from '@tpluscode/rdf-string'
-import $rdf from 'rdf-ext'
-import clownface from 'clownface'
+import $rdf from '@view-builder/core/env.js'
 import * as ns from '@view-builder/core/ns.js'
 import { nanoid } from 'nanoid'
 import { getAllTriplesFromRoot } from '../../clownface.js'
@@ -25,7 +24,7 @@ export const viewForm = {
       clearView(state) {
         if (!('pointer' in state)) return state
 
-        const { pointer, ...rest } = state
+        const { pointer, ...rest } = state // eslint-disable-line @typescript-eslint/no-unused-vars
         return rest
       },
       setSaveOperation(state, saveOperation) {
@@ -58,7 +57,7 @@ export const viewForm = {
           const { pointer, saveOperation } = store.getState().viewForm
 
           const dataset = $rdf.dataset([...getAllTriplesFromRoot(pointer)])
-          const payload = clownface({ dataset }).node(pointer)
+          const payload = $rdf.clownface({ dataset }).node(pointer)
           dispatch.operation.invoke({
             operation: saveOperation,
             payload,
@@ -159,7 +158,7 @@ export const viewForm = {
             .match(null, null, null, term)
             .map(({ subject, predicate, object }) => $rdf.quad(subject, predicate, object))
 
-          dispatch.viewForm.setView(clownface({ dataset }).node(term))
+          dispatch.viewForm.setView($rdf.clownface({ dataset }).node(term))
         },
         toggleButtons: toggleButtons(store),
         setView: multiEffect(

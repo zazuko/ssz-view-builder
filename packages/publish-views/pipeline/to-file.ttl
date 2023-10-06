@@ -7,7 +7,7 @@
     [
       :stepList
         (
-          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten> <#serialize> _:save
+          <Main> <#serialize> _:save
         )
     ] ;
   :variables

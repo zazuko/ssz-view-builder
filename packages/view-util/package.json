@@ -5,17 +5,17 @@
   "main": "index.js",
   "dependencies": {
     "@rdfjs/term-map": "^2",
-    "@tpluscode/rdf-ns-builders": "^2.0.1",
-    "@tpluscode/sparql-builder": "^0.3.23",
+    "@tpluscode/rdf-ns-builders": "^4",
+    "@tpluscode/sparql-builder": "^1.1.0",
     "@view-builder/core": "0.0.0",
-    "clownface": "^1.5.1",
-    "rdf-cube-view-query": "^1.10.0",
+    "clownface": "^2",
+    "rdf-cube-view-query": "^1.12.0",
     "rdf-ext": "^2.0.0"
   },
   "devDependencies": {
     "@view-builder/testing": "0.0.0",
     "chai": "^4.3.6",
-    "is-graph-pointer": "^1.2.2",
+    "is-graph-pointer": "^2",
     "rdf-dataset-ext": "^1.0.1",
     "sinon": "^14.0.1",
     "sparql-http-client": "^2.4.1"

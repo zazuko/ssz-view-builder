@@ -44,8 +44,10 @@ async function loadViewMeta(publishedView, metaObject, client) {
   const shape = await viewShape()
 
   const subjectVariable = 'view'
-  const query = shapeTo.construct(shape, { focusNode: metaObject, subjectVariable })
-  const dataset = await query.execute(client.query)
+  const query = shapeTo.constructQuery(shape, { focusNode: metaObject, subjectVariable })
+  const dataset = await query.execute(client.query, {
+    operation: 'postDirect',
+  })
 
   return toStream(dataset).pipe(through2.obj(viewIdTransform(metaObject, publishedView)))
 }
