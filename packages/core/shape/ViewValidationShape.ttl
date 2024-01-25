@@ -1,3 +1,4 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 prefix view: <https://cube.link/view/>
 
@@ -78,6 +79,17 @@ prefix view: <https://cube.link/view/>
       sh:minCount 1 ;
       sh:maxCount 1 ;
     ] ;
+  sh:xone
+    (
+      [
+        sh:path rdf:type ;
+        sh:hasValue view:CubeSource
+      ]
+      [
+        sh:path rdf:type ;
+        sh:hasValue view:LookupSource
+      ]
+    )
 .
 
 <#TermSetFilter>
