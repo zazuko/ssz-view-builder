@@ -7,7 +7,7 @@ import { cube, view, viewBuilder } from '@view-builder/core/ns.js'
 import { _void, dcat, foaf, rdfs, schema } from '@tpluscode/rdf-ns-builders'
 import { MetaLookup } from '@view-builder/view-util/lib/metaLookup.js'
 import sinon from 'sinon'
-import $rdf from 'rdf-ext'
+import $rdf from 'barnard59-env'
 import { toNtriples } from '../index.js'
 import { ValidationError } from '../lib/ValidationError.js'
 
@@ -42,6 +42,7 @@ describe('@view-builder/publish-views', () => {
               ${view.from} [
                 ${view.path} ${foaf.name} ;
                 ${view.source} [
+                  a ${view.CubeSource} ;
                   ${view.cube} <http://foo.cube> ;
                 ] ;
               ] ;
@@ -74,6 +75,7 @@ describe('@view-builder/publish-views', () => {
               ${view.from} [
                 ${view.path} ${schema.knows} ;
                 ${view.source} [
+                  a ${view.CubeSource} ;
                   ${view.cube} <http://foo.cube> ;
                 ] ;
               ] ;

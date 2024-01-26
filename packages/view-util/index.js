@@ -1,5 +1,4 @@
-import clownface from 'clownface'
-import $rdf from 'rdf-ext'
+import env from '@zazuko/env'
 import View from 'rdf-cube-view-query/lib/View.js'
 import * as ns from '@view-builder/core/ns.js'
 import { rdf, schema } from '@tpluscode/rdf-ns-builders'
@@ -17,14 +16,15 @@ export async function prepareViewPointer(pointer, options = {}) {
     rename,
     client,
     metaLookup = new MetaLookup(client),
+    $rdf = env,
   } = options
 
   let dataset = $rdf.dataset([...pointer.dataset])
   if (cleanup) {
-    dataset = sourcesToBlankNodes(dataset)
+    dataset = sourcesToBlankNodes(dataset, $rdf)
   }
 
-  let view = clownface({ dataset }).node(pointer)
+  let view = $rdf.clownface({ dataset }).node(pointer)
   view.deleteOut(ssz.metadataCreator)
 
   if (rename) {
@@ -61,7 +61,7 @@ export async function prepareViewPointer(pointer, options = {}) {
     dataset = dataset.filter(removeApiProperties)
   }
 
-  return clownface({ dataset })
+  return $rdf.clownface({ dataset })
     .node(view)
     .addOut(rdf.type, schema.Dataset)
 }

@@ -1,11 +1,8 @@
 import { CONSTRUCT, SELECT } from '@tpluscode/sparql-builder'
 import * as ns from '@view-builder/core/ns.js'
 import through2 from 'through2'
-import $rdf from 'rdf-ext'
-import clownface from 'clownface'
-import { schema } from '@tpluscode/rdf-ns-builders'
+import $rdf from 'barnard59-env'
 import * as shapeTo from '@hydrofoil/shape-to-query'
-import toStream from 'rdf-dataset-ext/toStream.js'
 import { viewShape } from './shapes.js'
 import { getViewBuilderClient, getMetadataClient } from './sparql.js'
 
@@ -17,8 +14,8 @@ export default async function loadViewsToPublish() {
     .WHERE`
       ?viewBuilderView 
         a ${ns.view.View} ;
-        ${schema.sameAs} ?publishedView ; 
-        ${schema.isBasedOn} ?metaObject ;
+        ${$rdf.ns.schema.sameAs} ?publishedView ; 
+        ${$rdf.ns.schema.isBasedOn} ?metaObject ;
         ${ns.viewBuilder.publish} true ;
     `
     .execute(client.query)
@@ -34,7 +31,7 @@ export default async function loadViewsToPublish() {
 
     const dataset = $rdf.dataset()
     await Promise.all([dataset.import(viewQuads), dataset.import(metaQuads)])
-    this.push(clownface({ dataset, term: viewBuilderView }))
+    this.push($rdf.clownface({ dataset, term: viewBuilderView }))
 
     next()
   }))
@@ -45,11 +42,12 @@ async function loadViewMeta(publishedView, metaObject, client) {
 
   const subjectVariable = 'view'
   const query = shapeTo.constructQuery(shape, { focusNode: metaObject, subjectVariable })
-  const dataset = await query.execute(client.query, {
+  const quads = await query.execute(client.query, {
     operation: 'postDirect',
   })
 
-  return toStream(dataset).pipe(through2.obj(viewIdTransform(metaObject, publishedView)))
+  return $rdf.dataset(quads).toStream()
+    .pipe(through2.obj(viewIdTransform(metaObject, publishedView)))
 }
 
 function viewIdTransform(from, to) {

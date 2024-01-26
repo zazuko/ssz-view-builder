@@ -1,6 +1,5 @@
 import * as ns from '@view-builder/core/ns.js'
 import { hydra, schema } from '@tpluscode/rdf-ns-builders'
-import $rdf from 'rdf-ext'
 import TermMap from '@rdfjs/term-map'
 
 const viewBuilderNs = ns.viewBuilder().value
@@ -12,7 +11,7 @@ export function removeApiProperties({ predicate }) {
   return !url.startsWith(viewBuilderNs) && !url.startsWith(hydraNs)
 }
 
-export function sourcesToBlankNodes(dataset) {
+export function sourcesToBlankNodes(dataset, $rdf) {
   function isSource(term) {
     return dataset.match(null, ns.view.source, term).size > 0
   }

@@ -1,7 +1,7 @@
 @prefix : <https://pipeline.described.at/> .
 @prefix code: <https://code.described.at/> .
 
-<Main>
+<urn:pipeline:Main>
   a :Pipeline, :ReadableObjectMode ;
   :variables
     [
@@ -16,12 +16,17 @@
     [
       :stepList
         (
-          <#loadViews> <#prepareView> <#pointerToDataset> <#validate> <#checkShaclReports> <#flatten>
+          <urn:step:loadViews>
+          _:prepareView
+          _:pointerToDataset
+          _:validate
+          _:checkShaclReports
+          _:flatten
         )
     ] ;
 .
 
-<#prepareView>
+_:prepareView
   a :Step ;
   code:implementedBy
     [
@@ -37,7 +42,7 @@
     ) ;
 .
 
-<#pointerToDataset>
+_:pointerToDataset
   a :Step ;
   code:implementedBy
     [
@@ -50,22 +55,22 @@
     ) ;
 .
 
-<#validate>
+_:validate
   a :Step ;
   code:implementedBy
     [
-      code:link <node:barnard59-validate-shacl/validate.js#shacl> ;
+      code:link <node:barnard59-shacl/validate.js#shacl> ;
       a code:EcmaScriptModule ;
     ] ;
   code:arguments
-    [ code:name "shape" ; code:value <#Shapes> ] ,
+    [ code:name "shape" ; code:value _:Shapes ] ,
     [
       code:name "onViolation" ;
       code:value [ a code:EcmaScriptModule ; code:link <file:../lib/shacl.js#collectShaclReports> ] ;
     ];
 .
 
-<#checkShaclReports>
+_:checkShaclReports
    a :Step ;
   code:implementedBy
     [
@@ -74,7 +79,7 @@
     ] ;
 .
 
-<#Shapes>
+_:Shapes
   a :Pipeline, :ReadableObjectMode ;
   :steps
     [
@@ -91,7 +96,7 @@
     ]
 .
 
-<#flatten>
+_:flatten
   a :Step ;
   code:implementedBy
     [

@@ -1,11 +1,9 @@
-import { rdf, sh } from '@tpluscode/rdf-ns-builders'
-import $rdf from 'rdf-ext'
-import clownface from 'clownface'
+import $rdf from 'barnard59-env'
 
 export class ValidationError extends Error {
   constructor(reports) {
     const total = reports.reduce((sum, { pointer }) => {
-      const violations = pointer.any().has(sh.resultSeverity).terms.length
+      const violations = pointer.any().has($rdf.ns.sh.resultSeverity).terms.length
       return sum + violations
     }, 0)
 
@@ -17,8 +15,8 @@ export class ValidationError extends Error {
     })
     Object.defineProperty(this, 'reports', {
       enumerable: false,
-      value: clownface({ dataset: this.dataset })
-        .has(rdf.type, sh.ValidationReport),
+      value: $rdf.clownface({ dataset: this.dataset })
+        .has($rdf.ns.rdf.type, $rdf.ns.sh.ValidationReport),
     })
   }
 }

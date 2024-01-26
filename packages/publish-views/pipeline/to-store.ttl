@@ -1,13 +1,16 @@
 @prefix : <https://pipeline.described.at/> .
 @prefix code: <https://code.described.at/> .
 
-<ToStore>
+[ code:imports <./main.ttl> ] .
+[ code:imports <./steps/loadViews.ttl> ] .
+
+<urn:pipeline:ToStore>
   a :Pipeline ;
   :steps
     [
       :stepList
         (
-          <Main> _:setGraph _:upload
+          <urn:pipeline:Main> _:setGraph _:upload
         )
     ] ;
 .

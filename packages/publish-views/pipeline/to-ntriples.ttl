@@ -1,18 +1,18 @@
 @prefix : <https://pipeline.described.at/> .
 @prefix code: <https://code.described.at/> .
 
-<ToNtriples>
+<urn:pipeline:ToNtriples>
   a :Pipeline, :Readable ;
   :steps
     [
       :stepList
         (
-          <Main> <#serialize>
+          <urn:pipeline:Main> <urn:step:serialize>
         )
     ] ;
 .
 
-<#serialize>
+<urn:step:serialize>
   a :Step ;
   code:implementedBy
     [

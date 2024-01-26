@@ -1,7 +1,5 @@
 import Runner from 'barnard59/runner.js'
-import fromFile from 'rdf-utils-fs/fromFile.js'
-import $rdf from 'rdf-ext'
-import clownface from 'clownface'
+import $rdf from 'barnard59-env'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { PassThrough } from 'stream'
@@ -19,7 +17,7 @@ export function toNtriples({
   loadViewsStepsPath = loadViewsFromStoreStepPath,
 }) {
   return startRun({
-    term: 'ToFile',
+    term: 'urn:pipeline:ToFile',
     steps: [ntriplesStepsPath, fileStepsPath, loadViewsStepsPath],
     variables: {
       outFile,
@@ -30,19 +28,19 @@ export function toNtriples({
 
 export async function toStore(variables = {}) {
   return startRun({
-    term: 'ToStore',
+    term: 'urn:pipeline:ToStore',
     steps: [storeStepsPath, loadViewsFromStoreStepPath],
     variables,
   })
 }
 
 async function startRun({ term, steps, variables }) {
-  const dataset = await $rdf.dataset().import(fromFile(path.resolve(__dirname, pipelinePath)))
-  await Promise.all(steps.map(src => dataset.import(fromFile(path.resolve(__dirname, src)))))
-  const pipeline = clownface({ dataset }).namedNode(term)
+  const dataset = await $rdf.dataset().import($rdf.fromFile(path.resolve(__dirname, pipelinePath)))
+  await Promise.all(steps.map(src => dataset.import($rdf.fromFile(path.resolve(__dirname, src)))))
+  const pipeline = $rdf.clownface({ dataset }).namedNode(term)
 
   const outputStream = new PassThrough()
-  const run = await Runner(pipeline, {
+  const run = await Runner(pipeline, $rdf, {
     basePath: __dirname,
     variables: new Map(Object.entries(variables)),
     outputStream,
