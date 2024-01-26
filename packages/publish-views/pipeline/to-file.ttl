@@ -1,13 +1,17 @@
 @prefix : <https://pipeline.described.at/> .
 @prefix code: <https://code.described.at/> .
 
-<ToFile>
+[ code:imports <./main.ttl> ] .
+[ code:imports <./to-ntriples.ttl> ] .
+[ code:imports <./steps/loadViews.ttl> ] .
+
+<urn:pipeline:ToFile>
   a :Pipeline ;
   :steps
     [
       :stepList
         (
-          <Main> <#serialize> _:save
+          <urn:pipeline:Main> <urn:step:serialize> _:save
         )
     ] ;
   :variables

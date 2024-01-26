@@ -3,7 +3,7 @@ prefix : <https://pipeline.described.at/>
 
 # Streams view pointers prepared in test setup,
 # stored in the `views` variable
-<#loadViews>
+<urn:step:loadViews>
   a :Step ;
   code:implementedBy
     """function () {

@@ -1,7 +1,7 @@
 PREFIX code: <https://code.described.at/>
 prefix : <https://pipeline.described.at/>
 
-<#loadViews>
+<urn:step:loadViews>
   a :Step ;
   code:implementedBy
     [

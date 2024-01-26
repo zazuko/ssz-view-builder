@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import sinon from 'sinon'
-import $rdf from 'rdf-ext'
+import $rdf from '@zazuko/env'
 import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
 import { viewBuilder, view } from '@view-builder/core/ns.js'
 import { ex, testData } from '@view-builder/testing'
