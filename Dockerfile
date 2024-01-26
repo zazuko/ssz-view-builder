@@ -7,8 +7,6 @@ COPY . ./
 
 RUN apk add --no-cache gettext jq
 
-ENV NODE_OPTIONS=--openssl-legacy-provider
-
 # first do the build
 RUN yarn --frozen-lockfile \
   && yarn build \

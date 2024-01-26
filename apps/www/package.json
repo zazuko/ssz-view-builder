@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "precommit": "lit-analyzer --strict --quiet",
-    "build": "webpack --mode production --config webpack.config.cjs",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider DISABLE_V8_COMPILE_CACHE=1 webpack --mode production --config webpack.config.cjs",
     "start": "webpack-dev-server --mode development --config webpack.config.cjs"
   },
   "dependencies": {
