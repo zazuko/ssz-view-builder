@@ -1,5 +1,14 @@
 # @view-builder/publish-views
 
+## 0.0.5
+
+### Patch Changes
+
+- 6bac13e: Clashing blank nodes would cause invalid views being published
+- Updated dependencies [6bac13e]
+  - @view-builder/core@0.0.1
+  - @view-builder/view-util@0.0.2
+
 ## 0.0.4
 
 ### Patch Changes

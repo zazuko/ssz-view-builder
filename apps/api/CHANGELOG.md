@@ -1,5 +1,13 @@
 # @view-builder/api
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies [6bac13e]
+  - @view-builder/publish-views@0.0.5
+  - @view-builder/core@0.0.1
+
 ## 1.1.3
 
 ### Patch Changes

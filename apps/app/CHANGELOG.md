@@ -1,5 +1,12 @@
 # @view-builder/app
 
+## 1.1.4
+
+### Patch Changes
+
+- @view-builder/api@1.1.4
+- @view-builder/ui@1.1.4
+
 ## 1.1.3
 
 ### Patch Changes

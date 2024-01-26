@@ -1,10 +1,10 @@
 {
   "name": "@view-builder/app",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "private": true,
   "description": "Meta package to have a combined version of api+ui",
   "dependencies": {
-    "@view-builder/api": "1.1.3",
-    "@view-builder/ui": "1.1.1"
+    "@view-builder/api": "1.1.4",
+    "@view-builder/ui": "1.1.4"
   }
 }
