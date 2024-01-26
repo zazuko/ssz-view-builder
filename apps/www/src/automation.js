@@ -30,7 +30,7 @@ async function createKeyDimensions(view, pointer, client, { findKeyDimensions })
   for (const [dimension, { label, sources }] of dimensions) {
     view.addOut(ns.view.dimension, (viewDim) => {
       viewDim
-        .addOut(rdf.type, ns.view.Dimension)
+        .addOut(rdf.ns.rdf.type, ns.view.Dimension)
         .addOut(ns.viewBuilder.generated, true)
         .addOut(ns.view.from, (from) => {
           from.addOut(ns.view.source, sources)
@@ -59,7 +59,7 @@ async function createMeasureDimensions(view, sources, client, { findMeasureDimen
     for (const { dimension, label } of measures) {
       view.addOut(ns.view.dimension, (viewDim) => {
         viewDim
-          .addOut(rdf.type, ns.view.Dimension)
+          .addOut(rdf.ns.rdf.type, ns.view.Dimension)
           .addOut(ns.viewBuilder.generated, true)
           .addOut(ns.view.from, (from) => {
             from.addOut(ns.view.source, source)
@@ -76,7 +76,7 @@ async function createMeasureDimensions(view, sources, client, { findMeasureDimen
 
 function clearGeneratedDimensions(view) {
   const generatedDimensions = view.any()
-    .has(rdf.type, ns.view.Dimension)
+    .has(rdf.ns.rdf.type, ns.view.Dimension)
     .has(ns.viewBuilder.generated, true)
 
   generatedDimensions.forEach((dim) => {
