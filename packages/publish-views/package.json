@@ -1,6 +1,6 @@
 {
   "name": "@view-builder/publish-views",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -15,8 +15,8 @@
     "@hydrofoil/shape-to-query": "^0.8.1",
     "@tpluscode/rdf-ns-builders": "^4.1.1",
     "@tpluscode/sparql-builder": "^1.1.0",
-    "@view-builder/core": "^0.0.0",
-    "@view-builder/view-util": "^0.0.1",
+    "@view-builder/core": "^0.0.1",
+    "@view-builder/view-util": "^0.0.2",
     "barnard59": "^4.5.3",
     "barnard59-base": "^2.4.0",
     "barnard59-env": "^1.2.3",

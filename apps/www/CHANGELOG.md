@@ -1,5 +1,13 @@
 # @view-builder/ui
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies [6bac13e]
+  - @view-builder/core@0.0.1
+  - @view-builder/view-util@0.0.2
+
 ## 1.1.1
 
 ### Patch Changes
