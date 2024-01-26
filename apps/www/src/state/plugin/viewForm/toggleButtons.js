@@ -1,7 +1,7 @@
 import generateDimensionsShapeQuads from '@view-builder/core/shape/ViewWithSource.ttl'
 import viewValidationShapeQuads from '@view-builder/core/shape/ViewValidationShape.ttl'
 import { prepareViewPointer } from '@view-builder/view-util'
-import $rdf from 'rdf-ext'
+import $rdf from '@zazuko/env'
 
 const GenerateDimensionsShapes = $rdf.dataset(generateDimensionsShapeQuads($rdf))
 

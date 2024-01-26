@@ -34,6 +34,7 @@
     "content-disposition": "^0.5.4",
     "@view-builder/core": "0.0.0",
     "@view-builder/view-util": "0.0.1",
+    "@zazuko/env": "^2.0.3",
     "@zazuko/prefixes": "^2.0.0",
     "@zazuko/vocabulary-extras": "^2.0.1",
     "alcaeus": "^2.3.2",
