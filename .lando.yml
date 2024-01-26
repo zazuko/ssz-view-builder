@@ -35,7 +35,7 @@ services:
       - /opt/stardog/bin/stardog-admin db create -o preserve.bnode.ids=false query.describe.strategy=cbd -n view-builder || true
       - /opt/stardog/bin/stardog-admin db create -o preserve.bnode.ids=false -n published || true
     services:
-      image: stardog/stardog:8.1.0-java11-preview
+      image: stardog/stardog
       command: /opt/stardog/bin/stardog-admin server start --foreground
       environment:
         LANDO_NO_USER_PERMS: NOTGONNADOIT
