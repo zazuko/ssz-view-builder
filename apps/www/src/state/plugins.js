@@ -1,6 +1,5 @@
 import * as shell from '@hydrofoil/shell'
-import $rdf from '@rdfjs/data-model'
-import { hydra } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 
 export { viewForm } from './plugin/view.js'
 export { viewCollection } from './plugin/viewCollection.js'
@@ -27,7 +26,7 @@ export const entrypointInit = {
             representations.get($rdf.namedNode(resource))
 
           const newEntrypoint = representation
-            ?.root?.apiDocumentation?.getArray(hydra.entrypoint)
+            ?.root?.apiDocumentation?.getArray($rdf.ns.hydra.entrypoint)
             .shift()
           if (newEntrypoint && !newEntrypoint.equals(entrypoint)) {
             dispatch.core.setEntrypoint(newEntrypoint.pointer)

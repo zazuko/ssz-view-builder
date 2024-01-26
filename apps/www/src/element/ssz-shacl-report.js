@@ -1,6 +1,5 @@
 import { html, LitElement } from 'lit'
-import TermMap from '@rdfjs/term-map'
-import { sh } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 import '@shoelace-style/shoelace/dist/components/details/details.js'
 import { toSparql } from 'clownface-shacl-path'
 
@@ -22,15 +21,15 @@ customElements.define('ssz-shacl-report', class extends LitElement {
       return []
     }
 
-    const map = this.report.out(sh.result)
+    const map = this.report.out($rdf.ns.sh.result)
       .toArray()
       .reduce((previous, result) => {
-        const focusNode = result.out(sh.focusNode).term
+        const focusNode = result.out($rdf.ns.sh.focusNode).term
         const results = previous.get(focusNode) || []
         results.push(result)
         previous.set(focusNode, results)
         return previous
-      }, new TermMap())
+      }, $rdf.termMap())
 
     return [...map]
   }
@@ -41,7 +40,7 @@ customElements.define('ssz-shacl-report', class extends LitElement {
 
   renderFocusNodeResults([focusNode, results]) {
     const grouped = results.reduce(({ warnings, violations }, result) => {
-      if (result.out(sh.resultSeverity).term?.equals(sh.Warning)) {
+      if (result.out($rdf.ns.sh.resultSeverity).term?.equals($rdf.ns.sh.Warning)) {
         return { violations, warnings: [...warnings, result] }
       }
 
@@ -78,9 +77,9 @@ customElements.define('ssz-shacl-report', class extends LitElement {
 
   // eslint-disable-next-line class-methods-use-this
   renderResult(result) {
-    const property = result.out(sh.sourceShape).out(sh.name).value ||
-    toSparql(result.out(sh.resultPath)).toString({ prologue: false })
+    const property = result.out($rdf.ns.sh.sourceShape).out($rdf.ns.sh.name).value ||
+    toSparql(result.out($rdf.ns.sh.resultPath)).toString({ prologue: false })
 
-    return html`<li>${property}: ${result.out(sh.resultMessage)}</li>`
+    return html`<li>${property}: ${result.out($rdf.ns.sh.resultMessage)}</li>`
   }
 })

@@ -1,8 +1,8 @@
-import { dash, rdf } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 
 export const dataGraphInstanceSource = {
   applicableTo(component) {
-    return component.editor.equals(dash.InstancesSelectEditor)
+    return component.editor.equals($rdf.ns.dash.InstancesSelectEditor)
   },
   decorate(component) {
     return {
@@ -16,7 +16,7 @@ export const dataGraphInstanceSource = {
 
         return focusNode
           .any()
-          .has(rdf.type, clas.id)
+          .has($rdf.ns.rdf.type, clas.id)
           .toArray()
       },
     }

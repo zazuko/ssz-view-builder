@@ -1,5 +1,4 @@
-import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
-import TermMap from '@rdfjs/term-map'
+import rdf from '@view-builder/core/env.js'
 import * as ns from '@view-builder/core/ns.js'
 import * as dimensionQueries from './queries/dimensions.js'
 import { deleteCbd, newReference } from './clownface.js'
@@ -26,7 +25,7 @@ async function createKeyDimensions(view, pointer, client, { findKeyDimensions })
 
     map.set(dimension, value)
     return map
-  }, new TermMap())
+  }, rdf.termMap())
 
   for (const [dimension, { label, sources }] of dimensions) {
     view.addOut(ns.view.dimension, (viewDim) => {
@@ -39,7 +38,7 @@ async function createKeyDimensions(view, pointer, client, { findKeyDimensions })
         })
 
       if (label) {
-        viewDim.addOut(rdfs.label, `Key ${label.value}`)
+        viewDim.addOut(rdf.ns.rdfs.label, `Key ${label.value}`)
       }
     })
   }
@@ -68,7 +67,7 @@ async function createMeasureDimensions(view, sources, client, { findMeasureDimen
           })
 
         if (label) {
-          viewDim.addOut(rdfs.label, `Measure ${label.value} (${source.out(rdfs.label).value})`)
+          viewDim.addOut(rdf.ns.rdfs.label, `Measure ${label.value} (${source.out(rdf.ns.rdfs.label).value})`)
         }
       })
     }

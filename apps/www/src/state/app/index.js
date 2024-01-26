@@ -1,6 +1,6 @@
 import { createModel } from '@captaincodeman/rdx'
 import ParsingClient from 'sparql-http-client/ParsingClient.js'
-import { schema } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 import * as loadingView from '../../view/loading.js'
 import effects from './effects.js'
 
@@ -34,11 +34,11 @@ export const app = createModel({
       }
 
       const softwareComponents = api.pointer
-        .out(schema.application)
+        .out($rdf.ns.schema.application)
         .toArray()
         .map(arg => [
-          arg.out(schema.name).value,
-          arg.out(schema.softwareVersion).value,
+          arg.out($rdf.ns.schema.name).value,
+          arg.out($rdf.ns.schema.softwareVersion).value,
         ])
 
       return {

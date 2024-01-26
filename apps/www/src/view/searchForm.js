@@ -1,12 +1,11 @@
 import $rdf from '@view-builder/core/env.js'
-import { dash, hydra, sh } from '@tpluscode/rdf-ns-builders'
 import { hyper_query as query } from '@hydrofoil/vocabularies/builders'
 import { html } from 'lit'
 
 export function searchForm(pointer) {
   const collection = $rdf.rdfine.hydra.Collection(pointer)
   const template = collection.search
-  const shape = template.get(dash.shape, { strict: false })
+  const shape = template.get($rdf.ns.dash.shape, { strict: false })
   const currentFilters = collection.get(query.templateMappings, { strict: false })
 
   if (shape) {
@@ -37,13 +36,14 @@ function doFilter(template) {
 }
 
 function searchHasMinLength(template, ptr) {
-  const { value } = ptr.out(hydra.freetextQuery)
+  const { value } = ptr.out($rdf.ns.hydra.freetextQuery)
   if (value === '') {
     return true
   }
 
-  const mapping = template.mapping.find(({ property }) => property.id.equals(hydra.freetextQuery))
-  const minLength = mapping?.getNumber(sh.minLength)
+  const mapping = template.mapping
+    .find(({ property }) => property.id.equals($rdf.ns.hydra.freetextQuery))
+  const minLength = mapping?.getNumber($rdf.ns.sh.minLength)
 
   return minLength && minLength <= value.length
 }

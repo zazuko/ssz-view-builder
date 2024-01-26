@@ -3,9 +3,9 @@ import viewValidationShapeQuads from '@view-builder/core/shape/ViewValidationSha
 import { prepareViewPointer } from '@view-builder/view-util'
 import $rdf from '@zazuko/env'
 
-const GenerateDimensionsShapes = $rdf.dataset(generateDimensionsShapeQuads($rdf))
+const GenerateDimensionsShapes = $rdf.dataset(generateDimensionsShapeQuads({ factory: $rdf }))
 
-const ViewValidationShapes = $rdf.dataset(viewValidationShapeQuads($rdf))
+const ViewValidationShapes = $rdf.dataset(viewValidationShapeQuads({ factory: $rdf }))
 
 export default function (store) {
   const dispatch = store.getDispatch().viewForm

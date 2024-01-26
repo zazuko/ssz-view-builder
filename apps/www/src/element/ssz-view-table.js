@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
-import { schema, vcard } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js'
 import { ssz } from '@view-builder/core/ns.js'
 
@@ -52,10 +52,10 @@ customElements.define('ssz-view-table', class extends LitElement {
 
     return html`
       <tr class="view-row" @click="${() => this.dispatchEvent(new CustomEvent('view-select', { detail: { view } }))}">
-        <td>${view.out(schema.alternateName).value}</td>
-        <td>${view.out(schema.name).value}</td>
-        <td>${metadataCreator.out(vcard.hasName).value || metadataCreator.value}</td>
-        <td>${view.out(schema.author).out(vcard.hasName).value}</td>
+        <td>${view.out($rdf.ns.schema.alternateName).value}</td>
+        <td>${view.out($rdf.ns.schema.name).value}</td>
+        <td>${metadataCreator.out($rdf.ns.vcard.hasName).value || metadataCreator.value}</td>
+        <td>${view.out($rdf.ns.schema.author).out($rdf.ns.vcard.hasName).value}</td>
         <td>
           <sl-icon-button name="trash"
                           label="Delete"

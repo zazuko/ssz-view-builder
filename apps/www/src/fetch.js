@@ -1,6 +1,5 @@
 import str2stream from 'string-to-stream'
-import RDF from '@rdfjs/dataset'
-import clownface from 'clownface'
+import RDF from '@view-builder/core/env.js'
 import isAbsoluteUrl from 'is-absolute-url'
 
 export async function fetch(id, what) {
@@ -15,7 +14,7 @@ export async function fetch(id, what) {
     dataset.add(quad)
   }
 
-  const graph = clownface({ dataset })
+  const graph = RDF.clownface({ dataset })
   return isAbsoluteUrl(id) ? graph.namedNode(id) : graph
 }
 

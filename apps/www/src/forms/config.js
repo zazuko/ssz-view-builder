@@ -5,7 +5,7 @@ import * as templates from '@hydrofoil/shaperone-wc-shoelace/templates.js'
 import * as shoelace from '@hydrofoil/shaperone-wc-shoelace/components.js'
 import { instancesMultiSelectEditor } from '@hydrofoil/shaperone-wc-shoelace/component-extras.js'
 import shaperoneHydra from '@hydrofoil/shaperone-hydra'
-import { rdfs, schema } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 import * as decorators from '../component/decorators.js'
 import * as editors from '../editor/index.js'
 import dynamicXone from './dynamicXone.js'
@@ -13,7 +13,7 @@ import debugProperties from './debugProperties.js'
 
 shaperoneHydra(configure)
 
-shoelace.autocomplete.labelProperties = [schema.name, rdfs.label]
+shoelace.autocomplete.labelProperties = [$rdf.ns.schema.name, $rdf.ns.rdfs.label]
 
 configure.editors.addMatchers(editors)
 

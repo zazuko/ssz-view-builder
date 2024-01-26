@@ -1,7 +1,6 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
 import $rdf from '@view-builder/core/env.js'
-import { owl, sh } from '@tpluscode/rdf-ns-builders'
 import sh1 from '@hydrofoil/shaperone-core/ns.js'
 import { ex, testData } from '@view-builder/testing'
 import dynamicXone from '../../src/forms/dynamicXone.js'
@@ -25,17 +24,17 @@ describe('forms/dynamicXone.js', () => {
       
       <ShapeFoo>
         ${sh1.discriminatorValue} "FOO" ;
-        ${sh.property} <PropertyFoo> .
+        ${$rdf.ns.sh.property} <PropertyFoo> .
       
       <ShapeBar>
         ${sh1.discriminatorValue} "BAR" ;
-        ${sh.property} <PropertyBar> .
+        ${$rdf.ns.sh.property} <PropertyBar> .
       
       <ShapeBaz>
         ${sh1.discriminatorValue} [
-          ${owl.differentFrom} "FOO", "BAR" ;
+          ${$rdf.ns.owl.differentFrom} "FOO", "BAR" ;
         ] ;
-        ${sh.property} <PropertyBaz> .
+        ${$rdf.ns.sh.property} <PropertyBaz> .
     `
     xone = [{
       shapes: shape.any().has(sh1.discriminatorValue).map($rdf.rdfine.sh.PropertyShape),

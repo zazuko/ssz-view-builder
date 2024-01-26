@@ -1,10 +1,10 @@
 import { css, html, LitElement, render } from 'lit'
 import { connect } from '@captaincodeman/rdx'
+import $rdf from '@view-builder/core/env.js'
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 import '@shoelace-style/shoelace/dist/components/progress-bar/progress-bar.js'
 import './ssz-shacl-report.js'
-import { rdfs } from '@tpluscode/rdf-ns-builders'
 import { store } from '../state/store.js'
 
 export class SszNotifications extends connect(store, LitElement) {
@@ -88,7 +88,7 @@ export class SszNotifications extends connect(store, LitElement) {
 
   renderError() {
     return html`<sl-dialog ?open="${!!this.error}"
-                           .label="${this.error?.out(rdfs.comment).value || ''}"
+                           .label="${this.error?.out($rdf.ns.rdfs.comment).value || ''}"
                            @sl-after-hide="${() => store.dispatch.notifications.hideError()}">
       <ssz-shacl-report .report="${this.error}"></ssz-shacl-report>
     </sl-dialog>`

@@ -1,9 +1,9 @@
 import { html } from 'lit'
-import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import { isBlankNode } from 'is-graph-pointer'
 import { code } from '@zazuko/vocabulary-extras/builders'
 import '../element/ssz-shacl-button.js'
 import '../forms/index.js'
+import $rdf from '@view-builder/core/env.js'
 import { fetchQuery, fetchShapes } from '../fetch.js'
 import { getSparqlUrl } from '../queries/index.js'
 import * as loading from './loading.js'
@@ -25,7 +25,7 @@ function content({ state, dispatch }) {
   }
 
   return html`
-    <h2>${state.viewForm.pointer.out(schema.name).value || 'Unnamed view'}</h2>
+    <h2>${state.viewForm.pointer.out($rdf.ns.schema.name).value || 'Unnamed view'}</h2>
     
     <shaperone-form .shapes=${shapes} 
                     .resource=${state.viewForm.pointer}
@@ -61,10 +61,10 @@ async function loadShapes(client) {
 
   const templates = graph
     .any()
-    .has(hydra.template)
+    .has($rdf.ns.hydra.template)
 
   const queriesLoaded = templates.map(async (template) => {
-    const iriTemplate = template.out(hydra.template)
+    const iriTemplate = template.out($rdf.ns.hydra.template)
     if (!isBlankNode(iriTemplate)) {
       return
     }
@@ -74,7 +74,7 @@ async function loadShapes(client) {
     const sparqlUrl = getSparqlUrl({ query, template, client })
 
     iriTemplate.deleteOut().deleteIn()
-    template.addOut(hydra.template, sparqlUrl)
+    template.addOut($rdf.ns.hydra.template, sparqlUrl)
   })
 
   await Promise.all(queriesLoaded)

@@ -1,4 +1,3 @@
-import { rdf } from '@tpluscode/rdf-ns-builders'
 import { turtle } from '@tpluscode/rdf-string'
 import $rdf from '@view-builder/core/env.js'
 import * as ns from '@view-builder/core/ns.js'
@@ -137,7 +136,7 @@ export const viewForm = {
           window.open(cubeViewerUrl, 'cubeViewer')
         }),
         'core/setContentResource': ({ pointer }) => {
-          if (pointer.has(rdf.type, ns.view.View).term) {
+          if (pointer.has($rdf.ns.rdf.type, ns.view.View).term) {
             dispatch.viewForm.populateForm(pointer.term)
           } else {
             dispatch.viewForm.clearView()

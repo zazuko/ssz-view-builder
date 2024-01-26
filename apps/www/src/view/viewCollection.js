@@ -1,10 +1,10 @@
 import { html } from 'lit'
-import { hydra, schema } from '@tpluscode/rdf-ns-builders'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '../element/ssz-view-table.js'
 import '../forms/index.js'
 import { viewBuilder } from '@view-builder/core/ns.js'
 import { fromRdf } from 'rdf-literal'
+import $rdf from '@view-builder/core/env.js'
 import { searchForm } from './searchForm.js'
 
 export async function init() {
@@ -37,11 +37,11 @@ function menu({ dispatch }) {
 
 function table({ state, dispatch }) {
   const views = state.viewCollection.pointer
-    ?.out(hydra.member)
+    ?.out($rdf.ns.hydra.member)
     .toArray()
     .sort((l, r) => {
-      const leftId = l.out(schema.alternateName).value || ''
-      const rightId = r.out(schema.alternateName).value || ''
+      const leftId = l.out($rdf.ns.schema.alternateName).value || ''
+      const rightId = r.out($rdf.ns.schema.alternateName).value || ''
 
       return leftId.localeCompare(rightId)
     }) || []
@@ -66,7 +66,7 @@ function publishForm({ state, dispatch }) {
 
   const datePublished = state.viewCollection.pointer
     .out(viewBuilder.publish)
-    .out(schema.datePublished)
+    .out($rdf.ns.schema.datePublished)
     .term
 
   function submit(e) {

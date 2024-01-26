@@ -1,5 +1,5 @@
 import { SELECT } from '@tpluscode/sparql-builder'
-import { schema, sh } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 import { VALUES } from '@tpluscode/sparql-builder/expressions'
 import * as ns from '@view-builder/core/ns.js'
 
@@ -13,9 +13,9 @@ import * as ns from '@view-builder/core/ns.js'
 export function findMeasureDimensions(cube, client) {
   return SELECT.DISTINCT`?dimension ?label`
     .WHERE`
-      ${cube} ${ns.cube.observationConstraint}/${sh.property}/${sh.path} ?dimension .
+      ${cube} ${ns.cube.observationConstraint}/${$rdf.ns.sh.property}/${$rdf.ns.sh.path} ?dimension .
 
-      optional { ?dimension ${schema.name} ?label . }
+      optional { ?dimension ${$rdf.ns.schema.name} ?label . }
 
       ?dimension a ${ns.cube.MeasureDimension}
     `.execute(client.query)
@@ -36,9 +36,9 @@ export function findKeyDimensions(cubes, client) {
     .WHERE`
       ${VALUES(...cubeValues)}
 
-      ?cube ${ns.cube.observationConstraint}/${sh.property}/${sh.path} ?dimension .
+      ?cube ${ns.cube.observationConstraint}/${$rdf.ns.sh.property}/${$rdf.ns.sh.path} ?dimension .
 
-      optional { ?dimension ${schema.name} ?label . }
+      optional { ?dimension ${$rdf.ns.schema.name} ?label . }
 
       ?dimension a ${ns.cube.KeyDimension}
     `.execute(client.query)

@@ -1,7 +1,7 @@
 import { decorate } from '@hydrofoil/shaperone-wc/templates.js'
 import { findNodes } from 'clownface-shacl-path'
 import { isGraphPointer } from 'is-graph-pointer'
-import { owl } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 import sh1 from '@hydrofoil/shaperone-core/ns.js'
 
 /**
@@ -56,7 +56,7 @@ export default decorate(wrapped => function dynamicXone(context, args) {
   return wrapped(context, args)
 })
 
-const { differentFrom } = owl
+const { differentFrom } = $rdf.ns.owl
 function shouldDisplay(shape, value) {
   const discriminatorValue = shape.pointer.out(sh1.discriminatorValue)
 

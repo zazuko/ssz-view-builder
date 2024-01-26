@@ -1,7 +1,6 @@
 import { expect } from 'chai'
 import sinon from 'sinon'
 import $rdf from '@zazuko/env'
-import { rdfs, rdf } from '@tpluscode/rdf-ns-builders'
 import { viewBuilder, view } from '@view-builder/core/ns.js'
 import { ex, testData } from '@view-builder/testing'
 import { generateDimensions } from '../src/automation.js'
@@ -40,7 +39,7 @@ describe('automation.js', () => {
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Kennzahl)
       expect(dimensions.out(view.from).out(view.source).term)
         .to.deep.eq(before.out(viewBuilder.source).term)
-      expect(dimensions.out(rdfs.label).value).to.contain('KENNZAHL')
+      expect(dimensions.out($rdf.ns.rdfs.label).value).to.contain('KENNZAHL')
     })
 
     it('generates a view dimension for key dimensions', async () => {
@@ -125,12 +124,12 @@ describe('automation.js', () => {
       const after = await generateDimensions(before, { queries })
 
       // then
-      const dimensions = after.any().has(rdf.type, view.Dimension)
+      const dimensions = after.any().has($rdf.ns.rdf.type, view.Dimension)
       expect(dimensions.terms).to.have.length(1)
       expect(dimensions.out(view.from).out(view.path).term).to.deep.eq(ex.Kennzahl)
       expect(dimensions.out(view.from).out(view.source).term)
         .to.deep.eq(before.out(viewBuilder.source).term)
-      expect(dimensions.out(rdfs.label).value).to.contain('KENNZAHL')
+      expect(dimensions.out($rdf.ns.rdfs.label).value).to.contain('KENNZAHL')
     })
   })
 })

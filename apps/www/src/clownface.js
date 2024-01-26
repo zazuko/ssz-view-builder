@@ -1,6 +1,4 @@
 import $rdf from '@view-builder/core/env.js'
-import Traverser from '@rdfjs/traverser'
-import TermSet from '@rdfjs/term-set'
 
 export function newReference(ptr) {
   return $rdf.clownface({
@@ -9,7 +7,7 @@ export function newReference(ptr) {
   })
 }
 
-const subgraph = new Traverser(({ level, quad }) => level === 0 || quad.subject.termType === 'BlankNode', { factory: $rdf })
+const subgraph = $rdf.traverser(({ level, quad }) => level === 0 || quad.subject.termType === 'BlankNode')
 
 export function deleteCbd(ptr) {
   for (const quad of subgraph.match(ptr)) {
@@ -18,7 +16,7 @@ export function deleteCbd(ptr) {
 }
 
 export function getAllTriplesFromRoot(ptr) {
-  const visited = new TermSet()
-  const traverser = new Traverser(({ quad }) => !visited.has(quad.subject), { factory: $rdf })
+  const visited = $rdf.termSet()
+  const traverser = $rdf.traverser(({ quad }) => !visited.has(quad.subject))
   return traverser.match(ptr)
 }

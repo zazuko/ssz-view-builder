@@ -1,5 +1,4 @@
-import { rdf } from '@tpluscode/rdf-ns-builders'
-import TermSet from '@rdfjs/term-set'
+import $rdf from '@view-builder/core/env.js'
 import url from 'url-state'
 import * as ns from '@view-builder/core/ns.js'
 import { viewBuilder } from '@view-builder/core/ns.js'
@@ -49,7 +48,7 @@ export default function effects(store) {
       dispatch.app.setSparqlEndpoint(endpoint)
       const client = store.getState().app.sparqlClient
 
-      const types = new TermSet(pointer.out(rdf.type).terms)
+      const types = $rdf.termSet(pointer.out($rdf.ns.rdf.type).terms)
       if (types.has(ns.viewBuilder.ViewCollection)) {
         view = await import('../../view/viewCollection.js')
       } else if (types.has(ns.view.View)) {

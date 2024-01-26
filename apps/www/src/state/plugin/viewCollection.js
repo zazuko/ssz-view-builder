@@ -1,4 +1,4 @@
-import { hydra, schema } from '@tpluscode/rdf-ns-builders'
+import $rdf from '@view-builder/core/env.js'
 import * as ns from '@view-builder/core/ns.js'
 import { nanoid } from 'nanoid'
 
@@ -33,7 +33,7 @@ export const viewCollection = {
 
           if (!newViewShape) {
             const operation = collection.findOperations({
-              bySupportedOperation: schema.CreateAction,
+              bySupportedOperation: $rdf.ns.schema.CreateAction,
             }).shift()
 
             const promise = operation.expects.shift().load()
@@ -69,14 +69,14 @@ export const viewCollection = {
           const viewResource = collection.member.find(member => member.id.equals(deleted))
 
           const operation = viewResource.findOperations({
-            bySupportedOperation: schema.DeleteAction,
+            bySupportedOperation: $rdf.ns.schema.DeleteAction,
           }).shift()
 
           const task = nanoid()
           dispatch.notifications.addTask(task)
           await operation.invoke()
 
-          pointer.deleteOut(hydra.member, deleted)
+          pointer.deleteOut($rdf.ns.hydra.member, deleted)
           dispatch.viewCollection.setPointer(pointer)
 
           dispatch.notifications.deleteTask(task)
